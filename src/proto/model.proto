@@ -1,0 +1,102 @@
+// Copyright 2012, Google Inc.
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+// 
+//   * Redistributions of source code must retain the above copyright
+//     notice, this list of conditions and the following disclaimer.
+//   * Redistributions in binary form must reproduce the above
+//     copyright notice, this list of conditions and the following disclaimer
+//     in the documentation and/or other materials provided with the
+//     distribution.
+//   * Neither the name of Google Inc. nor the names of its
+//     contributors may be used to endorse or promote products derived from
+//     this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// -----------------------------------------------------------------------------
+//
+// Protocol buffer to store models.
+// Author: kbhall@google.com (Keith Hall)
+
+package confusion_learning;
+
+option java_package = "com.confusion.learning";
+option java_outer_classname = "ModelProto";
+
+// A single symbol with its index.
+message SymbolMessage {
+  required string symbol = 1;
+  required int32 index = 2;
+}
+
+// A set of Symbol messages (should be unique).
+message SymbolTableMessage {
+  repeated SymbolMessage symbol = 1;
+}
+
+// A single model feature.
+// Next available id: 6
+message FeatureMessage {
+  // A FeatureType will control how a model can be exported to another format.
+  // E.g., NGRAM features may be encoded as FSTs.
+  enum FeatureType {
+    BASIC = 0;
+    NGRAM = 1;
+  }
+  // Optional name; usually left blank when returned from a feature extractor.
+  optional string name = 1;
+  optional int32 id = 2 [default = -1];
+  optional FeatureType type = 3 [default = BASIC];
+  optional float value = 4 [default = 1.0];
+  optional int32 count = 5 [default = 1];
+  // Keep the averaged feature value when serializing a model in map-reduce.
+  optional float avg_value = 6 [default = 0.0];
+
+  extensions 1000 to max;
+}
+
+// A collection of features.
+// Used as a return value from a feature extractor.
+message FeatureVecMessage {
+  repeated FeatureMessage feature = 1;
+
+  extensions 1000 to max;
+}
+
+// A model is a message format of a trained model.
+// Next available id: 12
+message ModelMessage {
+  // Unique name for this model.
+  optional string identifier = 1;
+  // Number of training iterations completed to train this model.
+  optional int32 num_iterations = 2;
+  // Cumulative loss from training.
+  optional float loss = 3 [default = 0.0];
+  optional int32 training_errors = 8;
+
+  optional int32 num_parameters = 10;
+  optional int32 num_symbols = 11;
+
+  optional FeatureVecMessage raw_parameters = 4;
+  optional FeatureVecMessage avg_parameters = 5;
+
+  optional SymbolTableMessage symbols = 6;
+  // The spec string for the concrete class of ModelProtoReader that can
+  // de-serialize this type of Model.  A spec string is of the form
+  // "ReaderClassName()", e.g., "PerceptronModelProtoReader()".
+  optional string reader_spec = 7;
+  optional string model_spec = 9;
+}

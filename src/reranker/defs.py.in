@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+## @file defs.py
+#  A set of installation-dependent variable definitions.
+
+refrbin = "@bindir@"
+hadoopbin = "@hadoopbin@"

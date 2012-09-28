@@ -1,0 +1,14 @@
+.PHONY: protolib
+
+BASELIBS = $(DEPTH)/proto/proto_lib.a $(DEPTH)/proto/dataio.a $(DEPTH)/gzstream/libgzstream.a $(DEPTH)/libb64/src/libb64.a
+TESTPROTO := pkg-config --cflags --libs protobuf
+BASELIBS_FLAGS := `pkg-config --cflags --libs protobuf` -lm -lz
+#BASELIBS_FLAGS := -lm -lz
+BASELIBS_CFLAGS := `pkg-config --cflags protobuf`
+#BASELIBS_CFLAGS :=
+
+PROTOLIBS = $(DEPTH)/proto/dataio.a $(DEPTH)/proto/proto_lib.a
+
+protolib:
+	make -C $(DEPTH)/proto dataio.a
+	make -C $(DEPTH)/proto proto_lib.a

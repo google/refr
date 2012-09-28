@@ -1,0 +1,75 @@
+// Copyright 2012, Google Inc.
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+// 
+//   * Redistributions of source code must retain the above copyright
+//     notice, this list of conditions and the following disclaimer.
+//   * Redistributions in binary form must reproduce the above
+//     copyright notice, this list of conditions and the following disclaimer
+//     in the documentation and/or other materials provided with the
+//     distribution.
+//   * Neither the name of Google Inc. nor the names of its
+//     contributors may be used to endorse or promote products derived from
+//     this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// -----------------------------------------------------------------------------
+//
+// Protocol buffer to store discriminative training data.
+// Author: kbhall@google.com (Keith Hall)
+
+package confusion_learning;
+
+import "model.proto";
+
+// A Typed score.
+// Next available id: 3
+message ScoreMessage {
+  enum ScoreType {
+    LOSS = 0;
+    SYSTEM_SCORE = 1;
+    OUTPUT_SCORE = 2;
+  }
+  optional ScoreType type = 1 [default = SYSTEM_SCORE];
+  optional double score = 2;
+}
+
+// A single hypothesis represented as a feature vector.
+// Next available id: 6
+message CandidateMessage {
+  enum CandidateType {
+    REFERENCE = 0;
+    HYP = 1;
+  }
+  optional CandidateType type = 1;
+  optional string raw_data = 2;
+  // Features as extracted by feature extractors.
+  optional FeatureVecMessage feats = 3;
+  repeated ScoreMessage score = 4;
+  // A vector of additional information.
+}
+
+// A set of CandidateMessage items.  Usually used to represent an n-best list.
+// We assume the order of the candidates is the original order of the n-best
+// list.  This allows us to merg featuer sets based on the key of the
+// CandidateSet.
+message CandidateSetMessage {
+  optional string source_key = 1;  // Unique key for this candidate set.
+  optional string reference_string = 3;  // Index in the original file.
+  repeated CandidateMessage candidate = 4;
+  optional int32 gold_index = 5;
+  optional int32 best_scoring_index = 6;
+}

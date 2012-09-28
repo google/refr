@@ -1,0 +1,57 @@
+Copyright 2012, Google Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+  * Neither the name of Google Inc. nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+---------------------------------------
+
+This directory provides tools to convert from various n-best list data formats
+to the protocol buffer format used by the reranker learning algorithms.
+
+mt_nbest_proto: convert from Philipp's n-best list format (along with system
+scores) to proto-buffer features.
+Example converting MT data:
+./lm-confusion/dataconvert/mt_nbest_proto \
+  -f /export/ws11/cslmmtsr/Workshop/de-en/jhu/parallel0.pb.1000best.gz.split-a* \
+  -r /export/ws11/cslmmtsr/Workshop/de-en/data-jackknife/parallel.wo9.en \
+  -C -o mtsample_proto.gz
+
+asr_nbest_proto: convert from Brian's input file format for scores, losses, features, etc. to proto-buffer features.
+Example converting ASR format data:
+./lm-confusion/dataconvert/asr_nbest_proto \
+  -r /export/ws11/cslmmtsr/broark/CTS.refs/18.swb.ref.gz \
+  -l /export/ws11/cslmmtsr/broark/CTS.100bests/18.swb.100best.loss.gz \
+  -b /export/ws11/cslmmtsr/broarkCTS.100bests/18.swb.100best.base.gz \
+  -t /export/ws11/cslmmtsr/broarkCTS.100bests/18.swb.100best.text.gz \
+  -f 3g:/export/ws11/cslmmtsr/broark/CTS.extraftr/18.swb.100best.3gram.gz \
+  -f rk:/export/ws11/cslmmtsr/broarkCTS.extraftr/18.swb.100best.rankbin.gz \
+  -f rklt:/export/ws11/cslmmtsr/broarkCTS.extraftr/18.swb.100best.rankLTbin.gz \
+  -o /mnt/data/kbhall/CTS.100best.18.swb.FULL.proto.gz 
+
+(non-obvious) Options for the above:
+  -U - Output files in uncompressed form
+  -B - Assume the loss file is in the sentence-level BLEU format
+  -A - Assume the reference is in ASR format.

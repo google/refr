@@ -1,0 +1,108 @@
+Copyright 2011, Google Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+  * Neither the name of Google Inc. nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+----- Training a model with the example data:
+
+$ ../src/reranker/bin/run-model -t asr_100best_train.proto.gz -d asr_100best_dev.proto.gz -m example_data.model
+
+Loading devtest examples.
+CandidateSetReader: reading from file "asr_100best_dev.proto.gz".
+CandidateSetReader: read 100 candidate sets from file "asr_100best_dev.proto.gz". Closing file.
+Training.
+CandidateSetReader: reading from file "asr_100best_train.proto.gz".
+CandidateSetReader: read 1000 candidate sets.
+CandidateSetReader: read 1000 candidate sets from file "asr_100best_train.proto.gz". Closing file.
+StringCanonicalizer: clearing out canonical map of size 111565
+Training because num epochs in decline is 0 which is less than 5.
+Epoch 0: number of training errors: 838 (83.8839%)
+Epoch 0: oracle loss: 0.190604
+Epoch 0: average devtest loss: 0.332174
+Epoch 0: number of testing errors: 74 (74%)
+Training because num epochs in decline is 0 which is less than 5.
+Writing out model from epoch 0 to file "example_data.model"... done.
+Epoch 1: number of training errors: 529 (52.953%)
+Epoch 1: oracle loss: 0.190604
+Epoch 1: average devtest loss: 0.313451
+Epoch 1: number of testing errors: 73 (73%)
+Training because num epochs in decline is 0 which is less than 5.
+Epoch 1: 0.961722 seconds.
+Writing out model from epoch 1 to file "example_data.model"... done.
+Epoch 2: number of training errors: 337 (33.7337%)
+Epoch 2: oracle loss: 0.190604
+Epoch 2: average devtest loss: 0.295534
+Epoch 2: number of testing errors: 69 (69%)
+Training because num epochs in decline is 0 which is less than 5.
+Epoch 2: 0.840965 seconds.
+Writing out model from epoch 2 to file "example_data.model"... done.
+Epoch 3: number of training errors: 253 (25.3253%)
+Epoch 3: oracle loss: 0.190604
+Epoch 3: average devtest loss: 0.296862
+Epoch 3: number of testing errors: 69 (69%)
+Training because num epochs in decline is 1 which is less than 5.
+Epoch 3: 0.833423 seconds.
+Epoch 4: number of training errors: 173 (17.3173%)
+Epoch 4: oracle loss: 0.190604
+Epoch 4: average devtest loss: 0.299951
+Epoch 4: number of testing errors: 71 (71%)
+Training because num epochs in decline is 2 which is less than 5.
+Epoch 4: 0.255693 seconds.
+Epoch 5: number of training errors: 143 (14.3143%)
+Epoch 5: oracle loss: 0.190604
+Epoch 5: average devtest loss: 0.29752
+Epoch 5: number of testing errors: 67 (67%)
+Training because num epochs in decline is 3 which is less than 5.
+Epoch 5: 0.250697 seconds.
+Epoch 6: number of training errors: 112 (11.2112%)
+Epoch 6: oracle loss: 0.190604
+Epoch 6: average devtest loss: 0.297714
+Epoch 6: number of testing errors: 67 (67%)
+Training because num epochs in decline is 4 which is less than 5.
+Epoch 6: 0.238521 seconds.
+Epoch 7: number of training errors: 95 (9.50951%)
+Epoch 7: oracle loss: 0.190604
+Epoch 7: average devtest loss: 0.299252
+Epoch 7: number of testing errors: 67 (67%)
+Stopping training because num epochs in decline is 5 which is greater than or equal to 5.
+Best model epoch: 2
+Total elpased time: 23.1872 seconds.
+Writing out model to file "example_data.model"...done.
+StringCanonicalizer: clearing out canonical map of size 0
+
+----- Testing the trained model:
+
+$ ../src/reranker/bin/run-model -d asr_100best_eval.proto.gz -m example_data.model ModelReader: reading serialized model from "example_data.model"...done.
+Loaded model "MyPerceptronModel".
+Loading devtest examples.
+CandidateSetReader: reading from file "asr_100best_eval.proto.gz".
+CandidateSetReader: read 100 candidate sets from file "asr_100best_eval.proto.gz". Closing file.
+Epoch 0: oracle loss: 0.189076
+Epoch 0: average devtest loss: 0.302408
+Epoch 0: number of testing errors: 76 (76%)
+StringCanonicalizer: clearing out canonical map of size 12917
+
