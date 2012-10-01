@@ -138,7 +138,7 @@ class RandomPairCandidateSetScorer : public CandidateSet::Scorer {
 ///
 /// TODO(dbikel): Add factory for kernel functions.  Remove all constructors
 /// but the zero-arg constructor from both Model and PerceptronModel.
-class Model : public FactoryConstructable {
+class Model : public FactoryConstructible {
  public:
   /// Constructs a new instance with the empty string for its name and
   /// a NULL kernel function.
@@ -239,7 +239,7 @@ class Model : public FactoryConstructable {
   /// \see Model::NeedToUpdate
   /// \see Model::Init
   /// \see Model::InitHelper
-  class UpdatePredicate : public FactoryConstructable {
+  class UpdatePredicate : public FactoryConstructible {
    public:
     /// An initialization method, guaranteed to be invoked by \link
     /// Factory \endlink after initial construction.  The default
@@ -270,7 +270,7 @@ class Model : public FactoryConstructable {
   /// \see Model::Update
   /// \see Model::Init
   /// \see Model::InitHelper
-  class Updater : public FactoryConstructable {
+  class Updater : public FactoryConstructible {
    public:
     /// An initialization method, guaranteed to be invoked by \link
     /// Factory \endlink after initial construction.  The default

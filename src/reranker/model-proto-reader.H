@@ -50,7 +50,7 @@ using confusion_learning::ModelMessage;
 /// \class ModelProtoReader
 ///
 /// A class to de-serialize a Model instance from a ModelMessage instance.
-class ModelProtoReader : public FactoryConstructable {
+class ModelProtoReader : public FactoryConstructible {
  public:
   /// Constructs a new instance that can de-serialize Model instances from
   /// ModelMessage protocol buffer messages.

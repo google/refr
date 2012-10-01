@@ -76,7 +76,7 @@ class CandidateSet {
   /// \class Scorer
   ///
   /// An inner interface for a model to score a \link CandidateSet\endlink.
-  class Scorer : public FactoryConstructable {
+  class Scorer : public FactoryConstructible {
    public:
     /// An initialization method, guaranteed to be invoked by \link
     /// Factory \endlink after initial construction.  The default

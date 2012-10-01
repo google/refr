@@ -146,7 +146,7 @@ class Constructor {
 
 /// An interface to make it easier to implement Factory-constructible
 /// types by implementing both required methods to do nothing.
-class FactoryConstructable {
+class FactoryConstructible {
  public:
   virtual void RegisterInitializers(Initializers &initializers) { }
   virtual void Init(const string &arg) { }
@@ -321,12 +321,12 @@ class Factory : public FactoryBase {
   ///
   /// \par Special note on \<bool_literal\>:
   /// A <tt>\<bool_literal\></tt> is either a <tt>\<string_literal\></tt>
-  /// or an <tt>\<int_literal\></tt>.  If it is a <tt>\<string_literal\></tt>,
-  /// then its truth value is <tt>true</tt> if the string is exactly
+  /// or a <tt>\<double_literal\></tt>.  If it is a <tt>\<string_literal\></tt>,
+  /// then its truth value is <tt>false</tt> if the string is exactly
   /// equal to the all-lowercase string <tt>&quot;false&quot;</tt> and
-  /// <tt>false</tt> otherwise.  If it is an <tt>\<double_literal\></tt> then
-  /// its truth value is <tt>true</tt> if the <tt>\<double_literal\></tt>
-  /// evaluates to anything other than <tt>0.0</tt>, <tt>false</tt> otherwise.
+  /// <tt>true</tt> otherwise.  If it is a <tt>\<double_literal\></tt> then
+  /// its truth value is <tt>false</tt> if the <tt>\<double_literal\></tt>
+  /// evaluates to <tt>0.0</tt>, <tt>true</tt> otherwise.
   ///
   /// \param st the stream tokenizer providing tokens according to the
   ///           grammar shown above

@@ -83,7 +83,7 @@ void TearDown();
 /// \see ExecutiveFeatureExtractor for a class that can &ldquo;execute&rdquo;
 ///      a suite of \link FeatureExtractor \endlink instances on a
 ///      \link CandidateSet \endlink
-class FeatureExtractor : public FactoryConstructable {
+class FeatureExtractor : public FactoryConstructible {
  public:
   /// Constructs an empty feature vector
   FeatureExtractor() {}

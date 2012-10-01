@@ -58,7 +58,7 @@ using std::tr1::shared_ptr;
 /// \class ModelProtoWriter
 ///
 /// A class to construct a ModelMessage from a Model instance.
-class ModelProtoWriter : public FactoryConstructable {
+class ModelProtoWriter : public FactoryConstructible {
  public:
   /// Constructs a new instance that can serialize Model instances to
   /// ModelMessage protocol buffer messages.

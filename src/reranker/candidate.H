@@ -105,7 +105,7 @@ class Candidate {
   virtual ~Candidate() { }
   
   /// An inner interface specifying comparison between two Candidate instances.
-  class Comparator : public FactoryConstructable {
+  class Comparator : public FactoryConstructible {
    public:
     /// An initialization method, guaranteed to be invoked by \link
     /// Factory \endlink after initial construction.  The default
