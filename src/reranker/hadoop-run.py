@@ -30,11 +30,34 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # -----------------------------------------------------------------------------
 ## @file hadoop-run.py
-#  A tool to run IterativeParameterMixtures learning on a hadoop cluster.
+#  A python program which will train a reranking model on a Hadoop cluster using
+#  the Iterative Parameter Mixtures perceptron training algorithm.
 #
-#  Confusion-based Statistical Language Models (CLSP Summer Workshop)
-#  The hadoop-run.py will perform distributed training on a hadoop cluster.
+#  You must first have a Hadoop account configured.  In order to train, you will
+#  need to have the following:
+#   - Training data locally accessible (accessible by the script)
+#   - A HadoopFS (HDFS) directory with enough space to store the input
+#   training data, the intermediate models and the final model.
 #
+#  The program will attempt to locate the Hadoop binary and the
+#  Hadoop streaming library.  If this fails, you can specify these 
+#  via command-line parameters (--hadooproot and --streamingloc).
+#
+#  Usage:
+#   hadoop-run.py --input InputData --hdfsinputdir HDFSIndir \\
+#                 --hdfsoutputdir HDFSOutDir --outputdir OutputDir
+#
+#   InputData - A comma-separated list of file globs containing the training data.
+#               These must be accessible by script.
+#   OutputDir - The local directory where the trained model(s) are written.  The
+#               default model name is 'model'.  You can change this using the
+#               --modelname command-line parameter.
+#   HDFSInDir - A directory on HDFS where the input data will be copied to.
+#   HDFSOutDir - A directory on HDFS where the temporary data and output data
+#                will be written to.
+#                The final models are copied to the locally-accessible OutputDir.
+#
+# Check  input command line options.
 #  @author kbhall@google.com (Keith Hall)
 #
 
