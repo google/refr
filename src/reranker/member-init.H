@@ -176,20 +176,26 @@ class Initializer<bool> : public MemberInitializer {
       MemberInitializer(required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
-    if (token_type != StreamTokenizer::STRING &&
-        token_type != StreamTokenizer::NUMBER) {
+    if (token_type != StreamTokenizer::RESERVED_WORD) {
       ostringstream err_ss;
-      err_ss << "BoolInitializer: expected STRING or NUMBER token at stream "
+      err_ss << "BoolInitializer: expected RESERVED_WORD token at stream "
              << "position " << st.PeekTokenStart() << " but found "
              << StreamTokenizer::TypeName(token_type) << " token: \""
              << st.Peek() << "\"";
       throw std::runtime_error(err_ss.str());
     }
-    if (token_type == StreamTokenizer::STRING) {
-      (*member_) = st.Next() != "false";
+    size_t next_tok_start = st.PeekTokenStart();
+    string next_tok = st.Next();
+    if (next_tok == "false") {
+      (*member_) = false;
+    } else if (next_tok == "true") {
+      (*member_) = true;
     } else {
-      double val = atof(st.Next().c_str());
-      (*member_) = val != 0.0;
+      ostringstream err_ss;
+      err_ss << "Initializer<bool>: expected either \"true\" or \"false\" "
+             << "token at stream position " << next_tok_start << " but found "
+             << "token: \"" << next_tok << "\"";
+      throw new std::runtime_error(err_ss.str());
     }
     ++initialized_;
   }

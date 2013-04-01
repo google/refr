@@ -37,6 +37,7 @@
 #define RERANKER_STREAM_TOKENIZER_H_
 
 #include <iostream>
+#include <set>
 #include <sstream>
 #include <string>
 #include <string.h>
@@ -47,11 +48,17 @@ namespace reranker {
 using std::istream;
 using std::istringstream;
 using std::ostringstream;
+using std::set;
 using std::streampos;
 using std::string;
 using std::vector;
 using std::cerr;
 using std::endl;
+
+static const char *default_reserved_words[] = {
+  "false",
+  "true",
+};
 
 /// \class StreamTokenizer
 ///
@@ -89,6 +96,10 @@ class StreamTokenizer {
     Init(reserved_chars);
   }
 
+  void set_reserved_words(set<string> &reserved_words) {
+    reserved_words_ = reserved_words;
+  }
+
   /// Destroys this instance.
   virtual ~StreamTokenizer() {
     delete[] reserved_chars_;
@@ -121,6 +132,10 @@ class StreamTokenizer {
     num_reserved_chars_ = strlen(reserved_chars);
     reserved_chars_ = new char[num_reserved_chars_];
     strcpy(reserved_chars_, reserved_chars);
+    int num_reserved_words = sizeof(default_reserved_words)/sizeof(const char*);
+    for (int i = 0; i < num_reserved_words; ++i) {
+      reserved_words_.insert(string(default_reserved_words[i]));
+    }
     GetNext();
   }
 
@@ -144,6 +159,7 @@ class StreamTokenizer {
   istream &is_;
   char *reserved_chars_;
   size_t num_reserved_chars_;
+  set<string> reserved_words_;
   string next_tok_;
   TokenType next_tok_type_;
   size_t next_tok_start_;

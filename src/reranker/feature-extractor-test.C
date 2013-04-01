@@ -53,11 +53,15 @@ main(int argc, char **argv) {
       factory.CreateOrDie("ExampleFeatureExtractor(arg(\"my_feats:\"))", "");
 
   shared_ptr<FeatureExtractor> example_feature_extractor2 =
-      factory.CreateOrDie("ExampleFeatureExtractor(arg(\"your_feats:\"))", "");
+      factory.CreateOrDie("ExampleFeatureExtractor(b(true), "
+                                                  "arg(\"your_feats:\"))", "");
 
   shared_ptr<FeatureExtractor> example_feature_extractor3 =
       factory.CreateOrDie("ExampleFeatureExtractor(arg(\"whose_feats:\"), "
                           "strvec({\"foo\", \"bar\", \"baz\"}))", "");
+
+  shared_ptr<FeatureExtractor> example_feature_extractor4 =
+      factory.CreateOrDie("ExampleFeatureExtractor(b(true))", "");
 
   CandidateSet candidate_set("test candidate set");
   candidate_set.set_reference_string("This is a reference string.");

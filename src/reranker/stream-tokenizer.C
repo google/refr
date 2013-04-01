@@ -105,21 +105,28 @@ StreamTokenizer::GetNext() {
     next_tok_complete = true;
     next_tok_type_ = STRING;
   } else {
-    // This is a number or C++ identifier token, so add first character;
-    // the remainder of the token will be handled after this switch statement.
+    // This is a number, a reserved word or C++ identifier token, so
+    // add first character; the remainder of the token will be handled
+    // after this switch statement.
     next_tok_ += c;
     next_tok_type_ = (c >= '0' && c <= '9') ? NUMBER : IDENTIFIER;
   }
   if (!next_tok_complete) {
-    // The current token is a number or C++ identifier, so we keep
-    // reading characters until hitting a "reserved character",
-    // a whitespace character or EOF.
+    // The current token is a number, a reserved word or C++
+    // identifier, so we keep reading characters until hitting a
+    // "reserved character", a whitespace character or EOF.
     bool done = false;
     while (!done && is_.good()) {
       c = is_.get();
       if (is_.good()) {
         if (ReservedChar(c) || c == '"' || isspace(c)) {
           is_.putback(c);
+          // Now that we've finished reading something that is not a
+          // string literal, change its type to be RESERVED_WORD if it
+          // exactly matches something in the set of reserved words.
+          if (reserved_words_.count(next_tok_) != 0) {
+            next_tok_type_ = RESERVED_WORD;
+          }
           done = true;
         } else {
           ++num_read_;

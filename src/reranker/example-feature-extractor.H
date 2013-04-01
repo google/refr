@@ -87,6 +87,8 @@ class ExampleFeatureExtractor : public FeatureExtractor {
       cout << "\"" << *it << "\", ";
     }
     cout << "}" << endl;
+    cout << "ExampleFeatureExtractor: set b to " << (b_ ? "true" : "false")
+         << endl;
   }
 
   /// Extracts &ldquo;compiled&rdquo; features.
