@@ -201,16 +201,15 @@ class Factory : public FactoryBase {
   /// legal specification strings for constructing instances of
   /// ExampleFeatureExtractor:
   /// \code
-  /// ExampleFeatureExtractor(arg("foo"), strvec("foo", "bar", "baz"), b(1))
-  /// ExampleFeatureExtractor(strvec("foo", "bar", "baz",))
-  /// ExampleFeatureExtractor(b("false"))
+  /// ExampleFeatureExtractor(arg("foo"), strvec({"foo", "bar", "baz"}), b(true))
+  /// ExampleFeatureExtractor(strvec({"foo", "bar", "baz",}))
+  /// ExampleFeatureExtractor(b(false))
   /// ExampleFeatureExtractor()
   /// \endcode
   /// Crucially, note how a vector can have an optional comma at the
   /// end of its list (the second example), and how a boolean may be
-  /// initialized either with an integer or a string token (the first
-  /// and third examples; see the &ldquo;<b>Special note on
-  /// <tt>\<bool_literal\></tt></b>&rdquo;, below). Finally, unlike
+  /// initialized either with one of the two <i>reserved words</i>
+  /// <tt>true</tt> or <tt>false</tt>, as in C and C++. Finally, unlike
   /// parameter lists to C++ constructors, since our members are always
   /// named, the grammar allows them to appear in any order, making the
   /// following two specification strings equivalent:
@@ -282,12 +281,12 @@ class Factory : public FactoryBase {
   /// <tr>
   ///   <td><tt>\<bool_literal\></tt></td>
   ///   <td><tt>::=</tt></td>
-  ///   <td><tt>\<string_literal\> | \<double_literal\></tt></td>
+  ///   <td><tt>true | false</tt></td>
   /// </tr>
   /// <tr>
   ///   <td><tt>\<primitive_vector_init></tt></td>
   ///   <td><tt>::=</tt></td>
-  ///   <td><tt>\<member_name\> '(' \<literal_list\> ')'</tt></td>
+  ///   <td><tt>\<member_name\> '(' '{' \<literal_list\> '}' ')'</tt></td>
   /// </tr>
   /// <tr>
   ///   <td valign=top><tt>\<literal_list\></tt></td>
@@ -306,7 +305,7 @@ class Factory : public FactoryBase {
   /// <tr>
   ///   <td><tt>\<factory_vector_init\></tt></td>
   ///   <td><tt>::=</tt></td>
-  ///   <td><tt>\<member_name\> '(' \<spec_list\> ')'</tt></td>
+  ///   <td><tt>\<member_name\> '(' '{' \<spec_list\> '}' ')'</tt></td>
   /// </tr>
   /// <tr>
   ///   <td valign=top><tt>\<spec_list\></tt></td>
@@ -318,15 +317,6 @@ class Factory : public FactoryBase {
   ///   </td>
   /// </tr>
   /// </table>
-  ///
-  /// \par Special note on \<bool_literal\>:
-  /// A <tt>\<bool_literal\></tt> is either a <tt>\<string_literal\></tt>
-  /// or a <tt>\<double_literal\></tt>.  If it is a <tt>\<string_literal\></tt>,
-  /// then its truth value is <tt>false</tt> if the string is exactly
-  /// equal to the all-lowercase string <tt>&quot;false&quot;</tt> and
-  /// <tt>true</tt> otherwise.  If it is a <tt>\<double_literal\></tt> then
-  /// its truth value is <tt>false</tt> if the <tt>\<double_literal\></tt>
-  /// evaluates to <tt>0.0</tt>, <tt>true</tt> otherwise.
   ///
   /// \param st the stream tokenizer providing tokens according to the
   ///           grammar shown above
