@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -57,7 +57,7 @@ main(int argc, char **argv) {
 
   shared_ptr<FeatureExtractor> example_feature_extractor3 =
       factory.CreateOrDie("ExampleFeatureExtractor(arg(\"whose_feats:\"), "
-                          "strvec(\"foo\", \"bar\", \"baz\"))", "");
+                          "strvec({\"foo\", \"bar\", \"baz\"}))", "");
 
   CandidateSet candidate_set("test candidate set");
   candidate_set.set_reference_string("This is a reference string.");

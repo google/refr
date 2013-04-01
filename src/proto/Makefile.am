@@ -1,14 +1,15 @@
 AM_CPPFLAGS = `pkg-config --cflags protobuf`
+
 AM_LDFLAGS = -L../gzstream -L../libb64/src \
 		`pkg-config --cflags --libs protobuf`
 
 bin_PROGRAMS = bin/protoview bin/featconvert bin/featcount
 
 bin_protoview_SOURCES = protoview.cc
-bin_protoview_LDADD = libdataio.a libproto_lib.a -lgzstream -lb64
+bin_protoview_LDADD = libdataio.a libproto_lib.a -lprotobuf -lpthread -lgzstream -lb64
 
 bin_featconvert_SOURCES = featconvert.cc
-bin_featconvert_LDADD = libdataio.a libproto_lib.a -lgzstream -lb64
+bin_featconvert_LDADD = libdataio.a libproto_lib.a -lprotobuf -lpthread -lgzstream -lb64
 
 bin_featcount_SOURCES = featcount.cc
 bin_featcount_LDFLAGS = -lm -lz

@@ -2,7 +2,7 @@ AM_CPPFLAGS = `pkg-config --cflags protobuf` -I. -Wall
 AM_LDFLAGS = -L../proto -L../gzstream -L../libb64/src \
         `pkg-config --cflags --libs protobuf`
 
-LDADD = -lproto_lib -ldataio -lgzstream -lb64
+LDADD = -lproto_lib -lprotobuf -lpthread -ldataio -lgzstream -lb64
 
 bin_PROGRAMS = bin/run-model \
 		bin/compile-features \

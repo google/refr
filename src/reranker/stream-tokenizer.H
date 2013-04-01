@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -62,14 +62,15 @@ class StreamTokenizer {
  public:
   enum TokenType {
     EOF_TYPE,
-    RESERVED,
+    RESERVED_CHAR,
+    RESERVED_WORD,
     STRING,
     NUMBER,
     IDENTIFIER
   };
   static const char *TypeName(TokenType token_type) {
     static const char *names[] = {
-      "EOF", "RESERVED", "STRING", "NUMBER", "IDENTIFIER"
+      "EOF", "RESERVED_CHAR", "RESERVED_WORD", "STRING", "NUMBER", "IDENTIFIER"
     };
     return names[token_type];
   }
@@ -77,20 +78,20 @@ class StreamTokenizer {
   /// Constructs a new instance around the specified byte stream.
   ///
   /// \param is       the input byte stream for this stream tokenizer to use
-  /// \param reserved the set of single characters serving as
-  ///                 &ldquo;reserved words&rdquo;
-  StreamTokenizer(istream &is, const char *reserved = "(),") :
+  /// \param reserved_chars the set of single characters serving as
+  ///                 &ldquo;reserved characters&rdquo;
+  StreamTokenizer(istream &is, const char *reserved_chars = "(){},") :
       is_(is), curr_pos_(0), num_read_(0), has_next_(false) {
-    Init(reserved);
+    Init(reserved_chars);
   }
-  StreamTokenizer(const string &s, const char *reserved = "(),") :
+  StreamTokenizer(const string &s, const char *reserved_chars = "(){},") :
       sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), has_next_(false) {
-    Init(reserved);
+    Init(reserved_chars);
   }
-  
+
   /// Destroys this instance.
   virtual ~StreamTokenizer() {
-    delete[] reserved_;
+    delete[] reserved_chars_;
   }
 
   string str() { return oss_.str(); }
@@ -116,10 +117,10 @@ class StreamTokenizer {
   /// when \link HasNext \endlink returns <tt>true</tt>.
   string Peek() { return has_next_ ? next_tok_ : ""; }
  private:
-  void Init(const char *reserved) {
-    num_reserved_ = strlen(reserved);
-    reserved_ = new char[num_reserved_];
-    strcpy(reserved_, reserved);
+  void Init(const char *reserved_chars) {
+    num_reserved_chars_ = strlen(reserved_chars);
+    reserved_chars_ = new char[num_reserved_chars_];
+    strcpy(reserved_chars_, reserved_chars);
     GetNext();
   }
 
@@ -128,21 +129,21 @@ class StreamTokenizer {
   void GetNext();
 
   /// Returns whether the specified character represents a
-  /// &ldquo;reserved word&rdquo;.
-  bool Reserved(char c) {
-    for (size_t i = 0; i < num_reserved_; ++i) {
-      if (c == reserved_[i]) {
+  /// &ldquo;reserved character&rdquo;.
+  bool ReservedChar(char c) {
+    for (size_t i = 0; i < num_reserved_chars_; ++i) {
+      if (c == reserved_chars_[i]) {
         return true;
       }
     }
     return false;
   }
-  
+
   // data members
   istringstream sstream_;
   istream &is_;
-  char *reserved_;
-  size_t num_reserved_;
+  char *reserved_chars_;
+  size_t num_reserved_chars_;
   string next_tok_;
   TokenType next_tok_type_;
   size_t next_tok_start_;

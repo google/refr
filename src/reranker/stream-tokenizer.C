@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -65,10 +65,10 @@ StreamTokenizer::GetNext() {
   next_tok_start_ = num_read_ - 1;
   bool next_tok_complete = false;
   next_tok_.clear();
-  if (Reserved(c)) {
+  if (ReservedChar(c)) {
     next_tok_ += c;
     next_tok_complete = true;
-    next_tok_type_ = RESERVED;
+    next_tok_type_ = RESERVED_CHAR;
   } else if (c == '"') {
     // We've got a string literal, so keep reading characters,
     // until hitting a non-escaped double quote.
@@ -112,13 +112,13 @@ StreamTokenizer::GetNext() {
   }
   if (!next_tok_complete) {
     // The current token is a number or C++ identifier, so we keep
-    // reading characters until hitting a "reserved word" character,
+    // reading characters until hitting a "reserved character",
     // a whitespace character or EOF.
     bool done = false;
     while (!done && is_.good()) {
       c = is_.get();
       if (is_.good()) {
-        if (Reserved(c) || c == '"' || isspace(c)) {
+        if (ReservedChar(c) || c == '"' || isspace(c)) {
           is_.putback(c);
           done = true;
         } else {

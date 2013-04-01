@@ -31,7 +31,7 @@ AC_CHECK_LIB([m], [pow])
 AC_CHECK_LIB([z], [gzread])
 
 # find Protocol Buffers
-PKG_CHECK_MODULES(PROTOBUF, protobuf >= 2.0)
+#PKG_CHECK_MODULES(PROTOBUF, protobuf >= 2.0)
 AC_PATH_PROG(PROTOC, protoc, [no])
 if test "$PROTOC" == "no"; then
     AC_MSG_FAILURE([Protocol Buffers compiler 'protoc' is required to build.])

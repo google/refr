@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -125,7 +125,7 @@ class Initializer<int> : public MemberInitializer {
     if (token_type != StreamTokenizer::NUMBER) {
       ostringstream err_ss;
       err_ss << "IntInitializer: expected NUMBER token at stream "
-             << "position " << st.PeekTokenStart() << " but found " 
+             << "position " << st.PeekTokenStart() << " but found "
              << StreamTokenizer::TypeName(token_type) << " token: \""
              << st.Peek() << "\"";
       throw std::runtime_error(err_ss.str());
@@ -226,8 +226,9 @@ class Initializer<string> : public MemberInitializer {
 
 /// A partial specialization to allow initialization of a vector of
 /// any primitive type or any \link Factory\endlink-constructible
-/// type.  The syntax for a vector initialization is a comma-separated
-/// list of values.
+/// type.  The syntax for a vector initialization is an open brace '{}'
+/// followed by a comma-separated list of values followed by a close
+/// brace '}'.
 template<typename T>
 class Initializer<vector<T> > : public MemberInitializer {
  public:
@@ -235,7 +236,17 @@ class Initializer<vector<T> > : public MemberInitializer {
   Initializer(vector<T> *member, bool required) :
       MemberInitializer(required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
-    while (st.Peek() != ")") {
+    if (st.Peek() == "{") {
+      // Consume open brace.
+      st.Next();
+    } else {
+      ostringstream err_ss;
+      err_ss << "Initializer<vector<T>>: "
+             << "error: expected '{' at stream position "
+             << st.PeekTokenStart() << " but found \"" << st.Peek() << "\"";
+      throw std::runtime_error(err_ss.str());
+    }
+    while (st.Peek() != "}") {
       T vector_element;
       Initializer<T> *element_init = new Initializer<T>(&vector_element);
       element_init->Init(st);
@@ -243,10 +254,10 @@ class Initializer<vector<T> > : public MemberInitializer {
       delete element_init;
       // Each vector element initializer must be followed by a comma
       // or the final closing parenthesis.
-      if (st.Peek() != ","  && st.Peek() != ")") {
+      if (st.Peek() != ","  && st.Peek() != "}") {
         ostringstream err_ss;
         err_ss << "Initializer<vector<T>>: "
-               << "error: expected ',' or ')' at stream position "
+               << "error: expected ',' or '}' at stream position "
                << st.PeekTokenStart() << " but found \"" << st.Peek() << "\"";
         throw std::runtime_error(err_ss.str());
       }
@@ -255,6 +266,8 @@ class Initializer<vector<T> > : public MemberInitializer {
         st.Next();
       }
     }
+    // Consume close brace.
+    st.Next();
   }
  private:
   vector<T> *member_;
