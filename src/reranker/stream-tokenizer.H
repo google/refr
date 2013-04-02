@@ -55,18 +55,28 @@ using std::vector;
 using std::cerr;
 using std::endl;
 
+/// Default set of reserved words for the StreamTokenizer class.
+/// Use the \link reranker::StreamTokenizer::set_reserved_words
+/// StreamTokenizer::set_reserved_words \endlink
+/// to customize this set.
 static const char *default_reserved_words[] = {
   "false",
   "true",
 };
 
+/// Default set of reserved characters for the StreamTokenizer class.
+static const char *default_reserved_chars = "(){},;";
+
 /// \class StreamTokenizer
 ///
-/// A simple class for tokenizing a stream of tokens for the informally
-/// specified, ad-hoc language used to construct objects for the Reranker
+/// A simple class for tokenizing a stream of tokens for the formally
+/// specified language used to construct objects for the Reranker
 /// framework.
 class StreamTokenizer {
  public:
+  /// The set of types of tokens read by this stream tokenizer.
+  ///
+  /// \see PeekTokenType
   enum TokenType {
     EOF_TYPE,
     RESERVED_CHAR,
@@ -75,6 +85,8 @@ class StreamTokenizer {
     NUMBER,
     IDENTIFIER
   };
+
+  /// Returns a string type name for the specified TokenType constant.
   static const char *TypeName(TokenType token_type) {
     static const char *names[] = {
       "EOF", "RESERVED_CHAR", "RESERVED_WORD", "STRING", "NUMBER", "IDENTIFIER"
@@ -84,18 +96,30 @@ class StreamTokenizer {
 
   /// Constructs a new instance around the specified byte stream.
   ///
-  /// \param is       the input byte stream for this stream tokenizer to use
+  /// \param is             the input byte stream for this stream tokenizer to
+  ///                       use
   /// \param reserved_chars the set of single characters serving as
-  ///                 &ldquo;reserved characters&rdquo;
-  StreamTokenizer(istream &is, const char *reserved_chars = "(){},") :
+  ///                       &ldquo;reserved characters&rdquo;
+  StreamTokenizer(istream &is,
+                  const char *reserved_chars = default_reserved_chars) :
       is_(is), curr_pos_(0), num_read_(0), has_next_(false) {
     Init(reserved_chars);
   }
-  StreamTokenizer(const string &s, const char *reserved_chars = "(){},") :
+
+  /// Constructs a new instance around the specified string.
+  ///
+  /// \param s              the string providing the stream of characters
+  ///                       for this stream tokenizer to use
+  /// \param reserved_chars the set of single characters serving as
+  ///                       &ldquo;reserved characters&rdquo;
+  StreamTokenizer(const string &s,
+                  const char *reserved_chars = default_reserved_chars) :
       sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), has_next_(false) {
     Init(reserved_chars);
   }
 
+  /// Sets the set of &ldquo;reserved words&rdquo; used by this stream
+  /// tokenizer.  Should be invoked just after construction time.
   void set_reserved_words(set<string> &reserved_words) {
     reserved_words_ = reserved_words;
   }
@@ -105,13 +129,17 @@ class StreamTokenizer {
     delete[] reserved_chars_;
   }
 
+  /// Returns the entire sequence of characters read so far by this
+  /// stream tokenizer as a newly constructed string object.
   string str() { return oss_.str(); }
 
   /// Returns the number of bytes read from the underlying byte
   /// stream.
   size_t tellg() { return curr_pos_; }
+
   /// Returns whether there is another token in the token stream.
   bool HasNext() { return has_next_; }
+
   /// Returns the next token in the token stream.
   string Next() {
     string curr_tok = next_tok_;
@@ -119,14 +147,20 @@ class StreamTokenizer {
     GetNext();
     return curr_tok;
   }
+
+  /// Returns the next token&rsquo;s start position.
   size_t PeekTokenStart() {
     return has_next_ ? next_tok_start_ : tellg();
   }
+
+  /// Returns the type of the next token.
   TokenType PeekTokenType() { return has_next_ ? next_tok_type_ : EOF_TYPE; }
+
   /// Returns the next token that would be returned by the \link Next
   /// \endlink method.  The return value of this method is only valid
   /// when \link HasNext \endlink returns <tt>true</tt>.
   string Peek() { return has_next_ ? next_tok_ : ""; }
+
  private:
   void Init(const char *reserved_chars) {
     num_reserved_chars_ = strlen(reserved_chars);

@@ -58,8 +58,38 @@ using std::tr1::unordered_map;
 using std::tr1::unordered_set;
 using std::vector;
 
-/// A base class for all \link Factory \endlink instances, specifying a single
-/// virtual method.
+/// A base class for all \link EnvFactory \endlink instances, which
+/// provide type-specific mappings between variable names and
+/// \link Factory\endlink-constructible objects.
+class EnvFactoryBase {
+ public:
+  /// Sets the variable with the specified name to a newly constructed
+  /// object by the following tokens in the specified stream tokenizer.
+  virtual void SetVar(const string &varname, StreamTokenizer &st) = 0;
+
+  /// Creates or appends to a vector associated with the variable of the
+  /// specified name.  The object appended to the vector is the one
+  /// created by consuming the next token or tokens from the specified
+  /// token stream.
+  virtual void VectorAppend(const string &varname,
+                            StreamTokenizer &st) = 0;
+
+  /// Returns whether the specified variable has been defined by this
+  /// environment factory instance, either as an object variable
+  /// or a vector-of-object variable.
+  virtual bool Defined(const string &varname) const = 0;
+
+  /// Returns whether the specified variable has been defined as an
+  /// object variable by this environment factory instance.
+  virtual bool DefinedObject(const string &varname) const = 0;
+
+  /// Returns whether the specified variable has been defined as a
+  /// vector-of-object variable by this environment factory instance.
+  virtual bool DefinedVector(const string& varname) const = 0;
+};
+
+/// A base class for all \link Factory \endlink instances, specifying a few
+/// virtual methods.
 class FactoryBase {
  public:
   /// Clears the (possibly static) data of this factory.
@@ -77,11 +107,15 @@ class FactoryBase {
   ///                                   concrete types registered with this
   ///                                   factory
   virtual void CollectRegistered(unordered_set<string> &registered) = 0;
+
+  virtual shared_ptr<EnvFactoryBase> CreateEnvFactory() = 0;
 };
 
 /// A class to hold all \link Factory \endlink instances that have been created.
 class FactoryContainer {
  public:
+  typedef vector<FactoryBase *>::iterator iterator;
+
   /// Adds the specified factory to this container of factories.
   ///
   /// \param factory the factory to add to this container
@@ -103,6 +137,23 @@ class FactoryContainer {
       }
       delete factories_;
     }
+  }
+
+  // Provide two methods to iterate over the FactoryBase instances
+  // held by this FactoryContainer.
+  static iterator begin() {
+    if (factories_ == NULL) {
+      cerr << "FactoryContainer::begin: error: no FactoryBase instances!"
+           << endl;
+    }
+    return factories_->begin();
+  }
+  static iterator end() {
+    if (factories_ == NULL) {
+      cerr << "FactoryContainer::begin: error: no FactoryBase instances!"
+           << endl;
+    }
+    return factories_->end();
   }
 
   /// Prints the base typenames for all factories along with a list of all
@@ -152,6 +203,9 @@ class FactoryConstructible {
   virtual void Init(const string &arg) { }
 };
 
+template <typename T>
+class EnvFactory;
+
 /// Factory for dynamically created instance of the specified type.
 ///
 /// \tparam T the type of objects created by this factory, required to have
@@ -161,6 +215,10 @@ class Factory : public FactoryBase {
  public:
   /// Constructs a new factory
   Factory() { }
+
+  virtual shared_ptr<EnvFactoryBase> CreateEnvFactory() {
+    return shared_ptr<EnvFactoryBase>(new EnvFactory<T>());
+  }
 
   /// Clears this factory of all (possibly static) data.
   /// \p
@@ -453,7 +511,11 @@ class Factory : public FactoryBase {
     // Invoke new instance's Init method.
     // TODO(dbikel): Possibly add the unordered_map of initializers as
     // a parameter to the init method.
-    instance->Init(st.str().substr(start, end - start));
+    string stream_str = st.str();
+    //cerr << "Full stream string is: \"" << stream_str << "\"" << endl;
+    string init_str = stream_str.substr(start, end - start);
+    //cerr << "Init string is: \"" << init_str << "\"" << endl;
+    instance->Init(init_str);
 
     return instance;
   }
@@ -473,7 +535,7 @@ class Factory : public FactoryBase {
   ///
   /// \param type the type to be tested
   /// \return whether the specified type has been registered with this
-  ///         factory 
+  ///         factory
   static bool IsRegistered(const string &type) {
     return initialized_ && cons_table_->find(type) != cons_table_.end();
   }
@@ -530,6 +592,71 @@ class Factory : public FactoryBase {
   /// Factory map of prototype objects.
   static unordered_map<string, const Constructor<T> *> *cons_table_;
   static const char *base_name_;
+};
+
+template <typename T>
+class EnvFactory : public EnvFactoryBase {
+ public:
+  bool GetVar(const string &varname, shared_ptr<T> *value) const {
+    typename unordered_map<string, shared_ptr<T> >::const_iterator it =
+        vars_.find(varname);
+    if (it == vars_.end()) {
+      return false;
+    } else {
+      *value = it->second;
+      return true;
+    }
+  }
+
+  bool GetVector(const string &varname,
+                 vector<shared_ptr<T> > *value) const {
+    typename unordered_map<string, vector<shared_ptr<T> > >::const_iterator it =
+        vector_vars_.find(varname);
+    if (it == vector_vars_.end()) {
+      return false;
+    } else {
+      *value = it->second;
+      return true;
+    }
+  }
+
+  virtual void SetVar(const string &varname, StreamTokenizer &st) {
+    vars_[varname] = factory_.CreateOrDie(st);
+  }
+
+  virtual void VectorAppend(const string &varname,
+                            StreamTokenizer &st) {
+    // First, create object from stream.
+    shared_ptr<T> obj = factory_.CreateOrDie(st);
+
+    typename unordered_map<string, vector<shared_ptr<T> > >::iterator it =
+        vector_vars_.find(varname);
+
+    if (it == vector_vars_.end()) {
+      vector<shared_ptr<T> > vec;
+      vec.push_back(obj);
+      vector_vars_[varname] = vec;
+    } else {
+      it->second.push_back(obj);
+    }
+  }
+
+  virtual bool Defined(const string& varname) const {
+    return DefinedObject(varname) || DefinedVector(varname);
+  }
+
+  virtual bool DefinedObject(const string &varname) const {
+    return vars_.find(varname) != vars_.end();
+  }
+
+  virtual bool DefinedVector(const string &varname) const {
+    return vector_vars_.find(varname) != vector_vars_.end();
+  }
+
+ private:
+  Factory<T> factory_;
+  unordered_map<string, shared_ptr<T> > vars_;
+  unordered_map<string, vector<shared_ptr<T> > > vector_vars_;
 };
 
 /// This is a helper macro used only by the <tt>REGISTER</tt> macro.
