@@ -38,12 +38,14 @@
 #define RERANKER_ENVIRONMENT_H_
 
 #include <tr1/unordered_map>
+#include <tr1/unordered_set>
 
 #include "factory.H"
 
 namespace reranker {
 
 using std::tr1::unordered_map;
+using std::tr1::unordered_set;
 
 /// Provides a set of named variables and their types, as well as the values
 /// for those variable.
@@ -67,8 +69,24 @@ class Environment {
     OBJECT_VECTOR,
   };
 
-  Environment() { }
+  Environment() {
+    for (FactoryContainer::iterator factory_it = FactoryContainer::begin();
+         factory_it != FactoryContainer::end(); ++factory_it) {
+      unordered_set<string> registered;
+      (*factory_it)->CollectRegistered(registered);
+      string base_name = (*factory_it)->BaseName();
+      shared_ptr<EnvFactoryBase> env_factory =
+          (*factory_it)->CreateEnvFactory();
+      for (unordered_set<string>::const_iterator it = registered.begin();
+           it != registered.end(); ++it) {
+        factories_[*it] = env_factory;
+      }
+    }
+  }
  private:
+  /// A map from concrete typenames to the EnvFactory instances that can
+  /// construct instances of those typenames.
+  unordered_map<string, shared_ptr<EnvFactoryBase> > factories_;
   /// A map from primitive variable names to their values, encoded as strings.
   unordered_map<string, string> primitives_;
   /// A map from vector-of-primitive variable names to their values,

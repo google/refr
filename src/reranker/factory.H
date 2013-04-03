@@ -58,6 +58,8 @@ using std::tr1::unordered_map;
 using std::tr1::unordered_set;
 using std::vector;
 
+class FactoryBase;
+
 /// A base class for all \link EnvFactory \endlink instances, which
 /// provide type-specific mappings between variable names and
 /// \link Factory\endlink-constructible objects.
@@ -86,6 +88,10 @@ class EnvFactoryBase {
   /// Returns whether the specified variable has been defined as a
   /// vector-of-object variable by this environment factory instance.
   virtual bool DefinedVector(const string& varname) const = 0;
+
+  /// Returns the base class of the \link Factory \endlink wrapped by
+  /// this EnvFactory instance.
+  virtual const FactoryBase &GetFactoryBase() const = 0;
 };
 
 /// A base class for all \link Factory \endlink instances, specifying a few
@@ -651,6 +657,10 @@ class EnvFactory : public EnvFactoryBase {
 
   virtual bool DefinedVector(const string &varname) const {
     return vector_vars_.find(varname) != vector_vars_.end();
+  }
+
+  virtual const FactoryBase &GetFactoryBase() const {
+    return factory_;
   }
 
  private:
