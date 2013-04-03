@@ -48,7 +48,7 @@ test_PROGRAMS = bin/feature-vector-test$(EXEEXT) \
 	bin/perceptron-model-test$(EXEEXT) \
 	bin/executive-feature-extractor-test$(EXEEXT) \
 	bin/stream-tokenizer-test$(EXEEXT) \
-	bin/environment-test$(EXEEXT)
+	bin/environment-test$(EXEEXT) bin/interpreter-test$(EXEEXT)
 subdir = src/reranker
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -105,7 +105,8 @@ am__objects_1 = feature-extractor.$(OBJEXT) \
 	mira-style-model.$(OBJEXT) ngram-feature-extractor.$(OBJEXT) \
 	string-canonicalizer.$(OBJEXT) factory.$(OBJEXT) \
 	model-proto-reader.$(OBJEXT) model-proto-writer.$(OBJEXT) \
-	model-merge-reducer.$(OBJEXT) stream-tokenizer.$(OBJEXT)
+	model-merge-reducer.$(OBJEXT) stream-tokenizer.$(OBJEXT) \
+	interpreter.$(OBJEXT)
 am__objects_2 = candidate-set-proto-reader.$(OBJEXT) \
 	candidate-set-proto-writer.$(OBJEXT) \
 	perceptron-model-proto-reader.$(OBJEXT) \
@@ -159,6 +160,11 @@ bin_feature_vector_test_OBJECTS =  \
 	$(am_bin_feature_vector_test_OBJECTS)
 bin_feature_vector_test_LDADD = $(LDADD)
 bin_feature_vector_test_DEPENDENCIES =
+am_bin_interpreter_test_OBJECTS = $(am__objects_1) \
+	interpreter-test.$(OBJEXT)
+bin_interpreter_test_OBJECTS = $(am_bin_interpreter_test_OBJECTS)
+bin_interpreter_test_LDADD = $(LDADD)
+bin_interpreter_test_DEPENDENCIES =
 am_bin_model_combine_shards_OBJECTS = $(am__objects_1) \
 	$(am__objects_2) model-combine-shards.$(OBJEXT)
 bin_model_combine_shards_OBJECTS =  \
@@ -224,6 +230,7 @@ SOURCES = $(lib_libreranker_a_SOURCES) \
 	$(bin_extract_features_SOURCES) \
 	$(bin_feature_extractor_test_SOURCES) \
 	$(bin_feature_vector_test_SOURCES) \
+	$(bin_interpreter_test_SOURCES) \
 	$(bin_model_combine_shards_SOURCES) \
 	$(bin_model_combine_symbols_SOURCES) \
 	$(bin_model_merge_reducer_SOURCES) \
@@ -240,6 +247,7 @@ DIST_SOURCES = $(lib_libreranker_a_SOURCES) \
 	$(bin_extract_features_SOURCES) \
 	$(bin_feature_extractor_test_SOURCES) \
 	$(bin_feature_vector_test_SOURCES) \
+	$(bin_interpreter_test_SOURCES) \
 	$(bin_model_combine_shards_SOURCES) \
 	$(bin_model_combine_symbols_SOURCES) \
 	$(bin_model_merge_reducer_SOURCES) \
@@ -374,7 +382,7 @@ SRCS = feature-extractor.C executive-feature-extractor.C perceptron-model.C \
 	mira-style-model.C ngram-feature-extractor.C \
 	string-canonicalizer.C factory.C \
 	model-proto-reader.C model-proto-writer.C model-merge-reducer.C \
-	stream-tokenizer.C
+	stream-tokenizer.C interpreter.C
 
 PROTO_DEP_SRCS = candidate-set-proto-reader.C candidate-set-proto-writer.C \
 		 perceptron-model-proto-reader.C perceptron-model-proto-writer.C
@@ -413,6 +421,7 @@ bin_executive_feature_extractor_test_SOURCES = $(SRCS) $(PROTO_DEP_SRCS) \
 	executive-feature-extractor-test.C
 
 bin_environment_test_SOURCES = $(SRCS) environment-test.C
+bin_interpreter_test_SOURCES = $(SRCS) interpreter-test.C
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -586,6 +595,9 @@ bin/feature-extractor-test$(EXEEXT): $(bin_feature_extractor_test_OBJECTS) $(bin
 bin/feature-vector-test$(EXEEXT): $(bin_feature_vector_test_OBJECTS) $(bin_feature_vector_test_DEPENDENCIES) $(EXTRA_bin_feature_vector_test_DEPENDENCIES) bin/$(am__dirstamp)
 	@rm -f bin/feature-vector-test$(EXEEXT)
 	$(CXXLINK) $(bin_feature_vector_test_OBJECTS) $(bin_feature_vector_test_LDADD) $(LIBS)
+bin/interpreter-test$(EXEEXT): $(bin_interpreter_test_OBJECTS) $(bin_interpreter_test_DEPENDENCIES) $(EXTRA_bin_interpreter_test_DEPENDENCIES) bin/$(am__dirstamp)
+	@rm -f bin/interpreter-test$(EXEEXT)
+	$(CXXLINK) $(bin_interpreter_test_OBJECTS) $(bin_interpreter_test_LDADD) $(LIBS)
 bin/model-combine-shards$(EXEEXT): $(bin_model_combine_shards_OBJECTS) $(bin_model_combine_shards_DEPENDENCIES) $(EXTRA_bin_model_combine_shards_DEPENDENCIES) bin/$(am__dirstamp)
 	@rm -f bin/model-combine-shards$(EXEEXT)
 	$(CXXLINK) $(bin_model_combine_shards_OBJECTS) $(bin_model_combine_shards_LDADD) $(LIBS)
@@ -699,6 +711,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/feature-vector-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file-backed-loss-setter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file-backed-ngram-feature-extractor.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interpreter-test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interpreter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mira-style-model.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/model-combine-shards.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/model-combine-symbols.Po@am__quote@

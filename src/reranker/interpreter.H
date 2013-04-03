@@ -30,20 +30,69 @@
 //
 //
 /// \file
-/// Feature extractor interface and factory implementation.
-/// Author: dbikel@google.com (Dan Bikel)
+/// Provides an interpreter for assigning primitives and Factory-constructible
+/// objects to named variables, as well as vectors thereof.
+/// \author dbikel@google.com (Dan Bikel)
 
-#include "feature-extractor.H"
+#ifndef RERANKER_INTERPRETER_H_
+#define RERANKER_INTERPRETER_H_
 
-using namespace std;
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <tr1/unordered_map>
+#include <tr1/unordered_set>
+
+#include "environment.H"
 
 namespace reranker {
 
-void TearDown() {
-  FactoryContainer::Clear();
-  StringCanonicalizer::Clear();
-}
+using std::iostream;
+using std::ifstream;
 
-IMPLEMENT_FACTORY(FeatureExtractor)
+class Interpreter {
+ public:
+  Interpreter() { }
+  virtual ~Interpreter() { }
+
+  /// Evaluates the statements in the specified text file.
+  void Eval(const string &filename) {
+    filename_ = filename;
+    ifstream file(filename_.c_str());
+    Eval(file);
+  }
+
+  void EvalString(const string& input) {
+    StreamTokenizer st(input);
+    Eval(st);
+  }
+
+  /// Evaluates the statements in the specified stream.
+  void Eval(istream &is) {
+    StreamTokenizer st(is);
+    Eval(st);
+  }
+
+  Environment &env() { return env_; }
+
+ private:
+  void Eval(StreamTokenizer &st);
+
+  void WrongTokenError(size_t pos,
+                       const string &expected, const string &found) const;
+
+  void WrongTokenTypeError(size_t pos,
+                           StreamTokenizer::TokenType expected,
+                           StreamTokenizer::TokenType found,
+                           const string &token) const;
+  /// The environment of this interpreter.
+  ///
+  /// TODO(dbikel): Possibly turn this into a stack.
+  Environment env_;
+
+  string filename_;
+};
 
 }  // namespace reranker
+
+#endif

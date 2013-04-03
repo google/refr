@@ -62,10 +62,18 @@ using std::endl;
 static const char *default_reserved_words[] = {
   "false",
   "true",
+  "bool",
+  "int",
+  "double",
+  "string",
+  "bool[]",
+  "int[]",
+  "double[]",
+  "string[]",
 };
 
 /// Default set of reserved characters for the StreamTokenizer class.
-static const char *default_reserved_chars = "(){},;";
+static const char *default_reserved_chars = "(){},=;";
 
 /// \class StreamTokenizer
 ///
@@ -135,10 +143,10 @@ class StreamTokenizer {
 
   /// Returns the number of bytes read from the underlying byte
   /// stream.
-  size_t tellg() { return curr_pos_; }
+  size_t tellg() const { return curr_pos_; }
 
   /// Returns whether there is another token in the token stream.
-  bool HasNext() { return has_next_; }
+  bool HasNext() const { return has_next_; }
 
   /// Returns the next token in the token stream.
   string Next() {
@@ -149,17 +157,19 @@ class StreamTokenizer {
   }
 
   /// Returns the next token&rsquo;s start position.
-  size_t PeekTokenStart() {
+  size_t PeekTokenStart() const {
     return has_next_ ? next_tok_start_ : tellg();
   }
 
   /// Returns the type of the next token.
-  TokenType PeekTokenType() { return has_next_ ? next_tok_type_ : EOF_TYPE; }
+  TokenType PeekTokenType() const {
+    return has_next_ ? next_tok_type_ : EOF_TYPE;
+  }
 
   /// Returns the next token that would be returned by the \link Next
   /// \endlink method.  The return value of this method is only valid
   /// when \link HasNext \endlink returns <tt>true</tt>.
-  string Peek() { return has_next_ ? next_tok_ : ""; }
+  string Peek() const { return has_next_ ? next_tok_ : ""; }
 
  private:
   void Init(const char *reserved_chars) {
@@ -179,7 +189,7 @@ class StreamTokenizer {
 
   /// Returns whether the specified character represents a
   /// &ldquo;reserved character&rdquo;.
-  bool ReservedChar(char c) {
+  bool ReservedChar(char c) const {
     for (size_t i = 0; i < num_reserved_chars_; ++i) {
       if (c == reserved_chars_[i]) {
         return true;

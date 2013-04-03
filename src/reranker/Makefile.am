@@ -21,7 +21,8 @@ test_PROGRAMS = bin/feature-vector-test \
 		bin/perceptron-model-test \
 		bin/executive-feature-extractor-test \
 		bin/stream-tokenizer-test \
-		bin/environment-test
+		bin/environment-test \
+		bin/interpreter-test
 
 PYTHON_TOOLS = bin/hadoop-run
 ${PYTHON_TOOLS}: ../scripts/python_wrapper bin/$(am__dirstamp)
@@ -48,7 +49,7 @@ SRCS =  feature-extractor.C executive-feature-extractor.C perceptron-model.C \
 	mira-style-model.C ngram-feature-extractor.C \
 	string-canonicalizer.C factory.C \
 	model-proto-reader.C model-proto-writer.C model-merge-reducer.C \
-	stream-tokenizer.C
+	stream-tokenizer.C interpreter.C
 
 PROTO_DEP_SRCS = candidate-set-proto-reader.C candidate-set-proto-writer.C \
 		 perceptron-model-proto-reader.C perceptron-model-proto-writer.C
@@ -81,3 +82,4 @@ bin_stream_tokenizer_test_SOURCES = $(SRCS) stream-tokenizer-test.C
 bin_executive_feature_extractor_test_SOURCES = $(SRCS) $(PROTO_DEP_SRCS) \
 	executive-feature-extractor-test.C
 bin_environment_test_SOURCES = $(SRCS) environment-test.C
+bin_interpreter_test_SOURCES = $(SRCS) interpreter-test.C

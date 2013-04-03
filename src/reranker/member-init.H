@@ -62,14 +62,19 @@ using std::vector;
 /// or a <tt>shared_ptr</tt> to another Factory-constructible type.
 class MemberInitializer {
  public:
-  MemberInitializer() : initialized_(0), required_(false) { }
-  MemberInitializer(bool required) : initialized_(0), required_(required) { }
+  MemberInitializer(const string &name) : name_(name),
+                                          initialized_(0), required_(false) { }
+  MemberInitializer(const string& name, bool required) :
+      name_(name), initialized_(0), required_(required) { }
+  virtual string Name() { return name_; }
   virtual void Init(StreamTokenizer &st) = 0;
   /// Returns the number of times this member initializer&rsquo;s
   /// \link Init \endlink method has been invoked.
   virtual int Initialized() const { return initialized_; }
   virtual bool Required() const { return required_; }
  protected:
+  /// The name of this member.
+  string name_;
   /// The number of times this member initializer&rsquo;s Init method has
   /// been invoked.
   int initialized_;
@@ -89,9 +94,10 @@ template <typename T> class Factory;
 template <typename T>
 class Initializer : public MemberInitializer {
  public:
-  Initializer(T *member) : member_(member) { }
-  Initializer(T *member, bool required) :
-      MemberInitializer(required), member_(member) { }
+  Initializer(const string &name, T *member) :
+      MemberInitializer(name), member_(member) { }
+  Initializer(const string &name, T *member, bool required) :
+      MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::IDENTIFIER) {
@@ -117,9 +123,10 @@ class Initializer : public MemberInitializer {
 template<>
 class Initializer<int> : public MemberInitializer {
  public:
-  Initializer(int *member) : member_(member) { }
-  Initializer(int *member, bool required) :
-      MemberInitializer(required), member_(member) { }
+  Initializer(const string &name, int *member) :
+      MemberInitializer(name), member_(member) { }
+  Initializer(const string &name, int *member, bool required) :
+      MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
@@ -144,9 +151,10 @@ class Initializer<int> : public MemberInitializer {
 template<>
 class Initializer<double> : public MemberInitializer {
  public:
-  Initializer(double *member) : member_(member) { }
-  Initializer(double *member, bool required) :
-      MemberInitializer(required), member_(member) { }
+  Initializer(const string &name, double *member) :
+      MemberInitializer(name), member_(member) { }
+  Initializer(const string &name, double *member, bool required) :
+      MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
@@ -171,9 +179,10 @@ class Initializer<double> : public MemberInitializer {
 template<>
 class Initializer<bool> : public MemberInitializer {
  public:
-  Initializer(bool *member) : member_(member) { }
-  Initializer(bool *member, bool required) :
-      MemberInitializer(required), member_(member) { }
+  Initializer(const string &name, bool *member) :
+      MemberInitializer(name), member_(member) { }
+  Initializer(const string &name, bool *member, bool required) :
+      MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::RESERVED_WORD) {
@@ -210,9 +219,10 @@ class Initializer<bool> : public MemberInitializer {
 template<>
 class Initializer<string> : public MemberInitializer {
  public:
-  Initializer(string *member) : member_(member) { }
-  Initializer(string *member, bool required) :
-      MemberInitializer(required), member_(member) { }
+  Initializer(const string &name, string *member) :
+      MemberInitializer(name), member_(member) { }
+  Initializer(const string &name, string *member, bool required) :
+      MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::STRING) {
@@ -232,29 +242,34 @@ class Initializer<string> : public MemberInitializer {
 
 /// A partial specialization to allow initialization of a vector of
 /// any primitive type or any \link Factory\endlink-constructible
-/// type.  The syntax for a vector initialization is an open brace '{}'
+/// type.  The syntax for a vector initialization is an open brace '{'
 /// followed by a comma-separated list of values followed by a close
 /// brace '}'.
 template<typename T>
 class Initializer<vector<T> > : public MemberInitializer {
  public:
-  Initializer(vector<T> *member) : member_(member) { }
-  Initializer(vector<T> *member, bool required) :
-      MemberInitializer(required), member_(member) { }
+  Initializer(const string &name, vector<T> *member) :
+      MemberInitializer(name), member_(member) { }
+  Initializer(const string &name, vector<T> *member, bool required) :
+      MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
     if (st.Peek() == "{") {
       // Consume open brace.
       st.Next();
     } else {
+      // If StreamTokenizer had a way to put back the last token read,
+      // we could re-enable this error-checking code.
+      /*
       ostringstream err_ss;
       err_ss << "Initializer<vector<T>>: "
              << "error: expected '{' at stream position "
              << st.PeekTokenStart() << " but found \"" << st.Peek() << "\"";
       throw std::runtime_error(err_ss.str());
+      */
     }
     while (st.Peek() != "}") {
       T vector_element;
-      Initializer<T> *element_init = new Initializer<T>(&vector_element);
+      Initializer<T> *element_init = new Initializer<T>("", &vector_element);
       element_init->Init(st);
       member_->push_back(vector_element);
       delete element_init;
@@ -308,7 +323,7 @@ class Initializers {
 
   template<typename T>
   void Add(const string &name, T *member, bool required = false) {
-    initializers_[name] = new Initializer<T>(member, required);
+    initializers_[name] = new Initializer<T>(name, member, required);
   }
 
   /// Returns a const iterator pointing to the beginning of the map

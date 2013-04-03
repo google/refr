@@ -614,8 +614,8 @@ class EnvFactory : public EnvFactoryBase {
     }
   }
 
-  bool GetVector(const string &varname,
-                 vector<shared_ptr<T> > *value) const {
+  bool GetVectorVar(const string &varname,
+                    vector<shared_ptr<T> > *value) const {
     typename unordered_map<string, vector<shared_ptr<T> > >::const_iterator it =
         vector_vars_.find(varname);
     if (it == vector_vars_.end()) {
