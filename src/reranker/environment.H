@@ -69,7 +69,7 @@ class Environment {
     OBJECT_VECTOR,
   };
 
-  Environment() {
+  Environment(bool debug = false) {
     for (FactoryContainer::iterator factory_it = FactoryContainer::begin();
          factory_it != FactoryContainer::end(); ++factory_it) {
       unordered_set<string> registered;
@@ -80,6 +80,11 @@ class Environment {
       for (unordered_set<string>::const_iterator it = registered.begin();
            it != registered.end(); ++it) {
         factories_[*it] = env_factory;
+
+        if (test) {
+          cerr << "Environment: associating concrete typename " << *it
+               << " with factory for " << (*factory_it)->BaseName() << endl;
+        }
       }
     }
   }

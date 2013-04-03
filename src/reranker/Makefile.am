@@ -20,7 +20,8 @@ test_PROGRAMS = bin/feature-vector-test \
 		bin/candidate-set-proto-writer-test \
 		bin/perceptron-model-test \
 		bin/executive-feature-extractor-test \
-		bin/stream-tokenizer-test
+		bin/stream-tokenizer-test \
+		bin/environment-test
 
 PYTHON_TOOLS = bin/hadoop-run
 ${PYTHON_TOOLS}: ../scripts/python_wrapper bin/$(am__dirstamp)
@@ -79,3 +80,4 @@ bin_perceptron_model_test_SOURCES = $(SRCS) $(PROTO_DEP_SRCS) \
 bin_stream_tokenizer_test_SOURCES = $(SRCS) stream-tokenizer-test.C
 bin_executive_feature_extractor_test_SOURCES = $(SRCS) $(PROTO_DEP_SRCS) \
 	executive-feature-extractor-test.C
+bin_environment_test_SOURCES = $(SRCS) environment-test.C

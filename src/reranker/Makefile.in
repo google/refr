@@ -47,7 +47,8 @@ test_PROGRAMS = bin/feature-vector-test$(EXEEXT) \
 	bin/candidate-set-proto-writer-test$(EXEEXT) \
 	bin/perceptron-model-test$(EXEEXT) \
 	bin/executive-feature-extractor-test$(EXEEXT) \
-	bin/stream-tokenizer-test$(EXEEXT)
+	bin/stream-tokenizer-test$(EXEEXT) \
+	bin/environment-test$(EXEEXT)
 subdir = src/reranker
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -130,6 +131,11 @@ am_bin_compile_features_OBJECTS = $(am__objects_1) $(am__objects_2) \
 bin_compile_features_OBJECTS = $(am_bin_compile_features_OBJECTS)
 bin_compile_features_LDADD = $(LDADD)
 bin_compile_features_DEPENDENCIES =
+am_bin_environment_test_OBJECTS = $(am__objects_1) \
+	environment-test.$(OBJEXT)
+bin_environment_test_OBJECTS = $(am_bin_environment_test_OBJECTS)
+bin_environment_test_LDADD = $(LDADD)
+bin_environment_test_DEPENDENCIES =
 am_bin_executive_feature_extractor_test_OBJECTS = $(am__objects_1) \
 	$(am__objects_2) executive-feature-extractor-test.$(OBJEXT)
 bin_executive_feature_extractor_test_OBJECTS =  \
@@ -213,6 +219,7 @@ SOURCES = $(lib_libreranker_a_SOURCES) \
 	$(bin_candidate_set_proto_reader_test_SOURCES) \
 	$(bin_candidate_set_proto_writer_test_SOURCES) \
 	$(bin_compile_features_SOURCES) \
+	$(bin_environment_test_SOURCES) \
 	$(bin_executive_feature_extractor_test_SOURCES) \
 	$(bin_extract_features_SOURCES) \
 	$(bin_feature_extractor_test_SOURCES) \
@@ -228,6 +235,7 @@ DIST_SOURCES = $(lib_libreranker_a_SOURCES) \
 	$(bin_candidate_set_proto_reader_test_SOURCES) \
 	$(bin_candidate_set_proto_writer_test_SOURCES) \
 	$(bin_compile_features_SOURCES) \
+	$(bin_environment_test_SOURCES) \
 	$(bin_executive_feature_extractor_test_SOURCES) \
 	$(bin_extract_features_SOURCES) \
 	$(bin_feature_extractor_test_SOURCES) \
@@ -404,6 +412,7 @@ bin_stream_tokenizer_test_SOURCES = $(SRCS) stream-tokenizer-test.C
 bin_executive_feature_extractor_test_SOURCES = $(SRCS) $(PROTO_DEP_SRCS) \
 	executive-feature-extractor-test.C
 
+bin_environment_test_SOURCES = $(SRCS) environment-test.C
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -562,6 +571,9 @@ bin/candidate-set-proto-writer-test$(EXEEXT): $(bin_candidate_set_proto_writer_t
 bin/compile-features$(EXEEXT): $(bin_compile_features_OBJECTS) $(bin_compile_features_DEPENDENCIES) $(EXTRA_bin_compile_features_DEPENDENCIES) bin/$(am__dirstamp)
 	@rm -f bin/compile-features$(EXEEXT)
 	$(CXXLINK) $(bin_compile_features_OBJECTS) $(bin_compile_features_LDADD) $(LIBS)
+bin/environment-test$(EXEEXT): $(bin_environment_test_OBJECTS) $(bin_environment_test_DEPENDENCIES) $(EXTRA_bin_environment_test_DEPENDENCIES) bin/$(am__dirstamp)
+	@rm -f bin/environment-test$(EXEEXT)
+	$(CXXLINK) $(bin_environment_test_OBJECTS) $(bin_environment_test_LDADD) $(LIBS)
 bin/executive-feature-extractor-test$(EXEEXT): $(bin_executive_feature_extractor_test_OBJECTS) $(bin_executive_feature_extractor_test_DEPENDENCIES) $(EXTRA_bin_executive_feature_extractor_test_DEPENDENCIES) bin/$(am__dirstamp)
 	@rm -f bin/executive-feature-extractor-test$(EXEEXT)
 	$(CXXLINK) $(bin_executive_feature_extractor_test_OBJECTS) $(bin_executive_feature_extractor_test_LDADD) $(LIBS)
@@ -677,6 +689,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/candidate-set.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/candidate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compile-features.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/executive-feature-extractor-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/executive-feature-extractor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/extract-features.Po@am__quote@
