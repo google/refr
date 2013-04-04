@@ -357,18 +357,18 @@ a member named <code>b</code> of type <code>bool</code>. </li>
 <tr>
 <td><code>&lt;bool_literal&gt;</code> </td><td><code>::=</code> </td><td><code>true | false</code>  </td></tr>
 <tr>
-<td><code>&lt;primitive_vector_init&gt;</code> </td><td><code>::=</code> </td><td><code>&lt;member_name&gt; '(' &lt;literal_list&gt; ')'</code>  </td></tr>
+<td><code>&lt;primitive_vector_init&gt;</code> </td><td><code>::=</code> </td><td><code>&lt;member_name&gt; '(' '{' &lt;literal_list&gt; '}' ')'</code>  </td></tr>
 <tr>
-<td valign="top"><code>&lt;literal_list&gt;</code> </td><td valign="top"><code>::=</code> </td><td><code>'{' &lt;string_literal&gt; [ ',' &lt;string_literal&gt; ]* [','] |<br/>
+<td valign="top"><code>&lt;literal_list&gt;</code> </td><td valign="top"><code>::=</code> </td><td><code>&lt;string_literal&gt; [ ',' &lt;string_literal&gt; ]* [','] |<br/>
  &lt;double_literal&gt; [ ',' &lt;double_literal&gt; ]* [','] |<br/>
  &lt;int_literal&gt; [ ',' &lt;int_literal&gt; ]* [','] |<br/>
- &lt;bool_literal&gt; [ ',' &lt;bool_literal&gt; ]* [','] '}'</code>   </td></tr>
+ &lt;bool_literal&gt; [ ',' &lt;bool_literal&gt; ]* [',']</code>   </td></tr>
 <tr>
 <td><code>&lt;factory_init&gt;</code> </td><td><code>::=</code> </td><td><code>&lt;member_name&gt; '(' &lt;spec&gt; ')'</code>  </td></tr>
 <tr>
-<td><code>&lt;factory_vector_init&gt;</code> </td><td><code>::=</code> </td><td><code>&lt;member_name&gt; '(' &lt;spec_list&gt; ')'</code>  </td></tr>
+<td><code>&lt;factory_vector_init&gt;</code> </td><td><code>::=</code> </td><td><code>&lt;member_name&gt; '(' '{' &lt;spec_list&gt; '}' ')'</code>  </td></tr>
 <tr>
-<td valign="top"><code>&lt;spec_list&gt;</code> </td><td valign="top"><code>::=</code> </td><td><code>'{' &lt;spec&gt; [ ',' &lt;spec&gt; ]* [','] '}'</code><br/>
+<td valign="top"><code>&lt;spec_list&gt;</code> </td><td valign="top"><code>::=</code> </td><td><code>&lt;spec&gt; [ ',' &lt;spec&gt; ]* [',']</code><br/>
  where every <code>&lt;spec&gt;</code> has a <code>&lt;type&gt;</code> constructible by the same <a class="el" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory</a> (<em>i.e.</em>, all <code>&lt;type&gt;</code>&rsquo;s have a common abstract base class)   </td></tr>
 </table>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
@@ -548,7 +548,7 @@ template&lt;typename T&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:00:09 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 4 2013 16:13:48 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
