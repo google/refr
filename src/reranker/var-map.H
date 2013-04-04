@@ -31,9 +31,9 @@
 //
 /// \file
 /// Provides a map from variables of a specific type (primitives,
-/// \link Factory\endlink-constructible objects, or vectors thereof)
-/// to their values.  These maps exist primarily to support the \link
-/// Environment \endlink class.
+/// \link reranker::Factory Factory\endlink-constructible objects, or
+/// vectors thereof) to their values.  These maps exist primarily to
+/// support the \link reranker::Environment Environment \endlink class.
 /// \author dbikel@google.com (Dan Bikel)
 
 #ifndef RERANKER_VAR_MAP_H_
