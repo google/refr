@@ -330,8 +330,8 @@ a member named <code>b</code> of type <code>bool</code>. </li>
  ExampleFeatureExtractor(b(false))
  ExampleFeatureExtractor()
 </pre></div><p> Crucially, note how a vector can have an optional comma at the end of its list (the second example), and how a boolean may be initialized either with one of the two <em>reserved words</em> <code>true</code> or <code>false</code>, as in C and C++. Finally, unlike parameter lists to C++ constructors, since our members are always named, the grammar allows them to appear in any order, making the following two specification strings equivalent: </p>
-<div class="fragment"><pre class="fragment"> ExampleFeatureExtractor(arg(<span class="stringliteral">&quot;foo&quot;</span>), strvec(<span class="stringliteral">&quot;foo&quot;</span>, <span class="stringliteral">&quot;bar&quot;</span>, <span class="stringliteral">&quot;baz&quot;</span>))
- ExampleFeatureExtractor(strvec(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;), arg(&quot;foo&quot;))
+<div class="fragment"><pre class="fragment"> ExampleFeatureExtractor(arg(<span class="stringliteral">&quot;foo&quot;</span>), strvec({<span class="stringliteral">&quot;foo&quot;</span>, <span class="stringliteral">&quot;bar&quot;</span>, <span class="stringliteral">&quot;baz&quot;</span>}))
+ ExampleFeatureExtractor(strvec({<span class="stringliteral">&quot;foo&quot;</span>, <span class="stringliteral">&quot;bar&quot;</span>, <span class="stringliteral">&quot;baz&quot;</span>}), arg(<span class="stringliteral">&quot;foo&quot;</span>))
 </pre></div><p>More formally, the specification string must conform to the following grammar: </p>
 <table  border="0">
 <tr>
@@ -548,7 +548,7 @@ template&lt;typename T&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:13:48 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 4 2013 16:17:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
