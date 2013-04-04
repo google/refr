@@ -13,10 +13,19 @@ using namespace reranker;
 
 int
 main(int argc, char **argv) {
-  cout << "Hello!  Please type assignment statements." << endl;
+  cout << "\nHello!  Please type assignment statements.\n" << endl;
 
-  Interpreter interpreter;
+  int debug = 1;
+  Interpreter interpreter(debug);
   interpreter.Eval(cin);
 
-  cout << "Have a nice day!" << endl;
+  bool value_for_f;
+  bool success = interpreter.env().Get("f", &value_for_f);
+  if (success) {
+    cout << "Success! f=" << (value_for_f ? "true" : "false") << endl;
+  } else {
+    cout << ":( ... no value for variable f" << endl;
+  }
+
+  cout << "\nHave a nice day!\n" << endl;
 }

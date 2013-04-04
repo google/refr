@@ -52,7 +52,7 @@ using std::ifstream;
 
 class Interpreter {
  public:
-  Interpreter() { }
+  Interpreter(int debug = 0) : env_(debug), debug_(debug) { }
   virtual ~Interpreter() { }
 
   /// Evaluates the statements in the specified text file.
@@ -62,6 +62,7 @@ class Interpreter {
     Eval(file);
   }
 
+  /// Evaluates the statements in the specified string.
   void EvalString(const string& input) {
     StreamTokenizer st(input);
     Eval(st);
@@ -79,7 +80,9 @@ class Interpreter {
   void Eval(StreamTokenizer &st);
 
   void WrongTokenError(size_t pos,
-                       const string &expected, const string &found) const;
+                       const string &expected,
+                       const string &found,
+                       StreamTokenizer::TokenType found_type) const;
 
   void WrongTokenTypeError(size_t pos,
                            StreamTokenizer::TokenType expected,
@@ -91,6 +94,8 @@ class Interpreter {
   Environment env_;
 
   string filename_;
+
+  int debug_;
 };
 
 }  // namespace reranker

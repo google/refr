@@ -110,7 +110,7 @@ class StreamTokenizer {
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(istream &is,
                   const char *reserved_chars = default_reserved_chars) :
-      is_(is), curr_pos_(0), num_read_(0), has_next_(false) {
+      is_(is), curr_pos_(0), num_read_(0), has_next_(false), has_prev_(false) {
     Init(reserved_chars);
   }
 
@@ -122,7 +122,8 @@ class StreamTokenizer {
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(const string &s,
                   const char *reserved_chars = default_reserved_chars) :
-      sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), has_next_(false) {
+      sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), has_next_(false),
+      has_prev_(false) {
     Init(reserved_chars);
   }
 
@@ -148,12 +149,33 @@ class StreamTokenizer {
   /// Returns whether there is another token in the token stream.
   bool HasNext() const { return has_next_; }
 
+  bool HasPrev() const { return has_prev_; }
+
+  string PeekPrev() const { return has_prev_ ? prev_tok_ : ""; }
+
+  size_t PeekPrevTokenStart() const {
+    return has_prev_ ? prev_tok_start_ : 0;
+  }
+
+  TokenType PeekPrevTokenType() const {
+    return has_prev_ ? prev_tok_type_ : EOF_TYPE;
+  }
+
   /// Returns the next token in the token stream.
   string Next() {
-    string curr_tok = next_tok_;
+    if (!HasNext()) {
+      // Error.
+    }
+
+    // First, preserve the next token as the previous token.
+    prev_tok_ = next_tok_;
+    prev_tok_type_ = next_tok_type_;
+    prev_tok_start_ = next_tok_start_;
+    has_prev_ = true;
+
     curr_pos_ = num_read_;
     GetNext();
-    return curr_tok;
+    return prev_tok_;
   }
 
   /// Returns the next token&rsquo;s start position.
@@ -199,18 +221,35 @@ class StreamTokenizer {
   }
 
   // data members
+
+  // The stream itself.
+  /// This data member is for use when we need to construct the is_ data member
+  /// from a string at construction time.
   istringstream sstream_;
+  /// The underlying byte stream of this token stream.
   istream &is_;
+
+  // Information about special tokens.
   char *reserved_chars_;
   size_t num_reserved_chars_;
   set<string> reserved_words_;
-  string next_tok_;
-  TokenType next_tok_type_;
-  size_t next_tok_start_;
+
+  // Information about the current state of this stream.
   size_t curr_pos_;
   size_t num_read_;
   ostringstream oss_;
+
+  // Information about the next token in this stream.
+  string next_tok_;
+  TokenType next_tok_type_;
+  size_t next_tok_start_;
   bool has_next_;
+
+  // Information about the previous token in this stream.
+  string prev_tok_;
+  TokenType prev_tok_type_;
+  size_t prev_tok_start_;
+  bool has_prev_;
 };
 
 }  // namespace reranker

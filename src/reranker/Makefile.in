@@ -106,7 +106,7 @@ am__objects_1 = feature-extractor.$(OBJEXT) \
 	string-canonicalizer.$(OBJEXT) factory.$(OBJEXT) \
 	model-proto-reader.$(OBJEXT) model-proto-writer.$(OBJEXT) \
 	model-merge-reducer.$(OBJEXT) stream-tokenizer.$(OBJEXT) \
-	interpreter.$(OBJEXT)
+	environment.$(OBJEXT) interpreter.$(OBJEXT)
 am__objects_2 = candidate-set-proto-reader.$(OBJEXT) \
 	candidate-set-proto-writer.$(OBJEXT) \
 	perceptron-model-proto-reader.$(OBJEXT) \
@@ -382,7 +382,7 @@ SRCS = feature-extractor.C executive-feature-extractor.C perceptron-model.C \
 	mira-style-model.C ngram-feature-extractor.C \
 	string-canonicalizer.C factory.C \
 	model-proto-reader.C model-proto-writer.C model-merge-reducer.C \
-	stream-tokenizer.C interpreter.C
+	stream-tokenizer.C environment.C interpreter.C
 
 PROTO_DEP_SRCS = candidate-set-proto-reader.C candidate-set-proto-writer.C \
 		 perceptron-model-proto-reader.C perceptron-model-proto-writer.C
@@ -702,6 +702,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/candidate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compile-features.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment-test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/executive-feature-extractor-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/executive-feature-extractor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/extract-features.Po@am__quote@

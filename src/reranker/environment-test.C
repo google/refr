@@ -13,6 +13,6 @@ using namespace reranker;
 
 int
 main(int argc, char **argv) {
-  bool test = true;
-  Environment env(test);
+  int debug = 1;
+  Environment env(debug);
 }

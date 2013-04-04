@@ -253,19 +253,21 @@ class Initializer<vector<T> > : public MemberInitializer {
   Initializer(const string &name, vector<T> *member, bool required) :
       MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st) {
+    // Either the next token is an open brace (if reading tokens from
+    // within a Factory-constructible object's member init list), or
+    // else we just read an open brace (if Interpreter is reading tokens).
     if (st.Peek() == "{") {
       // Consume open brace.
       st.Next();
     } else {
-      // If StreamTokenizer had a way to put back the last token read,
-      // we could re-enable this error-checking code.
-      /*
-      ostringstream err_ss;
-      err_ss << "Initializer<vector<T>>: "
-             << "error: expected '{' at stream position "
-             << st.PeekTokenStart() << " but found \"" << st.Peek() << "\"";
-      throw std::runtime_error(err_ss.str());
-      */
+      if (st.PeekPrev() != "{") {
+        ostringstream err_ss;
+        err_ss << "Initializer<vector<T>>: "
+               << "error: expected '{' at stream position "
+               << st.PeekPrevTokenStart() << " but found \""
+               << st.PeekPrev() << "\"";
+        throw std::runtime_error(err_ss.str());
+      }
     }
     while (st.Peek() != "}") {
       T vector_element;

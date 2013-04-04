@@ -55,33 +55,35 @@ Interpreter::Eval(StreamTokenizer &st) {
     }
     string varname = st.Next();
 
-    cerr << "Read varname " << varname << endl;
-
     // Next, read equals sign.
     token_type = st.PeekTokenType();
+    if (st.Peek() != "=") {
+      WrongTokenError(st.PeekTokenStart(), "=", st.Peek(), st.PeekTokenType());
+    }
+    /*
     if (token_type != StreamTokenizer::RESERVED_CHAR) {
       WrongTokenTypeError(st.PeekTokenStart(), StreamTokenizer::RESERVED_CHAR,
                           token_type, st.Peek());
     }
-    if (st.Peek() != "=") {
-      WrongTokenError(st.PeekTokenStart(), "=", st.Peek());
-    }
-
-    cerr << "About to read " << st.Peek() << endl;
+    */
 
     // Consume equals sign.
     st.Next();
+
+    if (st.PeekTokenType() == StreamTokenizer::EOF_TYPE) {
+      ostringstream err_ss;
+      err_ss << "Interpreter:" << filename_
+             << ": error: unexpected EOF at stream position "
+             << st.tellg();
+      throw std::runtime_error(err_ss.str());
+    }
 
     // Consume and set the value for this variable in the environment.
     env_.ReadAndSet(varname, st);
 
     token_type = st.PeekTokenType();
-    if (token_type != StreamTokenizer::RESERVED_CHAR) {
-      WrongTokenTypeError(st.PeekTokenStart(), StreamTokenizer::RESERVED_CHAR,
-                          token_type, st.Peek());
-    }
     if (st.Peek() != ";") {
-      WrongTokenError(st.PeekTokenStart(), ";", st.Peek());
+      WrongTokenError(st.PeekTokenStart(), ";", st.Peek(), st.PeekTokenType());
     }
     // Consume semicolon.
     st.Next();
@@ -91,11 +93,13 @@ Interpreter::Eval(StreamTokenizer &st) {
 void
 Interpreter::WrongTokenError(size_t pos,
                              const string &expected,
-                             const string &found) const {
+                             const string &found,
+                             StreamTokenizer::TokenType found_type) const {
   ostringstream err_ss;
-  err_ss << "Interpreter:" << filename_ << ":" << " at stream pos " << pos
+  err_ss << "Interpreter:" << filename_ << ": at stream pos " << pos
          << " expected token \"" << expected << "\" but found \"" << found
-         << "\"";
+         << "\" (token type: " << StreamTokenizer::TypeName(found_type)
+         << ")";
   throw std::runtime_error(err_ss.str());
 }
 
@@ -105,7 +109,7 @@ Interpreter::WrongTokenTypeError(size_t pos,
                                  StreamTokenizer::TokenType found,
                                  const string &token) const {
   ostringstream err_ss;
-  err_ss << "Interpreter:" << filename_ << ":" << " at stream pos " << pos
+  err_ss << "Interpreter:" << filename_ << ": at stream pos " << pos
          << " expected token type " << StreamTokenizer::TypeName(expected)
          << " but found " << StreamTokenizer::TypeName(found)
          << "; token=\"" << token << "\"";
