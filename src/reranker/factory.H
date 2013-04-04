@@ -238,8 +238,8 @@ class Factory : public FactoryBase {
   /// named, the grammar allows them to appear in any order, making the
   /// following two specification strings equivalent:
   /// \code
-  /// ExampleFeatureExtractor(arg("foo"), strvec("foo", "bar", "baz"))
-  /// ExampleFeatureExtractor(strvec("foo", "bar", "baz"), arg("foo"))
+  /// ExampleFeatureExtractor(arg("foo"), strvec({"foo", "bar", "baz"}))
+  /// ExampleFeatureExtractor(strvec({"foo", "bar", "baz"}), arg("foo"))
   /// \endcode
   ///
   /// More formally, the specification string must conform to the following
