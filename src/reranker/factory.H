@@ -310,15 +310,15 @@ class Factory : public FactoryBase {
   /// <tr>
   ///   <td><tt>\<primitive_vector_init></tt></td>
   ///   <td><tt>::=</tt></td>
-  ///   <td><tt>\<member_name\> '(' \<literal_list\> ')'</tt></td>
+  ///   <td><tt>\<member_name\> '(' '{' \<literal_list\> '}' ')'</tt></td>
   /// </tr>
   /// <tr>
   ///   <td valign=top><tt>\<literal_list\></tt></td>
   ///   <td valign=top><tt>::=</tt></td>
-  ///   <td><tt>'{' \<string_literal\> [ ',' \<string_literal\> ]* [','] |<br>
+  ///   <td><tt>\<string_literal\> [ ',' \<string_literal\> ]* [','] |<br>
   ///           \<double_literal\> [ ',' \<double_literal\> ]* [','] |<br>
   ///           \<int_literal\> [ ',' \<int_literal\> ]* [','] |<br>
-  ///           \<bool_literal\> [ ',' \<bool_literal\> ]* [','] '}'</tt>
+  ///           \<bool_literal\> [ ',' \<bool_literal\> ]* [',']</tt>
   ///   </td>
   /// </tr>
   /// <tr>
@@ -329,12 +329,12 @@ class Factory : public FactoryBase {
   /// <tr>
   ///   <td><tt>\<factory_vector_init\></tt></td>
   ///   <td><tt>::=</tt></td>
-  ///   <td><tt>\<member_name\> '(' \<spec_list\> ')'</tt></td>
+  ///   <td><tt>\<member_name\> '(' '{' \<spec_list\> '}' ')'</tt></td>
   /// </tr>
   /// <tr>
   ///   <td valign=top><tt>\<spec_list\></tt></td>
   ///   <td valign=top><tt>::=</tt></td>
-  ///   <td><tt>'{' \<spec\> [ ',' \<spec\> ]* [','] '}'</tt><br>
+  ///   <td><tt>\<spec\> [ ',' \<spec\> ]* [',']</tt><br>
   ///       where every <tt>\<spec\></tt> has a <tt>\<type\></tt>
   ///       constructible by the same Factory (<i>i.e.</i>, all
   ///       <tt>\<type\></tt>&rsquo;s have a common abstract base class)
