@@ -110,6 +110,14 @@ Environment::ReadAndSet(const string &varname, StreamTokenizer &st) {
   if (is_vector) {
     // Consume open brace.
     st.Next();
+  } else if (st.PeekTokenType() == StreamTokenizer::RESERVED_CHAR ||
+             (st.PeekTokenType() == StreamTokenizer::RESERVED_WORD &&
+              st.Peek() != "true" && st.Peek() != "false")) {
+    ostringstream err_ss;
+    err_ss << "Environment: error: expected type but found token \""
+           << st.Peek() << "\" of type "
+           << StreamTokenizer::TypeName(st.PeekTokenType());
+    throw std::runtime_error(err_ss.str());
   }
   string next_tok = st.Peek();
   bool is_object_type = false;
@@ -144,7 +152,10 @@ Environment::ReadAndSet(const string &varname, StreamTokenizer &st) {
 
 
   if (type == "") {
-    // Error.
+    ostringstream err_ss;
+    err_ss << "Environment: error: could not infer type for variable "
+           << varname;
+    throw std::runtime_error(err_ss.str());
   }
 
   // Check that type is a key in var_map_.

@@ -60,6 +60,7 @@ using std::endl;
 /// StreamTokenizer::set_reserved_words \endlink
 /// to customize this set.
 static const char *default_reserved_words[] = {
+  "-",
   "false",
   "true",
   "bool",

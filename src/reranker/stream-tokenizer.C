@@ -109,7 +109,7 @@ StreamTokenizer::GetNext() {
     // add first character; the remainder of the token will be handled
     // after this switch statement.
     next_tok_ += c;
-    next_tok_type_ = (c >= '0' && c <= '9') ? NUMBER : IDENTIFIER;
+    next_tok_type_ = (c == '-' || c >= '0' && c <= '9') ? NUMBER : IDENTIFIER;
   }
   if (!next_tok_complete) {
     // The current token is a number, a reserved word or C++
