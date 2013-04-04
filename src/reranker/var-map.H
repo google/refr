@@ -122,10 +122,21 @@ class VarMapBase {
 template <typename T>
 class VarMap : public VarMapBase {
  public:
+  /// Constructs a mapping from variables of a particular type to their values.
+  ///
+  /// \param name         the type name of the variables in this instance
+  /// \param is_primitive whether this instance contains primitive or primitive
+  ///                     vector variables
   VarMap(const string &name, bool is_primitive = true) :
       VarMapBase(name, is_primitive) { }
 
   // Accessor methods
+
+  /// Assigns the value of the specified variable to the object pointed to
+  /// by the <tt>value</tt> parameter.
+  ///
+  /// \return whether the specified variable exists and the assignment
+  ///         was successful
   bool Get(const string &varname, T *value) const {
     typename unordered_map<string, T>::const_iterator it = vars_.find(varname);
     if (it == vars_.end()) {
@@ -136,16 +147,21 @@ class VarMap : public VarMapBase {
     }
   }
 
+  /// Returns whether the specified variable has a definition in this
+  /// environment.
   virtual bool Defined(const string &varname) const {
     return vars_.find(varname) != vars_.end();
   }
 
+  /// Sets the specified variable to the specified value.
   void Set(const string &varname, T value) {
     vars_[varname] = value;
   }
 
-  /// Reads the next primitive value from the specified stream
-  /// tokenizer and sets the specified variable to that value.
+  /// Reads the next value (primitive or spec for constructing a \link
+  /// reranker::Factory Factory\endlink-constructible object) from the
+  /// specified stream tokenizer and sets the specified variable to
+  /// that value.
   void ReadAndSet(const string &varname, StreamTokenizer &st) {
     bool required = true;
 

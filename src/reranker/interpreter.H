@@ -81,6 +81,7 @@ class Interpreter {
     Eval(st);
   }
 
+  /// Returns the environment of this interpreter.
   Environment &env() { return env_; }
 
  private:
