@@ -99,13 +99,29 @@ class ValueString<vector<T> > {
 /// values.
 class VarMapBase {
  public:
+  /// Constructs a base class for a concrete implementation providing
+  /// a mapping from variables of a particular type to their values.
+  ///
+  /// \param name         the type name of the variables in this instance
+  /// \param is_primitive whether this instance contains primitive or primitive
+  ///                     vector variables
   VarMapBase(const string &name, bool is_primitive) :
       name_(name), is_primitive_(is_primitive) { }
 
+  /// Returns whether this instance contains primitive or primtive
+  /// vector variables.
   virtual bool IsPrimitive() const { return is_primitive_; }
+  /// Returns the type name of the variables of this instance.
   virtual const string &Name() const { return name_; }
 
+  /// Returns whether the specified variable has a definition in this
+  /// environment.
   virtual bool Defined(const string &varname) const = 0;
+
+  /// Reads the next value (primitive or spec for constructing a \link
+  /// reranker::Factory Factory\endlink-constructible object) from the
+  /// specified stream tokenizer and sets the specified variable to
+  /// that value.
   virtual void ReadAndSet(const string &varname, StreamTokenizer &st) = 0;
  protected:
   /// The type name of this VarMap.
@@ -147,8 +163,7 @@ class VarMap : public VarMapBase {
     }
   }
 
-  /// Returns whether the specified variable has a definition in this
-  /// environment.
+  /// \copydoc VarMapBase::Defined
   virtual bool Defined(const string &varname) const {
     return vars_.find(varname) != vars_.end();
   }
@@ -158,10 +173,7 @@ class VarMap : public VarMapBase {
     vars_[varname] = value;
   }
 
-  /// Reads the next value (primitive or spec for constructing a \link
-  /// reranker::Factory Factory\endlink-constructible object) from the
-  /// specified stream tokenizer and sets the specified variable to
-  /// that value.
+  /// \copydoc VarMapBase::ReadAndSet
   void ReadAndSet(const string &varname, StreamTokenizer &st) {
     bool required = true;
 

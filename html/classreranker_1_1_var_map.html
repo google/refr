@@ -128,11 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58">Get</a> (const string &amp;varname, T *value) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the value of the specified variable to the object pointed to by the <code>value</code> parameter.  <a href="#a06ae9d1793c6e507b975ac23f9d7af58"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd">Defined</a> (const string &amp;varname) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the specified variable has a definition in this environment.  <a href="#a9962a54a8e138ea24f49fdb92df108dd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3">Set</a> (const string &amp;varname, T value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the specified variable to the specified value.  <a href="#a4facf600cb7a75264e443f70856767e3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a1a01ace6f7f06a7779ff583c6bcd0f0d">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the next value (primitive or spec for constructing a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible object) from the specified stream tokenizer and sets the specified variable to that value.  <a href="#a1a01ace6f7f06a7779ff583c6bcd0f0d"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br/>
@@ -146,7 +144,7 @@ class reranker::VarMap&lt; T &gt;</h3>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00123">123</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00139">139</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a42a25cbc1b217b5c643bfb94f86c4703"></a><!-- doxytag: member="reranker::VarMap::VarMap" ref="a42a25cbc1b217b5c643bfb94f86c4703" args="(const string &amp;name, bool is_primitive=true)" -->
 <div class="memitem">
@@ -184,7 +182,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00130">130</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00146">146</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
 
 </div>
 </div>
@@ -205,12 +203,11 @@ template&lt;typename T&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-
 <p>Returns whether the specified variable has a definition in this environment. </p>
-
+ 
 <p>Implements <a class="el" href="classreranker_1_1_var_map_base.html#af9d31b9fe4a4a5b6b30ea968fd59ddf5">reranker::VarMapBase</a>.</p>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00152">152</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00167">167</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
 
 </div>
 </div>
@@ -244,7 +241,7 @@ template&lt;typename T&gt; </div>
 <p>Assigns the value of the specified variable to the object pointed to by the <code>value</code> parameter. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>whether the specified variable exists and the assignment was successful </dd></dl>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00140">140</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00156">156</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
 
 </div>
 </div>
@@ -274,12 +271,11 @@ template&lt;typename T&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-
 <p>Reads the next value (primitive or spec for constructing a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible object) from the specified stream tokenizer and sets the specified variable to that value. </p>
-
+ 
 <p>Implements <a class="el" href="classreranker_1_1_var_map_base.html#a2870abd4bc8ad1d925fc304acb44417d">reranker::VarMapBase</a>.</p>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00165">165</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00177">177</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
 
 </div>
 </div>
@@ -312,7 +308,7 @@ template&lt;typename T&gt; </div>
 
 <p>Sets the specified variable to the specified value. </p>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00157">157</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00172">172</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
 
 </div>
 </div>
@@ -337,7 +333,7 @@ template&lt;typename T&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 15:55:27 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 4 2013 16:00:10 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
