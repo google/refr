@@ -114,8 +114,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#adb2fe71a0b3dbb89a7941eed3dde0655">Environment</a> (int debug)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a989c315785e4af0680ca0b31e0a09f64">Environment</a> (int debug=0)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new, empty environment.  <a href="#a989c315785e4af0680ca0b31e0a09f64"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6">~Environment</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this environment.  <a href="#a987c93a94bcb94e3e5facdcf51109fc6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a37b13c2e63697f91314e96c11b702ffc">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the specified variable to the value obtained from the following tokens available from the specified token stream.  <a href="#a37b13c2e63697f91314e96c11b702ffc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a2bcbe917196d503db31fd2980a65c605">Defined</a> (const string &amp;varname)</td></tr>
@@ -139,23 +141,32 @@ vector of a primitive type </li>
 <li>
 vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible type </li>
 </ul>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classreranker_1_1_interpreter.html" title="Provides an interpreter for assigning primitives and Factory-constructible objects to named variables...">Interpreter</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00068">68</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00070">70</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="adb2fe71a0b3dbb89a7941eed3dde0655"></a><!-- doxytag: member="reranker::Environment::Environment" ref="adb2fe71a0b3dbb89a7941eed3dde0655" args="(int debug)" -->
+<a class="anchor" id="a989c315785e4af0680ca0b31e0a09f64"></a><!-- doxytag: member="reranker::Environment::Environment" ref="a989c315785e4af0680ca0b31e0a09f64" args="(int debug=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classreranker_1_1_environment.html#adb2fe71a0b3dbb89a7941eed3dde0655">reranker::Environment::Environment</a> </td>
+          <td class="memname"><a class="el" href="classreranker_1_1_environment.html#a989c315785e4af0680ca0b31e0a09f64">reranker::Environment::Environment</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>debug</em></td><td>)</td>
+          <td class="paramname"><em>debug</em> = <code>0</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Constructs a new, empty environment. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">debug</td><td>the debug level; if greater than 0, various debugging messages will be output to <code>std::cerr</code> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Definition at line <a class="el" href="environment_8_c_source.html#l00040">40</a> of file <a class="el" href="environment_8_c_source.html">environment.C</a>.</p>
 
@@ -175,7 +186,9 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00072">72</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Destroys this environment. </p>
+
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00079">79</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -197,7 +210,7 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
 
 <p>Returns whether the specified variable has been defined in this environment. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00085">85</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00092">92</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -238,7 +251,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>whether the specified variable exists and its value was successfully set by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00122">122</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00129">129</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -332,7 +345,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 15:22:03 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 4 2013 15:41:40 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

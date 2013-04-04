@@ -65,10 +65,17 @@ using std::tr1::unordered_set;
 /// <li> \link reranker::Factory Factory\endlink-constructible type
 /// <li> vector of a \link reranker::Factory Factory\endlink-constructible type
 /// </ul>
+///
+/// \see Interpreter
 class Environment {
  public:
-  Environment(int debug);
+  /// Constructs a new, empty environment.
+  ///
+  /// \param debug the debug level; if greater than 0, various debugging
+  ///              messages will be output to <tt>std::cerr</tt>
+  Environment(int debug = 0);
 
+  /// Destroys this environment.
   virtual ~Environment() {
     for (unordered_map<string, VarMapBase *>::iterator it = var_map_.begin();
          it != var_map_.end(); ++it) {

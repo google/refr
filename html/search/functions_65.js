@@ -5,7 +5,7 @@ var searchData=
   ['endofepoch',['EndOfEpoch',['../classreranker_1_1_model.html#a0392df23892406abcbf21bbe1bf5392a',1,'reranker::Model::EndOfEpoch()'],['../classreranker_1_1_perceptron_model.html#a5e1359da40c7d987f2a14b7b47765a83',1,'reranker::PerceptronModel::EndOfEpoch()']]],
   ['endofepochmodelwriter',['EndOfEpochModelWriter',['../classreranker_1_1_end_of_epoch_model_writer.html#ad48473d4c497e1bcb2aee00e918f609b',1,'reranker::EndOfEpochModelWriter']]],
   ['env',['env',['../classreranker_1_1_interpreter.html#a2f3805a313ccab10a8cf23aa4c68428d',1,'reranker::Interpreter']]],
-  ['environment',['Environment',['../classreranker_1_1_environment.html#adb2fe71a0b3dbb89a7941eed3dde0655',1,'reranker::Environment']]],
+  ['environment',['Environment',['../classreranker_1_1_environment.html#a989c315785e4af0680ca0b31e0a09f64',1,'reranker::Environment']]],
   ['epoch',['epoch',['../classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98',1,'reranker::Time']]],
   ['eval',['Eval',['../classreranker_1_1_interpreter.html#ae3489eaf9df30f95e72e1b477769e812',1,'reranker::Interpreter::Eval(const string &amp;filename)'],['../classreranker_1_1_interpreter.html#a2515d630df648bb68453ca622484d3f5',1,'reranker::Interpreter::Eval(istream &amp;is)']]],
   ['evalstring',['EvalString',['../classreranker_1_1_interpreter.html#a9c6311e9b19114c92573b3d53daef5ac',1,'reranker::Interpreter']]],

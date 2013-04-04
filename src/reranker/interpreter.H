@@ -50,9 +50,16 @@ namespace reranker {
 using std::iostream;
 using std::ifstream;
 
+/// Provides an interpreter for assigning primitives and Factory-constructible
+/// objects to named variables, as well as vectors thereof.
 class Interpreter {
  public:
+  /// Constructs a new instance with the specified debug level.  The
+  /// wrapped \link reranker::Environment Environment \endlink will
+  /// also have the specified debug level.
   Interpreter(int debug = 0) : env_(debug), debug_(debug) { }
+
+  /// Destroys this interpreter.
   virtual ~Interpreter() { }
 
   /// Evaluates the statements in the specified text file.
