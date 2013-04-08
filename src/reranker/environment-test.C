@@ -5,7 +5,7 @@
 #include <iostream>
 #include <tr1/memory>
 
-#include "environment.H"
+#include "environment-impl.H"
 
 using namespace std;
 using namespace std::tr1;

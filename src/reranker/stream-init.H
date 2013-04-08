@@ -33,8 +33,8 @@
 /// Provides a generic dynamic object factory.
 /// \author dbikel@google.com (Dan Bikel)
 
-#ifndef RERANKER_MEMBER_INIT_H_
-#define RERANKER_MEMBER_INIT_H_
+#ifndef RERANKER_STREAM_INIT_H_
+#define RERANKER_STREAM_INIT_H_
 
 #include <cstdlib>
 #include <iostream>
@@ -58,10 +58,12 @@ class Environment;
 
 /// \class StreamInitializer
 ///
-/// An interface that allows for a data member of a Factory-constructible type
-/// to be initialized based on the next token or tokens from a token stream.
-/// The data member may be an <tt>int</tt>, a <tt>double</tt>, a <tt>string</tt>
-/// or a <tt>shared_ptr</tt> to another Factory-constructible type.
+/// An interface that allows for a primitive, \link reranker::Factory
+/// Factory\endlink-constructible object or vector thereof to be
+/// initialized based on the next token or tokens from a token stream.
+/// The data member may be an <tt>int</tt>, a <tt>double</tt>, a
+/// <tt>string</tt> or a <tt>shared_ptr</tt> to another
+/// Factory-constructible type.
 class StreamInitializer {
  public:
   StreamInitializer() { }
@@ -72,9 +74,8 @@ template <typename T> class Factory;
 
 /// \class Initializer
 ///
-/// A class to allow \link Factory\endlink-constructible objects to
-/// initialize data members that point to other \link
-/// Factory\endlink-constructible objects.
+/// A class to initialize a \link Factory\endlink-constructible
+/// object.
 ///
 /// \tparam T a <tt>shared_ptr</tt> to any type constructible by a Factory
 template <typename T>
@@ -124,8 +125,7 @@ class Initializer<int> : public StreamInitializer {
 
 /// \class Initializer<double>
 ///
-/// A specialization to allow Factory-constructible objects to initialize
-/// <tt>double</tt> data members.
+/// A specialization to initialize <tt>double</tt> data members.
 template<>
 class Initializer<double> : public StreamInitializer {
  public:
@@ -148,8 +148,7 @@ class Initializer<double> : public StreamInitializer {
 
 /// \class Initializer<bool>
 ///
-/// A specialization to allow Factory-constructible objects to initialize
-/// <tt>bool</tt> data members.
+/// A specialization to initialize <tt>bool</tt> data members.
 template<>
 class Initializer<bool> : public StreamInitializer {
  public:
@@ -184,8 +183,7 @@ class Initializer<bool> : public StreamInitializer {
 
 /// \class Initializer<string>
 ///
-/// A specialization to allow Factory-constructible objects to initialize
-/// <tt>string</tt> data members.
+/// A specialization to initialize <tt>string</tt> data members.
 template<>
 class Initializer<string> : public StreamInitializer {
  public:

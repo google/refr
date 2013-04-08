@@ -43,7 +43,7 @@
 #include <tr1/unordered_map>
 #include <tr1/unordered_set>
 
-#include "environment.H"
+#include "environment-impl.H"
 
 namespace reranker {
 

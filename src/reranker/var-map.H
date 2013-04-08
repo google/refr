@@ -44,7 +44,7 @@
 #include <sstream>
 #include <vector>
 
-#include "member-init.H"
+#include "stream-init.H"
 #include "stream-tokenizer.H"
 
 namespace reranker {

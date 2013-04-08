@@ -45,7 +45,7 @@
 #include <stdexcept>
 
 #include "stream-tokenizer.H"
-#include "environment.H"
+#include "environment-impl.H"
 
 namespace reranker {
 

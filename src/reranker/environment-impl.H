@@ -34,8 +34,8 @@
 /// or Factory-constructible objects.
 /// \author dbikel@google.com (Dan Bikel)
 
-#ifndef RERANKER_ENVIRONMENT_H_
-#define RERANKER_ENVIRONMENT_H_
+#ifndef RERANKER_ENVIRONMENT_IMPL_H_
+#define RERANKER_ENVIRONMENT_IMPL_H_
 
 #include <sstream>
 #include <string>

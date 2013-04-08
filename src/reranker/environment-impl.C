@@ -33,7 +33,7 @@
 /// Implementation of the Environment class.
 /// \author dbikel@google.com (Dan Bikel)
 
-#include "environment.H"
+#include "environment-impl.H"
 #include "factory.H"
 
 namespace reranker {
