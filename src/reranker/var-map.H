@@ -73,6 +73,8 @@ class VarMapBase {
   VarMapBase(const string &name, Environment *env, bool is_primitive) :
       name_(name), env_(env), is_primitive_(is_primitive) { }
 
+  virtual ~VarMapBase() { }
+
   /// Returns whether this instance contains primitive or primtive
   /// vector variables.
   virtual bool IsPrimitive() const { return is_primitive_; }
@@ -88,7 +90,19 @@ class VarMapBase {
   /// specified stream tokenizer and sets the specified variable to
   /// that value.
   virtual void ReadAndSet(const string &varname, StreamTokenizer &st) = 0;
+
+  /// Returns a newly constructed copy of this VarMap.
+  virtual VarMapBase *Copy(Environment *env) const = 0;
+
  protected:
+  /// To allow proper implementation of Copy in VarMapBase implementation,
+  /// since we don't get copying of base class' members for free.
+  void SetMembers(const string &name, Environment *env, bool is_primitive) {
+    name_ = name;
+    env_ = env;
+    is_primitive_ = is_primitive;
+  }
+
   /// The type name of this VarMap.
   string name_;
   /// The Environment that holds this VarMap instance.
@@ -102,6 +116,8 @@ class VarMapBase {
 /// types are mapped to their values.
 class Environment {
  public:
+  virtual ~Environment() { }
+
   /// Returns whether the specified variable has been defined in this
   /// environment.
   virtual bool Defined(const string &varname) const = 0;
@@ -118,6 +134,9 @@ class Environment {
 
   /// Retrieves the VarMap instance for the specified type.
   virtual VarMapBase *GetVarMapForType(const string &type) = 0;
+
+  /// Returns a copy of this environment.
+  virtual Environment *Copy() const = 0;
 };
 
 /// A template class that helps print out values with ostream& operator
@@ -172,6 +191,8 @@ class VarMap : public VarMapBase {
   VarMap(const string &name, Environment *env, bool is_primitive = true) :
       VarMapBase(name, env, is_primitive) { }
 
+  virtual ~VarMap() { }
+
   // Accessor methods
 
   /// Assigns the value of the specified variable to the object pointed to
@@ -200,7 +221,7 @@ class VarMap : public VarMapBase {
   }
 
   /// \copydoc VarMapBase::ReadAndSet
-  void ReadAndSet(const string &varname, StreamTokenizer &st) {
+  virtual void ReadAndSet(const string &varname, StreamTokenizer &st) {
     if (VAR_MAP_DEBUG >= 1) {
       cerr << "VarMap<" << Name() << ">::ReadAndSet: about to set varname "
            << varname << " of type " << typeid(T).name() << endl;
@@ -248,6 +269,12 @@ class VarMap : public VarMapBase {
         cerr << endl;
       }
     }
+  }
+
+  virtual VarMapBase *Copy(Environment *env) const {
+    VarMap<T> *var_map_copy = new VarMap<T>(*this);
+    var_map_copy->SetMembers(name_, env, is_primitive_);
+    return var_map_copy;
   }
  private:
   unordered_map<string, T> vars_;

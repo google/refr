@@ -126,6 +126,20 @@ class EnvironmentImpl : public Environment {
     return var_map_it->second;
   }
 
+  /// \copydoc reranker::Environment::Copy
+  virtual Environment *Copy() const {
+    EnvironmentImpl *new_env = new EnvironmentImpl(*this);
+    // Now go through and create copies of each VarMap.
+    for (unordered_map<string, VarMapBase *>::iterator new_env_var_map_it =
+             new_env->var_map_.begin();
+         new_env_var_map_it != new_env->var_map_.end(); ++new_env_var_map_it) {
+      cerr << "Creating copy of VarMap<" << new_env_var_map_it->second->Name()
+           << ">" << endl;
+      new_env_var_map_it->second = new_env_var_map_it->second->Copy(new_env);
+    }
+    return new_env;
+  }
+
   /// Retrieves the value of the variable with the specified name and puts
   /// into into the object pointed to by the <tt>value</tt> parameter.
   ///

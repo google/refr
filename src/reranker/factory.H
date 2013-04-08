@@ -460,10 +460,8 @@ class Factory : public FactoryBase {
   /// \param st the stream tokenizer providing tokens according to the
   ///           grammar shown above
   shared_ptr<T> CreateOrDie(StreamTokenizer &st, Environment *env = NULL) {
-    shared_ptr<Environment> env_ptr(env);
-    if (env_ptr == NULL) {
-      env_ptr = shared_ptr<Environment>(new EnvironmentImpl());
-    }
+    shared_ptr<Environment> env_ptr(env == NULL ?
+                                    new EnvironmentImpl() : env->Copy());
     size_t start = st.tellg();
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::IDENTIFIER) {
