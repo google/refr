@@ -14,5 +14,6 @@ using namespace reranker;
 int
 main(int argc, char **argv) {
   int debug = 1;
-  Environment env(debug);
+  Environment *env = new EnvironmentImpl(debug);
+  delete env;
 }

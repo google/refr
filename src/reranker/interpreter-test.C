@@ -20,7 +20,7 @@ main(int argc, char **argv) {
   interpreter.Eval(cin);
 
   bool value_for_f;
-  bool success = interpreter.env().Get("f", &value_for_f);
+  bool success = interpreter.Get("f", &value_for_f);
   if (success) {
     cout << "Success! f=" << (value_for_f ? "true" : "false") << endl;
   } else {

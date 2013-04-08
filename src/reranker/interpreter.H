@@ -57,10 +57,14 @@ class Interpreter {
   /// Constructs a new instance with the specified debug level.  The
   /// wrapped \link reranker::Environment Environment \endlink will
   /// also have the specified debug level.
-  Interpreter(int debug = 0) : env_(debug), debug_(debug) { }
+  Interpreter(int debug = 0) : debug_(debug) {
+    env_ = new EnvironmentImpl(debug);
+  }
 
   /// Destroys this interpreter.
-  virtual ~Interpreter() { }
+  virtual ~Interpreter() {
+    delete env_;
+  }
 
   /// Evaluates the statements in the specified text file.
   void Eval(const string &filename) {
@@ -81,8 +85,18 @@ class Interpreter {
     Eval(st);
   }
 
-  /// Returns the environment of this interpreter.
-  Environment &env() { return env_; }
+  template<typename T>
+  bool Get(const string &varname, T *value) const {
+    return env_->Get(varname, value);
+  }
+
+  /// Returns a pointer to the environment of this interpreter.
+  /// Crucially, this method returns a pointer to the Environment
+  /// implementation class, \link reranker::EnvironmentImpl
+  /// EnvironmentImpl\endlink, so that its templated \link
+  /// reranker::EnvironmentImpl::Get EnvironmentImpl::Get \endlink
+  /// method may be invoked.
+  EnvironmentImpl *env() { return env_; }
 
  private:
   void Eval(StreamTokenizer &st);
@@ -99,7 +113,7 @@ class Interpreter {
   /// The environment of this interpreter.
   ///
   /// TODO(dbikel): Possibly turn this into a stack.
-  Environment env_;
+  EnvironmentImpl *env_;
 
   string filename_;
 

@@ -34,21 +34,22 @@
 /// \author dbikel@google.com (Dan Bikel)
 
 #include "environment.H"
+#include "factory.H"
 
 namespace reranker {
 
-Environment::Environment(int debug) {
+EnvironmentImpl::EnvironmentImpl(int debug) {
   debug_ = debug;
 
   // Set up VarMap instances for each of the primitive types and their vectors.
-  var_map_["bool"] = new VarMap<bool>("bool");
-  var_map_["int"] = new VarMap<int>("int");
-  var_map_["double"] = new VarMap<double>("double");
-  var_map_["string"] = new VarMap<string>("string");
-  var_map_["bool[]"] = new VarMap<vector<bool> >("bool[]");
-  var_map_["int[]"] = new VarMap<vector<int> >("int[]");
-  var_map_["double[]"] = new VarMap<vector<double> >("double[]");
-  var_map_["string[]"] = new VarMap<vector<string> >("string[]");
+  var_map_["bool"] = new VarMap<bool>("bool", this);
+  var_map_["int"] = new VarMap<int>("int", this);
+  var_map_["double"] = new VarMap<double>("double", this);
+  var_map_["string"] = new VarMap<string>("string", this);
+  var_map_["bool[]"] = new VarMap<vector<bool> >("bool[]", this);
+  var_map_["int[]"] = new VarMap<vector<int> >("int[]", this);
+  var_map_["double[]"] = new VarMap<vector<double> >("double[]", this);
+  var_map_["string[]"] = new VarMap<vector<string> >("string[]", this);
 
   // Set up VarMap instances for each of the Factory-constructible types
   // and their vectors.
@@ -59,7 +60,7 @@ Environment::Environment(int debug) {
     string base_name = (*factory_it)->BaseName();
 
     // Create type-specific VarMap from the Factory and add to var_map_.
-    VarMapBase *obj_var_map = (*factory_it)->CreateVarMap();
+    VarMapBase *obj_var_map = (*factory_it)->CreateVarMap(this);
     var_map_[obj_var_map->Name()] = obj_var_map;
 
     if (debug_ >= 2) {
@@ -68,7 +69,7 @@ Environment::Environment(int debug) {
     }
 
     // Create VarMap for vectors of shared_object of T and add to var_map_.
-    VarMapBase *obj_vector_var_map = (*factory_it)->CreateVectorVarMap();
+    VarMapBase *obj_vector_var_map = (*factory_it)->CreateVectorVarMap(this);
     var_map_[obj_vector_var_map->Name()] = obj_vector_var_map;
 
     if (debug_ >= 2) {
@@ -103,7 +104,7 @@ Environment::Environment(int debug) {
 }
 
 void
-Environment::ReadAndSet(const string &varname, StreamTokenizer &st) {
+EnvironmentImpl::ReadAndSet(const string &varname, StreamTokenizer &st) {
   bool is_vector =
       st.PeekTokenType() == StreamTokenizer::RESERVED_CHAR &&
       st.Peek() == "{";
@@ -119,37 +120,16 @@ Environment::ReadAndSet(const string &varname, StreamTokenizer &st) {
            << StreamTokenizer::TypeName(st.PeekTokenType());
     throw std::runtime_error(err_ss.str());
   }
+
   string next_tok = st.Peek();
   bool is_object_type = false;
 
-  string type = InferType(st, is_vector, &is_object_type);
-
-  if (is_object_type) {
-    // Verify that next_tok is a concrete typename.
-    unordered_map<string, string>::const_iterator it =
-        concrete_to_factory_type_.find(next_tok);
-    if (it == concrete_to_factory_type_.end()) {
-      ostringstream err_ss;
-      err_ss << "Environment: error: variable "
-             << varname << " appears to be of type " << type
-             << " but token " << next_tok
-             << " is not a concrete object typename";
-      throw std::runtime_error(err_ss.str());
-    }
-
-    // Set type to be abstract factory type.
-    if (debug_ >= 1) {
-      cerr << "Environment::ReadAndSet: concrete type is " << type
-           << "; mapping to abstract Factory type " << it->second << endl;
-    }
-    type = it->second;
-  }
+  string type = InferType(varname, st, is_vector, &is_object_type);
 
   if (debug_ >= 1) {
     cerr << "Environment::ReadAndSet: "
          << "next_tok=" << next_tok << "; type=" << type << endl;
   }
-
 
   if (type == "") {
     ostringstream err_ss;
@@ -165,8 +145,9 @@ Environment::ReadAndSet(const string &varname, StreamTokenizer &st) {
 }
 
 string
-Environment::InferType(const StreamTokenizer &st, bool is_vector,
-                       bool *is_object_type) {
+EnvironmentImpl::InferType(const string &varname,
+                           const StreamTokenizer &st, bool is_vector,
+                           bool *is_object_type) {
   *is_object_type = false;
   string next_tok = st.Peek();
   switch (st.PeekTokenType()) {
@@ -194,8 +175,44 @@ Environment::InferType(const StreamTokenizer &st, bool is_vector,
       break;
     case StreamTokenizer::IDENTIFIER:
       {
-        *is_object_type = true;
-        string type = is_vector ? next_tok + "[]" : next_tok;
+        string type = "";
+
+        // Find out if next_tok is a concrete typename or a variable.
+        unordered_map<string, string>::const_iterator factory_type_it =
+            concrete_to_factory_type_.find(next_tok);
+        unordered_map<string, string>::const_iterator var_type_it =
+            types_.find(next_tok);
+        if (factory_type_it != concrete_to_factory_type_.end()) {
+          // Set type to be abstract factory type.
+          if (debug_ >= 1) {
+            cerr << "Environment::InferType: concrete type is " << next_tok
+                 << "; mapping to abstract Factory type "
+                 << factory_type_it->second << endl;
+          }
+          type = factory_type_it->second;
+          *is_object_type = true;
+          string type = is_vector ? next_tok + "[]" : next_tok;
+        } else if (var_type_it != types_.end()) {
+          // Could be a variable, in which case we need not only to return
+          // the variable's type, but also set is_object_type and is_vector
+          // based on the variable's type string.
+          if (debug_ >= 1) {
+            cerr << "Environment::InferType: found variable "
+                 << var_type_it->first << " of type " << var_type_it->second
+                 << endl;
+          }
+
+          string append = is_vector ? "[]" : "";
+          type = var_type_it->second + append;
+          if (debug_ >= 1) {
+            cerr << "; type is " << type;
+          }
+        } else {
+          ostringstream err_ss;
+          err_ss << "Environment: error: token " << next_tok
+                 << " is neither a variable nor a concrete object typename";
+          throw std::runtime_error(err_ss.str());
+        }
         return type;
       }
       break;

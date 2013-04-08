@@ -54,32 +54,18 @@ using std::tr1::shared_ptr;
 using std::tr1::unordered_map;
 using std::vector;
 
-/// \class MemberInitializer
+class Environment;
+
+/// \class StreamInitializer
 ///
 /// An interface that allows for a data member of a Factory-constructible type
 /// to be initialized based on the next token or tokens from a token stream.
 /// The data member may be an <tt>int</tt>, a <tt>double</tt>, a <tt>string</tt>
 /// or a <tt>shared_ptr</tt> to another Factory-constructible type.
-class MemberInitializer {
+class StreamInitializer {
  public:
-  MemberInitializer(const string &name) : name_(name),
-                                          initialized_(0), required_(false) { }
-  MemberInitializer(const string& name, bool required) :
-      name_(name), initialized_(0), required_(required) { }
-  virtual string Name() { return name_; }
-  virtual void Init(StreamTokenizer &st) = 0;
-  /// Returns the number of times this member initializer&rsquo;s
-  /// \link Init \endlink method has been invoked.
-  virtual int Initialized() const { return initialized_; }
-  virtual bool Required() const { return required_; }
- protected:
-  /// The name of this member.
-  string name_;
-  /// The number of times this member initializer&rsquo;s Init method has
-  /// been invoked.
-  int initialized_;
-  /// Whether this member is required to be initialized.
-  bool required_;
+  StreamInitializer() { }
+  virtual void Init(StreamTokenizer &st, Environment *env = NULL) = 0;
 };
 
 template <typename T> class Factory;
@@ -92,13 +78,10 @@ template <typename T> class Factory;
 ///
 /// \tparam T a <tt>shared_ptr</tt> to any type constructible by a Factory
 template <typename T>
-class Initializer : public MemberInitializer {
+class Initializer : public StreamInitializer {
  public:
-  Initializer(const string &name, T *member) :
-      MemberInitializer(name), member_(member) { }
-  Initializer(const string &name, T *member, bool required) :
-      MemberInitializer(name, required), member_(member) { }
-  virtual void Init(StreamTokenizer &st) {
+  Initializer(T *member) : member_(member) { }
+  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::IDENTIFIER) {
       ostringstream err_ss;
@@ -109,8 +92,7 @@ class Initializer : public MemberInitializer {
       throw std::runtime_error(err_ss.str());
     }
     Factory<typename T::element_type> factory;
-    (*member_) = factory.CreateOrDie(st);
-    ++initialized_;
+    (*member_) = factory.CreateOrDie(st, env);
   }
  private:
   T *member_;
@@ -121,13 +103,10 @@ class Initializer : public MemberInitializer {
 /// A specialization to allow Factory-constructible objects to initialize
 /// <tt>int</tt> data members.
 template<>
-class Initializer<int> : public MemberInitializer {
+class Initializer<int> : public StreamInitializer {
  public:
-  Initializer(const string &name, int *member) :
-      MemberInitializer(name), member_(member) { }
-  Initializer(const string &name, int *member, bool required) :
-      MemberInitializer(name, required), member_(member) { }
-  virtual void Init(StreamTokenizer &st) {
+  Initializer(int *member) : member_(member) { }
+  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
       ostringstream err_ss;
@@ -138,7 +117,6 @@ class Initializer<int> : public MemberInitializer {
       throw std::runtime_error(err_ss.str());
     }
     (*member_) = atoi(st.Next().c_str());
-    ++initialized_;
   }
  private:
   int *member_;
@@ -149,13 +127,10 @@ class Initializer<int> : public MemberInitializer {
 /// A specialization to allow Factory-constructible objects to initialize
 /// <tt>double</tt> data members.
 template<>
-class Initializer<double> : public MemberInitializer {
+class Initializer<double> : public StreamInitializer {
  public:
-  Initializer(const string &name, double *member) :
-      MemberInitializer(name), member_(member) { }
-  Initializer(const string &name, double *member, bool required) :
-      MemberInitializer(name, required), member_(member) { }
-  virtual void Init(StreamTokenizer &st) {
+  Initializer(double *member) : member_(member) { }
+  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
       ostringstream err_ss;
@@ -166,7 +141,6 @@ class Initializer<double> : public MemberInitializer {
       throw std::runtime_error(err_ss.str());
     }
     (*member_) = atof(st.Next().c_str());
-    ++initialized_;
   }
  private:
   double *member_;
@@ -177,13 +151,10 @@ class Initializer<double> : public MemberInitializer {
 /// A specialization to allow Factory-constructible objects to initialize
 /// <tt>bool</tt> data members.
 template<>
-class Initializer<bool> : public MemberInitializer {
+class Initializer<bool> : public StreamInitializer {
  public:
-  Initializer(const string &name, bool *member) :
-      MemberInitializer(name), member_(member) { }
-  Initializer(const string &name, bool *member, bool required) :
-      MemberInitializer(name, required), member_(member) { }
-  virtual void Init(StreamTokenizer &st) {
+  Initializer(bool *member) : member_(member) { }
+  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::RESERVED_WORD) {
       ostringstream err_ss;
@@ -206,7 +177,6 @@ class Initializer<bool> : public MemberInitializer {
              << "token: \"" << next_tok << "\"";
       throw new std::runtime_error(err_ss.str());
     }
-    ++initialized_;
   }
  private:
   bool *member_;
@@ -217,13 +187,10 @@ class Initializer<bool> : public MemberInitializer {
 /// A specialization to allow Factory-constructible objects to initialize
 /// <tt>string</tt> data members.
 template<>
-class Initializer<string> : public MemberInitializer {
+class Initializer<string> : public StreamInitializer {
  public:
-  Initializer(const string &name, string *member) :
-      MemberInitializer(name), member_(member) { }
-  Initializer(const string &name, string *member, bool required) :
-      MemberInitializer(name, required), member_(member) { }
-  virtual void Init(StreamTokenizer &st) {
+  Initializer(string *member) : member_(member) { }
+  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::STRING) {
       ostringstream err_ss;
@@ -234,7 +201,6 @@ class Initializer<string> : public MemberInitializer {
       throw std::runtime_error(err_ss.str());
     }
     (*member_) = st.Next();
-    ++initialized_;
   }
  private:
   string *member_;
@@ -246,13 +212,10 @@ class Initializer<string> : public MemberInitializer {
 /// followed by a comma-separated list of values followed by a close
 /// brace '}'.
 template<typename T>
-class Initializer<vector<T> > : public MemberInitializer {
+class Initializer<vector<T> > : public StreamInitializer {
  public:
-  Initializer(const string &name, vector<T> *member) :
-      MemberInitializer(name), member_(member) { }
-  Initializer(const string &name, vector<T> *member, bool required) :
-      MemberInitializer(name, required), member_(member) { }
-  virtual void Init(StreamTokenizer &st) {
+  Initializer(vector<T> *member) : member_(member) { }
+  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     // Either the next token is an open brace (if reading tokens from
     // within a Factory-constructible object's member init list), or
     // else we just read an open brace (if Interpreter is reading tokens).
@@ -271,8 +234,8 @@ class Initializer<vector<T> > : public MemberInitializer {
     }
     while (st.Peek() != "}") {
       T vector_element;
-      Initializer<T> *element_init = new Initializer<T>("", &vector_element);
-      element_init->Init(st);
+      Initializer<T> *element_init = new Initializer<T>(&vector_element);
+      element_init->Init(st, env);
       member_->push_back(vector_element);
       delete element_init;
       // Each vector element initializer must be followed by a comma
@@ -294,73 +257,6 @@ class Initializer<vector<T> > : public MemberInitializer {
   }
  private:
   vector<T> *member_;
-};
-
-/// \class Initializers
-///
-/// A container for all the member initializers for a particular
-/// Factory-constructible instance.  This class provides an easy, consistent
-/// syntax for Factory-constructible classes to specify which members they
-/// want/need initialized by the Factory based on the specification string.
-class Initializers {
- public:
-  /// Forward the <tt>const_iterator</tt> typedef of the internal data
-  /// structure, to make code compact and readable.
-  typedef unordered_map<string, MemberInitializer *>::const_iterator
-      const_iterator;
-  /// Forward the <tt>iterator</tt> typedef of the internal data
-  /// structure, to make code compact and readable.
-  typedef unordered_map<string, MemberInitializer *>::iterator iterator;
-
-  /// Constructs a new instance.
-  Initializers() { }
-  /// Destroys this instance.
-  virtual ~Initializers() {
-    for (iterator init_it = initializers_.begin();
-         init_it != initializers_.end();
-         ++init_it) {
-      delete init_it->second;
-    }
-  }
-
-  template<typename T>
-  void Add(const string &name, T *member, bool required = false) {
-    initializers_[name] = new Initializer<T>(name, member, required);
-  }
-
-  /// Returns a const iterator pointing to the beginning of the map
-  /// from member names to pointers to \link MemberInitializer
-  /// \endlink instances.
-  const_iterator begin() const { return initializers_.begin(); }
-  /// Returns a const iterator pointing to the end of the map from
-  /// member names to pointers to \link MemberInitializer \endlink
-  /// instances.
-  const_iterator end() const { return initializers_.end(); }
-
-  /// Returns an iterator pointing to the beginning of the map from
-  /// member names to pointers to \link MemberInitializer \endlink
-  /// instances.
-  iterator begin() { return initializers_.begin(); }
-  /// Returns an iterator pointing to the end of the map from member
-  /// names to pointers to \link MemberInitializer \endlink instances.
-  iterator end() { return initializers_.end(); }
-
-  /// Returns a <tt>const_iterator</tt> pointing to the \link
-  /// MemberInitializer \endlink associated with the specified name,
-  /// or else \link end \endlink if no such \link MemberInitializer
-  /// \endlink exists.
-  const_iterator find(const string &name) const {
-    return initializers_.find(name);
-  }
-  /// Returns an <tt>iterator</tt> pointing to the \link
-  /// MemberInitializer \endlink associated with the specified name,
-  /// or else \link end \endlink if no such \link MemberInitializer
-  /// \endlink exists.
-  iterator find(const string &name) {
-    return initializers_.find(name);
-  }
- private:
-  unordered_map<string, MemberInitializer *> initializers_;
 };
 
 }  // namespace reranker

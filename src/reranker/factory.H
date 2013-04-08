@@ -44,9 +44,8 @@
 #include <vector>
 #include <stdexcept>
 
-#include "member-init.H"
 #include "stream-tokenizer.H"
-#include "var-map.H"
+#include "environment.H"
 
 namespace reranker {
 
@@ -58,6 +57,122 @@ using std::tr1::shared_ptr;
 using std::tr1::unordered_map;
 using std::tr1::unordered_set;
 using std::vector;
+
+/// \class MemberInitializer
+///
+/// An interface for initializers of members of a \link
+/// reranker::Factory Factory\endlink-constructible object.
+class MemberInitializer {
+ public:
+  MemberInitializer(const string &name, bool required) :
+      name_(name), initialized_(0), required_(required) { }
+  virtual string Name() { return name_; }
+  virtual void Init(StreamTokenizer &st, Environment *env) = 0;
+  /// Returns the number of times this member initializer&rsquo;s
+  /// \link Init \endlink method has been invoked.
+  virtual int Initialized() const { return initialized_; }
+  virtual bool Required() const { return required_; }
+ protected:
+  /// The name of this member.
+  string name_;
+  /// The number of times this member initializer&rsquo;s Init method has
+  /// been invoked.
+  int initialized_;
+  /// Whether this member is required to be initialized.
+  bool required_;
+};
+
+template <typename T>
+class TypedMemberInitializer : public MemberInitializer {
+ public:
+  TypedMemberInitializer(const string &name, T *member, bool required = false) :
+      MemberInitializer(name, required), member_(member) { }
+  virtual void Init(StreamTokenizer &st, Environment *env) {
+    env->ReadAndSet(Name(), st);
+    VarMapBase *var_map = env->GetVarMap(Name());
+    VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
+    if (typed_var_map != NULL) {
+      bool success = typed_var_map->Get(Name(), member_);
+      if (success) {
+        ++(initialized_);
+      }
+    }
+  }
+ protected:
+  T *member_;
+};
+
+/// \class Initializers
+///
+/// A container for all the member initializers for a particular
+/// Factory-constructible instance.  This class provides an easy, consistent
+/// syntax for Factory-constructible classes to specify which members they
+/// want/need initialized by the Factory based on the specification string.
+class Initializers {
+ public:
+  /// Forward the <tt>const_iterator</tt> typedef of the internal data
+  /// structure, to make code compact and readable.
+  typedef unordered_map<string, MemberInitializer *>::const_iterator
+      const_iterator;
+  /// Forward the <tt>iterator</tt> typedef of the internal data
+  /// structure, to make code compact and readable.
+  typedef unordered_map<string, MemberInitializer *>::iterator iterator;
+
+  /// Constructs a new instance.
+  Initializers() { }
+  /// Destroys this instance.
+  virtual ~Initializers() {
+    for (iterator init_it = initializers_.begin();
+         init_it != initializers_.end();
+         ++init_it) {
+      delete init_it->second;
+    }
+  }
+
+  template<typename T>
+  void Add(const string &name, T *member, bool required = false) {
+    initializers_[name] = new TypedMemberInitializer<T>(name, member, required);
+  }
+
+  /// Returns a const iterator pointing to the beginning of the map
+  /// from member names to pointers to \link reranker::TypedMemberInitializer
+  /// TypedMemberInitializer \endlink instances.
+  const_iterator begin() const { return initializers_.begin(); }
+  /// Returns a const iterator pointing to the end of the map from
+  /// member names to pointers to \link
+  /// reranker::TypedMemberInitializer TypedMemberInitializer \endlink
+  /// instances.
+  const_iterator end() const { return initializers_.end(); }
+
+  /// Returns an iterator pointing to the beginning of the map from
+  /// member names to pointers to \link
+  /// reranker::TypedMemberInitializer TypedMemberInitializer \endlink
+  /// instances.
+  iterator begin() { return initializers_.begin(); }
+  /// Returns an iterator pointing to the end of the map from member
+  /// names to pointers to \link reranker::TypedMemberInitializer
+  /// TypedMemberInitializer \endlink instances.
+  iterator end() { return initializers_.end(); }
+
+  /// Returns a <tt>const_iterator</tt> pointing to the \link
+  /// MemberInitializer \endlink associated with the specified name,
+  /// or else \link end \endlink if no such \link
+  /// reranker::TypedMemberInitializer TypedMemberInitializer \endlink
+  /// exists.
+  const_iterator find(const string &name) const {
+    return initializers_.find(name);
+  }
+  /// Returns an <tt>iterator</tt> pointing to the \link
+  /// MemberInitializer \endlink associated with the specified name,
+  /// or else \link end \endlink if no such \link
+  /// reranker::TypedMemberInitializer TypedMemberInitializer \endlink
+  /// exists.
+  iterator find(const string &name) {
+    return initializers_.find(name);
+  }
+ private:
+  unordered_map<string, MemberInitializer *> initializers_;
+};
 
 /// An interface for all \link Factory \endlink instances, specifying a few
 /// pure virtual methods.
@@ -79,9 +194,9 @@ class FactoryBase {
   ///                                   factory
   virtual void CollectRegistered(unordered_set<string> &registered) const = 0;
 
-  virtual VarMapBase *CreateVarMap() const = 0;
+  virtual VarMapBase *CreateVarMap(Environment *env) const = 0;
 
-  virtual VarMapBase *CreateVectorVarMap() const = 0;
+  virtual VarMapBase *CreateVectorVarMap(Environment *env) const = 0;
 };
 
 /// A class to hold all \link Factory \endlink instances that have been created.
@@ -344,7 +459,11 @@ class Factory : public FactoryBase {
   ///
   /// \param st the stream tokenizer providing tokens according to the
   ///           grammar shown above
-  shared_ptr<T> CreateOrDie(StreamTokenizer &st) {
+  shared_ptr<T> CreateOrDie(StreamTokenizer &st, Environment *env = NULL) {
+    shared_ptr<Environment> env_ptr(env);
+    if (env_ptr == NULL) {
+      env_ptr = shared_ptr<Environment>(new EnvironmentImpl());
+    }
     size_t start = st.tellg();
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::IDENTIFIER) {
@@ -419,7 +538,7 @@ class Factory : public FactoryBase {
       st.Next();
 
       // Initialize member based on following token(s).
-      member_initializer->Init(st);
+      member_initializer->Init(st, env_ptr.get());
 
       // Read close parenthesis for current member initializer.
       if (st.Peek() != ")") {
@@ -486,9 +605,10 @@ class Factory : public FactoryBase {
     return instance;
   }
 
-  shared_ptr<T> CreateOrDie(const string &spec, const string err_msg) {
+  shared_ptr<T> CreateOrDie(const string &spec, const string err_msg,
+                            Environment *env = NULL) {
     StreamTokenizer st(spec);
-    return CreateOrDie(st);
+    return CreateOrDie(st, env);
   }
 
 
@@ -518,14 +638,15 @@ class Factory : public FactoryBase {
     }
   }
 
-  virtual VarMapBase *CreateVarMap() const {
+  virtual VarMapBase *CreateVarMap(Environment *env) const {
     bool is_primitive = false;
-    return new VarMap<shared_ptr<T> >(BaseName(), is_primitive);
+    return new VarMap<shared_ptr<T> >(BaseName(), env, is_primitive);
   }
 
-  virtual VarMapBase *CreateVectorVarMap() const {
+  virtual VarMapBase *CreateVectorVarMap(Environment *env) const {
+    string name = BaseName() + "[]";
     bool is_primitive = false;
-    return new VarMap<vector<shared_ptr<T> > >(BaseName() + "[]", is_primitive);
+    return new VarMap<vector<shared_ptr<T> > >(name, env, is_primitive);
   }
 
   /// The method used by the \link REGISTER_NAMED \endlink macro to ensure

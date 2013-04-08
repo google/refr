@@ -79,7 +79,7 @@ Interpreter::Eval(StreamTokenizer &st) {
     }
 
     // Consume and set the value for this variable in the environment.
-    env_.ReadAndSet(varname, st);
+    env_->ReadAndSet(varname, st);
 
     token_type = st.PeekTokenType();
     if (st.Peek() != ";") {

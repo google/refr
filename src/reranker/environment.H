@@ -43,7 +43,7 @@
 #include <tr1/unordered_set>
 #include <typeinfo>
 
-#include "factory.H"
+#include "var-map.H"
 
 namespace reranker {
 
@@ -67,31 +67,63 @@ using std::tr1::unordered_set;
 /// </ul>
 ///
 /// \see Interpreter
-class Environment {
+class EnvironmentImpl : public Environment {
  public:
   /// Constructs a new, empty environment.
   ///
   /// \param debug the debug level; if greater than 0, various debugging
   ///              messages will be output to <tt>std::cerr</tt>
-  Environment(int debug = 0);
+  EnvironmentImpl(int debug = 0);
 
   /// Destroys this environment.
-  virtual ~Environment() {
+  virtual ~EnvironmentImpl() {
     for (unordered_map<string, VarMapBase *>::iterator it = var_map_.begin();
          it != var_map_.end(); ++it) {
       delete it->second;
     }
   }
 
-  /// Sets the specified variable to the value obtained from the following
-  /// tokens available from the specified token stream.
-  void ReadAndSet(const string &varname, StreamTokenizer &st);
-
   /// Returns whether the specified variable has been defined in this
   /// environment.
-  bool Defined(const string &varname) {
+  virtual bool Defined(const string &varname) const {
     unordered_map<string, string>::const_iterator it = types_.find(varname);
     return it != types_.end();
+  }
+
+  /// Sets the specified variable to the value obtained from the following
+  /// tokens available from the specified token stream.
+  virtual void ReadAndSet(const string &varname, StreamTokenizer &st);
+
+  virtual const string &GetType(const string &varname) const {
+    unordered_map<string, string>::const_iterator type_it =
+        types_.find(varname);
+    if (type_it == types_.end()) {
+      // Error or warning.
+    }
+    return type_it->second;
+  }
+
+  virtual VarMapBase *GetVarMap(const string &varname) {
+    return GetVarMapForType(GetType(varname));
+  }
+
+  /// Retrieves the VarMap instance for the specified type.
+  virtual VarMapBase *GetVarMapForType(const string &type) {
+    string lookup_type = type;
+    // First, check if this is a concrete Factory-constructible type.
+    // If so, map to its abstract type name.
+    unordered_map<string, string>::const_iterator factory_type_it =
+        concrete_to_factory_type_.find(type);
+    if (factory_type_it != concrete_to_factory_type_.end()) {
+      lookup_type = factory_type_it->second;
+    }
+
+    unordered_map<string, VarMapBase *>::const_iterator var_map_it =
+        var_map_.find(lookup_type);
+    if (var_map_it == var_map_.end()) {
+      // Error.
+    }
+    return var_map_it->second;
   }
 
   /// Retrieves the value of the variable with the specified name and puts
@@ -105,11 +137,12 @@ class Environment {
   template<typename T>
   bool Get(const string &varname, T *value) const;
 
+ private:
   /// Infer the type based on the next token and its token type.
-  string InferType(const StreamTokenizer &st, bool is_vector,
+  string InferType(const string &varname,
+                   const StreamTokenizer &st, bool is_vector,
                    bool *is_object_type);
 
- private:
   /// A map from all variable names to their types.
   unordered_map<string, string> types_;
 
@@ -126,7 +159,7 @@ class Environment {
 
 template<typename T>
 bool
-Environment::Get(const string &varname, T *value) const {
+EnvironmentImpl::Get(const string &varname, T *value) const {
   unordered_map<string, string>::const_iterator type_it =
       types_.find(varname);
   if (type_it == types_.end()) {
