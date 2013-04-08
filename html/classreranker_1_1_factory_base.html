@@ -129,13 +129,13 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the base type of objects constructed by this factory.  <a href="#a3f0dd88a8da419dde3cbe3e97fda55ab"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_base.html#ada8c5df4396bb4e785b690d0a6d5922f">CollectRegistered</a> (unordered_set&lt; string &gt; &amp;registered) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects the names of types registered with this factory.  <a href="#ada8c5df4396bb4e785b690d0a6d5922f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_base.html#a753b0a100b8e7db5f11b38614482d44d">CreateVarMap</a> () const =0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_base.html#af4b3197bc37c78d1591adc27e59d7cc3">CreateVectorVarMap</a> () const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_base.html#a165b07587cacb1112b783f5191c51fd5">CreateVarMap</a> (<a class="el" href="classreranker_1_1_environment.html">Environment</a> *env) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_base.html#a8ba4ece87f76449fbdc2702bb6ddcb76">CreateVectorVarMap</a> (<a class="el" href="classreranker_1_1_environment.html">Environment</a> *env) const =0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>An interface for all <a class="el" href="classreranker_1_1_factory.html">Factory</a> instances, specifying a few pure virtual methods. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00064">64</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00179">179</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a3f0dd88a8da419dde3cbe3e97fda55ab"></a><!-- doxytag: member="reranker::FactoryBase::BaseName" ref="a3f0dd88a8da419dde3cbe3e97fda55ab" args="() const =0" -->
 <div class="memitem">
@@ -205,39 +205,41 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a753b0a100b8e7db5f11b38614482d44d"></a><!-- doxytag: member="reranker::FactoryBase::CreateVarMap" ref="a753b0a100b8e7db5f11b38614482d44d" args="() const =0" -->
+<a class="anchor" id="a165b07587cacb1112b783f5191c51fd5"></a><!-- doxytag: member="reranker::FactoryBase::CreateVarMap" ref="a165b07587cacb1112b783f5191c51fd5" args="(Environment *env) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a>* <a class="el" href="classreranker_1_1_factory_base.html#a753b0a100b8e7db5f11b38614482d44d">reranker::FactoryBase::CreateVarMap</a> </td>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a>* <a class="el" href="classreranker_1_1_factory_base.html#a165b07587cacb1112b783f5191c51fd5">reranker::FactoryBase::CreateVarMap</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classreranker_1_1_factory.html#a8d70ce06ae1dfbea951079ac5c07bff5">reranker::Factory&lt; T &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#a8d70ce06ae1dfbea951079ac5c07bff5">reranker::Factory&lt; FeatureExtractor &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#a8d70ce06ae1dfbea951079ac5c07bff5">reranker::Factory&lt; Model &gt;</a>, and <a class="el" href="classreranker_1_1_factory.html#a8d70ce06ae1dfbea951079ac5c07bff5">reranker::Factory&lt; ModelProtoReader &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">reranker::Factory&lt; T &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">reranker::Factory&lt; FeatureExtractor &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">reranker::Factory&lt; Model &gt;</a>, and <a class="el" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">reranker::Factory&lt; ModelProtoReader &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af4b3197bc37c78d1591adc27e59d7cc3"></a><!-- doxytag: member="reranker::FactoryBase::CreateVectorVarMap" ref="af4b3197bc37c78d1591adc27e59d7cc3" args="() const =0" -->
+<a class="anchor" id="a8ba4ece87f76449fbdc2702bb6ddcb76"></a><!-- doxytag: member="reranker::FactoryBase::CreateVectorVarMap" ref="a8ba4ece87f76449fbdc2702bb6ddcb76" args="(Environment *env) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a>* <a class="el" href="classreranker_1_1_factory_base.html#af4b3197bc37c78d1591adc27e59d7cc3">reranker::FactoryBase::CreateVectorVarMap</a> </td>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a>* <a class="el" href="classreranker_1_1_factory_base.html#a8ba4ece87f76449fbdc2702bb6ddcb76">reranker::FactoryBase::CreateVectorVarMap</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classreranker_1_1_factory.html#ac4e5885060856e2d281419bfe9937298">reranker::Factory&lt; T &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#ac4e5885060856e2d281419bfe9937298">reranker::Factory&lt; FeatureExtractor &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#ac4e5885060856e2d281419bfe9937298">reranker::Factory&lt; Model &gt;</a>, and <a class="el" href="classreranker_1_1_factory.html#ac4e5885060856e2d281419bfe9937298">reranker::Factory&lt; ModelProtoReader &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">reranker::Factory&lt; T &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">reranker::Factory&lt; FeatureExtractor &gt;</a>, <a class="el" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">reranker::Factory&lt; Model &gt;</a>, and <a class="el" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">reranker::Factory&lt; ModelProtoReader &gt;</a>.</p>
 
 </div>
 </div>
@@ -262,7 +264,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:17:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 13:57:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

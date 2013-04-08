@@ -1,7 +1,7 @@
 var searchData=
 [
   ['n_5f',['n_',['../classreranker_1_1_file_backed_ngram_feature_extractor.html#a0b2d146b611818dcf8d6fd1f2b4fd3d1',1,'reranker::FileBackedNgramFeatureExtractor']]],
-  ['name_5f',['name_',['../classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92',1,'reranker::MemberInitializer::name_()'],['../classreranker_1_1_model.html#ac6e00f894c28c3bc36636983a0fc2bb6',1,'reranker::Model::name_()'],['../classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca',1,'reranker::VarMapBase::name_()']]],
+  ['name_5f',['name_',['../classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca',1,'reranker::VarMapBase::name_()'],['../classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92',1,'reranker::MemberInitializer::name_()'],['../classreranker_1_1_model.html#ac6e00f894c28c3bc36636983a0fc2bb6',1,'reranker::Model::name_()']]],
   ['ngram_5fextractor_5f',['ngram_extractor_',['../classreranker_1_1_file_backed_ngram_feature_extractor.html#a30a34d552327051d5194e7ff2ebdbfb6',1,'reranker::FileBackedNgramFeatureExtractor']]],
   ['ngramfeatureextractor_5fmy_5fprotoype',['NgramFeatureExtractor_my_protoype',['../namespacereranker.html#a95095bf19831533178bd76351de78a38',1,'reranker']]],
   ['null_5fsymbol',['null_symbol',['../classreranker_1_1_symbols.html#a3dd0909558359c12747e9744e16a9791',1,'reranker::Symbols']]],

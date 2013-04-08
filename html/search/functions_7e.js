@@ -9,6 +9,7 @@ var searchData=
   ['_7ecandidatesetreader',['~CandidateSetReader',['../classreranker_1_1_candidate_set_reader.html#ae84e3289cc6f6ce1e02602364316cb78',1,'reranker::CandidateSetReader']]],
   ['_7ecandidatesetwriter',['~CandidateSetWriter',['../classreranker_1_1_candidate_set_writer.html#a2215b526e55eae431701a24ff861a44c',1,'reranker::CandidateSetWriter']]],
   ['_7eenvironment',['~Environment',['../classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6',1,'reranker::Environment']]],
+  ['_7eenvironmentimpl',['~EnvironmentImpl',['../classreranker_1_1_environment_impl.html#a50a9c84d509eb54b5baa1acdc0a18bfe',1,'reranker::EnvironmentImpl']]],
   ['_7eexamplefeatureextractor',['~ExampleFeatureExtractor',['../classreranker_1_1_example_feature_extractor.html#a23bf6814cd58ce48b6cca75dd5238377',1,'reranker::ExampleFeatureExtractor']]],
   ['_7eexecutivefeatureextractor',['~ExecutiveFeatureExtractor',['../classreranker_1_1_executive_feature_extractor.html#ab4d9fe507023800afd459194f364b5be',1,'reranker::ExecutiveFeatureExtractor']]],
   ['_7efeatureextractor',['~FeatureExtractor',['../classreranker_1_1_feature_extractor.html#a92ea3deaf805a3db9b78a837e2aa2aff',1,'reranker::FeatureExtractor']]],
@@ -26,5 +27,7 @@ var searchData=
   ['_7eperceptronmodelprotowriter',['~PerceptronModelProtoWriter',['../classreranker_1_1_perceptron_model_proto_writer.html#a03c3e28a447bf3645a46e643d1431f3c',1,'reranker::PerceptronModelProtoWriter']]],
   ['_7erankfeatureextractor',['~RankFeatureExtractor',['../classreranker_1_1_rank_feature_extractor.html#a310922904e2aacb2a016b17acc1ae077',1,'reranker::RankFeatureExtractor']]],
   ['_7estreamtokenizer',['~StreamTokenizer',['../classreranker_1_1_stream_tokenizer.html#a4e49fac1cca5675cddb0bad5b28db74f',1,'reranker::StreamTokenizer']]],
-  ['_7etrainingvectorset',['~TrainingVectorSet',['../classreranker_1_1_training_vector_set.html#acba29d899d0d74be86ba31dd6b9d8810',1,'reranker::TrainingVectorSet']]]
+  ['_7etrainingvectorset',['~TrainingVectorSet',['../classreranker_1_1_training_vector_set.html#acba29d899d0d74be86ba31dd6b9d8810',1,'reranker::TrainingVectorSet']]],
+  ['_7evarmap',['~VarMap',['../classreranker_1_1_var_map.html#af8844540d015ae4e5aa4c878cf85fd97',1,'reranker::VarMap']]],
+  ['_7evarmapbase',['~VarMapBase',['../classreranker_1_1_var_map_base.html#a0d49848ea240d99d8e99b38af0130564',1,'reranker::VarMapBase']]]
 ];

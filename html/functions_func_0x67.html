@@ -120,11 +120,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>Get()
 : <a class="el" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">reranker::CandidateSet</a>
-, <a class="el" href="classreranker_1_1_environment.html#a8cadc367973c636fc35cc87bcffccc67">reranker::Environment</a>
-, <a class="el" href="structreranker_1_1_uid_getter_3_01string_01_4.html#a41212a53c12fc2befd238d6f048a6447">reranker::UidGetter&lt; string &gt;</a>
-, <a class="el" href="classreranker_1_1_string_canonicalizer.html#a8110ee309fa86078768b4407c0942d47">reranker::StringCanonicalizer</a>
+, <a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">reranker::EnvironmentImpl</a>
 , <a class="el" href="structreranker_1_1_uid_getter.html#a2a79b591c1ac77d7cefbdda3fb92faf7">reranker::UidGetter&lt; T &gt;</a>
+, <a class="el" href="structreranker_1_1_uid_getter_3_01string_01_4.html#a41212a53c12fc2befd238d6f048a6447">reranker::UidGetter&lt; string &gt;</a>
 , <a class="el" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58">reranker::VarMap&lt; T &gt;</a>
+, <a class="el" href="classreranker_1_1_interpreter.html#a7a303a24ec83502b36bbccce670e3868">reranker::Interpreter</a>
+, <a class="el" href="classreranker_1_1_string_canonicalizer.html#a8110ee309fa86078768b4407c0942d47">reranker::StringCanonicalizer</a>
 </li>
 <li>GetBestScoring()
 : <a class="el" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">reranker::CandidateSet</a>
@@ -154,6 +155,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="classreranker_1_1_static_symbol_table.html#af9adc6b0fcc4fa0fe1d4ca24c304285f">reranker::StaticSymbolTable</a>
 , <a class="el" href="classreranker_1_1_local_symbol_table.html#afb6f7c068f48c3acd79ec44acb68a08d">reranker::LocalSymbolTable</a>
 </li>
+<li>GetType()
+: <a class="el" href="classreranker_1_1_environment_impl.html#a275a8c6c31f7c2bb32a238c82065518d">reranker::EnvironmentImpl</a>
+, <a class="el" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3">reranker::Environment</a>
+</li>
 <li>GetUpdatePredicate()
 : <a class="el" href="classreranker_1_1_model.html#a1f79bda31ef5b3ed236d77a79403d789">reranker::Model</a>
 </li>
@@ -162,6 +167,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>GetValue()
 : <a class="el" href="classreranker_1_1_feature_vector.html#a565133f9b5b31de43d07aea909631be5">reranker::FeatureVector&lt; K, V, Map &gt;</a>
+</li>
+<li>GetVarMap()
+: <a class="el" href="classreranker_1_1_environment_impl.html#ac7b813bc8bb592d54f9f81c7b79a1c44">reranker::EnvironmentImpl</a>
+, <a class="el" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003">reranker::Environment</a>
+</li>
+<li>GetVarMapForType()
+: <a class="el" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2">reranker::Environment</a>
+, <a class="el" href="classreranker_1_1_environment_impl.html#a0b8461c2a65c4b439acc46d97ba01283">reranker::EnvironmentImpl</a>
 </li>
 <li>GetWeight()
 : <a class="el" href="classreranker_1_1_feature_vector.html#a0786ae9b9f6b579a80d8ae601edfd80a">reranker::FeatureVector&lt; K, V, Map &gt;</a>
@@ -191,7 +204,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:17:30 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 13:57:18 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

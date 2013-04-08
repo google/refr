@@ -27,7 +27,7 @@ var searchData=
   ['defaultupdatepredicate',['DefaultUpdatePredicate',['../classreranker_1_1_perceptron_model_1_1_default_update_predicate.html',1,'reranker::PerceptronModel']]],
   ['defaultupdater',['DefaultUpdater',['../classreranker_1_1_perceptron_model_1_1_default_updater.html',1,'reranker::PerceptronModel']]],
   ['define_5fcons_5fclass',['DEFINE_CONS_CLASS',['../factory_8_h.html#a0440aa6c8d7080a9daa203766dae388d',1,'factory.H']]],
-  ['defined',['Defined',['../classreranker_1_1_environment.html#a2bcbe917196d503db31fd2980a65c605',1,'reranker::Environment::Defined()'],['../classreranker_1_1_var_map_base.html#af9d31b9fe4a4a5b6b30ea968fd59ddf5',1,'reranker::VarMapBase::Defined()'],['../classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd',1,'reranker::VarMap::Defined()']]],
+  ['defined',['Defined',['../classreranker_1_1_environment_impl.html#ae88e17a317d959cf91bb4d5660a68c59',1,'reranker::EnvironmentImpl::Defined()'],['../classreranker_1_1_var_map_base.html#af9d31b9fe4a4a5b6b30ea968fd59ddf5',1,'reranker::VarMapBase::Defined()'],['../classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276',1,'reranker::Environment::Defined()'],['../classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd',1,'reranker::VarMap::Defined()']]],
   ['defs',['defs',['../namespacedefs.html',1,'']]],
   ['defs_2epy',['defs.py',['../defs_8py.html',1,'']]],
   ['devtest_5fscore',['devtest_score',['../namespacehadoop-run.html#ab913a16649b25375ec6afac29d20b21b',1,'hadoop-run']]],

@@ -6,7 +6,7 @@ var searchData=
   ['abstractfilebackedfeatureextractor',['AbstractFileBackedFeatureExtractor',['../classreranker_1_1_abstract_file_backed_feature_extractor.html',1,'reranker']]],
   ['abstractfilebackedfeatureextractor',['AbstractFileBackedFeatureExtractor',['../classreranker_1_1_candidate.html#a859ab638260cebff3ff246e58ea25638',1,'reranker::Candidate::AbstractFileBackedFeatureExtractor()'],['../classreranker_1_1_abstract_file_backed_feature_extractor.html#ae1a8ca499ceccbd96e595c5eed8162e5',1,'reranker::AbstractFileBackedFeatureExtractor::AbstractFileBackedFeatureExtractor()']]],
   ['action',['action',['../namespacehadoop-run.html#ab12a73005bb25b5a9695d359571a3b3e',1,'hadoop-run']]],
-  ['add',['Add',['../classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324',1,'reranker::FactoryContainer::Add()'],['../classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91',1,'reranker::Initializers::Add()']]],
+  ['add',['Add',['../classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91',1,'reranker::Initializers::Add()'],['../classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324',1,'reranker::FactoryContainer::Add()']]],
   ['addcandidate',['AddCandidate',['../classreranker_1_1_candidate_set.html#adcb001dd18d4119f04f8a95ca7547f27',1,'reranker::CandidateSet']]],
   ['addl_5fdata',['addl_data',['../namespacehadoop-run.html#a36c4796df68329c6bd8fcdd6b45af5ff',1,'hadoop-run']]],
   ['addscaledsubvector',['AddScaledSubvector',['../classreranker_1_1_feature_vector.html#aa732c2a9d4b249b652f881eb57112e1f',1,'reranker::FeatureVector']]],

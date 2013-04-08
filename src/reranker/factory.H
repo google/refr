@@ -457,8 +457,11 @@ class Factory : public FactoryBase {
   /// </tr>
   /// </table>
   ///
-  /// \param st the stream tokenizer providing tokens according to the
-  ///           grammar shown above
+  /// \param st  the stream tokenizer providing tokens according to the
+  ///            grammar shown above
+  /// \param env the \link reranker::Environment Environment \endlink in
+  ///            this method was called, or <tt>NULL</tt> if there is
+  ///            no calling environment
   shared_ptr<T> CreateOrDie(StreamTokenizer &st, Environment *env = NULL) {
     shared_ptr<Environment> env_ptr(env == NULL ?
                                     Environment::CreateEmpty() : env->Copy());

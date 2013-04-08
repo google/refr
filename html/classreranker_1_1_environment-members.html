@@ -89,11 +89,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 This is the complete list of members for <a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a2bcbe917196d503db31fd2980a65c605">Defined</a>(const string &amp;varname)</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a989c315785e4af0680ca0b31e0a09f64">Environment</a>(int debug=0)</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a8cadc367973c636fc35cc87bcffccc67">Get</a>(const string &amp;varname, T *value) const </td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#ad90afb9e1d9346029e3fa3b184046ac0">InferType</a>(const StreamTokenizer &amp;st, bool is_vector, bool *is_object_type)</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a37b13c2e63697f91314e96c11b702ffc">ReadAndSet</a>(const string &amp;varname, StreamTokenizer &amp;st)</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02">Copy</a>() const =0</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792">CreateEmpty</a>()</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276">Defined</a>(const string &amp;varname) const =0</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3">GetType</a>(const string &amp;varname) const =0</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003">GetVarMap</a>(const string &amp;varname)=0</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2">GetVarMapForType</a>(const string &amp;type)=0</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#ae2641671e6f45d47f9432429ad5349bf">ReadAndSet</a>(const string &amp;varname, StreamTokenizer &amp;st)=0</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6">~Environment</a>()</td><td><a class="el" href="classreranker_1_1_environment.html">reranker::Environment</a></td><td><code> [inline, virtual]</code></td></tr>
 </table></div><!-- contents -->
 <!-- window showing the filter options -->
@@ -113,7 +115,7 @@ This is the complete list of members for <a class="el" href="classreranker_1_1_e
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:17:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 13:57:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

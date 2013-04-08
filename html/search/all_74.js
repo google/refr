@@ -3,8 +3,8 @@ var searchData=
   ['teardown',['TearDown',['../namespacereranker.html#aad9b478cf30e8884067b0f4edefefb76',1,'reranker']]],
   ['tellg',['tellg',['../classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79',1,'reranker::StreamTokenizer']]],
   ['tick',['Tick',['../classreranker_1_1_time.html#aacb31465040806ff8705e168056b01aa',1,'reranker::Time']]],
-  ['time',['Time',['../classreranker_1_1_time.html#a1b73861f59b95ac90e3cc28db9b2bf58',1,'reranker::Time::Time()'],['../classreranker_1_1_time.html#aafdca8f1ef34bd508246704dc2eaced8',1,'reranker::Time::Time(int epoch, int index, int absolute_index)'],['../classreranker_1_1_model.html#a6385b58c2b89e43f00033bbed7ead046',1,'reranker::Model::time()']]],
   ['time',['Time',['../classreranker_1_1_time.html',1,'reranker']]],
+  ['time',['Time',['../classreranker_1_1_time.html#a1b73861f59b95ac90e3cc28db9b2bf58',1,'reranker::Time::Time()'],['../classreranker_1_1_time.html#aafdca8f1ef34bd508246704dc2eaced8',1,'reranker::Time::Time(int epoch, int index, int absolute_index)'],['../classreranker_1_1_model.html#a6385b58c2b89e43f00033bbed7ead046',1,'reranker::Model::time()']]],
   ['time_5f',['time_',['../classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f',1,'reranker::Model']]],
   ['tmppath',['tmppath',['../namespacehadoop-run.html#a3bec14631fcfd1766537753d2de16d78',1,'hadoop-run']]],
   ['to_5fstring',['to_string',['../classreranker_1_1_candidate.html#ac61188c8c9beba920cdc85d7c4f506c8',1,'reranker::Candidate::to_string()'],['../classreranker_1_1_time.html#a1e8b9be0b48cd8cbb360f23a638e12c6',1,'reranker::Time::to_string()']]],
@@ -28,5 +28,7 @@ var searchData=
   ['trainingvectorset',['TrainingVectorSet',['../classreranker_1_1_training_vector_set.html#aed20b78e2d1864aaeb338f7d2a5c1791',1,'reranker::TrainingVectorSet']]],
   ['trainoneepoch',['TrainOneEpoch',['../classreranker_1_1_model.html#a6aeac4515eae1f8b6d7adf665f05060f',1,'reranker::Model::TrainOneEpoch()'],['../classreranker_1_1_perceptron_model.html#ae88557a6953807829c8d5fb760589487',1,'reranker::PerceptronModel::TrainOneEpoch()']]],
   ['trainonexample',['TrainOnExample',['../classreranker_1_1_model.html#ad6a7660247d0c0477d5c4f01591a942b',1,'reranker::Model::TrainOnExample()'],['../classreranker_1_1_perceptron_model.html#abfb9261016f61a8f660e699ccbdafa6a',1,'reranker::PerceptronModel::TrainOnExample()']]],
+  ['typedmemberinitializer',['TypedMemberInitializer',['../classreranker_1_1_typed_member_initializer.html#a95c3abb535f08c9ec87a5539d1f7f1c1',1,'reranker::TypedMemberInitializer']]],
+  ['typedmemberinitializer',['TypedMemberInitializer',['../classreranker_1_1_typed_member_initializer.html',1,'reranker']]],
   ['typename',['TypeName',['../classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450',1,'reranker::StreamTokenizer']]]
 ];

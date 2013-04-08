@@ -108,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>A container to hold the mapping between named variables of a specific type and their values.  
  <a href="classreranker_1_1_var_map.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="var-map_8_h_source.html">var-map.H</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="environment_8_h_source.html">environment.H</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for reranker::VarMap&lt; T &gt;:</div>
 <div class="dyncontent">
@@ -123,14 +123,17 @@ Inheritance diagram for reranker::VarMap&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a42a25cbc1b217b5c643bfb94f86c4703">VarMap</a> (const string &amp;name, bool is_primitive=true)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a mapping from variables of a particular type to their values.  <a href="#a42a25cbc1b217b5c643bfb94f86c4703"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#abb805680c80d7cf246b0baa9a89b9bae">VarMap</a> (const string &amp;name, <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env, bool is_primitive=true)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a mapping from variables of a particular type to their values.  <a href="#abb805680c80d7cf246b0baa9a89b9bae"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#af8844540d015ae4e5aa4c878cf85fd97">~VarMap</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58">Get</a> (const string &amp;varname, T *value) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the value of the specified variable to the object pointed to by the <code>value</code> parameter.  <a href="#a06ae9d1793c6e507b975ac23f9d7af58"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd">Defined</a> (const string &amp;varname) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3">Set</a> (const string &amp;varname, T value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the specified variable to the specified value.  <a href="#a4facf600cb7a75264e443f70856767e3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a1a01ace6f7f06a7779ff583c6bcd0f0d">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#acc6b1af4c1e73585fe3b686ca5ac1ade">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map.html#a1e717f1d6bf0be3c038a8e5de4f3c238">Copy</a> (<a class="el" href="classreranker_1_1_environment.html">Environment</a> *env) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a newly constructed copy of this <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a>.  <a href="#a1e717f1d6bf0be3c038a8e5de4f3c238"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br/>
@@ -144,9 +147,9 @@ class reranker::VarMap&lt; T &gt;</h3>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00139">139</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00189">189</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a42a25cbc1b217b5c643bfb94f86c4703"></a><!-- doxytag: member="reranker::VarMap::VarMap" ref="a42a25cbc1b217b5c643bfb94f86c4703" args="(const string &amp;name, bool is_primitive=true)" -->
+<a class="anchor" id="abb805680c80d7cf246b0baa9a89b9bae"></a><!-- doxytag: member="reranker::VarMap::VarMap" ref="abb805680c80d7cf246b0baa9a89b9bae" args="(const string &amp;name, Environment *env, bool is_primitive=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -157,6 +160,12 @@ template&lt;typename T&gt; </div>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -177,16 +186,62 @@ template&lt;typename T&gt; </div>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>the type name of the variables in this instance </td></tr>
+    <tr><td class="paramname">env</td><td>the <a class="el" href="classreranker_1_1_environment.html">Environment </a> that contains this <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance </td></tr>
     <tr><td class="paramname">is_primitive</td><td>whether this instance contains primitive or primitive vector variables </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00146">146</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00198">198</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af8844540d015ae4e5aa4c878cf85fd97"></a><!-- doxytag: member="reranker::VarMap::~VarMap" ref="af8844540d015ae4e5aa4c878cf85fd97" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map.html">reranker::VarMap</a>&lt; T &gt;::~<a class="el" href="classreranker_1_1_var_map.html">VarMap</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00201">201</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a1e717f1d6bf0be3c038a8e5de4f3c238"></a><!-- doxytag: member="reranker::VarMap::Copy" ref="a1e717f1d6bf0be3c038a8e5de4f3c238" args="(Environment *env) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a>* <a class="el" href="classreranker_1_1_var_map.html">reranker::VarMap</a>&lt; T &gt;::<a class="el" href="classreranker_1_1_var_map.html#a1e717f1d6bf0be3c038a8e5de4f3c238">Copy</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a newly constructed copy of this <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a>. </p>
+
+<p>Implements <a class="el" href="classreranker_1_1_var_map_base.html#ad8a03d5cb3c186131e9af106d59bf751">reranker::VarMapBase</a>.</p>
+
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00281">281</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a9962a54a8e138ea24f49fdb92df108dd"></a><!-- doxytag: member="reranker::VarMap::Defined" ref="a9962a54a8e138ea24f49fdb92df108dd" args="(const string &amp;varname) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +262,7 @@ template&lt;typename T&gt; </div>
  
 <p>Implements <a class="el" href="classreranker_1_1_var_map_base.html#af9d31b9fe4a4a5b6b30ea968fd59ddf5">reranker::VarMapBase</a>.</p>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00167">167</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00221">221</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -241,18 +296,18 @@ template&lt;typename T&gt; </div>
 <p>Assigns the value of the specified variable to the object pointed to by the <code>value</code> parameter. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>whether the specified variable exists and the assignment was successful </dd></dl>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00156">156</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00210">210</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1a01ace6f7f06a7779ff583c6bcd0f0d"></a><!-- doxytag: member="reranker::VarMap::ReadAndSet" ref="a1a01ace6f7f06a7779ff583c6bcd0f0d" args="(const string &amp;varname, StreamTokenizer &amp;st)" -->
+<a class="anchor" id="acc6b1af4c1e73585fe3b686ca5ac1ade"></a><!-- doxytag: member="reranker::VarMap::ReadAndSet" ref="acc6b1af4c1e73585fe3b686ca5ac1ade" args="(const string &amp;varname, StreamTokenizer &amp;st)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classreranker_1_1_var_map.html">reranker::VarMap</a>&lt; T &gt;::<a class="el" href="classreranker_1_1_var_map.html#a1a01ace6f7f06a7779ff583c6bcd0f0d">ReadAndSet</a> </td>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_var_map.html">reranker::VarMap</a>&lt; T &gt;::<a class="el" href="classreranker_1_1_var_map.html#acc6b1af4c1e73585fe3b686ca5ac1ade">ReadAndSet</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>varname</em>, </td>
@@ -275,7 +330,7 @@ template&lt;typename T&gt; </div>
  
 <p>Implements <a class="el" href="classreranker_1_1_var_map_base.html#a2870abd4bc8ad1d925fc304acb44417d">reranker::VarMapBase</a>.</p>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00177">177</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00231">231</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -308,12 +363,12 @@ template&lt;typename T&gt; </div>
 
 <p>Sets the specified variable to the specified value. </p>
 
-<p>Definition at line <a class="el" href="var-map_8_h_source.html#l00172">172</a> of file <a class="el" href="var-map_8_h_source.html">var-map.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00226">226</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="var-map_8_h_source.html">var-map.H</a></li>
+<li><a class="el" href="environment_8_h_source.html">environment.H</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -333,7 +388,7 @@ template&lt;typename T&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:17:30 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 13:57:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

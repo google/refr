@@ -13,5 +13,6 @@ var searchData=
   ['trainingvectorset',['TrainingVectorSet',['../classreranker_1_1_training_vector_set.html#aed20b78e2d1864aaeb338f7d2a5c1791',1,'reranker::TrainingVectorSet']]],
   ['trainoneepoch',['TrainOneEpoch',['../classreranker_1_1_model.html#a6aeac4515eae1f8b6d7adf665f05060f',1,'reranker::Model::TrainOneEpoch()'],['../classreranker_1_1_perceptron_model.html#ae88557a6953807829c8d5fb760589487',1,'reranker::PerceptronModel::TrainOneEpoch()']]],
   ['trainonexample',['TrainOnExample',['../classreranker_1_1_model.html#ad6a7660247d0c0477d5c4f01591a942b',1,'reranker::Model::TrainOnExample()'],['../classreranker_1_1_perceptron_model.html#abfb9261016f61a8f660e699ccbdafa6a',1,'reranker::PerceptronModel::TrainOnExample()']]],
+  ['typedmemberinitializer',['TypedMemberInitializer',['../classreranker_1_1_typed_member_initializer.html#a95c3abb535f08c9ec87a5539d1f7f1c1',1,'reranker::TypedMemberInitializer']]],
   ['typename',['TypeName',['../classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450',1,'reranker::StreamTokenizer']]]
 ];

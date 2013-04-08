@@ -99,79 +99,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">reranker::Environment Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="reranker::Environment" -->
-<p>Provides a set of named variables and their types, as well as the values for those variable.  
+<p>An interface for an environment in which variables of various types are mapped to their values.  
  <a href="classreranker_1_1_environment.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="environment_8_h_source.html">environment.H</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for reranker::Environment:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classreranker_1_1_environment.png" usemap="#reranker::Environment_map" alt=""/>
+  <map id="reranker::Environment_map" name="reranker::Environment_map">
+<area href="classreranker_1_1_environment_impl.html" title="Provides a set of named variables and their types, as well as the values for those variable..." alt="reranker::EnvironmentImpl" shape="rect" coords="0,56,159,80"/>
+</map>
+ </div></div>
 
 <p><a href="classreranker_1_1_environment-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a989c315785e4af0680ca0b31e0a09f64">Environment</a> (int debug=0)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new, empty environment.  <a href="#a989c315785e4af0680ca0b31e0a09f64"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6">~Environment</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this environment.  <a href="#a987c93a94bcb94e3e5facdcf51109fc6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a37b13c2e63697f91314e96c11b702ffc">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the specified variable to the value obtained from the following tokens available from the specified token stream.  <a href="#a37b13c2e63697f91314e96c11b702ffc"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a2bcbe917196d503db31fd2980a65c605">Defined</a> (const string &amp;varname)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the specified variable has been defined in this environment.  <a href="#a2bcbe917196d503db31fd2980a65c605"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a8cadc367973c636fc35cc87bcffccc67">Get</a> (const string &amp;varname, T *value) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the value of the variable with the specified name and puts into into the object pointed to by the <code>value</code> parameter.  <a href="#a8cadc367973c636fc35cc87bcffccc67"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#ad90afb9e1d9346029e3fa3b184046ac0">InferType</a> (const <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st, bool is_vector, bool *is_object_type)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Infer the type based on the next token and its token type.  <a href="#ad90afb9e1d9346029e3fa3b184046ac0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276">Defined</a> (const string &amp;varname) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the specified variable has been defined in this environment.  <a href="#aed7a464b7498b2855eb24ee4563c8276"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#ae2641671e6f45d47f9432429ad5349bf">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the specified variable to the value obtained from the following tokens available from the specified token stream.  <a href="#ae2641671e6f45d47f9432429ad5349bf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual const string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3">GetType</a> (const string &amp;varname) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the type name of the specified variable.  <a href="#a971839d4e0e9f5a2d7e76214c81592f3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003">GetVarMap</a> (const string &amp;varname)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance for the specified variable.  <a href="#a64763b2d3e5a5f1cc7a69ecc018d6003"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2">GetVarMapForType</a> (const string &amp;type)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance for the specified type.  <a href="#a3602611145e0b9c82aee80dd8e1abbf2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02">Copy</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this environment.  <a href="#ad5ad2fe5a00eba18331de208dd4f4b02"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792">CreateEmpty</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A static factory method to create a new, empty <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> instance.  <a href="#a1214411c110887639ada037668265792"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Provides a set of named variables and their types, as well as the values for those variable. </p>
-<p>N.B.: Primitive values are stored as strings, and are converted on demand to a concrete primitive type, one of <code>{bool,int,double,string}</code>. Because of this, this class only considers variables to have one of four types (even if their concrete types are more specific): </p>
-<ul>
-<li>
-primitive </li>
-<li>
-vector of a primitive type </li>
-<li>
-<a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible type </li>
-<li>
-vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible type </li>
-</ul>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classreranker_1_1_interpreter.html" title="Provides an interpreter for assigning primitives and Factory-constructible objects to named variables...">Interpreter</a> </dd></dl>
+<div class="textblock"><p>An interface for an environment in which variables of various types are mapped to their values. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00070">70</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00119">119</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a989c315785e4af0680ca0b31e0a09f64"></a><!-- doxytag: member="reranker::Environment::Environment" ref="a989c315785e4af0680ca0b31e0a09f64" args="(int debug=0)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classreranker_1_1_environment.html#a989c315785e4af0680ca0b31e0a09f64">reranker::Environment::Environment</a> </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>debug</em> = <code>0</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Constructs a new, empty environment. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">debug</td><td>the debug level; if greater than 0, various debugging messages will be output to <code>std::cerr</code> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="environment_8_c_source.html#l00040">40</a> of file <a class="el" href="environment_8_c_source.html">environment.C</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a987c93a94bcb94e3e5facdcf51109fc6"></a><!-- doxytag: member="reranker::Environment::~Environment" ref="a987c93a94bcb94e3e5facdcf51109fc6" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -186,23 +161,61 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
 </div>
 <div class="memdoc">
 
-<p>Destroys this environment. </p>
-
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00079">79</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00121">121</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a2bcbe917196d503db31fd2980a65c605"></a><!-- doxytag: member="reranker::Environment::Defined" ref="a2bcbe917196d503db31fd2980a65c605" args="(const string &amp;varname)" -->
+<a class="anchor" id="ad5ad2fe5a00eba18331de208dd4f4b02"></a><!-- doxytag: member="reranker::Environment::Copy" ref="ad5ad2fe5a00eba18331de208dd4f4b02" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classreranker_1_1_environment.html#a2bcbe917196d503db31fd2980a65c605">reranker::Environment::Defined</a> </td>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_environment.html">Environment</a>* <a class="el" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02">reranker::Environment::Copy</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a copy of this environment. </p>
+
+<p>Implemented in <a class="el" href="classreranker_1_1_environment_impl.html#ae8b103a71223c7702ecaf33840d5e114">reranker::EnvironmentImpl</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1214411c110887639ada037668265792"></a><!-- doxytag: member="reranker::Environment::CreateEmpty" ref="a1214411c110887639ada037668265792" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classreranker_1_1_environment.html">Environment</a> * <a class="el" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792">reranker::Environment::CreateEmpty</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A static factory method to create a new, empty <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> instance. </p>
+
+<p>Definition at line <a class="el" href="environment_8_c_source.html#l00043">43</a> of file <a class="el" href="environment_8_c_source.html">environment.C</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aed7a464b7498b2855eb24ee4563c8276"></a><!-- doxytag: member="reranker::Environment::Defined" ref="aed7a464b7498b2855eb24ee4563c8276" args="(const string &amp;varname) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276">reranker::Environment::Defined</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>varname</em></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -210,94 +223,79 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
 
 <p>Returns whether the specified variable has been defined in this environment. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00092">92</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_environment_impl.html#ae88e17a317d959cf91bb4d5660a68c59">reranker::EnvironmentImpl</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a8cadc367973c636fc35cc87bcffccc67"></a><!-- doxytag: member="reranker::Environment::Get" ref="a8cadc367973c636fc35cc87bcffccc67" args="(const string &amp;varname, T *value) const " -->
+<a class="anchor" id="a971839d4e0e9f5a2d7e76214c81592f3"></a><!-- doxytag: member="reranker::Environment::GetType" ref="a971839d4e0e9f5a2d7e76214c81592f3" args="(const string &amp;varname) const =0" -->
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classreranker_1_1_environment.html#a8cadc367973c636fc35cc87bcffccc67">reranker::Environment::Get</a> </td>
+          <td class="memname">virtual const string&amp; <a class="el" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3">reranker::Environment::GetType</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>varname</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramname"><em>varname</em></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Retrieves the value of the variable with the specified name and puts into into the object pointed to by the <code>value</code> parameter. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">varname</td><td>the name of the variable whose value is to be retrieved </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>a pointer to the object whose value is to be set </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>whether the specified variable exists and its value was successfully set by this method </dd></dl>
+<p>Retrieves the type name of the specified variable. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00129">129</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_environment_impl.html#a275a8c6c31f7c2bb32a238c82065518d">reranker::EnvironmentImpl</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad90afb9e1d9346029e3fa3b184046ac0"></a><!-- doxytag: member="reranker::Environment::InferType" ref="ad90afb9e1d9346029e3fa3b184046ac0" args="(const StreamTokenizer &amp;st, bool is_vector, bool *is_object_type)" -->
+<a class="anchor" id="a64763b2d3e5a5f1cc7a69ecc018d6003"></a><!-- doxytag: member="reranker::Environment::GetVarMap" ref="a64763b2d3e5a5f1cc7a69ecc018d6003" args="(const string &amp;varname)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string <a class="el" href="classreranker_1_1_environment.html#ad90afb9e1d9346029e3fa3b184046ac0">reranker::Environment::InferType</a> </td>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a>* <a class="el" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003">reranker::Environment::GetVarMap</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;&#160;</td>
-          <td class="paramname"><em>st</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>is_vector</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool *&#160;</td>
-          <td class="paramname"><em>is_object_type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>varname</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Infer the type based on the next token and its token type. </p>
+<p>Retrieves the <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance for the specified variable. </p>
 
-<p>Definition at line <a class="el" href="environment_8_c_source.html#l00168">168</a> of file <a class="el" href="environment_8_c_source.html">environment.C</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_environment_impl.html#ac7b813bc8bb592d54f9f81c7b79a1c44">reranker::EnvironmentImpl</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a37b13c2e63697f91314e96c11b702ffc"></a><!-- doxytag: member="reranker::Environment::ReadAndSet" ref="a37b13c2e63697f91314e96c11b702ffc" args="(const string &amp;varname, StreamTokenizer &amp;st)" -->
+<a class="anchor" id="a3602611145e0b9c82aee80dd8e1abbf2"></a><!-- doxytag: member="reranker::Environment::GetVarMapForType" ref="a3602611145e0b9c82aee80dd8e1abbf2" args="(const string &amp;type)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classreranker_1_1_environment.html#a37b13c2e63697f91314e96c11b702ffc">reranker::Environment::ReadAndSet</a> </td>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a>* <a class="el" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2">reranker::Environment::GetVarMapForType</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieves the <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance for the specified type. </p>
+
+<p>Implemented in <a class="el" href="classreranker_1_1_environment_impl.html#a0b8461c2a65c4b439acc46d97ba01283">reranker::EnvironmentImpl</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae2641671e6f45d47f9432429ad5349bf"></a><!-- doxytag: member="reranker::Environment::ReadAndSet" ref="ae2641671e6f45d47f9432429ad5349bf" args="(const string &amp;varname, StreamTokenizer &amp;st)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_environment.html#ae2641671e6f45d47f9432429ad5349bf">reranker::Environment::ReadAndSet</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>varname</em>, </td>
@@ -311,7 +309,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -319,7 +317,7 @@ template&lt;typename T &gt; </div>
 
 <p>Sets the specified variable to the value obtained from the following tokens available from the specified token stream. </p>
 
-<p>Definition at line <a class="el" href="environment_8_c_source.html#l00106">106</a> of file <a class="el" href="environment_8_c_source.html">environment.C</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_environment_impl.html#ae8549b3ea2960701a99da3e6d4054c9e">reranker::EnvironmentImpl</a>.</p>
 
 </div>
 </div>
@@ -345,7 +343,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:17:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 13:57:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

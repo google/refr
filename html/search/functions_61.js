@@ -3,7 +3,7 @@ var searchData=
   ['absolute_5findex',['absolute_index',['../classreranker_1_1_time.html#a27932d36ed9adabd73eab8a9b94cfdc9',1,'reranker::Time']]],
   ['absolute_5fseconds',['absolute_seconds',['../classreranker_1_1_time.html#a07f9ec2004438a55f7813e70c50423c6',1,'reranker::Time']]],
   ['abstractfilebackedfeatureextractor',['AbstractFileBackedFeatureExtractor',['../classreranker_1_1_abstract_file_backed_feature_extractor.html#ae1a8ca499ceccbd96e595c5eed8162e5',1,'reranker::AbstractFileBackedFeatureExtractor']]],
-  ['add',['Add',['../classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324',1,'reranker::FactoryContainer::Add()'],['../classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91',1,'reranker::Initializers::Add()']]],
+  ['add',['Add',['../classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91',1,'reranker::Initializers::Add()'],['../classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324',1,'reranker::FactoryContainer::Add()']]],
   ['addcandidate',['AddCandidate',['../classreranker_1_1_candidate_set.html#adcb001dd18d4119f04f8a95ca7547f27',1,'reranker::CandidateSet']]],
   ['addscaledsubvector',['AddScaledSubvector',['../classreranker_1_1_feature_vector.html#aa732c2a9d4b249b652f881eb57112e1f',1,'reranker::FeatureVector']]],
   ['addscaledvector',['AddScaledVector',['../classreranker_1_1_feature_vector.html#a76c6244a176999e72a54c78726ee718f',1,'reranker::FeatureVector']]],

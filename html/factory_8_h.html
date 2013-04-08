@@ -94,14 +94,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;tr1/unordered_set&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;stdexcept&gt;</code><br/>
-<code>#include &quot;<a class="el" href="member-init_8_h_source.html">member-init.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="var-map_8_h_source.html">var-map.H</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="environment_8_h_source.html">environment.H</a>&quot;</code><br/>
 </div>
 <p><a href="factory_8_h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_member_initializer.html">reranker::MemberInitializer</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An interface for initializers of members of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible object.  <a href="classreranker_1_1_member_initializer.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_typed_member_initializer.html">reranker::TypedMemberInitializer&lt; T &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializers.html">reranker::Initializers</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A container for all the member initializers for a particular Factory-constructible instance.  <a href="classreranker_1_1_initializers.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_base.html">reranker::FactoryBase</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An interface for all <a class="el" href="classreranker_1_1_factory.html">Factory</a> instances, specifying a few pure virtual methods.  <a href="classreranker_1_1_factory_base.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_container.html">reranker::FactoryContainer</a></td></tr>
@@ -167,7 +171,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>This is a helper macro used only by the <code>REGISTER</code> macro. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00574">574</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00696">696</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -192,7 +196,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>Provides the necessary implementation for a factory for the specified <code>BASE</code> class type. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00595">595</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00717">717</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -233,7 +237,7 @@ Defines</h2></td></tr>
 <p>This macro registers the concrete subtype <em>TYPE</em> with the specified factory for instances of type <em>BASE</em>; the <em>TYPE</em> is associated with the specified <em>NAME</em>. </p>
 <p>This macro&mdash;or a macro defined using this macro&mdash;should be used in the implementation file for a concrete subclass <em>TYPE</em> of the baseclass <em>BASE</em>. Often, <em>TYPE</em> and <em>NAME</em> may be the exact same string; however, they must be different when <em>TYPE</em> contains characters that may not appear in C++ identifiers, such as colons (<em>e.g.</em>, when <em>TYPE</em> is the fully-qualified name of an inner class). </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00588">588</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00710">710</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -255,7 +259,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:17:28 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 13:57:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

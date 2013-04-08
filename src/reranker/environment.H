@@ -68,6 +68,8 @@ class VarMapBase {
   /// a mapping from variables of a particular type to their values.
   ///
   /// \param name         the type name of the variables in this instance
+  /// \param env          the \link reranker::Environment Environment \endlink
+  ///                     that wraps this VarMapBase instance
   /// \param is_primitive whether this instance contains primitive or primitive
   ///                     vector variables
   VarMapBase(const string &name, Environment *env, bool is_primitive) :
@@ -189,6 +191,8 @@ class VarMap : public VarMapBase {
   /// Constructs a mapping from variables of a particular type to their values.
   ///
   /// \param name         the type name of the variables in this instance
+  /// \param env          the \link reranker::Environment Environment \endlink
+  ///                     that contains this VarMap instance
   /// \param is_primitive whether this instance contains primitive or primitive
   ///                     vector variables
   VarMap(const string &name, Environment *env, bool is_primitive = true) :

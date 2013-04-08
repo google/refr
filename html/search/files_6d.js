@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['member_2dinit_2eh',['member-init.H',['../member-init_8_h.html',1,'']]],
   ['mira_2dstyle_2dmodel_2ec',['mira-style-model.C',['../mira-style-model_8_c.html',1,'']]],
   ['mira_2dstyle_2dmodel_2eh',['mira-style-model.H',['../mira-style-model_8_h.html',1,'']]],
   ['model_2dcombine_2dshards_2ec',['model-combine-shards.C',['../model-combine-shards_8_c.html',1,'']]],

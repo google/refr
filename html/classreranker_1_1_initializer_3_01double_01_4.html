@@ -104,15 +104,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">reranker::Initializer&lt; double &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="reranker::Initializer&lt; double &gt;" --><!-- doxytag: inherits="reranker::MemberInitializer" -->
-<p><code>#include &lt;<a class="el" href="member-init_8_h_source.html">member-init.H</a>&gt;</code></p>
+<!-- doxytag: class="reranker::Initializer&lt; double &gt;" --><!-- doxytag: inherits="reranker::StreamInitializer" -->
+<p><code>#include &lt;<a class="el" href="stream-init_8_h_source.html">stream-init.H</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for reranker::Initializer&lt; double &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classreranker_1_1_initializer_3_01double_01_4.png" usemap="#reranker::Initializer&lt; double &gt;_map" alt=""/>
   <map id="reranker::Initializer&lt; double &gt;_map" name="reranker::Initializer&lt; double &gt;_map">
-<area href="classreranker_1_1_member_initializer.html" title="An interface that allows for a data member of a Factory-constructible type to be initialized based on..." alt="reranker::MemberInitializer" shape="rect" coords="0,0,179,24"/>
+<area href="classreranker_1_1_stream_initializer.html" title="An interface that allows for a primitive, Factory-constructible object or vector thereof to be initia..." alt="reranker::StreamInitializer" shape="rect" coords="0,0,179,24"/>
 </map>
  </div></div>
 
@@ -120,105 +120,69 @@ Inheritance diagram for reranker::Initializer&lt; double &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer_3_01double_01_4.html#aa9ba33785dd2e68c7de4dd8aef3a534a">Initializer</a> (const string &amp;name, double *member)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer_3_01double_01_4.html#a75f11ebfb452c670ea0310802350312b">Initializer</a> (const string &amp;name, double *member, bool required)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer_3_01double_01_4.html#ab944d597a85825b9f309596fcf291c30">Init</a> (<a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer_3_01double_01_4.html#a9aa359e909355c9a0ede9e2cfad2e21b">Initializer</a> (double *member)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer_3_01double_01_4.html#a7167c4bd35078a5b2db32b9ae7afec12">Init</a> (<a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st, <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env=NULL)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;&gt;<br/>
 class reranker::Initializer&lt; double &gt;</h3>
 
 
-<p>Definition at line <a class="el" href="member-init_8_h_source.html#l00152">152</a> of file <a class="el" href="member-init_8_h_source.html">member-init.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00130">130</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa9ba33785dd2e68c7de4dd8aef3a534a"></a><!-- doxytag: member="reranker::Initializer&lt; double &gt;::Initializer" ref="aa9ba33785dd2e68c7de4dd8aef3a534a" args="(const string &amp;name, double *member)" -->
+<a class="anchor" id="a9aa359e909355c9a0ede9e2cfad2e21b"></a><!-- doxytag: member="reranker::Initializer&lt; double &gt;::Initializer" ref="a9aa359e909355c9a0ede9e2cfad2e21b" args="(double *member)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classreranker_1_1_initializer.html">reranker::Initializer</a>&lt; double &gt;::<a class="el" href="classreranker_1_1_initializer.html">Initializer</a> </td>
           <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>member</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
+          <td class="paramname"><em>member</em></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="member-init_8_h_source.html#l00154">154</a> of file <a class="el" href="member-init_8_h_source.html">member-init.H</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a75f11ebfb452c670ea0310802350312b"></a><!-- doxytag: member="reranker::Initializer&lt; double &gt;::Initializer" ref="a75f11ebfb452c670ea0310802350312b" args="(const string &amp;name, double *member, bool required)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classreranker_1_1_initializer.html">reranker::Initializer</a>&lt; double &gt;::<a class="el" href="classreranker_1_1_initializer.html">Initializer</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>member</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>required</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="member-init_8_h_source.html#l00156">156</a> of file <a class="el" href="member-init_8_h_source.html">member-init.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00132">132</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ab944d597a85825b9f309596fcf291c30"></a><!-- doxytag: member="reranker::Initializer&lt; double &gt;::Init" ref="ab944d597a85825b9f309596fcf291c30" args="(StreamTokenizer &amp;st)" -->
+<a class="anchor" id="a7167c4bd35078a5b2db32b9ae7afec12"></a><!-- doxytag: member="reranker::Initializer&lt; double &gt;::Init" ref="a7167c4bd35078a5b2db32b9ae7afec12" args="(StreamTokenizer &amp;st, Environment *env=NULL)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_initializer.html">reranker::Initializer</a>&lt; double &gt;::<a class="el" href="classreranker_1_1_initializer_3_01double_01_4.html#ab944d597a85825b9f309596fcf291c30">Init</a> </td>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_initializer.html">reranker::Initializer</a>&lt; double &gt;::<a class="el" href="classreranker_1_1_initializer_3_01double_01_4.html#a7167c4bd35078a5b2db32b9ae7afec12">Init</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;&#160;</td>
-          <td class="paramname"><em>st</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td class="paramname"><em>st</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em> = <code>NULL</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="classreranker_1_1_member_initializer.html#ad7a2378d50bb5f8d7ea185501ef9121d">reranker::MemberInitializer</a>.</p>
+<p>Implements <a class="el" href="classreranker_1_1_stream_initializer.html#aa0b38f3a7283ef6297b7bd2da89991a4">reranker::StreamInitializer</a>.</p>
 
-<p>Definition at line <a class="el" href="member-init_8_h_source.html#l00158">158</a> of file <a class="el" href="member-init_8_h_source.html">member-init.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00133">133</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="member-init_8_h_source.html">member-init.H</a></li>
+<li><a class="el" href="stream-init_8_h_source.html">stream-init.H</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -238,7 +202,7 @@ class reranker::Initializer&lt; double &gt;</h3>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 4 2013 16:17:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 13:57:18 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
