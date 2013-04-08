@@ -133,8 +133,6 @@ class EnvironmentImpl : public Environment {
     for (unordered_map<string, VarMapBase *>::iterator new_env_var_map_it =
              new_env->var_map_.begin();
          new_env_var_map_it != new_env->var_map_.end(); ++new_env_var_map_it) {
-      cerr << "Creating copy of VarMap<" << new_env_var_map_it->second->Name()
-           << ">" << endl;
       new_env_var_map_it->second = new_env_var_map_it->second->Copy(new_env);
     }
     return new_env;
