@@ -196,16 +196,12 @@ EnvironmentImpl::InferType(const string &varname,
           // Could be a variable, in which case we need not only to return
           // the variable's type, but also set is_object_type and is_vector
           // based on the variable's type string.
-          if (debug_ >= 1) {
-            cerr << "Environment::InferType: found variable "
-                 << var_type_it->first << " of type " << var_type_it->second
-                 << endl;
-          }
-
           string append = is_vector ? "[]" : "";
           type = var_type_it->second + append;
           if (debug_ >= 1) {
-            cerr << "; type is " << type;
+            cerr << "Environment::InferType: found variable "
+                 << var_type_it->first << " of type " << var_type_it->second
+                 << "; type is " << type << endl;
           }
         } else {
           ostringstream err_ss;
