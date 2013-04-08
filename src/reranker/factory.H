@@ -45,7 +45,7 @@
 #include <stdexcept>
 
 #include "stream-tokenizer.H"
-#include "environment-impl.H"
+#include "environment.H"
 
 namespace reranker {
 
@@ -461,7 +461,7 @@ class Factory : public FactoryBase {
   ///           grammar shown above
   shared_ptr<T> CreateOrDie(StreamTokenizer &st, Environment *env = NULL) {
     shared_ptr<Environment> env_ptr(env == NULL ?
-                                    new EnvironmentImpl() : env->Copy());
+                                    Environment::CreateEmpty() : env->Copy());
     size_t start = st.tellg();
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::IDENTIFIER) {

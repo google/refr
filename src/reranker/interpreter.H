@@ -50,6 +50,8 @@ namespace reranker {
 using std::iostream;
 using std::ifstream;
 
+class EnvironmentImpl;
+
 /// Provides an interpreter for assigning primitives and Factory-constructible
 /// objects to named variables, as well as vectors thereof.
 class Interpreter {

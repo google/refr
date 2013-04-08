@@ -30,16 +30,16 @@
 //
 //
 /// \file
-/// Provides a map from variables of a specific type (primitives,
-/// \link reranker::Factory Factory\endlink-constructible objects, or
-/// vectors thereof) to their values.  These maps exist primarily to
-/// support the \link reranker::Environment Environment \endlink class.
+/// Provides an interface for an Environment, which contains a map
+/// from variables of a specific type (primitives, \link
+/// reranker::Factory Factory\endlink-constructible objects, or
+/// vectors thereof) to their values.
 /// \author dbikel@google.com (Dan Bikel)
 
-#ifndef RERANKER_VAR_MAP_H_
-#define RERANKER_VAR_MAP_H_
+#ifndef RERANKER_ENVIRONMENT_H_
+#define RERANKER_ENVIRONMENT_H_
 
-#define VAR_MAP_DEBUG 1
+#define VAR_MAP_DEBUG 0
 
 #include <sstream>
 #include <vector>
@@ -137,6 +137,9 @@ class Environment {
 
   /// Returns a copy of this environment.
   virtual Environment *Copy() const = 0;
+
+  /// A static factory method to create a new, empty Environment instance.
+  static Environment *CreateEmpty();
 };
 
 /// A template class that helps print out values with ostream& operator

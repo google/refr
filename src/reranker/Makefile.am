@@ -49,7 +49,7 @@ SRCS =  feature-extractor.C executive-feature-extractor.C perceptron-model.C \
 	mira-style-model.C ngram-feature-extractor.C \
 	string-canonicalizer.C factory.C \
 	model-proto-reader.C model-proto-writer.C model-merge-reducer.C \
-	stream-tokenizer.C environment-impl.C interpreter.C
+	stream-tokenizer.C environment.C environment-impl.C interpreter.C
 
 PROTO_DEP_SRCS = candidate-set-proto-reader.C candidate-set-proto-writer.C \
 		 perceptron-model-proto-reader.C perceptron-model-proto-writer.C
