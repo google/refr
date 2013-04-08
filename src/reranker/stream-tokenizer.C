@@ -42,6 +42,27 @@
 namespace reranker {
 
 void
+StreamTokenizer::ConsumeChar(char c) {
+  oss_ << c;
+  ++num_read_;
+  if (c == '\n') {
+    ++line_number_;
+  }
+}
+
+bool
+StreamTokenizer::ReadChar(char *c) {
+  (*c) = is_.get();
+  if (!is_.good()) {
+    has_next_ = false;
+    return false;
+  } else {
+    ConsumeChar(*c);
+    return true;
+  }
+}
+
+void
 StreamTokenizer::GetNext() {
   if (!is_.good()) {
     has_next_ = false;
@@ -51,14 +72,19 @@ StreamTokenizer::GetNext() {
   char c;
   bool is_whitespace = true;
   while (is_whitespace) {
-    c = is_.get();
-    if (!is_.good()) {
-      has_next_ = false;
+    if (!ReadChar(&c)) {
       return;
     }
-    oss_ << c;
-    ++num_read_;
     is_whitespace = isspace(c);
+
+    if (!is_whitespace && c == '/') {
+      while (c != '\n') {
+        if (!ReadChar(&c)) {
+          return;
+        }
+      }
+      is_whitespace = true;
+    }
   }
 
   has_next_ = true;
@@ -75,22 +101,16 @@ StreamTokenizer::GetNext() {
     streampos string_literal_start_pos = num_read_ - 1;
     bool found_closing_quote = false;
     while (is_.good()) {
-      c = is_.get();
-      if (is_.good()) {
-        oss_ << c;
-        ++num_read_;
+      bool success = ReadChar(&c);
+      if (success) {
         if (c == '"') {
           found_closing_quote = true;
           break;
         } else if (c == '\\') {
-          c = is_.get();
-          if (is_.good()) {
-            oss_ << c;
-            ++num_read_;
-          }
+          success = ReadChar(&c);
         }
       }
-      if (is_.good()) {
+      if (success) {
         next_tok_ += c;
       }
     }
@@ -109,7 +129,7 @@ StreamTokenizer::GetNext() {
     // add first character; the remainder of the token will be handled
     // after this switch statement.
     next_tok_ += c;
-    next_tok_type_ = (c == '-' || c >= '0' && c <= '9') ? NUMBER : IDENTIFIER;
+    next_tok_type_ = (c == '-' || (c >= '0' && c <= '9')) ? NUMBER : IDENTIFIER;
   }
   if (!next_tok_complete) {
     // The current token is a number, a reserved word or C++
@@ -117,6 +137,10 @@ StreamTokenizer::GetNext() {
     // "reserved character", a whitespace character or EOF.
     bool done = false;
     while (!done && is_.good()) {
+      // We don't call ReadChar here because we might need to put the
+      // character back into the underlying stream if it tells us that
+      // the current token has ended (i.e., if it's a reserved
+      // character, a double quote or a whitespace character).
       c = is_.get();
       if (is_.good()) {
         if (ReservedChar(c) || c == '"' || isspace(c)) {
@@ -129,10 +153,11 @@ StreamTokenizer::GetNext() {
           }
           done = true;
         } else {
-          ++num_read_;
-          oss_ << c;
+          ConsumeChar(c);
           next_tok_ += c;
         }
+      } else {
+        has_next_ = false;
       }
     }
   }

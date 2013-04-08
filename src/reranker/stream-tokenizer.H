@@ -74,7 +74,7 @@ static const char *default_reserved_words[] = {
 };
 
 /// Default set of reserved characters for the StreamTokenizer class.
-static const char *default_reserved_chars = "(){},=;";
+static const char *default_reserved_chars = "(){},=;/";
 
 /// \class StreamTokenizer
 ///
@@ -111,7 +111,8 @@ class StreamTokenizer {
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(istream &is,
                   const char *reserved_chars = default_reserved_chars) :
-      is_(is), curr_pos_(0), num_read_(0), has_next_(false), has_prev_(false) {
+      is_(is), curr_pos_(0), num_read_(0), line_number_(0),
+      has_next_(false), has_prev_(false) {
     Init(reserved_chars);
   }
 
@@ -123,8 +124,8 @@ class StreamTokenizer {
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(const string &s,
                   const char *reserved_chars = default_reserved_chars) :
-      sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), has_next_(false),
-      has_prev_(false) {
+      sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), line_number_(0),
+      has_next_(false), has_prev_(false) {
     Init(reserved_chars);
   }
 
@@ -146,6 +147,11 @@ class StreamTokenizer {
   /// Returns the number of bytes read from the underlying byte
   /// stream.
   size_t tellg() const { return curr_pos_; }
+
+  /// Returns the number of lines read from the underlying byte stream,
+  /// where a line is any number of bytes followed by a newline character
+  /// (i.e., this is ASCII-centric).
+  size_t line_number() const { return line_number_; }
 
   /// Returns whether there is another token in the token stream.
   bool HasNext() const { return has_next_; }
@@ -206,6 +212,10 @@ class StreamTokenizer {
     GetNext();
   }
 
+  void ConsumeChar(char c);
+
+  bool ReadChar(char *c);
+
   /// Retrieves the next token from the <tt>istream</tt> wrapped by this
   /// stream tokenizer.
   void GetNext();
@@ -238,6 +248,7 @@ class StreamTokenizer {
   // Information about the current state of this stream.
   size_t curr_pos_;
   size_t num_read_;
+  size_t line_number_;
   ostringstream oss_;
 
   // Information about the next token in this stream.
