@@ -141,6 +141,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the entire sequence of characters read so far by this stream tokenizer as a newly constructed string object.  <a href="#af4765dcb4f25bb60a13f879536d68288"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79">tellg</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of bytes read from the underlying byte stream.  <a href="#a6afa23fd8d78598209e49b8723683b79"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_stream_tokenizer.html#a9c45df83d9bd8319465459e8510e741f">line_number</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of lines read from the underlying byte stream, where a line is any number of bytes followed by a newline character (i.e., this is ASCII-centric).  <a href="#a9c45df83d9bd8319465459e8510e741f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e">HasNext</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether there is another token in the token stream.  <a href="#a1e015bd9bd6dd38c6c1cd4993e44a77e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">HasPrev</a> () const </td></tr>
@@ -272,7 +274,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00124">124</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00125">125</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -292,7 +294,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Destroys this instance. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00138">138</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00139">139</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -313,7 +315,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Returns whether there is another token in the token stream. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00151">151</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00157">157</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -331,7 +333,27 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00153">153</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00159">159</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9c45df83d9bd8319465459e8510e741f"></a><!-- doxytag: member="reranker::StreamTokenizer::line_number" ref="a9c45df83d9bd8319465459e8510e741f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classreranker_1_1_stream_tokenizer.html#a9c45df83d9bd8319465459e8510e741f">reranker::StreamTokenizer::line_number</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the number of lines read from the underlying byte stream, where a line is any number of bytes followed by a newline character (i.e., this is ASCII-centric). </p>
+
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00154">154</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -351,7 +373,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Returns the next token in the token stream. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00166">166</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00172">172</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -372,7 +394,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns the next token that would be returned by the <a class="el" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e">Next</a> method. </p>
 <p>The return value of this method is only valid when <a class="el" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e">HasNext</a> returns <code>true</code>. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00195">195</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00201">201</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -390,7 +412,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00155">155</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00161">161</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -408,7 +430,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00157">157</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00163">163</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -426,7 +448,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00161">161</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00167">167</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -446,7 +468,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Returns the next token&rsquo;s start position. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00183">183</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00189">189</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -466,7 +488,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Returns the type of the next token. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00188">188</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00194">194</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -488,7 +510,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Sets the set of &ldquo;reserved words&rdquo; used by this stream tokenizer. </p>
 <p>Should be invoked just after construction time. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00133">133</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00134">134</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -508,7 +530,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Returns the entire sequence of characters read so far by this stream tokenizer as a newly constructed string object. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00144">144</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00145">145</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -528,7 +550,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Returns the number of bytes read from the underlying byte stream. </p>
 
-<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00148">148</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-tokenizer_8_h_source.html#l00149">149</a> of file <a class="el" href="stream-tokenizer_8_h_source.html">stream-tokenizer.H</a>.</p>
 
 </div>
 </div>
@@ -575,7 +597,7 @@ Static Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 8 2013 14:28:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 18:55:55 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

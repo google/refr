@@ -137,6 +137,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance for the specified variable.  <a href="#ac7b813bc8bb592d54f9f81c7b79a1c44"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#a0b8461c2a65c4b439acc46d97ba01283">GetVarMapForType</a> (const string &amp;type)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance for the specified type.  <a href="#a0b8461c2a65c4b439acc46d97ba01283"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#a19bdb0da8cbaa2ba188d4d6415241741">Print</a> (ostream &amp;os) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#ae8b103a71223c7702ecaf33840d5e114">Copy</a> () const </td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">Get</a> (const string &amp;varname, T *value) const </td></tr>
@@ -224,7 +225,7 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
  
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00130">130</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00139">139</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -288,7 +289,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>whether the specified variable exists and its value was successfully set by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00174">174</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00183">183</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -361,6 +362,28 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a19bdb0da8cbaa2ba188d4d6415241741"></a><!-- doxytag: member="reranker::EnvironmentImpl::Print" ref="a19bdb0da8cbaa2ba188d4d6415241741" args="(ostream &amp;os) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_environment_impl.html#a19bdb0da8cbaa2ba188d4d6415241741">reranker::EnvironmentImpl::Print</a> </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Prints a human-readable string of all the variables in this environment, their types and, if primitive, their values. </p>
+ 
+<p>Implements <a class="el" href="classreranker_1_1_environment.html#a07d328d2d2bbe0f62e7348f590e6529c">reranker::Environment</a>.</p>
+
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00130">130</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ae8549b3ea2960701a99da3e6d4054c9e"></a><!-- doxytag: member="reranker::EnvironmentImpl::ReadAndSet" ref="ae8549b3ea2960701a99da3e6d4054c9e" args="(const string &amp;varname, StreamTokenizer &amp;st)" -->
 <div class="memitem">
 <div class="memproto">
@@ -416,7 +439,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 8 2013 14:28:40 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 18:55:54 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

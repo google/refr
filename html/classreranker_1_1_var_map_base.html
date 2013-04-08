@@ -136,6 +136,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the specified variable has a definition in this environment.  <a href="#af9d31b9fe4a4a5b6b30ea968fd59ddf5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map_base.html#a2870abd4bc8ad1d925fc304acb44417d">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the next value (primitive or spec for constructing a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible object) from the specified stream tokenizer and sets the specified variable to that value.  <a href="#a2870abd4bc8ad1d925fc304acb44417d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map_base.html#a9e4f03b385dd93614a7a870241b6dcac">Print</a> (ostream &amp;os) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints out a human-readable string to the specified output stream containing the variables, their type and, if primitive, their values.  <a href="#a9e4f03b385dd93614a7a870241b6dcac"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_var_map_base.html#ad8a03d5cb3c186131e9af106d59bf751">Copy</a> (<a class="el" href="classreranker_1_1_environment.html">Environment</a> *env) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a newly constructed copy of this <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a>.  <a href="#ad8a03d5cb3c186131e9af106d59bf751"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
@@ -302,6 +304,27 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9e4f03b385dd93614a7a870241b6dcac"></a><!-- doxytag: member="reranker::VarMapBase::Print" ref="a9e4f03b385dd93614a7a870241b6dcac" args="(ostream &amp;os) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_var_map_base.html#a9e4f03b385dd93614a7a870241b6dcac">reranker::VarMapBase::Print</a> </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Prints out a human-readable string to the specified output stream containing the variables, their type and, if primitive, their values. </p>
+
+<p>Implemented in <a class="el" href="classreranker_1_1_var_map.html#a13dfbc0f28af2b2cb6d8a808519681a4">reranker::VarMap&lt; T &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a2870abd4bc8ad1d925fc304acb44417d"></a><!-- doxytag: member="reranker::VarMapBase::ReadAndSet" ref="a2870abd4bc8ad1d925fc304acb44417d" args="(const string &amp;varname, StreamTokenizer &amp;st)=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +389,7 @@ Protected Attributes</h2></td></tr>
 
 <p>To allow proper implementation of Copy in <a class="el" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> implementation, since we don't get copying of base class' members for free. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00102">102</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00107">107</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -384,7 +407,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> that holds this <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00111">111</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00116">116</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -401,7 +424,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether this <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance holds variables of primitive type or vector of primitives. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00114">114</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00119">119</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -418,7 +441,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The type name of this <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a>. </p>
 
-<p>Definition at line <a class="el" href="environment_8_h_source.html#l00109">109</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
+<p>Definition at line <a class="el" href="environment_8_h_source.html#l00114">114</a> of file <a class="el" href="environment_8_h_source.html">environment.H</a>.</p>
 
 </div>
 </div>
@@ -443,7 +466,7 @@ Protected Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 8 2013 14:28:40 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 18:55:54 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

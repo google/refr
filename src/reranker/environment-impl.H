@@ -126,7 +126,7 @@ class EnvironmentImpl : public Environment {
     return var_map_it->second;
   }
 
-  /// \copydoc reranker::Enviornment::Print
+  /// \copydoc reranker::Environment::Print
   virtual void Print(ostream &os) const {
     for (unordered_map<string, VarMapBase *>::const_iterator var_map_it =
              var_map_.begin();
