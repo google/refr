@@ -77,6 +77,7 @@ StreamTokenizer::GetNext() {
     }
     is_whitespace = isspace(c);
 
+    // If we find a comment character, then read to the end of the line.
     if (!is_whitespace && c == '/') {
       while (c != '\n') {
         if (!ReadChar(&c)) {

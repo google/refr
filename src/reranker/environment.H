@@ -93,6 +93,11 @@ class VarMapBase {
   /// that value.
   virtual void ReadAndSet(const string &varname, StreamTokenizer &st) = 0;
 
+  /// Prints out a human-readable string to the specified output
+  /// stream containing the variables, their type and, if primitive,
+  /// their values.
+  virtual void Print(ostream &os) const = 0;
+
   /// Returns a newly constructed copy of this VarMap.
   virtual VarMapBase *Copy(Environment *env) const = 0;
 
@@ -137,6 +142,10 @@ class Environment {
   /// Retrieves the VarMap instance for the specified type.
   virtual VarMapBase *GetVarMapForType(const string &type) = 0;
 
+  /// Prints a human-readable string of all the variables in this environment,
+  /// their types and, if primitive, their values.
+  virtual void Print(ostream &os) const = 0;
+
   /// Returns a copy of this environment.
   virtual Environment *Copy() const = 0;
 
@@ -151,7 +160,7 @@ class Environment {
 template <typename T>
 class ValueString {
  public:
-  string ToString(const T &value) {
+  string ToString(const T &value) const {
     ostringstream oss;
     oss << value;
     return oss.str();
@@ -159,22 +168,45 @@ class ValueString {
 };
 
 /// A specialization of the ValueString class to support printing of
-/// vectors of values.
+/// string values.
+template<>
+class ValueString<string> {
+ public:
+  string ToString(const string &value) const {
+    return "\"" + value + "\"";
+  }
+};
+
+/// A partial specialization of the ValueString class to support
+/// printing of shared_ptr's to objects.
+template<typename T>
+class ValueString<shared_ptr<T> > {
+ public:
+  string ToString(const shared_ptr<T> &value) const {
+    return "<object>";
+  }
+};
+
+/// A partial specialization of the ValueString class to support
+/// printing of vectors of values.
 ///
 /// \tparam T the element type for a vector to be printed out to an ostream
 template <typename T>
 class ValueString<vector<T> > {
  public:
-  string ToString(const vector<T> &value) {
+  string ToString(const vector<T> &value) const {
     ostringstream oss;
     oss << "{";
     typename vector<T>::const_iterator it = value.begin();
+    ValueString<T> value_string;
     if (it != value.end()) {
-      oss << *it;
+      oss << value_string.ToString(*it);
+      //oss << *it;
       ++it;
     }
     for (; it != value.end(); ++it) {
-      oss << ", " << *it;
+      oss << ", " << value_string.ToString(*it);
+      //oss << ", " << *it;
     }
     oss << "}";
     return oss.str();
@@ -267,17 +299,29 @@ class VarMap : public VarMapBase {
       Set(varname, value);
 
       if (VAR_MAP_DEBUG >= 1) {
+        ValueString<T> value_string;
         cerr << "VarMap<" << Name() << ">::ReadAndSet: set varname "
-             << varname;
-        if (IsPrimitive()) {
-          ValueString<T> value_string;
-          cerr << " to value " << value_string.ToString(value);
-        }
-        cerr << endl;
+             << varname << " to value " << value_string.ToString(value)<< endl;
       }
     }
   }
 
+  /// \copydoc VarMapBase::Print
+  virtual void Print(ostream &os) const {
+    ValueString<T> value_string;
+    for (typename unordered_map<string, T>::const_iterator it = vars_.begin();
+         it != vars_.end(); ++it) {
+      const T& value = it->second;
+      os << Name() << " "
+         << it->first
+         << " = "
+         << value_string.ToString(value)
+         << ";\n";
+    }
+    os.flush();
+  }
+
+  /// \copydoc VarMapBase::Copy
   virtual VarMapBase *Copy(Environment *env) const {
     VarMap<T> *var_map_copy = new VarMap<T>(*this);
     var_map_copy->SetMembers(name_, env, is_primitive_);

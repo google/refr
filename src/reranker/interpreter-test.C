@@ -17,8 +17,11 @@ main(int argc, char **argv) {
 
   int debug = 1;
   Interpreter interpreter(debug);
-  interpreter.Eval(cin);
-
+  if (argc >= 2) {
+    interpreter.Eval(argv[1]);
+  } else {
+    interpreter.Eval(cin);
+  }
   bool value_for_f;
   bool success = interpreter.Get("f", &value_for_f);
   if (success) {
@@ -26,6 +29,9 @@ main(int argc, char **argv) {
   } else {
     cout << ":( ... no value for variable f" << endl;
   }
+
+  cout << "\n\nEnvironment: " << endl;
+  interpreter.PrintEnv(cout);
 
   cout << "\nHave a nice day!\n" << endl;
 }
