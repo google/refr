@@ -87,6 +87,16 @@ class Interpreter {
     Eval(st);
   }
 
+
+  /// Retrieves the value of the specified variable.  It is an error
+  /// if the type of the specified pointer to a value object is different
+  /// from the specified variable in this interpreter&rsquo;s environment.
+  ///
+  /// \tparam the type of value object being set by this method
+  ///
+  /// \param varname the name of the variable for which to retrieve the value
+  /// \param value   a pointer to the object whose value to be set by this
+  ///                method
   template<typename T>
   bool Get(const string &varname, T *value) const {
     return env_->Get(varname, value);
@@ -112,13 +122,15 @@ class Interpreter {
                            StreamTokenizer::TokenType expected,
                            StreamTokenizer::TokenType found,
                            const string &token) const;
+
   /// The environment of this interpreter.
-  ///
-  /// TODO(dbikel): Possibly turn this into a stack.
   EnvironmentImpl *env_;
 
+  /// The name of the file being interpreted, or the empty string if there
+  /// is no file associated with the stream being interpreted.
   string filename_;
 
+  /// The debug level of this interpreter and its associated environment.
   int debug_;
 };
 
