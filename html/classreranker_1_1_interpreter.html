@@ -126,6 +126,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the statements in the specified stream.  <a href="#a2515d630df648bb68453ca622484d3f5"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classreranker_1_1_interpreter.html#a7a303a24ec83502b36bbccce670e3868">Get</a> (const string &amp;varname, T *value) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the value of the specified variable.  <a href="#a7a303a24ec83502b36bbccce670e3868"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classreranker_1_1_environment_impl.html">EnvironmentImpl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_interpreter.html#a0f96ef75e5bc7122eddbdd5a7faf7f25">env</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the environment of this interpreter.  <a href="#a0f96ef75e5bc7122eddbdd5a7faf7f25"></a><br/></td></tr>
 </table>
@@ -194,7 +195,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a pointer to the environment of this interpreter. </p>
 <p>Crucially, this method returns a pointer to the <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> implementation class, <a class="el" href="classreranker_1_1_environment_impl.html">EnvironmentImpl</a>, so that its templated <a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">EnvironmentImpl::Get </a> method may be invoked. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00101">101</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00111">111</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -288,7 +289,23 @@ template&lt;typename T &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00091">91</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Retrieves the value of the specified variable. </p>
+<p>It is an error if the type of the specified pointer to a value object is different from the specified variable in this interpreter&rsquo;s environment.</p>
+<dl class=""><dt><b>Template Parameters:</b></dt><dd>
+  <table class="">
+    <tr><td class="paramname">the</td><td>type of value object being set by this method</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">varname</td><td>the name of the variable for which to retrieve the value </td></tr>
+    <tr><td class="paramname">value</td><td>a pointer to the object whose value to be set by this method </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00101">101</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -314,7 +331,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 8 2013 13:57:17 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 8 2013 14:28:40 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
