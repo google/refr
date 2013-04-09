@@ -165,9 +165,9 @@ Public Member Functions</h2></td></tr>
 <td valign="top"><code>&lt;value&gt;</code> </td><td valign="top"><code>::=</code> </td><td valign="top"><code>&lt;literal&gt; | '{' &lt;literal_list&gt; '}' |<br/>
  &lt;spec&gt; | '{' &lt;spec_list&gt; '}'</code>   </td></tr>
 </table>
-<p>The above grammar doesn&rsquo;t contain rules covering C++ style line comments, but they have the same behavior in this language as they do in C++, i.e., everything after the '//' to the end of the current line is treated as a comment and ignored. There are no C-style comments in this language. </p>
+<p>The above grammar doesn&rsquo;t contain rules covering C++ style line comments, but they have the same behavior in this language as they do in C++, i.e., everything after the <code>//</code> to the end of the current line is treated as a comment and ignored. There are no C-style comments in this language. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00120">120</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00121">121</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acafa4a552bb289cecf9ef1b9cbc25006"></a><!-- doxytag: member="reranker::Interpreter::Interpreter" ref="acafa4a552bb289cecf9ef1b9cbc25006" args="(int debug=0)" -->
 <div class="memitem">
@@ -187,7 +187,7 @@ Public Member Functions</h2></td></tr>
 <p>Constructs a new instance with the specified debug level. </p>
 <p>The wrapped <a class="el" href="classreranker_1_1_environment.html">Environment </a> will also have the specified debug level. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00125">125</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00126">126</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -207,7 +207,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Destroys this interpreter. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00130">130</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00131">131</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -229,7 +229,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a pointer to the environment of this interpreter. </p>
 <p>Crucially, this method returns a pointer to the <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> implementation class, <a class="el" href="classreranker_1_1_environment_impl.html">EnvironmentImpl</a>, so that its templated <a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">EnvironmentImpl::Get </a> method may be invoked. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00178">178</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00179">179</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -250,7 +250,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified text file. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00135">135</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00136">136</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -271,7 +271,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified stream. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00148">148</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00149">149</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -292,7 +292,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified string. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00142">142</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00143">143</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -339,7 +339,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00168">168</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00169">169</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -358,7 +358,7 @@ template&lt;typename T &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00154">154</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00155">155</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -384,7 +384,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:52:01 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 9 2013 11:53:37 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
