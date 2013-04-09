@@ -114,10 +114,10 @@ class EnvironmentImpl;
 /// </table>
 ///
 /// The above grammar doesn&rsquo;t contain rules covering C++ style
-/// line comments, but they have the same behavior in this language as they
-/// do in C++, i.e., everything after the '//' to the end of the current line
-/// is treated as a comment and ignored.  There are no C-style comments
-/// in this language.
+/// line comments, but they have the same behavior in this language as
+/// they do in C++, i.e., everything after the <tt>//</tt> to the end
+/// of the current line is treated as a comment and ignored.  There
+/// are no C-style comments in this language.
 class Interpreter {
  public:
   /// Constructs a new instance with the specified debug level.  The
