@@ -56,12 +56,11 @@ class EnvironmentImpl;
 /// Factory-constructible objects to named variables, as well as
 /// vectors thereof.  The interpreter maintains an internal
 /// environment whereby previously defined variables may be used in
-/// the definition of subsequent ones.
-///
-/// The syntax of this language extends the syntax
-/// of the \link reranker::Factory Factory \endlink class, described
-/// in the documentation of the \link reranker::Factory::CreateOrDie
-/// Factory::CreateOrDie \endlink method.
+/// the definition of subsequent ones.  The syntax of this language
+/// extends the syntax of the \link reranker::Factory Factory \endlink
+/// class, described in the documentation of the \link
+/// reranker::Factory::CreateOrDie Factory::CreateOrDie \endlink
+/// method.
 ///
 /// Statements in this language look like the following:
 /// \code
