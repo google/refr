@@ -52,8 +52,72 @@ using std::ifstream;
 
 class EnvironmentImpl;
 
-/// Provides an interpreter for assigning primitives and Factory-constructible
-/// objects to named variables, as well as vectors thereof.
+/// Provides an interpreter for assigning primitives and
+/// Factory-constructible objects to named variables, as well as
+/// vectors thereof.  The interpreter maintains an internal
+/// environment whereby previously defined variables may be used in
+/// the definition of subsequent ones.
+///
+/// The syntax of this language extends the syntax
+/// of the \link reranker::Factory Factory \endlink class, described
+/// in the documentation of the \link reranker::Factory::CreateOrDie
+/// Factory::CreateOrDie \endlink method.
+///
+/// Statements in this language look like the following:
+/// \code
+/// // This is a comment.
+/// b = true;  // assigns the value true to the boolean variable named "b"
+/// f = 1;     // assigns the int value 1 to the variable "f"
+/// g = 2.4;   // assigns the double value 2.4 to the variable "g"
+/// n = "foo"; // assigns the string value "foo" to the variable "n"
+/// b_vec = {true, false, true};  // assigns a vector of bool to "b_vec"
+///
+/// // Constructs an object of abstract type Model and assigns it to "m1"
+/// m1 = PerceptronModel(name("foo"));
+///
+/// // Constructs an object of type Model and assigns it to "m2", crucially
+/// // using the previously defined string variable "n" as the value for
+/// // the PerceptronModel's name parameter.
+/// m2 = PerceptronModel(name(n));
+///
+/// // Constructs a vector of Model objects and assigns it to "m_vec".
+/// m_vec = {m2, PerceptronModel(name("bar"))};
+/// \endcode
+///
+/// More formally, a statement in this language must conform to the
+/// following grammar, defined on top of the BNF syntax in the
+/// documentation of the \link reranker::Factory::CreateOrDie
+/// Factory::CreateOrDie \endlink method:
+/// <table border=0>
+/// <tr>
+///   <td><tt>\<statement_list\></tt></td>
+///   <td><tt>::=</tt></td>
+///   <td><tt>[ \<statement\> ]*</tt></td>
+/// </tr>
+/// <tr>
+///   <td><tt>\<statement\></tt></td>
+///   <td><tt>::=</tt></td>
+///   <td><tt>\<variable_name\> '=' \<value\> ';' </tt></td>
+/// </tr>
+/// <tr>
+///   <td><tt>\<variable_name\></tt></td>
+///   <td><tt>::=</tt></td>
+///   <td>any valid C++ identifier</td>
+/// </tr>
+/// <tr>
+///   <td valign=top><tt>\<value\></tt></td>
+///   <td valign=top><tt>::=</tt></td>
+///   <td valign=top><tt>\<literal\> | '{' \<literal_list\> '}' |<br>
+///                      \<spec\> | '{' \<spec_list\> '}'</tt>
+///   </td>
+/// </tr>
+/// </table>
+///
+/// The above grammar doesn&rsquo;t contain rules covering C++ style
+/// line comments, but they have the same behavior in this language as they
+/// do in C++, i.e., everything after the '//' to the end of the current line
+/// is treated as a comment and ignored.  There are no C-style comments
+/// in this language.
 class Interpreter {
  public:
   /// Constructs a new instance with the specified debug level.  The
