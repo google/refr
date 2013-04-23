@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -62,7 +62,7 @@ using std::tr1::unordered_set;
 /// objects to represent unique identifiers for features.
 ///
 /// \tparam T the type of object representing a feature&rsquo;s uid
-template<typename T> 
+template<typename T>
 struct UidGetter {
   /// Gets the canonical uid object for the specified uid object.
   static const T &Get(const T &uid) { return uid; }
@@ -87,7 +87,7 @@ struct UidGetter<string> {
 ///
 /// \tparam K the type to represent unique identifiers for each feature
 /// \tparam V the value or weight of a feature in this vector
-template <typename K, typename V, typename Map = unordered_map<K, V> >
+template <typename K, typename V, typename Map = map<K, V> >
 class FeatureVector {
  public:
   /// Create an empty feature vector.
@@ -111,7 +111,7 @@ class FeatureVector {
     for (typename MapType::const_iterator it = features.begin();
          it != features.end(); ++it) {
       features_.insert(*it);
-    } 
+    }
   }
 
   virtual ~FeatureVector() {}
@@ -169,7 +169,7 @@ class FeatureVector {
     for (const_iterator it = features_.begin(); it != features_.end(); ++it) {
       set.erase(it->first);
     }
-    return set;    
+    return set;
   }
 
   /// Removes from the specified set the uid's of feature with weights
