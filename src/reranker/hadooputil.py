@@ -116,7 +116,7 @@ class HadoopInterface:
       if (inputfile.endswith(".gz") and uncompress):
         new_input = outputdir + "/" + input_filename
         unzipcmd = "gunzip -c " + inputfile + " > " + new_input
-        if (pyutil.runCommand(unzipcmd) != 0 or force):
+        if (pyutil.runCommand(unzipcmd) != 0):
           pyutil.printError(12, "Unable to unzip file: " + inputfile)
         pyutil.runCommand(self.hadoopmove_ + new_input + " " + hdfsinputdir)
         input_file_list += " --input " + hdfsinputdir + "/" + input_filename
