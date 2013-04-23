@@ -109,7 +109,8 @@ class HadoopInterface:
     # Copy the input data to HDFS
     # Check that the input data exists and move to HDFS if necessary.
     hdfsinputfile = hdfsinputdir + "/" + input_filename
-    if (not self.CheckHDFSFile(hdfsinputfile) and not force):
+    if (not self.CheckHDFSFile(hdfsinputfile) or force):
+      pyutil.printInfo("Regenerating HDFS input: " + hdfsinputfile)
       if (not self.CheckHDir(hdfsinputdir)):
         pyutil.runCommand(self.hadoopmkdir_ + hdfsinputdir)
       if (inputfile.endswith(".gz") and uncompress):
