@@ -308,7 +308,7 @@ if (options.compilefeatures):
   if (options.develdata):
     precompdevfile = options.outputdir + "/"
     precompdevfile += os.path.basename(options.develdata).replace(".gz","")
-    precompdevfile += ".compiled.gz"
+    precompdevfile += "." + options.modelname + ".compiled.gz"
   symbol_dir = options.hdfsinputdir + "/Symbols/"
   precomp_dir = options.hdfsinputdir + "/Precompiled/"
   precompdev_dir = options.hdfsinputdir + "/PrecompiledDev/"
