@@ -289,6 +289,7 @@ PerceptronModel::Evaluate(CandidateSetIterator &development_test) {
   double total_weight = 0.0;
   double total_weighted_loss = 0.0;
   double total_oracle_loss = 0.0;
+  double total_baseline_loss = 0.0;
   num_testing_errors_per_epoch_.push_back(0);
 
   bool not_training = false;
@@ -304,10 +305,11 @@ PerceptronModel::Evaluate(CandidateSetIterator &development_test) {
     double loss_weight =
         use_weighted_loss() ? candidate_set.loss_weight() : 1.0;
     total_weight += loss_weight;
-    total_weighted_loss +=
-        loss_weight * candidate_set.GetBestScoring().loss();
-    total_oracle_loss +=
-        loss_weight * candidate_set.GetGold().loss();
+    total_weighted_loss += loss_weight * candidate_set.GetBestScoring().loss();
+    total_oracle_loss += loss_weight * candidate_set.GetGold().loss();
+
+    // For now, assume that the candidate sets are sorted by the baseline score.
+    total_baseline_loss += loss_weight * candidate_set.Get(0).loss();
     if (candidate_set.best_scoring_index() != candidate_set.gold_index()) {
       ++(*num_testing_errors_per_epoch_.rbegin());
     }
@@ -321,7 +323,9 @@ PerceptronModel::Evaluate(CandidateSetIterator &development_test) {
   double percent_testing_errors_this_epoch =
       ((double)num_testing_errors_this_epoch / development_test_size) * 100.0;
   double oracle_loss = total_oracle_loss / total_weight;
+  double baseline_loss = total_baseline_loss / total_weight;
   cerr << "Epoch " << time_.epoch() << ": oracle loss: " << oracle_loss << endl;
+  cerr << "Epoch " << time_.epoch() << ": baseline loss: " << baseline_loss << endl;
   cerr << "Epoch " << time_.epoch() << ": average devtest loss: "
        << loss_this_epoch << endl;
   cerr << "Epoch " << time_.epoch() << ": number of testing errors: "
