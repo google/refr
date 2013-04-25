@@ -406,11 +406,15 @@ while (not converged and iteration < int(options.maxiter)):
     loss_history.append(loss)
     pyutil.printInfo("Loss for iteration " + str(iteration) + ": " + str(loss) +
                      " loss-delta: " + str(diff))
-    if (num_in_decline < options.max_num_in_decline):
+    if (num_in_decline >= options.max_num_in_decline):
+      converged = True
+      pyutil.printInfo("Stopping after " + str(num_in_decline) +
+                       " iterations in decline")
+    else:
       pyutil.printInfo("Continuing to train as number epochs in decline is: " +
                        str(num_in_decline) + ", which is less than " +
                        str(options.max_num_in_decline))
-  # if not done...
+
   cur_model = model_output
 pyutil.printInfo("Best model is from iteration: " + str(best_loss_index + 1) +
                  " with a devset loss of: " + str(loss_history[best_loss_index]))
