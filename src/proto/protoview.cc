@@ -120,10 +120,14 @@ int main(int argc, char* argv[]) {
       // Default is to decode candidate-set messages
       tmp_msg = new confusion_learning::CandidateSetMessage;
     }
+    if (tmp_msg == NULL) {
+      continue
+    }
     reader_valid = reader->Read(tmp_msg);
     if (reader_valid) {
       cout << "Data: " << tmp_msg->Utf8DebugString();
     }
+    delete tmp_msg;
   }
   reader->Close();
   delete reader;
