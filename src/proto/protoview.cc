@@ -121,7 +121,7 @@ int main(int argc, char* argv[]) {
       tmp_msg = new confusion_learning::CandidateSetMessage;
     }
     if (tmp_msg == NULL) {
-      continue
+      continue;
     }
     reader_valid = reader->Read(tmp_msg);
     if (reader_valid) {
