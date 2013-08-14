@@ -108,6 +108,7 @@ EnvironmentImpl::ReadAndSet(const string &varname, StreamTokenizer &st) {
   bool is_vector =
       st.PeekTokenType() == StreamTokenizer::RESERVED_CHAR &&
       st.Peek() == "{";
+
   if (is_vector) {
     // Consume open brace.
     st.Next();
@@ -191,7 +192,13 @@ EnvironmentImpl::InferType(const string &varname,
           }
           type = factory_type_it->second;
           *is_object_type = true;
-          string type = is_vector ? next_tok + "[]" : next_tok;
+          type = is_vector ? type + "[]" : type;
+
+          if (debug_ >= 1) {
+            cerr << "Environment::InferType: type "
+                 << (is_vector ? "is" : "isn't")
+                 << " a vector, so final inferred type is " << type << endl;
+          }
         } else if (var_type_it != types_.end()) {
           // Could be a variable, in which case we need not only to return
           // the variable's type, but also set is_object_type and is_vector

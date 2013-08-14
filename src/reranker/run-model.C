@@ -168,7 +168,7 @@ void read_and_extract_features(const vector<string> &files,
                                CandidateSetReader &csr,
                                bool compressed,
                                bool use_base64,
-                               ExecutiveFeatureExtractor &efe,
+                               shared_ptr<ExecutiveFeatureExtractor> efe,
                                vector<shared_ptr<CandidateSet> > &examples) {
   bool reset_counters = true;
   for (vector<string>::const_iterator file_it = files.begin();
@@ -176,11 +176,13 @@ void read_and_extract_features(const vector<string> &files,
        ++file_it) {
     csr.Read(*file_it, compressed, use_base64, reset_counters, examples);
   }
-  // Extract features for CandidateSet instances in situ.
-  for (vector<shared_ptr<CandidateSet> >::iterator it = examples.begin();
-       it != examples.end();
-       ++it) {
-    efe.Extract(*(*it));
+  if (efe.get() != NULL) {
+    // Extract features for CandidateSet instances in situ.
+    for (vector<shared_ptr<CandidateSet> >::iterator it = examples.begin();
+         it != examples.end();
+         ++it) {
+      efe->Extract(*(*it));
+    }
   }
 }
 
@@ -426,13 +428,15 @@ main(int argc, char **argv) {
   }
 
   // Now, we finally get to the meat of the code for this executable.
-  ExecutiveFeatureExtractor training_efe;
+  shared_ptr<ExecutiveFeatureExtractor> training_efe;
   if (training_feature_extractor_config_file != "") {
-    training_efe.Init(training_feature_extractor_config_file);
+    training_efe = ExecutiveFeatureExtractor::InitFromSpec(
+        training_feature_extractor_config_file);
   }
-  ExecutiveFeatureExtractor devtest_efe;
+  shared_ptr<ExecutiveFeatureExtractor> devtest_efe;
   if (devtest_feature_extractor_config_file != "") {
-    devtest_efe.Init(devtest_feature_extractor_config_file);
+    devtest_efe = ExecutiveFeatureExtractor::InitFromSpec(
+        devtest_feature_extractor_config_file);
   }
 
   CandidateSetReader csr(max_examples, max_candidates, reporting_interval);
@@ -506,14 +510,14 @@ main(int argc, char **argv) {
     cerr << "Training." << endl;
     if (streaming) {
       training_it = new MultiFileCandidateSetIterator(training_files,
-                                                      &training_efe,
+                                                      training_efe,
                                                       max_examples,
                                                       max_candidates,
                                                       reporting_interval,
                                                       1,
                                                       compressed, use_base64);
       devtest_it = new MultiFileCandidateSetIterator(devtest_files,
-                                                     &devtest_efe,
+                                                     devtest_efe,
                                                      max_examples,
                                                      max_candidates,
                                                      reporting_interval,

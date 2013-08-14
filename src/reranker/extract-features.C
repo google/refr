@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -248,10 +248,10 @@ main(int argc, char **argv) {
     symbols = shared_ptr<Symbols>(new LocalSymbolTable());
   }
 
-  ExecutiveFeatureExtractor *efe = NULL;
+  shared_ptr<ExecutiveFeatureExtractor> efe;
   if (do_feature_extraction) {
-    efe = new ExecutiveFeatureExtractor();
-    efe->Init(feature_extractor_config_file);
+    efe =
+        ExecutiveFeatureExtractor::InitFromSpec(feature_extractor_config_file);
   }
 
   int verbosity = 1;
@@ -263,7 +263,7 @@ main(int argc, char **argv) {
                                     verbosity,
                                     compressed,
                                     use_base64);
-  
+
   // Set things up for streaming output.
   CandidateSetWriter csw(reporting_interval);
   csw.set_verbosity(1);
@@ -296,10 +296,6 @@ main(int argc, char **argv) {
   }
   csw.Close();
 
-  if (do_feature_extraction) {
-    delete efe;
-  }
-
   // Finally, output a symbol table if user specified one.
   if (symbol_table_output_file != "") {
     cerr << "Writing out Symbol protocol buffer messages to file \""
@@ -312,7 +308,7 @@ main(int argc, char **argv) {
          ++it) {
       SymbolMessage symbol_message;
       symbol_message.set_symbol(it->first);
-      symbol_message.set_index(it->second);        
+      symbol_message.set_index(it->second);
       proto_writer.Write(symbol_message);
     }
     proto_writer.Close();

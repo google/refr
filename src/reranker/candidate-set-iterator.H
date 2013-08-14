@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -148,7 +148,7 @@ class MultiFileCandidateSetIterator : public CandidateSetIterator {
   ///                           CandidateSet \endlink instances use
   ///                           base64 encoding
   MultiFileCandidateSetIterator(vector<string> files,
-                                const ExecutiveFeatureExtractor *efe,
+                                shared_ptr<const ExecutiveFeatureExtractor> efe,
                                 int max_examples,
                                 int max_candidates,
                                 int reporting_interval,
@@ -200,7 +200,7 @@ class MultiFileCandidateSetIterator : public CandidateSetIterator {
       file_open_ = true;
     }
     next_candidate_set_ = shared_ptr<CandidateSet>();
-    if (efe_ != NULL) {
+    if (efe_.get() != NULL) {
       efe_->Reset();
     }
     ReadNext();
@@ -227,14 +227,14 @@ class MultiFileCandidateSetIterator : public CandidateSetIterator {
         }
       }
     }
-    if (efe_ != NULL && next_candidate_set_.get() != NULL) {
+    if (efe_.get() != NULL && next_candidate_set_.get() != NULL) {
       efe_->Extract(*next_candidate_set_);
     }
   }
 
   // data members
   vector<string> files_;
-  const ExecutiveFeatureExtractor *efe_;
+  shared_ptr<const ExecutiveFeatureExtractor> efe_;
   bool compressed_;
   bool use_base64_;
   bool reader_valid_;

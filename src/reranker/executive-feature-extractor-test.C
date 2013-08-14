@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -48,8 +48,8 @@ main(int argc, char **argv) {
     cout << "usage: <feature extractor config filename>" << endl;
     return -1;
   }
-  ExecutiveFeatureExtractor efe;
-  efe.Init(argv[1]);
+  shared_ptr<ExecutiveFeatureExtractor> efe;
+  efe = ExecutiveFeatureExtractor::InitFromSpec(argv[1]);
 
   CandidateSet candidate_set("test candidate set");
   candidate_set.set_reference_string("This is a reference string.");
@@ -60,7 +60,7 @@ main(int argc, char **argv) {
                                          "This is a sillier string."));
   candidate_set.AddCandidate(c2);
 
-  efe.Extract(candidate_set);
+  efe->Extract(candidate_set);
 
   cout << candidate_set << endl;
 }

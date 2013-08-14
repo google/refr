@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -31,7 +31,7 @@
 //
 /// \file
 /// Provides the implementation of the
-/// reranker::ExecutiveFeatureExtractor class.  This class executes
+/// reranker::ExecutiveFeatureExtractor interface.  This class executes
 /// the extraction methods of a suite of reranker::FeatureExtractor
 /// instances.
 /// \author dbikel@google.com (Dan Bikel)
@@ -58,22 +58,22 @@ using std::vector;
 
 namespace reranker {
 
-void
-ExecutiveFeatureExtractor::Init(const string &filename) {
+IMPLEMENT_FACTORY(ExecutiveFeatureExtractor)
+
+REGISTER_EXECUTIVE_FEATURE_EXTRACTOR(ExecutiveFeatureExtractorImpl)
+
+// Factory method to initialize an ExecutiveFeatureExtractor instance
+// from a spec string contained in a file.
+shared_ptr<ExecutiveFeatureExtractor>
+ExecutiveFeatureExtractor::InitFromSpec(const string &filename) {
+  Factory<ExecutiveFeatureExtractor> factory;
   ifstream is(filename.c_str());
-  Init(is);
-}
-
-void
-ExecutiveFeatureExtractor::Init(istream &is) {
   StreamTokenizer st(is);
-  while (st.HasNext()) {
-    extractors_.push_back(factory_.CreateOrDie(st));
-  }
+  return factory.CreateOrDie(st);
 }
 
 void
-ExecutiveFeatureExtractor::Reset() const {
+ExecutiveFeatureExtractorImpl::Reset() const {
   for (vector<shared_ptr<FeatureExtractor> >::const_iterator it =
            extractors_.begin();
        it != extractors_.end();
@@ -83,7 +83,7 @@ ExecutiveFeatureExtractor::Reset() const {
 }
 
 void
-ExecutiveFeatureExtractor::Extract(CandidateSet &candidate_set) const {
+ExecutiveFeatureExtractorImpl::Extract(CandidateSet &candidate_set) const {
   for (vector<shared_ptr<FeatureExtractor> >::const_iterator it =
            extractors_.begin();
        it != extractors_.end();

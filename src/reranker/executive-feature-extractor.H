@@ -60,88 +60,50 @@ using std::vector;
 /// This class is like a regular FeatureExtractor, but has been promoted
 /// to the executive level and thus wears fancypants.  More specifically,
 /// this class executes the extraction of a suite of feature extractors,
-/// specified at run-time via a set of string specifications, which are
-/// typically read from a file.
+/// specified at run-time via a Factory specification string.
 ///
-/// \see FeatureExtractorFactory
-class ExecutiveFeatureExtractor {
+/// \see reranker::Interpreter
+class ExecutiveFeatureExtractor : public FactoryConstructible {
  public:
   /// Constructs a new intance.
   ExecutiveFeatureExtractor() { }
   /// Destroys this instance.
   virtual ~ExecutiveFeatureExtractor() { }
 
-  /// Initializes this instance from the feature extractor
-  /// specifications in the specified file.  A feature extractor specification
-  /// is a line that is of the form<br>
-  /// \code FeatureExtractorClassName(init_arg) \endcode
-  /// <p>
-  /// More formally, each line must have the form
-  /// \code
-  /// <feature extractor classname> <lparen> <init str> <rparen>
-  /// \endcode
-  /// where
-  /// <table border=0>
-  /// <tr>
-  ///   <td><tt>\<feature extractor classname\></tt></td>
-  ///   <td><tt>::=</tt></td>
-  ///   <td>the string passed to the \link REGISTER_NAMED \endlink macro
-  ///       by a \link FeatureExtractor \endlink implementation</td>
-  /// </tr>
-  /// <tr>
-  ///   <td><tt>\<lparen\></tt></td>
-  ///   <td><tt>::=</tt></td>
-  ///   <td>a left parenthesis character, <tt>'('</tt></td>
-  /// </tr>
-  /// <tr>
-  ///   <td><tt>\<init str\></tt></td>
-  ///   <td><tt>::=</tt></td>
-  ///   <td>an initialization string to be passed to the newly-constructed
-  ///       \link FeatureExtractor \endlink&rsquo;s
-  ///       \link FeatureExtractor::Init \endlink method
-  ///   </td>
-  /// </tr>
-  /// <tr>
-  ///   <td><tt>\<rparen\></tt></td>
-  ///   <td><tt>::=</tt></td>
-  ///   <td>a right parenthesis character, <tt>')'</tt></td>
-  /// </tr>
-  /// </table>
-  ///
-  /// \param filename the name of a file containing a set of feature extractor
-  ///                 specifications, one per line
-  ///
-  /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-  void Init(const string &filename);
-
-  /// Initializes this instance from the feature extractor
-  /// specifications in the specified input stream.  A feature extractor
-  /// specification is a line that is of the form<br>
-  /// \code FeatureExtractorClassName(init_arg) \endcode
-  /// Please see the documentation for the \link Init(const string&) \endlink
-  /// method for the formal specification.
-  ///
-  /// \param is an input stream containing a set of feature extractor
-  ///           specifications, one per line
-  void Init(istream &is);
+  /// A convenience factory method that uses an internal
+  /// Factory<ExecutiveFeatureExtractor> instance to construct an
+  /// ExecutiveFeatureExtractor instance using the spec string contained
+  /// in the specified file.
+  static shared_ptr<ExecutiveFeatureExtractor> InitFromSpec(
+      const string &filename);
 
   /// Indictes to this instance that iteration has been reset.  This
   /// is especially important for file-backed feature extractors.
   ///
   /// \see FeatureExtractor::Reset
-  void Reset() const;
+  virtual void Reset() const = 0;
 
   /// Extracts features for the specified CandidateSet using the suite
   /// of FeatureExtractor instances specified at construction time.
   ///
   /// \param candidate_set the CandidateSet for which to extract features
-  void Extract(CandidateSet &candidate_set) const;
+  virtual void Extract(CandidateSet &candidate_set) const = 0;
+};
+
+#define REGISTER_NAMED_EXECUTIVE_FEATURE_EXTRACTOR(TYPE,NAME) \
+  REGISTER_NAMED(TYPE,NAME,ExecutiveFeatureExtractor)
+
+#define REGISTER_EXECUTIVE_FEATURE_EXTRACTOR(TYPE) \
+  REGISTER_NAMED_EXECUTIVE_FEATURE_EXTRACTOR(TYPE,TYPE)
+
+class ExecutiveFeatureExtractorImpl : public ExecutiveFeatureExtractor {
+  virtual void RegisterInitializers(Initializers &initializers) {
+    initializers.Add("extractors", &extractors_);
+  }
+  virtual void Reset() const;
+  virtual void Extract(CandidateSet &candidate_set) const;
  private:
   // data members
-  /// The feature extractor factory so this executive feature extractor
-  /// can construct individual FeatureExtractor instances from their
-  /// specification strings.
-  Factory<FeatureExtractor> factory_;
   /// The set of feature extractors used by this executive feature extractor.
   vector<shared_ptr<FeatureExtractor> > extractors_;
 };
