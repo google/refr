@@ -135,6 +135,9 @@ class EnvironmentImpl : public Environment {
     }
   }
 
+  /// \copydoc reranker::Environment::PrintFactories
+  virtual void PrintFactories(ostream &os) const;
+
   /// \copydoc reranker::Environment::Copy
   virtual Environment *Copy() const {
     EnvironmentImpl *new_env = new EnvironmentImpl(*this);

@@ -227,7 +227,7 @@ main(int argc, char **argv) {
       if (!check_for_required_arg(argc, i, err_msg)) {
         return -1;
       }
-      input_model_file = argv[++i];      
+      input_model_file = argv[++i];
     } else if (arg == "-model-config" || arg == "--model-config") {
       string err_msg =
           string("no model configuration string specified with ") + arg;
@@ -610,7 +610,7 @@ main(int argc, char **argv) {
           for (CandidateSet::const_iterator cand_it = candidate_set.begin();
                cand_it != candidate_set.end();
                ++cand_it) {
-            score_os << (*cand_it)->score() << "\n";            
+            score_os << (*cand_it)->score() << "\n";
           }
         }
       }
@@ -675,7 +675,7 @@ main(int argc, char **argv) {
 /// <ul>
 /// <li><tt>autoconf</tt> 2.68 or higher
 /// <li><tt>automake</tt> 1.11 or higher
-/// </ul> 
+/// </ul>
 /// Additional requirements are checked by the supplied <tt>configure</tt>
 /// script; they comprise:
 /// <ul>
@@ -727,7 +727,7 @@ main(int argc, char **argv) {
 /// sets&rdquo;) where features for each candidate in each set are
 /// extracted &ldquo;on the fly&rdquo;.  Finally, you can mix these
 /// two ways of working, as we&rsquo;ll see below.
-/// 
+///
 /// \subsection io_subsec I/O
 /// The Reranker framework uses protocol buffers for all low-level
 /// I/O. (See <a href="http://code.google.com/p/protobuf/">
@@ -1140,7 +1140,7 @@ main(int argc, char **argv) {
 /// \code
 ///   Person fred("Fred", 180, Date(1990, 1, 10));
 /// \endcode
-/// 
+///
 /// If <tt>Person</tt> were a \link reranker::Factory
 /// Factory\endlink-constructible type in the Reranker Framework,
 /// we would be able to specify the following as a <i>specification string</i>

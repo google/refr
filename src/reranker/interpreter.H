@@ -155,6 +155,10 @@ class Interpreter {
     env_->Print(os);
   }
 
+  void PrintFactories(ostream &os) const {
+    env_->PrintFactories(os);
+  }
+
   /// Retrieves the value of the specified variable.  It is an error
   /// if the type of the specified pointer to a value object is different
   /// from the specified variable in this interpreter&rsquo;s environment.

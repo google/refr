@@ -149,6 +149,11 @@ class Environment {
   /// Returns a copy of this environment.
   virtual Environment *Copy() const = 0;
 
+  /// Prints out a human-readable string with the names of all abstract base
+  /// types and their concrete implementations that may be constructed.
+  /// \see reranker::FactoryContainer::Print
+  virtual void PrintFactories(ostream &os) const = 0;
+
   /// A static factory method to create a new, empty Environment instance.
   static Environment *CreateEmpty();
 };
