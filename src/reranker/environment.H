@@ -182,6 +182,16 @@ class ValueString<string> {
   }
 };
 
+/// A partial specialization of the ValueString class to support printing of
+/// boolean values.
+template<>
+class ValueString<bool> {
+ public:
+  string ToString(const bool &value) const {
+    return value ? "true" : "false";
+  }
+};
+
 /// A partial specialization of the ValueString class to support
 /// printing of shared_ptr's to objects.
 template<typename T>

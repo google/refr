@@ -1,0 +1,90 @@
+// This is the default configuration file for the stand-alone
+// executable run-model, part of the Reranker Framework (ReFr).
+// It is expressed in the C++-like interpreted language that allows
+// construction of primitives, objects and vectors thereof from a
+// set of registered object factories.  This interpreter and associated
+// code will eventually be forked as its own library called "InFact",
+// hence the ".infact" filename extension.
+
+
+// The path of the model file, either to read in for decoding or write out
+// after training.
+model_file = "example.model";
+
+// The type of model to construct when training.
+model = PerceptronModel(name("MyPerceptronModel"));
+
+// Change this to true to use the executable in mapper mode, which specifies
+// to train a single epoch and output features to standard output (mapper
+// mode is used by hadoop-run.py).
+mapper_mode = false;
+
+// Uncomment this to specify training files for a training run (can
+// also be done via the command line).
+//training_files = { "file1", "file2" };
+
+// Uncomment this to specify devtest files for either a training or decoding
+// run (must be specified either here or on the command line, unless in
+// mapper mode).
+//devtest_files = { "devtest1", "devtest2" };
+
+// Uncomment this to specify an output file when decoding (doing inference).
+//output_file = "output-file";
+
+// Uncomment this to specify an hypothesis output file when decoding (doing
+// inference).
+//hyp_output_file = "hyp-output-file";
+
+// Uncomment this to do additional feature extraction on training instances.
+// Put a comma-separated list of FeatureExtractor spec's in between the
+// braces.
+//training_efe = ExecutiveFeatureExtractorImpl(extractors({ }));
+
+// Uncomment this to do additional feature extraction on devtest instances.
+// Put a comma-separated list of FeatureExtractor spec's in between the
+// braces.
+//devtest_efe = ExecutiveFeatureExtractorImpl(extractors({ }));
+
+// Indicates whether to re-map all feature uids to the [0,n-1] interval, where
+// n is the number of non-zero features.
+compactify_feature_uids = false;
+
+// Specifies the interval after which to compactify feature uid's and
+// remove unused symbols (only available when training in streaming mode).
+compactify_interval = 10000;
+
+// Specifies whether to train in streaming mode (i.e., do not read in all
+// training instances into memory.
+streaming = false;
+
+// Change this to false if you are reading uncompressed input files (rare).
+compressed = true;
+
+// Change this to false if you are not use base64 encoding of input files
+// (rare).
+use_base64 = true;
+
+// Change this to an integer greater than 0 to specify a minimum number of
+// training epochs.
+min_epochs = -1;
+
+// Change this to an integer greater than 0 to specify a maximum number of
+// training epochs.
+max_epochs = -1;
+
+// Change this to an integer greater than 0 to specify a maximum number of
+// examples read from each input file.
+max_examples = -1;
+
+// Changes this to an integer greater than 0 to specify a maximum number of
+// candidates to be read for each candidate set (problem instance).
+max_candidates = -1;
+
+// Specifies the interval at which the CandidateSetReader reports how
+// many candidate sets it has read.
+reporting_interval = 1000;
+
+// Specifies whether to weight losses on devtest examples by the
+// number of tokens in the reference, where, e.g., weighted loss is
+// appropriate for computing WER, but not BLEU.
+use_weighted_loss = true;
