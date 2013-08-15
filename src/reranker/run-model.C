@@ -1016,29 +1016,26 @@ main(int argc, char **argv) {
 /// serialized \link reranker::CandidateSet CandidateSet \endlink
 /// instances (again, for now, created using the tools in
 /// <tt>src/dataconvert</tt>), you can write a short configuration
-/// file that specifies which \link reranker::FeatureExtractor
-/// FeatureExtractor \endlink implementations to instantiate at
-/// run-time and execute for each \link reranker::Candidate Candidate
-/// \endlink of each \link reranker::CandidateSet
-/// CandidateSet\endlink.  (The \link
+/// file that specifies the construction of an \link
 /// reranker::ExecutiveFeatureExtractor ExecutiveFeatureExtractor
-/// \endlink class is responsible for &ldquo;executing&rdquo; the
-/// feature extraction from this user-specified suite of feature
-/// extractors, all of which are built by a \link reranker::Factory
-/// Factory \endlink inside the \link
-/// reranker::ExecutiveFeatureExtractor
-/// ExecutiveFeatureExtractor\endlink.)
+/// \endlink instance.  This \link reranker::Factory
+/// Factory\endlink-constructible object contains a single data member,
+/// <tt>extractors</tt>, that is initialized with a vector of
+/// \link reranker::FeatureExtractor FeatureExtractor \endlink
+/// implementations.  Each \link reranker::FeatureExtractor FeatureExtractor
+/// \endlink will be executed on each \link reranker::Candidate Candidate
+/// \endlink of each \link reranker::CandidateSet CandidateSet\endlink.
 ///
 /// An example of such a configuration file is <tt>test-fe.config</tt>
-/// in the directory <tt>learning/reranker/config</tt>. The format of
-/// a feature extractor configuration file should be a sequence of
-/// <i>specification strings</i>, each of which looks like \code
-/// FeatureExtractorClassName(init_string) \endcode Please see \ref
-/// appendix_sec for more details on factories and the ability to
-/// construct objects from specification strings.  (For a formal, BNF
-/// description of the format of a <i>specification string</i>, please
-/// see the documentation for the \link reranker::Factory::CreateOrDie
-/// \endlink method.)
+/// in the directory <tt>src/reranker/config</tt>. The format of
+/// a feature extractor configuration file should be a
+/// <i>specification string</i> for constructing an \link
+/// reranker::ExecutiveFeatureExtractor ExecutiveFeatureExtractor
+/// \endlink instance, with a sequence of specification strings for each
+/// of its wrapped \link reranker::FeatureExtractor FeatureExtractor
+/// \endlink instances.  (For a formal, BNF description of the format of
+/// a <i>specification string</i>, please see the documentation for the
+/// \link reranker::Factory::CreateOrDie \endlink method.)
 ///
 /// You can then pass this configuration file, along with one or more
 /// input files and an output directory, to the
