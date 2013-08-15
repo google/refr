@@ -31,7 +31,7 @@
 //
 /// \file
 /// Provides an environment for variables and their values, either primitive
-/// or Factory-constructible objects.
+/// or Factory-constructible objects, or vectors thereof.
 /// \author dbikel@google.com (Dan Bikel)
 
 #ifndef RERANKER_ENVIRONMENT_IMPL_H_
@@ -53,18 +53,7 @@ using std::tr1::unordered_map;
 using std::tr1::unordered_set;
 
 /// Provides a set of named variables and their types, as well as the values
-/// for those variable.
-///
-/// N.B.: Primitive values are stored as strings, and are converted on demand
-/// to a concrete primitive type, one of <tt>{bool,int,double,string}</tt>.
-/// Because of this, this class only considers variables to have one of
-/// four types (even if their concrete types are more specific):
-/// <ul>
-/// <li> primitive
-/// <li> vector of a primitive type
-/// <li> \link reranker::Factory Factory\endlink-constructible type
-/// <li> vector of a \link reranker::Factory Factory\endlink-constructible type
-/// </ul>
+/// for those variables.
 ///
 /// \see Interpreter
 class EnvironmentImpl : public Environment {
