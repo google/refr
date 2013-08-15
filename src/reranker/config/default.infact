@@ -37,12 +37,12 @@ mapper_mode = false;
 
 // Uncomment this to do additional feature extraction on training instances.
 // Put a comma-separated list of FeatureExtractor spec's in between the
-// braces.
+// braces (may be spread across multiple lines).
 //training_efe = ExecutiveFeatureExtractorImpl(extractors({ }));
 
 // Uncomment this to do additional feature extraction on devtest instances.
 // Put a comma-separated list of FeatureExtractor spec's in between the
-// braces.
+// braces (may be spread across multiple lines).
 //devtest_efe = ExecutiveFeatureExtractorImpl(extractors({ }));
 
 // Indicates whether to re-map all feature uids to the [0,n-1] interval, where

@@ -50,11 +50,12 @@
 #include "candidate-set-reader.H"
 #include "candidate-set-writer.H"
 #include "executive-feature-extractor.H"
+#include "interpreter.H"
 #include "model.H"
-#include "perceptron-model.H"
 #include "model-merge-reducer.H"
 #include "model-reader.H"
 #include "model-proto-writer.H"
+#include "perceptron-model.H"
 #include "symbol-table.H"
 
 #define DEBUG 0
@@ -81,7 +82,8 @@ using namespace reranker;
 
 const char *usage_msg[] = {
   "Usage:\n",
-  PROG_NAME " -m|--model-file <model file> [--model-config <model config>]\n"
+  PROG_NAME " --config <master config file>\n",
+  "\t-m|--model-file <model file> [--model-config <model config>]\n"
   "\t[-t|--train <training input file>+ [-i <input model file>] [--mapper] ]\n",
   "\t-d|--devtest <devtest input file>+\n",
   "\t[-o|--output <candidate set output file>]\n",
@@ -96,6 +98,9 @@ const char *usage_msg[] = {
   "\t[--max-candidates <max num candidates>]\n",
   "\t[-r <reporting interval>] [ --use-weighted-loss[=][true|false] ]\n",
   "where\n",
+  "\t<master config file> is a file in the interpreted factory language\n",
+  "\t\tcapable of specifying all options to this executable (see\n",
+  "\t\tconfig/default.infact for an example of the default options)\n",
   "\t<model file> is the name of the file to which to write out a\n",
   "\t\tnewly-trained model when training (one or more\n",
   "\t\t<training input file>'s specified), or the name of a file\n",
@@ -188,6 +193,8 @@ void read_and_extract_features(const vector<string> &files,
 
 int
 main(int argc, char **argv) {
+  // Master configuration file.
+  string master_config_file;
   // Required parameters.
   string model_file;
   string input_model_file;
@@ -214,6 +221,54 @@ main(int argc, char **argv) {
   int max_examples = DEFAULT_MAX_EXAMPLES;
   int max_candidates = DEFAULT_MAX_CANDIDATES;
   int reporting_interval = DEFAULT_REPORTING_INTERVAL;
+
+  shared_ptr<Model> model;
+  shared_ptr<ExecutiveFeatureExtractor> training_efe;
+  shared_ptr<ExecutiveFeatureExtractor> devtest_efe;
+
+  // Preprocess options, looking for the --config option which specifies
+  // a master configuration file.  This file should be used before
+  // any other command line options, which may be used to override anything
+  // set in the master configuration file.
+  for (int i = 1; i < argc; ++i) {
+    string arg = argv[i];
+    if (arg == "--config") {
+      string err_msg =
+          string("no master configuration file specified with ") + arg;
+      if (!check_for_required_arg(argc, i, err_msg)) {
+        return -1;
+      }
+      master_config_file = argv[++i];
+    }
+  }
+  if (master_config_file != "") {
+    Interpreter i;
+    cerr << "Reading options from \"" << master_config_file << "\"." << endl;
+    i.Eval(master_config_file);
+    // Now, grab all variables that could be set and assign them to local
+    // variables.  Note that the Interpreter::Get method only assigns a value
+    // to its second argument if it exists in the interpreter's environment.
+    i.Get("model_file", &model_file);
+    i.Get("model", &model);
+    i.Get("mapper_mode", &mapper_mode);
+    i.Get("training_files", &training_files);
+    i.Get("devtest_files", &devtest_files);
+    i.Get("output_file", &output_file);
+    i.Get("hyp_output_file", &hyp_output_file);
+    i.Get("training_efe", &training_efe);
+    i.Get("devtest_efe", &devtest_efe);
+    i.Get("compactify_feature_uids", &compactify_feature_uids);
+    i.Get("compactify_interval", &compactify_interval);
+    i.Get("streaming", &streaming);
+    i.Get("compressed", &compressed);
+    i.Get("use_base64", &use_base64);
+    i.Get("min_epochs", &min_epochs);
+    i.Get("max_epochs", &max_epochs);
+    i.Get("max_examples", &max_examples);
+    i.Get("max_candidates", &max_candidates);
+    i.Get("reporting_interval", &reporting_interval);
+    i.Get("use_weighted_loss", &use_weighted_loss);
+  }
 
   // Process options.  The majority of code in this file is devoted to this.
   for (int i = 1; i < argc; ++i) {
@@ -428,12 +483,10 @@ main(int argc, char **argv) {
   }
 
   // Now, we finally get to the meat of the code for this executable.
-  shared_ptr<ExecutiveFeatureExtractor> training_efe;
   if (training_feature_extractor_config_file != "") {
     training_efe = ExecutiveFeatureExtractor::InitFromSpec(
         training_feature_extractor_config_file);
   }
-  shared_ptr<ExecutiveFeatureExtractor> devtest_efe;
   if (devtest_feature_extractor_config_file != "") {
     devtest_efe = ExecutiveFeatureExtractor::InitFromSpec(
         devtest_feature_extractor_config_file);
@@ -442,7 +495,6 @@ main(int argc, char **argv) {
   CandidateSetReader csr(max_examples, max_candidates, reporting_interval);
   csr.set_verbosity(1);
 
-  shared_ptr<Model> model;
   Factory<Model> model_factory;
 
   if (!training || input_model_file != "") {
