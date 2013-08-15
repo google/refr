@@ -1033,7 +1033,9 @@ main(int argc, char **argv) {
 /// reranker::ExecutiveFeatureExtractor ExecutiveFeatureExtractor
 /// \endlink instance, with a sequence of specification strings for each
 /// of its wrapped \link reranker::FeatureExtractor FeatureExtractor
-/// \endlink instances.  (For a formal, BNF description of the format of
+/// \endlink instances.  Please see \ref appendix_sec for more details on
+/// factories and the ability to construct objects from specification strings.
+/// (For a formal, BNF description of the format of
 /// a <i>specification string</i>, please see the documentation for the
 /// \link reranker::Factory::CreateOrDie \endlink method.)
 ///
