@@ -6,5 +6,6 @@ var searchData=
   ['evalio',['evalio',['../namespacehadoop-run.html#a96482b5b1d7e80ee6061d559e622a402',1,'hadoop-run']]],
   ['evalp_5f',['evalp_',['../classpyutil_1_1_command_i_o.html#a12d97647e54ea33cfdd374a15d6996b3',1,'pyutil::CommandIO']]],
   ['examplefeatureextractor_5fmy_5fprotoype',['ExampleFeatureExtractor_my_protoype',['../namespacereranker.html#a5132ca05a2361988c75ce1bb95c35065',1,'reranker']]],
+  ['executivefeatureextractorimpl_5fmy_5fprotoype',['ExecutiveFeatureExtractorImpl_my_protoype',['../namespacereranker.html#ac5a575c356161c4821a5b298b52ddc52',1,'reranker']]],
   ['extractsym_5fmap',['extractsym_map',['../namespacehadoop-run.html#a66112611af16f304a90d19eeb7807faf',1,'hadoop-run']]]
 ];

@@ -13,6 +13,7 @@ var searchData=
   ['constructor',['Constructor',['../classreranker_1_1_constructor.html',1,'reranker']]],
   ['constructor_3c_20candidate_3a_3acomparator_20_3e',['Constructor< Candidate::Comparator >',['../classreranker_1_1_constructor.html',1,'reranker']]],
   ['constructor_3c_20candidateset_3a_3ascorer_20_3e',['Constructor< CandidateSet::Scorer >',['../classreranker_1_1_constructor.html',1,'reranker']]],
+  ['constructor_3c_20executivefeatureextractor_20_3e',['Constructor< ExecutiveFeatureExtractor >',['../classreranker_1_1_constructor.html',1,'reranker']]],
   ['constructor_3c_20featureextractor_20_3e',['Constructor< FeatureExtractor >',['../classreranker_1_1_constructor.html',1,'reranker']]],
   ['constructor_3c_20model_20_3e',['Constructor< Model >',['../classreranker_1_1_constructor.html',1,'reranker']]],
   ['constructor_3c_20model_3a_3aupdatepredicate_20_3e',['Constructor< Model::UpdatePredicate >',['../classreranker_1_1_constructor.html',1,'reranker']]],

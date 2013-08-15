@@ -125,6 +125,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_interpreter.html#a2515d630df648bb68453ca622484d3f5">Eval</a> (istream &amp;is)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the statements in the specified stream.  <a href="#a2515d630df648bb68453ca622484d3f5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_interpreter.html#a5f3ebffb7c21cd29eeec4fb659f3b948">PrintEnv</a> (ostream &amp;os) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_interpreter.html#ae56b52c4056c52df9e785d99a6693858">PrintFactories</a> (ostream &amp;os) const </td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classreranker_1_1_interpreter.html#a7a303a24ec83502b36bbccce670e3868">Get</a> (const string &amp;varname, T *value) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the value of the specified variable.  <a href="#a7a303a24ec83502b36bbccce670e3868"></a><br/></td></tr>
@@ -228,7 +229,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a pointer to the environment of this interpreter. </p>
 <p>Crucially, this method returns a pointer to the <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> implementation class, <a class="el" href="classreranker_1_1_environment_impl.html">EnvironmentImpl</a>, so that its templated <a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">EnvironmentImpl::Get </a> method may be invoked. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00178">178</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00182">182</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -338,7 +339,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00168">168</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00172">172</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -358,6 +359,25 @@ template&lt;typename T &gt; </div>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00154">154</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae56b52c4056c52df9e785d99a6693858"></a><!-- doxytag: member="reranker::Interpreter::PrintFactories" ref="ae56b52c4056c52df9e785d99a6693858" args="(ostream &amp;os) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classreranker_1_1_interpreter.html#ae56b52c4056c52df9e785d99a6693858">reranker::Interpreter::PrintFactories</a> </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00158">158</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -383,7 +403,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:31 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:11:01 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

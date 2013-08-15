@@ -105,7 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="reranker::EnvironmentImpl" --><!-- doxytag: inherits="reranker::Environment" -->
-<p>Provides a set of named variables and their types, as well as the values for those variable.  
+<p>Provides a set of named variables and their types, as well as the values for those variables.  
  <a href="classreranker_1_1_environment_impl.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>&gt;</code></p>
@@ -138,27 +138,17 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#a0b8461c2a65c4b439acc46d97ba01283">GetVarMapForType</a> (const string &amp;type)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the <a class="el" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> instance for the specified type.  <a href="#a0b8461c2a65c4b439acc46d97ba01283"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#a19bdb0da8cbaa2ba188d4d6415241741">Print</a> (ostream &amp;os) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#a08b222370af4873154978f1364871d5e">PrintFactories</a> (ostream &amp;os) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#ae8b103a71223c7702ecaf33840d5e114">Copy</a> () const </td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">Get</a> (const string &amp;varname, T *value) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the value of the variable with the specified name and puts into into the object pointed to by the <code>value</code> parameter.  <a href="#ab3f0b07dc01a5fc63a4ab93ebe14bda6"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Provides a set of named variables and their types, as well as the values for those variable. </p>
-<p>N.B.: Primitive values are stored as strings, and are converted on demand to a concrete primitive type, one of <code>{bool,int,double,string}</code>. Because of this, this class only considers variables to have one of four types (even if their concrete types are more specific): </p>
-<ul>
-<li>
-primitive </li>
-<li>
-vector of a primitive type </li>
-<li>
-<a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible type </li>
-<li>
-vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible type </li>
-</ul>
+<div class="textblock"><p>Provides a set of named variables and their types, as well as the values for those variables. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classreranker_1_1_interpreter.html" title="Provides an interpreter for assigning primitives and Factory-constructible objects to named variables...">Interpreter</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00070">70</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00059">59</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a950ed9620daeffdd2d3e26a9a58f5e0a"></a><!-- doxytag: member="reranker::EnvironmentImpl::EnvironmentImpl" ref="a950ed9620daeffdd2d3e26a9a58f5e0a" args="(int debug=0)" -->
 <div class="memitem">
@@ -203,7 +193,7 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
 
 <p>Destroys this environment. </p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00079">79</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00068">68</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -225,7 +215,7 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
  
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00139">139</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00131">131</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -248,7 +238,7 @@ vector of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-cons
 
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00088">88</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00077">77</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -289,7 +279,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>whether the specified variable exists and its value was successfully set by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00183">183</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00175">175</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -312,7 +302,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00097">97</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00086">86</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -335,7 +325,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00106">106</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00095">95</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -358,7 +348,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00111">111</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00100">100</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -380,7 +370,30 @@ template&lt;typename T &gt; </div>
  
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a07d328d2d2bbe0f62e7348f590e6529c">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00130">130</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00119">119</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a08b222370af4873154978f1364871d5e"></a><!-- doxytag: member="reranker::EnvironmentImpl::PrintFactories" ref="a08b222370af4873154978f1364871d5e" args="(ostream &amp;os) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classreranker_1_1_environment_impl.html#a08b222370af4873154978f1364871d5e">reranker::EnvironmentImpl::PrintFactories</a> </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em></td><td>)</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Prints out a human-readable string with the names of all abstract base types and their concrete implementations that may be constructed. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classreranker_1_1_factory_container.html#a4ecabc625093e83cb762a27f8d175d88" title="Prints the base typenames for all factories along with a list of all concrete subtypes those factorie...">reranker::FactoryContainer::Print</a> </dd></dl>
+ 
+<p>Implements <a class="el" href="classreranker_1_1_environment.html#a068a3e922a02814d89b8d316bbf91830">reranker::Environment</a>.</p>
+
+<p>Definition at line <a class="el" href="environment-impl_8_c_source.html#l00228">228</a> of file <a class="el" href="environment-impl_8_c_source.html">environment-impl.C</a>.</p>
 
 </div>
 </div>
@@ -439,7 +452,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:30 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:11:00 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

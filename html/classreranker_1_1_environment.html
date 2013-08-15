@@ -116,7 +116,7 @@ Inheritance diagram for reranker::Environment:</div>
  <div class="center">
   <img src="classreranker_1_1_environment.png" usemap="#reranker::Environment_map" alt=""/>
   <map id="reranker::Environment_map" name="reranker::Environment_map">
-<area href="classreranker_1_1_environment_impl.html" title="Provides a set of named variables and their types, as well as the values for those variable..." alt="reranker::EnvironmentImpl" shape="rect" coords="0,56,159,80"/>
+<area href="classreranker_1_1_environment_impl.html" title="Provides a set of named variables and their types, as well as the values for those variables..." alt="reranker::EnvironmentImpl" shape="rect" coords="0,56,159,80"/>
 </map>
  </div></div>
 
@@ -139,6 +139,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a human-readable string of all the variables in this environment, their types and, if primitive, their values.  <a href="#a07d328d2d2bbe0f62e7348f590e6529c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02">Copy</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this environment.  <a href="#ad5ad2fe5a00eba18331de208dd4f4b02"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a068a3e922a02814d89b8d316bbf91830">PrintFactories</a> (ostream &amp;os) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints out a human-readable string with the names of all abstract base types and their concrete implementations that may be constructed.  <a href="#a068a3e922a02814d89b8d316bbf91830"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792">CreateEmpty</a> ()</td></tr>
@@ -313,6 +315,28 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a068a3e922a02814d89b8d316bbf91830"></a><!-- doxytag: member="reranker::Environment::PrintFactories" ref="a068a3e922a02814d89b8d316bbf91830" args="(ostream &amp;os) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_environment.html#a068a3e922a02814d89b8d316bbf91830">reranker::Environment::PrintFactories</a> </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Prints out a human-readable string with the names of all abstract base types and their concrete implementations that may be constructed. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classreranker_1_1_factory_container.html#a4ecabc625093e83cb762a27f8d175d88" title="Prints the base typenames for all factories along with a list of all concrete subtypes those factorie...">reranker::FactoryContainer::Print</a> </dd></dl>
+
+<p>Implemented in <a class="el" href="classreranker_1_1_environment_impl.html#a08b222370af4873154978f1364871d5e">reranker::EnvironmentImpl</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ae2641671e6f45d47f9432429ad5349bf"></a><!-- doxytag: member="reranker::Environment::ReadAndSet" ref="ae2641671e6f45d47f9432429ad5349bf" args="(const string &amp;varname, StreamTokenizer &amp;st)=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +390,7 @@ Static Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:30 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:11:00 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -43,6 +43,17 @@ namespace reranker {
 
 using std::ostringstream;
 
+/// TODO(dbikel): Support explicitly declared type specifies instead of
+///               always trying to infer the type.  I.e., allow
+///                 int f = 1;
+///               in addition to
+///                 f = 1;
+///               Crucially, this will allow you to declare the type
+///               of empty vectors, such as
+///                 FeatureExtractor[] extractors = {};
+///               Currently, empty vectors are only possible when
+///               initializing a vector member of a Factory-constructible
+///               object (since the type is known beforehand).
 void
 Interpreter::Eval(StreamTokenizer &st) {
   // Keeps reading assignment statements until there are no more tokens.
@@ -60,12 +71,6 @@ Interpreter::Eval(StreamTokenizer &st) {
     if (st.Peek() != "=") {
       WrongTokenError(st.PeekTokenStart(), "=", st.Peek(), st.PeekTokenType());
     }
-    /*
-    if (token_type != StreamTokenizer::RESERVED_CHAR) {
-      WrongTokenTypeError(st.PeekTokenStart(), StreamTokenizer::RESERVED_CHAR,
-                          token_type, st.Peek());
-    }
-    */
 
     // Consume equals sign.
     st.Next();

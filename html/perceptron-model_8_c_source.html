@@ -368,171 +368,175 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00289"></a>00289   <span class="keywordtype">double</span> total_weight = 0.0;
 <a name="l00290"></a>00290   <span class="keywordtype">double</span> total_weighted_loss = 0.0;
 <a name="l00291"></a>00291   <span class="keywordtype">double</span> total_oracle_loss = 0.0;
-<a name="l00292"></a>00292   <a class="code" href="classreranker_1_1_model.html#ab308fe9304485e8c838ed2a196bb585b" title="The number of testing errors made on held-out development test data for each epoch.">num_testing_errors_per_epoch_</a>.push_back(0);
-<a name="l00293"></a>00293 
-<a name="l00294"></a>00294   <span class="keywordtype">bool</span> not_training = <span class="keyword">false</span>;
-<a name="l00295"></a>00295   <span class="keywordtype">size_t</span> development_test_size = 0;
-<a name="l00296"></a>00296   development_test.<a class="code" href="classreranker_1_1_candidate_set_iterator.html#a10751b02e9aa29e8f2a1c76085b661ac" title="Resets this iterator back to the beginning of its backing collection.">Reset</a>();
-<a name="l00297"></a>00297   <span class="keywordflow">while</span> (development_test.<a class="code" href="classreranker_1_1_candidate_set_iterator.html#a82457e09d587f9e83ef3db066e8ac485" title="Returns whether this iterator contains another CandidateSet.">HasNext</a>()) {
-<a name="l00298"></a>00298     ++development_test_size;
-<a name="l00299"></a>00299     <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidate_set = development_test.<a class="code" href="classreranker_1_1_candidate_set_iterator.html#aa318e5cebc531e88bce5f6d9077f41ee" title="Returns the next CandidateSet.">Next</a>();
-<a name="l00300"></a>00300     <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a> != NULL) {
-<a name="l00301"></a>00301       candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a844b1e8edd6a75de2ffc5b295d558e36" title="Compiles any symbolic features in this candidate set.">CompileFeatures</a>(<a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>);
-<a name="l00302"></a>00302     }
-<a name="l00303"></a>00303     <a class="code" href="classreranker_1_1_perceptron_model.html#ace55bad139573080e682d5a269760673" title="Scores the specified set of candidates according to either the raw or averaged version of this percep...">ScoreCandidates</a>(candidate_set, not_training);
-<a name="l00304"></a>00304     <span class="keywordtype">double</span> loss_weight =
-<a name="l00305"></a>00305         <a class="code" href="classreranker_1_1_model.html#a013aa52eb8693d1133a0d32740dffa5a">use_weighted_loss</a>() ? candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a9bd2e0995871ec942b8117dc01293631" title="Returns the weight of the loss for this candidate set&rsquo;s reference.">loss_weight</a>() : 1.0;
-<a name="l00306"></a>00306     total_weight += loss_weight;
-<a name="l00307"></a>00307     total_weighted_loss +=
-<a name="l00308"></a>00308         loss_weight * candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">GetBestScoring</a>().<a class="code" href="classreranker_1_1_candidate.html#a024f88c11b795a31cb8f5d1b47150701" title="Returns the loss of this candidate.">loss</a>();
-<a name="l00309"></a>00309     total_oracle_loss +=
-<a name="l00310"></a>00310         loss_weight * candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">GetGold</a>().<a class="code" href="classreranker_1_1_candidate.html#a024f88c11b795a31cb8f5d1b47150701" title="Returns the loss of this candidate.">loss</a>();
-<a name="l00311"></a>00311     <span class="keywordflow">if</span> (candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">best_scoring_index</a>() != candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">gold_index</a>()) {
-<a name="l00312"></a>00312       ++(*<a class="code" href="classreranker_1_1_model.html#ab308fe9304485e8c838ed2a196bb585b" title="The number of testing errors made on held-out development test data for each epoch.">num_testing_errors_per_epoch_</a>.rbegin());
-<a name="l00313"></a>00313     }
-<a name="l00314"></a>00314   }
-<a name="l00315"></a>00315 
-<a name="l00316"></a>00316   <span class="keywordtype">double</span> loss_this_epoch = total_weighted_loss / total_weight;
-<a name="l00317"></a>00317   <a class="code" href="classreranker_1_1_model.html#ad3a296860f768bee866213cc0c8bbf83" title="The average loss per epoch.">loss_per_epoch_</a>.push_back(loss_this_epoch);
-<a name="l00318"></a>00318 
-<a name="l00319"></a>00319   <span class="keywordtype">int</span> num_testing_errors_this_epoch =
-<a name="l00320"></a>00320       <a class="code" href="classreranker_1_1_model.html#ab308fe9304485e8c838ed2a196bb585b" title="The number of testing errors made on held-out development test data for each epoch.">num_testing_errors_per_epoch_</a>[<a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>()];
-<a name="l00321"></a>00321   <span class="keywordtype">double</span> percent_testing_errors_this_epoch =
-<a name="l00322"></a>00322       ((double)num_testing_errors_this_epoch / development_test_size) * 100.0;
-<a name="l00323"></a>00323   <span class="keywordtype">double</span> oracle_loss = total_oracle_loss / total_weight;
-<a name="l00324"></a>00324   cerr &lt;&lt; <span class="stringliteral">&quot;Epoch &quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &lt;&lt; <span class="stringliteral">&quot;: oracle loss: &quot;</span> &lt;&lt; oracle_loss &lt;&lt; endl;
-<a name="l00325"></a>00325   cerr &lt;&lt; <span class="stringliteral">&quot;Epoch &quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &lt;&lt; <span class="stringliteral">&quot;: average devtest loss: &quot;</span>
-<a name="l00326"></a>00326        &lt;&lt; loss_this_epoch &lt;&lt; endl;
-<a name="l00327"></a>00327   cerr &lt;&lt; <span class="stringliteral">&quot;Epoch &quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &lt;&lt; <span class="stringliteral">&quot;: number of testing errors: &quot;</span>
-<a name="l00328"></a>00328        &lt;&lt; num_testing_errors_this_epoch &lt;&lt; <span class="stringliteral">&quot; (&quot;</span>
-<a name="l00329"></a>00329        &lt;&lt; percent_testing_errors_this_epoch &lt;&lt; <span class="stringliteral">&quot;%)&quot;</span> &lt;&lt; endl;
-<a name="l00330"></a>00330 
-<a name="l00331"></a>00331   <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() == 0 ||
-<a name="l00332"></a>00332       loss_this_epoch &lt; <a class="code" href="classreranker_1_1_model.html#ad3a296860f768bee866213cc0c8bbf83" title="The average loss per epoch.">loss_per_epoch_</a>[<a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a>]) {
-<a name="l00333"></a>00333     <a class="code" href="classreranker_1_1_perceptron_model.html#a234283287d5a7f59fd8a1d1cf767fbc1" title="The best models seen so far during training, according to evaluation on the held-out development test...">best_models_</a> = <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>;
-<a name="l00334"></a>00334     <a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a> = <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>();
-<a name="l00335"></a>00335   }
-<a name="l00336"></a>00336 
-<a name="l00337"></a>00337   <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &gt; 0 &amp;&amp;
-<a name="l00338"></a>00338       <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() != <a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a> &amp;&amp;
-<a name="l00339"></a>00339       loss_this_epoch &gt;= <a class="code" href="classreranker_1_1_model.html#ad3a296860f768bee866213cc0c8bbf83" title="The average loss per epoch.">loss_per_epoch_</a>[<a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a>]) {
-<a name="l00340"></a>00340     ++<a class="code" href="classreranker_1_1_perceptron_model.html#a0c25e67c7e7e5cef36bbc1b1fb1cd111" title="The current number of training epochs in which the model has been degrading in development set perfor...">num_epochs_in_decline_</a>;
-<a name="l00341"></a>00341   } <span class="keywordflow">else</span> {
-<a name="l00342"></a>00342     <span class="comment">// We&#39;re in the first epoch, or we&#39;ve made strictly fewer errors</span>
-<a name="l00343"></a>00343     <span class="comment">// than the previous epoch.</span>
-<a name="l00344"></a>00344     <a class="code" href="classreranker_1_1_perceptron_model.html#a0c25e67c7e7e5cef36bbc1b1fb1cd111" title="The current number of training epochs in which the model has been degrading in development set perfor...">num_epochs_in_decline_</a> = 0;
-<a name="l00345"></a>00345   }
-<a name="l00346"></a>00346   <span class="keywordflow">return</span> loss_this_epoch;
-<a name="l00347"></a>00347 }
-<a name="l00348"></a>00348 
-<a name="l00349"></a>00349 <span class="keywordtype">void</span>
-<a name="l00350"></a><a class="code" href="classreranker_1_1_perceptron_model.html#ace55bad139573080e682d5a269760673">00350</a> <a class="code" href="classreranker_1_1_perceptron_model.html#ace55bad139573080e682d5a269760673" title="Scores the specified set of candidates according to either the raw or averaged version of this percep...">PerceptronModel::ScoreCandidates</a>(<a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidates, <span class="keywordtype">bool</span> training) {
-<a name="l00351"></a>00351   <a class="code" href="classreranker_1_1_model.html#abf7147622fb3c5801016fb7c479f3158" title="A scorer for CandidateSet instances.">candidate_set_scorer_</a>-&gt;Score(<span class="keyword">this</span>, candidates, training);
-<a name="l00352"></a>00352 }
-<a name="l00353"></a>00353 
-<a name="l00354"></a>00354 <span class="keywordtype">double</span>
-<a name="l00355"></a><a class="code" href="classreranker_1_1_perceptron_model.html#aff26021ce19337a90068b66a219c0c6c">00355</a> <a class="code" href="classreranker_1_1_perceptron_model.html#aff26021ce19337a90068b66a219c0c6c" title="Scores a candidate according to either the raw or averaged version of this perceptron model...">PerceptronModel::ScoreCandidate</a>(<a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;candidate, <span class="keywordtype">bool</span> training) {
-<a name="l00356"></a>00356   <span class="keywordtype">bool</span> use_raw = training;
-<a name="l00357"></a>00357   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_feature_vector.html">FeatureVector&lt;int,double&gt;</a> &amp;model = <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#a98dd763d1e1b3b980e07091488f9b422" title="Returns either the raw or averaged feature vector, depending on the argument.">GetModel</a>(use_raw);
-<a name="l00358"></a>00358   <span class="keywordtype">double</span> score = <a class="code" href="classreranker_1_1_model.html#a50128261606a9cb655493b3f9b9149c4" title="Yes, this is an interface, but we add the kernel function as a data member.">kernel_fn_</a>-&gt;<a class="code" href="classreranker_1_1_kernel_function.html#ab274007dc0adedfaeb835910ccb5435a" title="Applies this kernel function to the specified feature vectors.">Apply</a>(model, candidate.<a class="code" href="classreranker_1_1_candidate.html#a741433c66a4cc4dfbb1e4b89c9c6e431" title="Returns the feature vector for this candidate.">features</a>());
-<a name="l00359"></a>00359   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
-<a name="l00360"></a>00360     cerr &lt;&lt; <span class="stringliteral">&quot;Time:&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a1e8b9be0b48cd8cbb360f23a638e12c6">to_string</a>() &lt;&lt; <span class="stringliteral">&quot;: scoring candidate &quot;</span>
-<a name="l00361"></a>00361          &lt;&lt; candidate &lt;&lt; <span class="stringliteral">&quot; with &quot;</span> &lt;&lt; (use_raw ? <span class="stringliteral">&quot;raw&quot;</span> : <span class="stringliteral">&quot;avg&quot;</span>)
-<a name="l00362"></a>00362          &lt;&lt; <span class="stringliteral">&quot; model: &quot;</span> &lt;&lt; model &lt;&lt; endl
-<a name="l00363"></a>00363          &lt;&lt; <span class="stringliteral">&quot;\tscore: &quot;</span> &lt;&lt; score &lt;&lt; endl;
-<a name="l00364"></a>00364   }
-<a name="l00365"></a>00365   candidate.<a class="code" href="classreranker_1_1_candidate.html#a1716a1e38f3b681a60aa5eaedbdc5f0b" title="Sets the score of this candidate.">set_score</a>(score);
-<a name="l00366"></a>00366   <span class="keywordflow">return</span> score;
-<a name="l00367"></a>00367 }
-<a name="l00368"></a>00368 
-<a name="l00369"></a>00369 <span class="keywordtype">void</span>
-<a name="l00370"></a><a class="code" href="classreranker_1_1_perceptron_model.html#a919a86a6a3a52f62199b438fb092836d">00370</a> <a class="code" href="classreranker_1_1_perceptron_model.html#a919a86a6a3a52f62199b438fb092836d">PerceptronModel::CompactifyFeatureUids</a>() {
-<a name="l00371"></a>00371   <span class="comment">// First, produce mapping for uid&#39;s of current non-zero features to dense</span>
-<a name="l00372"></a>00372   <span class="comment">// interval [0,n-1] (where there are n non-zero features).</span>
-<a name="l00373"></a>00373   unordered_set&lt;int&gt; old_uids;
-<a name="l00374"></a>00374   <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#a49b3808a509cf2e46edfdc4df6fbd62d" title="Returns the &quot;raw&quot; feature weights computed during training.">weights</a>().<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(old_uids);
-<a name="l00375"></a>00375   <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#a21e449676837c2a0aa03a6749bc9b6f7" title="Returns the feature vector corresponding to the averaged perceptron.">average_weights</a>().<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(old_uids);
-<a name="l00376"></a>00376   unordered_map&lt;int, int&gt; old_to_new_uids;
-<a name="l00377"></a>00377   <span class="keywordtype">int</span> new_uid = 0;
-<a name="l00378"></a>00378   <span class="keywordflow">for</span> (unordered_set&lt;int&gt;::const_iterator it = old_uids.begin();
-<a name="l00379"></a>00379        it != old_uids.end();
-<a name="l00380"></a>00380        ++it) {
-<a name="l00381"></a>00381     old_to_new_uids[*it] = new_uid++;
-<a name="l00382"></a>00382   }
-<a name="l00383"></a>00383   <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#acd8ae561c7437253df45616432d3a683">RemapFeatureUids</a>(old_to_new_uids);
-<a name="l00384"></a>00384   <a class="code" href="classreranker_1_1_perceptron_model.html#a234283287d5a7f59fd8a1d1cf767fbc1" title="The best models seen so far during training, according to evaluation on the held-out development test...">best_models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#acd8ae561c7437253df45616432d3a683">RemapFeatureUids</a>(old_to_new_uids);
-<a name="l00385"></a>00385 
-<a name="l00386"></a>00386   <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a> != NULL) {
-<a name="l00387"></a>00387     <a class="code" href="classreranker_1_1_symbols.html" title="An interface specifying a converter from symbols (strings) to int indices.">Symbols</a> *old_symbols = <a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>-&gt;<a class="code" href="classreranker_1_1_symbols.html#aaeac8d6c3a9d088aa4f086fa1cf6b2fa" title="Creates a newly-constructed clone of this Symbols instance that has the same runtime type...">Clone</a>();
-<a name="l00388"></a>00388     <a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>-&gt;<a class="code" href="classreranker_1_1_symbols.html#a3c78e8ddc4a1a1375968a214f4bdda3e" title="Clears all symbols from this symbol table.">Clear</a>();
-<a name="l00389"></a>00389     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_symbols.html#ac2f04202711c3f61038ca43656edeb92">Symbols::const_iterator</a> it = old_symbols-&gt;<a class="code" href="classreranker_1_1_symbols.html#ae63ad8cbeb0ab390a50e9f8b8deaa998">begin</a>();
-<a name="l00390"></a>00390          it != old_symbols-&gt;<a class="code" href="classreranker_1_1_symbols.html#a299004b5ead84217cc11ce43dd41b359">end</a>();
-<a name="l00391"></a>00391          ++it) {
-<a name="l00392"></a>00392       unordered_map&lt;int, int&gt;::const_iterator old_to_new_uid_it =
-<a name="l00393"></a>00393           old_to_new_uids.find(it-&gt;second);
-<a name="l00394"></a>00394       <span class="keywordflow">if</span> (old_to_new_uid_it != old_to_new_uids.end()) {
-<a name="l00395"></a>00395         <span class="keywordtype">int</span> new_uid = old_to_new_uid_it-&gt;second;
-<a name="l00396"></a>00396         <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;symbol = it-&gt;first;
-<a name="l00397"></a>00397         <a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>-&gt;<a class="code" href="classreranker_1_1_symbols.html#aae3fb0d876b17204049c3de8ae8b30f9">SetIndex</a>(symbol, new_uid);
-<a name="l00398"></a>00398       }
-<a name="l00399"></a>00399     }
-<a name="l00400"></a>00400     <span class="keyword">delete</span> old_symbols;
-<a name="l00401"></a>00401   }
-<a name="l00402"></a>00402 }
-<a name="l00403"></a>00403 
-<a name="l00404"></a>00404 <span class="keywordtype">void</span>
-<a name="l00405"></a><a class="code" href="classreranker_1_1_perceptron_model.html#af7b4bb2f10d16bcc6bdf2428e6c09af3">00405</a> <a class="code" href="classreranker_1_1_perceptron_model.html#af7b4bb2f10d16bcc6bdf2428e6c09af3" title="Computes the features to be updated for the gold candidate and the best-scoring candidate.">PerceptronModel::ComputeFeaturesToUpdate</a>(<span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;example,
-<a name="l00406"></a>00406                                          unordered_set&lt;int&gt; &amp;
-<a name="l00407"></a>00407                                          gold_features_to_update,
-<a name="l00408"></a>00408                                          unordered_set&lt;int&gt; &amp;
-<a name="l00409"></a>00409                                          best_scoring_features_to_update)<span class="keyword"></span>
-<a name="l00410"></a>00410 <span class="keyword">    const </span>{
-<a name="l00411"></a>00411   <span class="comment">// Collect gold features that are not in best-scoring candidate.</span>
-<a name="l00412"></a>00412   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_feature_vector.html">FeatureVector&lt;int,double&gt;</a> &amp;gold_features =
-<a name="l00413"></a>00413       example.<a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">GetGold</a>().<a class="code" href="classreranker_1_1_candidate.html#a741433c66a4cc4dfbb1e4b89c9c6e431" title="Returns the feature vector for this candidate.">features</a>();
-<a name="l00414"></a>00414   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_feature_vector.html">FeatureVector&lt;int,double&gt;</a> &amp;best_scoring_features =
-<a name="l00415"></a>00415       example.<a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">GetBestScoring</a>().<a class="code" href="classreranker_1_1_candidate.html#a741433c66a4cc4dfbb1e4b89c9c6e431" title="Returns the feature vector for this candidate.">features</a>();
-<a name="l00416"></a>00416 
-<a name="l00417"></a>00417   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
-<a name="l00418"></a>00418     cerr &lt;&lt; <span class="stringliteral">&quot;Gold index: &quot;</span> &lt;&lt; example.<a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">gold_index</a>()
-<a name="l00419"></a>00419          &lt;&lt; <span class="stringliteral">&quot;; best scoring index: &quot;</span> &lt;&lt; example.<a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">best_scoring_index</a>()
-<a name="l00420"></a>00420          &lt;&lt; endl;
-<a name="l00421"></a>00421     cerr &lt;&lt; <span class="stringliteral">&quot;Original gold features: &quot;</span> &lt;&lt; gold_features &lt;&lt; endl
-<a name="l00422"></a>00422          &lt;&lt; <span class="stringliteral">&quot;Original best scoring features: &quot;</span> &lt;&lt; best_scoring_features &lt;&lt; endl;
-<a name="l00423"></a>00423   }
-<a name="l00424"></a>00424 
-<a name="l00425"></a>00425   gold_features.<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(gold_features_to_update);
-<a name="l00426"></a>00426   best_scoring_features.<a class="code" href="classreranker_1_1_feature_vector.html#a56cdaf41599879784f9342e6d94250b0" title="Removes from the specified set the uid&#39;s of feature with weights equal in this vector to their weight...">RemoveEqualFeatures</a>(gold_features,
-<a name="l00427"></a>00427                                             gold_features_to_update);
+<a name="l00292"></a>00292   <span class="keywordtype">double</span> total_baseline_loss = 0.0;
+<a name="l00293"></a>00293   <a class="code" href="classreranker_1_1_model.html#ab308fe9304485e8c838ed2a196bb585b" title="The number of testing errors made on held-out development test data for each epoch.">num_testing_errors_per_epoch_</a>.push_back(0);
+<a name="l00294"></a>00294 
+<a name="l00295"></a>00295   <span class="keywordtype">bool</span> not_training = <span class="keyword">false</span>;
+<a name="l00296"></a>00296   <span class="keywordtype">size_t</span> development_test_size = 0;
+<a name="l00297"></a>00297   development_test.<a class="code" href="classreranker_1_1_candidate_set_iterator.html#a10751b02e9aa29e8f2a1c76085b661ac" title="Resets this iterator back to the beginning of its backing collection.">Reset</a>();
+<a name="l00298"></a>00298   <span class="keywordflow">while</span> (development_test.<a class="code" href="classreranker_1_1_candidate_set_iterator.html#a82457e09d587f9e83ef3db066e8ac485" title="Returns whether this iterator contains another CandidateSet.">HasNext</a>()) {
+<a name="l00299"></a>00299     ++development_test_size;
+<a name="l00300"></a>00300     <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidate_set = development_test.<a class="code" href="classreranker_1_1_candidate_set_iterator.html#aa318e5cebc531e88bce5f6d9077f41ee" title="Returns the next CandidateSet.">Next</a>();
+<a name="l00301"></a>00301     <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a> != NULL) {
+<a name="l00302"></a>00302       candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a844b1e8edd6a75de2ffc5b295d558e36" title="Compiles any symbolic features in this candidate set.">CompileFeatures</a>(<a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>);
+<a name="l00303"></a>00303     }
+<a name="l00304"></a>00304     <a class="code" href="classreranker_1_1_perceptron_model.html#ace55bad139573080e682d5a269760673" title="Scores the specified set of candidates according to either the raw or averaged version of this percep...">ScoreCandidates</a>(candidate_set, not_training);
+<a name="l00305"></a>00305     <span class="keywordtype">double</span> loss_weight =
+<a name="l00306"></a>00306         <a class="code" href="classreranker_1_1_model.html#a013aa52eb8693d1133a0d32740dffa5a">use_weighted_loss</a>() ? candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a9bd2e0995871ec942b8117dc01293631" title="Returns the weight of the loss for this candidate set&rsquo;s reference.">loss_weight</a>() : 1.0;
+<a name="l00307"></a>00307     total_weight += loss_weight;
+<a name="l00308"></a>00308     total_weighted_loss += loss_weight * candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">GetBestScoring</a>().<a class="code" href="classreranker_1_1_candidate.html#a024f88c11b795a31cb8f5d1b47150701" title="Returns the loss of this candidate.">loss</a>();
+<a name="l00309"></a>00309     total_oracle_loss += loss_weight * candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">GetGold</a>().<a class="code" href="classreranker_1_1_candidate.html#a024f88c11b795a31cb8f5d1b47150701" title="Returns the loss of this candidate.">loss</a>();
+<a name="l00310"></a>00310 
+<a name="l00311"></a>00311     <span class="comment">// For now, assume that the candidate sets are sorted by the baseline score.</span>
+<a name="l00312"></a>00312     total_baseline_loss += loss_weight * candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">Get</a>(0).<a class="code" href="classreranker_1_1_candidate.html#a024f88c11b795a31cb8f5d1b47150701" title="Returns the loss of this candidate.">loss</a>();
+<a name="l00313"></a>00313     <span class="keywordflow">if</span> (candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">best_scoring_index</a>() != candidate_set.<a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">gold_index</a>()) {
+<a name="l00314"></a>00314       ++(*<a class="code" href="classreranker_1_1_model.html#ab308fe9304485e8c838ed2a196bb585b" title="The number of testing errors made on held-out development test data for each epoch.">num_testing_errors_per_epoch_</a>.rbegin());
+<a name="l00315"></a>00315     }
+<a name="l00316"></a>00316   }
+<a name="l00317"></a>00317 
+<a name="l00318"></a>00318   <span class="keywordtype">double</span> loss_this_epoch = total_weighted_loss / total_weight;
+<a name="l00319"></a>00319   <a class="code" href="classreranker_1_1_model.html#ad3a296860f768bee866213cc0c8bbf83" title="The average loss per epoch.">loss_per_epoch_</a>.push_back(loss_this_epoch);
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321   <span class="keywordtype">int</span> num_testing_errors_this_epoch =
+<a name="l00322"></a>00322       <a class="code" href="classreranker_1_1_model.html#ab308fe9304485e8c838ed2a196bb585b" title="The number of testing errors made on held-out development test data for each epoch.">num_testing_errors_per_epoch_</a>[<a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>()];
+<a name="l00323"></a>00323   <span class="keywordtype">double</span> percent_testing_errors_this_epoch =
+<a name="l00324"></a>00324       ((double)num_testing_errors_this_epoch / development_test_size) * 100.0;
+<a name="l00325"></a>00325   <span class="keywordtype">double</span> oracle_loss = total_oracle_loss / total_weight;
+<a name="l00326"></a>00326   <span class="keywordtype">double</span> baseline_loss = total_baseline_loss / total_weight;
+<a name="l00327"></a>00327   cerr &lt;&lt; <span class="stringliteral">&quot;Epoch &quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &lt;&lt; <span class="stringliteral">&quot;: oracle loss: &quot;</span> &lt;&lt; oracle_loss &lt;&lt; endl;
+<a name="l00328"></a>00328   cerr &lt;&lt; <span class="stringliteral">&quot;Epoch &quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &lt;&lt; <span class="stringliteral">&quot;: baseline loss: &quot;</span> &lt;&lt; baseline_loss &lt;&lt; endl;
+<a name="l00329"></a>00329   cerr &lt;&lt; <span class="stringliteral">&quot;Epoch &quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &lt;&lt; <span class="stringliteral">&quot;: average devtest loss: &quot;</span>
+<a name="l00330"></a>00330        &lt;&lt; loss_this_epoch &lt;&lt; endl;
+<a name="l00331"></a>00331   cerr &lt;&lt; <span class="stringliteral">&quot;Epoch &quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &lt;&lt; <span class="stringliteral">&quot;: number of testing errors: &quot;</span>
+<a name="l00332"></a>00332        &lt;&lt; num_testing_errors_this_epoch &lt;&lt; <span class="stringliteral">&quot; (&quot;</span>
+<a name="l00333"></a>00333        &lt;&lt; percent_testing_errors_this_epoch &lt;&lt; <span class="stringliteral">&quot;%)&quot;</span> &lt;&lt; endl;
+<a name="l00334"></a>00334 
+<a name="l00335"></a>00335   <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() == 0 ||
+<a name="l00336"></a>00336       loss_this_epoch &lt; <a class="code" href="classreranker_1_1_model.html#ad3a296860f768bee866213cc0c8bbf83" title="The average loss per epoch.">loss_per_epoch_</a>[<a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a>]) {
+<a name="l00337"></a>00337     <a class="code" href="classreranker_1_1_perceptron_model.html#a234283287d5a7f59fd8a1d1cf767fbc1" title="The best models seen so far during training, according to evaluation on the held-out development test...">best_models_</a> = <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>;
+<a name="l00338"></a>00338     <a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a> = <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>();
+<a name="l00339"></a>00339   }
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341   <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() &gt; 0 &amp;&amp;
+<a name="l00342"></a>00342       <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a18d952cada06cc20fb8382b098e1ee98" title="Returns the index of the current epoch.">epoch</a>() != <a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a> &amp;&amp;
+<a name="l00343"></a>00343       loss_this_epoch &gt;= <a class="code" href="classreranker_1_1_model.html#ad3a296860f768bee866213cc0c8bbf83" title="The average loss per epoch.">loss_per_epoch_</a>[<a class="code" href="classreranker_1_1_perceptron_model.html#acc08b37db0b4b7ea4cd8d340a4e86216" title="The epoch of the best models seen so far during training.">best_model_epoch_</a>]) {
+<a name="l00344"></a>00344     ++<a class="code" href="classreranker_1_1_perceptron_model.html#a0c25e67c7e7e5cef36bbc1b1fb1cd111" title="The current number of training epochs in which the model has been degrading in development set perfor...">num_epochs_in_decline_</a>;
+<a name="l00345"></a>00345   } <span class="keywordflow">else</span> {
+<a name="l00346"></a>00346     <span class="comment">// We&#39;re in the first epoch, or we&#39;ve made strictly fewer errors</span>
+<a name="l00347"></a>00347     <span class="comment">// than the previous epoch.</span>
+<a name="l00348"></a>00348     <a class="code" href="classreranker_1_1_perceptron_model.html#a0c25e67c7e7e5cef36bbc1b1fb1cd111" title="The current number of training epochs in which the model has been degrading in development set perfor...">num_epochs_in_decline_</a> = 0;
+<a name="l00349"></a>00349   }
+<a name="l00350"></a>00350   <span class="keywordflow">return</span> loss_this_epoch;
+<a name="l00351"></a>00351 }
+<a name="l00352"></a>00352 
+<a name="l00353"></a>00353 <span class="keywordtype">void</span>
+<a name="l00354"></a><a class="code" href="classreranker_1_1_perceptron_model.html#ace55bad139573080e682d5a269760673">00354</a> <a class="code" href="classreranker_1_1_perceptron_model.html#ace55bad139573080e682d5a269760673" title="Scores the specified set of candidates according to either the raw or averaged version of this percep...">PerceptronModel::ScoreCandidates</a>(<a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidates, <span class="keywordtype">bool</span> training) {
+<a name="l00355"></a>00355   <a class="code" href="classreranker_1_1_model.html#abf7147622fb3c5801016fb7c479f3158" title="A scorer for CandidateSet instances.">candidate_set_scorer_</a>-&gt;Score(<span class="keyword">this</span>, candidates, training);
+<a name="l00356"></a>00356 }
+<a name="l00357"></a>00357 
+<a name="l00358"></a>00358 <span class="keywordtype">double</span>
+<a name="l00359"></a><a class="code" href="classreranker_1_1_perceptron_model.html#aff26021ce19337a90068b66a219c0c6c">00359</a> <a class="code" href="classreranker_1_1_perceptron_model.html#aff26021ce19337a90068b66a219c0c6c" title="Scores a candidate according to either the raw or averaged version of this perceptron model...">PerceptronModel::ScoreCandidate</a>(<a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;candidate, <span class="keywordtype">bool</span> training) {
+<a name="l00360"></a>00360   <span class="keywordtype">bool</span> use_raw = training;
+<a name="l00361"></a>00361   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_feature_vector.html">FeatureVector&lt;int,double&gt;</a> &amp;model = <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#a98dd763d1e1b3b980e07091488f9b422" title="Returns either the raw or averaged feature vector, depending on the argument.">GetModel</a>(use_raw);
+<a name="l00362"></a>00362   <span class="keywordtype">double</span> score = <a class="code" href="classreranker_1_1_model.html#a50128261606a9cb655493b3f9b9149c4" title="Yes, this is an interface, but we add the kernel function as a data member.">kernel_fn_</a>-&gt;<a class="code" href="classreranker_1_1_kernel_function.html#ab274007dc0adedfaeb835910ccb5435a" title="Applies this kernel function to the specified feature vectors.">Apply</a>(model, candidate.<a class="code" href="classreranker_1_1_candidate.html#a741433c66a4cc4dfbb1e4b89c9c6e431" title="Returns the feature vector for this candidate.">features</a>());
+<a name="l00363"></a>00363   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
+<a name="l00364"></a>00364     cerr &lt;&lt; <span class="stringliteral">&quot;Time:&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a1e8b9be0b48cd8cbb360f23a638e12c6">to_string</a>() &lt;&lt; <span class="stringliteral">&quot;: scoring candidate &quot;</span>
+<a name="l00365"></a>00365          &lt;&lt; candidate &lt;&lt; <span class="stringliteral">&quot; with &quot;</span> &lt;&lt; (use_raw ? <span class="stringliteral">&quot;raw&quot;</span> : <span class="stringliteral">&quot;avg&quot;</span>)
+<a name="l00366"></a>00366          &lt;&lt; <span class="stringliteral">&quot; model: &quot;</span> &lt;&lt; model &lt;&lt; endl
+<a name="l00367"></a>00367          &lt;&lt; <span class="stringliteral">&quot;\tscore: &quot;</span> &lt;&lt; score &lt;&lt; endl;
+<a name="l00368"></a>00368   }
+<a name="l00369"></a>00369   candidate.<a class="code" href="classreranker_1_1_candidate.html#a1716a1e38f3b681a60aa5eaedbdc5f0b" title="Sets the score of this candidate.">set_score</a>(score);
+<a name="l00370"></a>00370   <span class="keywordflow">return</span> score;
+<a name="l00371"></a>00371 }
+<a name="l00372"></a>00372 
+<a name="l00373"></a>00373 <span class="keywordtype">void</span>
+<a name="l00374"></a><a class="code" href="classreranker_1_1_perceptron_model.html#a919a86a6a3a52f62199b438fb092836d">00374</a> <a class="code" href="classreranker_1_1_perceptron_model.html#a919a86a6a3a52f62199b438fb092836d">PerceptronModel::CompactifyFeatureUids</a>() {
+<a name="l00375"></a>00375   <span class="comment">// First, produce mapping for uid&#39;s of current non-zero features to dense</span>
+<a name="l00376"></a>00376   <span class="comment">// interval [0,n-1] (where there are n non-zero features).</span>
+<a name="l00377"></a>00377   unordered_set&lt;int&gt; old_uids;
+<a name="l00378"></a>00378   <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#a49b3808a509cf2e46edfdc4df6fbd62d" title="Returns the &quot;raw&quot; feature weights computed during training.">weights</a>().<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(old_uids);
+<a name="l00379"></a>00379   <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#a21e449676837c2a0aa03a6749bc9b6f7" title="Returns the feature vector corresponding to the averaged perceptron.">average_weights</a>().<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(old_uids);
+<a name="l00380"></a>00380   unordered_map&lt;int, int&gt; old_to_new_uids;
+<a name="l00381"></a>00381   <span class="keywordtype">int</span> new_uid = 0;
+<a name="l00382"></a>00382   <span class="keywordflow">for</span> (unordered_set&lt;int&gt;::const_iterator it = old_uids.begin();
+<a name="l00383"></a>00383        it != old_uids.end();
+<a name="l00384"></a>00384        ++it) {
+<a name="l00385"></a>00385     old_to_new_uids[*it] = new_uid++;
+<a name="l00386"></a>00386   }
+<a name="l00387"></a>00387   <a class="code" href="classreranker_1_1_perceptron_model.html#a6f913688d02fe624d91d1416c71e157c" title="The feature vectors representing this model.">models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#acd8ae561c7437253df45616432d3a683">RemapFeatureUids</a>(old_to_new_uids);
+<a name="l00388"></a>00388   <a class="code" href="classreranker_1_1_perceptron_model.html#a234283287d5a7f59fd8a1d1cf767fbc1" title="The best models seen so far during training, according to evaluation on the held-out development test...">best_models_</a>.<a class="code" href="classreranker_1_1_training_vector_set.html#acd8ae561c7437253df45616432d3a683">RemapFeatureUids</a>(old_to_new_uids);
+<a name="l00389"></a>00389 
+<a name="l00390"></a>00390   <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a> != NULL) {
+<a name="l00391"></a>00391     <a class="code" href="classreranker_1_1_symbols.html" title="An interface specifying a converter from symbols (strings) to int indices.">Symbols</a> *old_symbols = <a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>-&gt;<a class="code" href="classreranker_1_1_symbols.html#aaeac8d6c3a9d088aa4f086fa1cf6b2fa" title="Creates a newly-constructed clone of this Symbols instance that has the same runtime type...">Clone</a>();
+<a name="l00392"></a>00392     <a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>-&gt;<a class="code" href="classreranker_1_1_symbols.html#a3c78e8ddc4a1a1375968a214f4bdda3e" title="Clears all symbols from this symbol table.">Clear</a>();
+<a name="l00393"></a>00393     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_symbols.html#ac2f04202711c3f61038ca43656edeb92">Symbols::const_iterator</a> it = old_symbols-&gt;<a class="code" href="classreranker_1_1_symbols.html#ae63ad8cbeb0ab390a50e9f8b8deaa998">begin</a>();
+<a name="l00394"></a>00394          it != old_symbols-&gt;<a class="code" href="classreranker_1_1_symbols.html#a299004b5ead84217cc11ce43dd41b359">end</a>();
+<a name="l00395"></a>00395          ++it) {
+<a name="l00396"></a>00396       unordered_map&lt;int, int&gt;::const_iterator old_to_new_uid_it =
+<a name="l00397"></a>00397           old_to_new_uids.find(it-&gt;second);
+<a name="l00398"></a>00398       <span class="keywordflow">if</span> (old_to_new_uid_it != old_to_new_uids.end()) {
+<a name="l00399"></a>00399         <span class="keywordtype">int</span> new_uid = old_to_new_uid_it-&gt;second;
+<a name="l00400"></a>00400         <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;symbol = it-&gt;first;
+<a name="l00401"></a>00401         <a class="code" href="classreranker_1_1_model.html#a8c0f904234605692035ba179f85c53e2" title="The symbol table for this model (may be NULL).">symbols_</a>-&gt;<a class="code" href="classreranker_1_1_symbols.html#aae3fb0d876b17204049c3de8ae8b30f9">SetIndex</a>(symbol, new_uid);
+<a name="l00402"></a>00402       }
+<a name="l00403"></a>00403     }
+<a name="l00404"></a>00404     <span class="keyword">delete</span> old_symbols;
+<a name="l00405"></a>00405   }
+<a name="l00406"></a>00406 }
+<a name="l00407"></a>00407 
+<a name="l00408"></a>00408 <span class="keywordtype">void</span>
+<a name="l00409"></a><a class="code" href="classreranker_1_1_perceptron_model.html#af7b4bb2f10d16bcc6bdf2428e6c09af3">00409</a> <a class="code" href="classreranker_1_1_perceptron_model.html#af7b4bb2f10d16bcc6bdf2428e6c09af3" title="Computes the features to be updated for the gold candidate and the best-scoring candidate.">PerceptronModel::ComputeFeaturesToUpdate</a>(<span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;example,
+<a name="l00410"></a>00410                                          unordered_set&lt;int&gt; &amp;
+<a name="l00411"></a>00411                                          gold_features_to_update,
+<a name="l00412"></a>00412                                          unordered_set&lt;int&gt; &amp;
+<a name="l00413"></a>00413                                          best_scoring_features_to_update)<span class="keyword"></span>
+<a name="l00414"></a>00414 <span class="keyword">    const </span>{
+<a name="l00415"></a>00415   <span class="comment">// Collect gold features that are not in best-scoring candidate.</span>
+<a name="l00416"></a>00416   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_feature_vector.html">FeatureVector&lt;int,double&gt;</a> &amp;gold_features =
+<a name="l00417"></a>00417       example.<a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">GetGold</a>().<a class="code" href="classreranker_1_1_candidate.html#a741433c66a4cc4dfbb1e4b89c9c6e431" title="Returns the feature vector for this candidate.">features</a>();
+<a name="l00418"></a>00418   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_feature_vector.html">FeatureVector&lt;int,double&gt;</a> &amp;best_scoring_features =
+<a name="l00419"></a>00419       example.<a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">GetBestScoring</a>().<a class="code" href="classreranker_1_1_candidate.html#a741433c66a4cc4dfbb1e4b89c9c6e431" title="Returns the feature vector for this candidate.">features</a>();
+<a name="l00420"></a>00420 
+<a name="l00421"></a>00421   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
+<a name="l00422"></a>00422     cerr &lt;&lt; <span class="stringliteral">&quot;Gold index: &quot;</span> &lt;&lt; example.<a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">gold_index</a>()
+<a name="l00423"></a>00423          &lt;&lt; <span class="stringliteral">&quot;; best scoring index: &quot;</span> &lt;&lt; example.<a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">best_scoring_index</a>()
+<a name="l00424"></a>00424          &lt;&lt; endl;
+<a name="l00425"></a>00425     cerr &lt;&lt; <span class="stringliteral">&quot;Original gold features: &quot;</span> &lt;&lt; gold_features &lt;&lt; endl
+<a name="l00426"></a>00426          &lt;&lt; <span class="stringliteral">&quot;Original best scoring features: &quot;</span> &lt;&lt; best_scoring_features &lt;&lt; endl;
+<a name="l00427"></a>00427   }
 <a name="l00428"></a>00428 
-<a name="l00429"></a>00429   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
-<a name="l00430"></a>00430     cerr &lt;&lt; <span class="stringliteral">&quot;Time:&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a1e8b9be0b48cd8cbb360f23a638e12c6">to_string</a>() &lt;&lt; <span class="stringliteral">&quot;: new gold features: [&quot;</span>;
-<a name="l00431"></a>00431     <span class="keywordflow">for</span> (unordered_set&lt;int&gt;::const_iterator it =
-<a name="l00432"></a>00432              gold_features_to_update.begin();
-<a name="l00433"></a>00433          it != gold_features_to_update.end();
-<a name="l00434"></a>00434          ++it) {
-<a name="l00435"></a>00435       cerr &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; *it;
-<a name="l00436"></a>00436     }
-<a name="l00437"></a>00437     cerr &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; endl;
-<a name="l00438"></a>00438   }
-<a name="l00439"></a>00439 
-<a name="l00440"></a>00440   best_scoring_features.<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(best_scoring_features_to_update);
-<a name="l00441"></a>00441   gold_features.<a class="code" href="classreranker_1_1_feature_vector.html#a56cdaf41599879784f9342e6d94250b0" title="Removes from the specified set the uid&#39;s of feature with weights equal in this vector to their weight...">RemoveEqualFeatures</a>(best_scoring_features,
-<a name="l00442"></a>00442                                     best_scoring_features_to_update);
-<a name="l00443"></a>00443   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
-<a name="l00444"></a>00444     cerr &lt;&lt; <span class="stringliteral">&quot;Time:&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a1e8b9be0b48cd8cbb360f23a638e12c6">to_string</a>() &lt;&lt; <span class="stringliteral">&quot;: new best scoring features: [&quot;</span>;
-<a name="l00445"></a>00445     <span class="keywordflow">for</span> (unordered_set&lt;int&gt;::const_iterator it =
-<a name="l00446"></a>00446              best_scoring_features_to_update.begin();
-<a name="l00447"></a>00447          it != best_scoring_features_to_update.end();
-<a name="l00448"></a>00448          ++it) {
-<a name="l00449"></a>00449       cerr &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; *it;
-<a name="l00450"></a>00450     }
-<a name="l00451"></a>00451     cerr &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; endl;
-<a name="l00452"></a>00452   }
-<a name="l00453"></a>00453 
-<a name="l00454"></a>00454 }
-<a name="l00455"></a>00455 
-<a name="l00456"></a>00456 }  <span class="comment">// namespace reranker</span>
+<a name="l00429"></a>00429   gold_features.<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(gold_features_to_update);
+<a name="l00430"></a>00430   best_scoring_features.<a class="code" href="classreranker_1_1_feature_vector.html#a56cdaf41599879784f9342e6d94250b0" title="Removes from the specified set the uid&#39;s of feature with weights equal in this vector to their weight...">RemoveEqualFeatures</a>(gold_features,
+<a name="l00431"></a>00431                                             gold_features_to_update);
+<a name="l00432"></a>00432 
+<a name="l00433"></a>00433   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
+<a name="l00434"></a>00434     cerr &lt;&lt; <span class="stringliteral">&quot;Time:&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a1e8b9be0b48cd8cbb360f23a638e12c6">to_string</a>() &lt;&lt; <span class="stringliteral">&quot;: new gold features: [&quot;</span>;
+<a name="l00435"></a>00435     <span class="keywordflow">for</span> (unordered_set&lt;int&gt;::const_iterator it =
+<a name="l00436"></a>00436              gold_features_to_update.begin();
+<a name="l00437"></a>00437          it != gold_features_to_update.end();
+<a name="l00438"></a>00438          ++it) {
+<a name="l00439"></a>00439       cerr &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; *it;
+<a name="l00440"></a>00440     }
+<a name="l00441"></a>00441     cerr &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; endl;
+<a name="l00442"></a>00442   }
+<a name="l00443"></a>00443 
+<a name="l00444"></a>00444   best_scoring_features.<a class="code" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b" title="Inserts the uid&#39;s of features with non-zero weights into the specified set.">GetNonZeroFeatures</a>(best_scoring_features_to_update);
+<a name="l00445"></a>00445   gold_features.<a class="code" href="classreranker_1_1_feature_vector.html#a56cdaf41599879784f9342e6d94250b0" title="Removes from the specified set the uid&#39;s of feature with weights equal in this vector to their weight...">RemoveEqualFeatures</a>(best_scoring_features,
+<a name="l00446"></a>00446                                     best_scoring_features_to_update);
+<a name="l00447"></a>00447   <span class="keywordflow">if</span> (<a class="code" href="perceptron-model_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> &gt;= 2) {
+<a name="l00448"></a>00448     cerr &lt;&lt; <span class="stringliteral">&quot;Time:&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_model.html#ac23eff7aa52c83c566658bcba9093c4f" title="The tiny object that holds the &quot;training time&quot; for this model (epoch, index and absolute time index)...">time_</a>.<a class="code" href="classreranker_1_1_time.html#a1e8b9be0b48cd8cbb360f23a638e12c6">to_string</a>() &lt;&lt; <span class="stringliteral">&quot;: new best scoring features: [&quot;</span>;
+<a name="l00449"></a>00449     <span class="keywordflow">for</span> (unordered_set&lt;int&gt;::const_iterator it =
+<a name="l00450"></a>00450              best_scoring_features_to_update.begin();
+<a name="l00451"></a>00451          it != best_scoring_features_to_update.end();
+<a name="l00452"></a>00452          ++it) {
+<a name="l00453"></a>00453       cerr &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; *it;
+<a name="l00454"></a>00454     }
+<a name="l00455"></a>00455     cerr &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; endl;
+<a name="l00456"></a>00456   }
+<a name="l00457"></a>00457 
+<a name="l00458"></a>00458 }
+<a name="l00459"></a>00459 
+<a name="l00460"></a>00460 }  <span class="comment">// namespace reranker</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -551,7 +555,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:10:59 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -98,11 +98,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;<a class="el" href="candidate-set-reader_8_h_source.html">candidate-set-reader.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="candidate-set-writer_8_h_source.html">candidate-set-writer.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="executive-feature-extractor_8_h_source.html">executive-feature-extractor.H</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="interpreter_8_h_source.html">interpreter.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="model_8_h_source.html">model.H</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="perceptron-model_8_h_source.html">perceptron-model.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="model-merge-reducer_8_h_source.html">model-merge-reducer.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="model-reader_8_h_source.html">model-reader.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="model-proto-writer_8_h_source.html">model-proto-writer.H</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="perceptron-model_8_h_source.html">perceptron-model.H</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="symbol-table_8_h_source.html">symbol-table.H</a>&quot;</code><br/>
 </div>
 <p><a href="run-model_8_c_source.html">Go to the source code of this file.</a></p>
@@ -125,7 +126,7 @@ Defines</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="run-model_8_c.html#a2ef30c42cbc289d899a8be5d2d8f77d0">usage</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="run-model_8_c.html#a69a0862c537d5d29e5f898d21b069ab4">check_for_required_arg</a> (int argc, int i, string err_msg)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="run-model_8_c.html#a76a3d9ad70569ed55e32127247a6c355">read_and_extract_features</a> (const vector&lt; string &gt; &amp;files, <a class="el" href="classreranker_1_1_candidate_set_reader.html">CandidateSetReader</a> &amp;csr, bool compressed, bool use_base64, <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> &amp;efe, vector&lt; shared_ptr&lt; <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> &gt; &gt; &amp;examples)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="run-model_8_c.html#a3c4e4351456e7cc7887eef23b4224244">read_and_extract_features</a> (const vector&lt; string &gt; &amp;files, <a class="el" href="classreranker_1_1_candidate_set_reader.html">CandidateSetReader</a> &amp;csr, bool compressed, bool use_base64, shared_ptr&lt; <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> &gt; efe, vector&lt; shared_ptr&lt; <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> &gt; &gt; &amp;examples)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="run-model_8_c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -149,7 +150,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00060">60</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00061">61</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -164,7 +165,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00068">68</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00069">69</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -179,7 +180,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00065">65</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00066">66</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -194,7 +195,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00064">64</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00065">65</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -209,7 +210,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00066">66</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00067">67</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -224,7 +225,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00067">67</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00068">68</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -239,7 +240,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00069">69</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00070">70</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -254,7 +255,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00062">62</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00063">63</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -275,7 +276,7 @@ Variables</h2></td></tr>
 
 <p>&ldquo;Returns&rdquo; the string value of the specified argument. </p>
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00076">76</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00077">77</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -296,7 +297,7 @@ Variables</h2></td></tr>
 
 <p>Expands the string value of the specified argument using the <a class="el" href="symbolize-model_8_c.html#a878d88fe9bab9d7372961ce77b00fa26">STR</a> macro. </p>
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00074">74</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00075">75</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -332,7 +333,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00157">157</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00162">162</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -361,16 +362,16 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00188">188</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00195">195</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a76a3d9ad70569ed55e32127247a6c355"></a><!-- doxytag: member="run&#45;model.C::read_and_extract_features" ref="a76a3d9ad70569ed55e32127247a6c355" args="(const vector&lt; string &gt; &amp;files, CandidateSetReader &amp;csr, bool compressed, bool use_base64, ExecutiveFeatureExtractor &amp;efe, vector&lt; shared_ptr&lt; CandidateSet &gt; &gt; &amp;examples)" -->
+<a class="anchor" id="a3c4e4351456e7cc7887eef23b4224244"></a><!-- doxytag: member="run&#45;model.C::read_and_extract_features" ref="a3c4e4351456e7cc7887eef23b4224244" args="(const vector&lt; string &gt; &amp;files, CandidateSetReader &amp;csr, bool compressed, bool use_base64, shared_ptr&lt; ExecutiveFeatureExtractor &gt; efe, vector&lt; shared_ptr&lt; CandidateSet &gt; &gt; &amp;examples)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="run-model_8_c.html#a76a3d9ad70569ed55e32127247a6c355">read_and_extract_features</a> </td>
+          <td class="memname">void <a class="el" href="run-model_8_c.html#a3c4e4351456e7cc7887eef23b4224244">read_and_extract_features</a> </td>
           <td>(</td>
           <td class="paramtype">const vector&lt; string &gt; &amp;&#160;</td>
           <td class="paramname"><em>files</em>, </td>
@@ -396,7 +397,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> &amp;&#160;</td>
+          <td class="paramtype">shared_ptr&lt; <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> &gt;&#160;</td>
           <td class="paramname"><em>efe</em>, </td>
         </tr>
         <tr>
@@ -414,7 +415,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00167">167</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00172">172</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -432,7 +433,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00149">149</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00154">154</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -448,7 +449,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00082">82</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
+<p>Definition at line <a class="el" href="run-model_8_c_source.html#l00083">83</a> of file <a class="el" href="run-model_8_c_source.html">run-model.C</a>.</p>
 
 </div>
 </div>
@@ -470,7 +471,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:30 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:10:59 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

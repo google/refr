@@ -82,11 +82,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <a href="extract-features_8_c.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// Copyright 2012, Google Inc.</span>
 <a name="l00002"></a>00002 <span class="comment">// All rights reserved.</span>
-<a name="l00003"></a>00003 <span class="comment">// </span>
+<a name="l00003"></a>00003 <span class="comment">//</span>
 <a name="l00004"></a>00004 <span class="comment">// Redistribution and use in source and binary forms, with or without</span>
 <a name="l00005"></a>00005 <span class="comment">// modification, are permitted provided that the following conditions are</span>
 <a name="l00006"></a>00006 <span class="comment">// met:</span>
-<a name="l00007"></a>00007 <span class="comment">// </span>
+<a name="l00007"></a>00007 <span class="comment">//</span>
 <a name="l00008"></a>00008 <span class="comment">//   * Redistributions of source code must retain the above copyright</span>
 <a name="l00009"></a>00009 <span class="comment">//     notice, this list of conditions and the following disclaimer.</span>
 <a name="l00010"></a>00010 <span class="comment">//   * Redistributions in binary form must reproduce the above</span>
@@ -103,8 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment">// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
 <a name="l00022"></a>00022 <span class="comment">// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
 <a name="l00023"></a>00023 <span class="comment">// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
-<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           </span>
-<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           </span>
+<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
 <a name="l00026"></a>00026 <span class="comment">// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00027"></a>00027 <span class="comment">// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00028"></a>00028 <span class="comment">// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
@@ -321,10 +321,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00248"></a>00248     symbols = shared_ptr&lt;Symbols&gt;(<span class="keyword">new</span> <a class="code" href="classreranker_1_1_local_symbol_table.html" title="A symbol table that stores the mapping from symbols to int&rsquo;s and vice versa in local (non-static) dat...">LocalSymbolTable</a>());
 <a name="l00249"></a>00249   }
 <a name="l00250"></a>00250 
-<a name="l00251"></a>00251   <a class="code" href="classreranker_1_1_executive_feature_extractor.html" title="This class is like a regular FeatureExtractor, but has been promoted to the executive level and thus ...">ExecutiveFeatureExtractor</a> *efe = NULL;
+<a name="l00251"></a>00251   shared_ptr&lt;ExecutiveFeatureExtractor&gt; efe;
 <a name="l00252"></a>00252   <span class="keywordflow">if</span> (do_feature_extraction) {
-<a name="l00253"></a>00253     efe = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_executive_feature_extractor.html" title="This class is like a regular FeatureExtractor, but has been promoted to the executive level and thus ...">ExecutiveFeatureExtractor</a>();
-<a name="l00254"></a>00254     efe-&gt;<a class="code" href="classreranker_1_1_executive_feature_extractor.html#ab970de3165f9979a995011c520b0813f" title="Initializes this instance from the feature extractor specifications in the specified file...">Init</a>(feature_extractor_config_file);
+<a name="l00253"></a>00253     efe =
+<a name="l00254"></a>00254         ExecutiveFeatureExtractor::InitFromSpec(feature_extractor_config_file);
 <a name="l00255"></a>00255   }
 <a name="l00256"></a>00256 
 <a name="l00257"></a>00257   <span class="keywordtype">int</span> verbosity = 1;
@@ -336,7 +336,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00263"></a>00263                                     verbosity,
 <a name="l00264"></a>00264                                     compressed,
 <a name="l00265"></a>00265                                     use_base64);
-<a name="l00266"></a>00266   
+<a name="l00266"></a>00266 
 <a name="l00267"></a>00267   <span class="comment">// Set things up for streaming output.</span>
 <a name="l00268"></a>00268   <a class="code" href="classreranker_1_1_candidate_set_writer.html" title="A class for writing streams of training or test instances, where each training or test instance is a ...">CandidateSetWriter</a> csw(reporting_interval);
 <a name="l00269"></a>00269   csw.<a class="code" href="classreranker_1_1_candidate_set_writer.html#af87c88a58e8279fa2548e8b09c710693" title="Sets the verbosity of this writer (mostly for debugging purposes).">set_verbosity</a>(1);
@@ -369,31 +369,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00296"></a>00296   }
 <a name="l00297"></a>00297   csw.<a class="code" href="classreranker_1_1_candidate_set_writer.html#a661461b25cf13bd6a248f33aca2e666f">Close</a>();
 <a name="l00298"></a>00298 
-<a name="l00299"></a>00299   <span class="keywordflow">if</span> (do_feature_extraction) {
-<a name="l00300"></a>00300     <span class="keyword">delete</span> efe;
-<a name="l00301"></a>00301   }
-<a name="l00302"></a>00302 
-<a name="l00303"></a>00303   <span class="comment">// Finally, output a symbol table if user specified one.</span>
-<a name="l00304"></a>00304   <span class="keywordflow">if</span> (symbol_table_output_file != <span class="stringliteral">&quot;&quot;</span>) {
-<a name="l00305"></a>00305     cerr &lt;&lt; <span class="stringliteral">&quot;Writing out Symbol protocol buffer messages to file \&quot;&quot;</span>
-<a name="l00306"></a>00306          &lt;&lt; symbol_table_output_file &lt;&lt; <span class="stringliteral">&quot;\&quot;.&quot;</span> &lt;&lt; endl;
-<a name="l00307"></a>00307     ConfusionProtoIO proto_writer(symbol_table_output_file,
-<a name="l00308"></a>00308                                   ConfusionProtoIO::WRITE,
-<a name="l00309"></a>00309                                   compressed, use_base64);
-<a name="l00310"></a>00310     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_symbols.html#ac2f04202711c3f61038ca43656edeb92">Symbols::const_iterator</a> it = symbols-&gt;begin();
-<a name="l00311"></a>00311          it != symbols-&gt;end();
-<a name="l00312"></a>00312          ++it) {
-<a name="l00313"></a>00313       SymbolMessage symbol_message;
-<a name="l00314"></a>00314       symbol_message.set_symbol(it-&gt;first);
-<a name="l00315"></a>00315       symbol_message.set_index(it-&gt;second);        
-<a name="l00316"></a>00316       proto_writer.Write(symbol_message);
-<a name="l00317"></a>00317     }
-<a name="l00318"></a>00318     proto_writer.Close();
-<a name="l00319"></a>00319   }
-<a name="l00320"></a>00320 
-<a name="l00321"></a>00321   <a class="code" href="namespacereranker.html#aad9b478cf30e8884067b0f4edefefb76" title="A free-floating function (within the reranker namespace) that frees statically allocated objects...">TearDown</a>();
-<a name="l00322"></a>00322   google::protobuf::ShutdownProtobufLibrary();
-<a name="l00323"></a>00323 }
+<a name="l00299"></a>00299   <span class="comment">// Finally, output a symbol table if user specified one.</span>
+<a name="l00300"></a>00300   <span class="keywordflow">if</span> (symbol_table_output_file != <span class="stringliteral">&quot;&quot;</span>) {
+<a name="l00301"></a>00301     cerr &lt;&lt; <span class="stringliteral">&quot;Writing out Symbol protocol buffer messages to file \&quot;&quot;</span>
+<a name="l00302"></a>00302          &lt;&lt; symbol_table_output_file &lt;&lt; <span class="stringliteral">&quot;\&quot;.&quot;</span> &lt;&lt; endl;
+<a name="l00303"></a>00303     ConfusionProtoIO proto_writer(symbol_table_output_file,
+<a name="l00304"></a>00304                                   ConfusionProtoIO::WRITE,
+<a name="l00305"></a>00305                                   compressed, use_base64);
+<a name="l00306"></a>00306     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_symbols.html#ac2f04202711c3f61038ca43656edeb92">Symbols::const_iterator</a> it = symbols-&gt;begin();
+<a name="l00307"></a>00307          it != symbols-&gt;end();
+<a name="l00308"></a>00308          ++it) {
+<a name="l00309"></a>00309       SymbolMessage symbol_message;
+<a name="l00310"></a>00310       symbol_message.set_symbol(it-&gt;first);
+<a name="l00311"></a>00311       symbol_message.set_index(it-&gt;second);
+<a name="l00312"></a>00312       proto_writer.Write(symbol_message);
+<a name="l00313"></a>00313     }
+<a name="l00314"></a>00314     proto_writer.Close();
+<a name="l00315"></a>00315   }
+<a name="l00316"></a>00316 
+<a name="l00317"></a>00317   <a class="code" href="namespacereranker.html#aad9b478cf30e8884067b0f4edefefb76" title="A free-floating function (within the reranker namespace) that frees statically allocated objects...">TearDown</a>();
+<a name="l00318"></a>00318   google::protobuf::ShutdownProtobufLibrary();
+<a name="l00319"></a>00319 }
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -412,7 +408,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:10:59 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

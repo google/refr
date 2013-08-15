@@ -1,7 +1,6 @@
 var searchData=
 [
   ['factory',['Factory',['../classreranker_1_1_factory.html',1,'reranker']]],
-  ['factory_3c_20featureextractor_20_3e',['Factory< FeatureExtractor >',['../classreranker_1_1_factory.html',1,'reranker']]],
   ['factory_3c_20model_20_3e',['Factory< Model >',['../classreranker_1_1_factory.html',1,'reranker']]],
   ['factory_3c_20modelprotoreader_20_3e',['Factory< ModelProtoReader >',['../classreranker_1_1_factory.html',1,'reranker']]],
   ['factorybase',['FactoryBase',['../classreranker_1_1_factory_base.html',1,'reranker']]],

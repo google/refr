@@ -95,28 +95,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00013"></a>00013 
 <a name="l00014"></a>00014 <span class="keywordtype">int</span>
 <a name="l00015"></a><a class="code" href="interpreter-test_8_c.html#a3c04138a5bfe5d72780bb7e82a18e627">00015</a> <a class="code" href="candidate-set-proto-reader-test_8_c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {
-<a name="l00016"></a>00016   cout &lt;&lt; <span class="stringliteral">&quot;\nHello!  Please type assignment statements.\n&quot;</span> &lt;&lt; endl;
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018   <span class="keywordtype">int</span> debug = 1;
-<a name="l00019"></a>00019   <a class="code" href="classreranker_1_1_interpreter.html" title="Provides an interpreter for assigning primitives and Factory-constructible objects to named variables...">Interpreter</a> interpreter(debug);
-<a name="l00020"></a>00020   <span class="keywordflow">if</span> (argc &gt;= 2) {
-<a name="l00021"></a>00021     interpreter.<a class="code" href="classreranker_1_1_interpreter.html#ae3489eaf9df30f95e72e1b477769e812" title="Evaluates the statements in the specified text file.">Eval</a>(argv[1]);
-<a name="l00022"></a>00022   } <span class="keywordflow">else</span> {
-<a name="l00023"></a>00023     interpreter.<a class="code" href="classreranker_1_1_interpreter.html#ae3489eaf9df30f95e72e1b477769e812" title="Evaluates the statements in the specified text file.">Eval</a>(cin);
-<a name="l00024"></a>00024   }
-<a name="l00025"></a>00025   <span class="keywordtype">bool</span> value_for_f;
-<a name="l00026"></a>00026   <span class="keywordtype">bool</span> success = interpreter.<a class="code" href="classreranker_1_1_interpreter.html#a7a303a24ec83502b36bbccce670e3868" title="Retrieves the value of the specified variable.">Get</a>(<span class="stringliteral">&quot;f&quot;</span>, &amp;value_for_f);
-<a name="l00027"></a>00027   <span class="keywordflow">if</span> (success) {
-<a name="l00028"></a>00028     cout &lt;&lt; <span class="stringliteral">&quot;Success! f=&quot;</span> &lt;&lt; (value_for_f ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>) &lt;&lt; endl;
-<a name="l00029"></a>00029   } <span class="keywordflow">else</span> {
-<a name="l00030"></a>00030     cout &lt;&lt; <span class="stringliteral">&quot;:( ... no value for variable f&quot;</span> &lt;&lt; endl;
-<a name="l00031"></a>00031   }
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033   cout &lt;&lt; <span class="stringliteral">&quot;\n\nEnvironment: &quot;</span> &lt;&lt; endl;
-<a name="l00034"></a>00034   interpreter.<a class="code" href="classreranker_1_1_interpreter.html#a5f3ebffb7c21cd29eeec4fb659f3b948">PrintEnv</a>(cout);
+<a name="l00016"></a>00016   cout &lt;&lt; <span class="stringliteral">&quot;Here is a list of abstract types and the concrete implementations\n&quot;</span>
+<a name="l00017"></a>00017        &lt;&lt; <span class="stringliteral">&quot;you can construct:&quot;</span> &lt;&lt; endl;
+<a name="l00018"></a>00018   <span class="comment">// NOTE: Must put a flow-through method to this method in</span>
+<a name="l00019"></a>00019   <span class="comment">// EnvironmentImpl which can then be invoked from the Interpreter</span>
+<a name="l00020"></a>00020   <span class="comment">// class.</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022   <span class="keywordtype">int</span> debug = 1;
+<a name="l00023"></a>00023   <a class="code" href="classreranker_1_1_interpreter.html" title="Provides an interpreter for assigning primitives and Factory-constructible objects to named variables...">Interpreter</a> interpreter(debug);
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025   cout &lt;&lt; endl;
+<a name="l00026"></a>00026   interpreter.<a class="code" href="classreranker_1_1_interpreter.html#ae56b52c4056c52df9e785d99a6693858">PrintFactories</a>(cout);
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028   cout &lt;&lt; <span class="stringliteral">&quot;\nHello!  Please type assignment statements.\n&quot;</span> &lt;&lt; endl;
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030   <span class="keywordflow">if</span> (argc &gt;= 2) {
+<a name="l00031"></a>00031     interpreter.<a class="code" href="classreranker_1_1_interpreter.html#ae3489eaf9df30f95e72e1b477769e812" title="Evaluates the statements in the specified text file.">Eval</a>(argv[1]);
+<a name="l00032"></a>00032   } <span class="keywordflow">else</span> {
+<a name="l00033"></a>00033     interpreter.<a class="code" href="classreranker_1_1_interpreter.html#ae3489eaf9df30f95e72e1b477769e812" title="Evaluates the statements in the specified text file.">Eval</a>(cin);
+<a name="l00034"></a>00034   }
 <a name="l00035"></a>00035 
-<a name="l00036"></a>00036   cout &lt;&lt; <span class="stringliteral">&quot;\nHave a nice day!\n&quot;</span> &lt;&lt; endl;
-<a name="l00037"></a>00037 }
+<a name="l00036"></a>00036   cout &lt;&lt; <span class="stringliteral">&quot;\nNow doing some hard-coded testing, looking to see if you\n&quot;</span>
+<a name="l00037"></a>00037        &lt;&lt; <span class="stringliteral">&quot;set a variable named \&quot;f\&quot; to have a boolean value.&quot;</span> &lt;&lt; endl;
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039   <span class="keywordtype">bool</span> value_for_f;
+<a name="l00040"></a>00040   <span class="keywordtype">bool</span> success = interpreter.<a class="code" href="classreranker_1_1_interpreter.html#a7a303a24ec83502b36bbccce670e3868" title="Retrieves the value of the specified variable.">Get</a>(<span class="stringliteral">&quot;f&quot;</span>, &amp;value_for_f);
+<a name="l00041"></a>00041   <span class="keywordflow">if</span> (success) {
+<a name="l00042"></a>00042     cout &lt;&lt; <span class="stringliteral">&quot;Success! f=&quot;</span> &lt;&lt; (value_for_f ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>) &lt;&lt; endl;
+<a name="l00043"></a>00043   } <span class="keywordflow">else</span> {
+<a name="l00044"></a>00044     cout &lt;&lt; <span class="stringliteral">&quot;:( ... no boolean value for variable f&quot;</span> &lt;&lt; endl;
+<a name="l00045"></a>00045   }
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047   cout &lt;&lt; <span class="stringliteral">&quot;\n\nEnvironment: &quot;</span> &lt;&lt; endl;
+<a name="l00048"></a>00048   interpreter.<a class="code" href="classreranker_1_1_interpreter.html#a5f3ebffb7c21cd29eeec4fb659f3b948">PrintEnv</a>(cout);
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050   cout &lt;&lt; <span class="stringliteral">&quot;\nHave a nice day!\n&quot;</span> &lt;&lt; endl;
+<a name="l00051"></a>00051 }
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -135,7 +149,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:10:59 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

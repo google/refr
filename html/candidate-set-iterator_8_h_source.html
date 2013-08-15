@@ -82,11 +82,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <a href="candidate-set-iterator_8_h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// Copyright 2012, Google Inc.</span>
 <a name="l00002"></a>00002 <span class="comment">// All rights reserved.</span>
-<a name="l00003"></a>00003 <span class="comment">// </span>
+<a name="l00003"></a>00003 <span class="comment">//</span>
 <a name="l00004"></a>00004 <span class="comment">// Redistribution and use in source and binary forms, with or without</span>
 <a name="l00005"></a>00005 <span class="comment">// modification, are permitted provided that the following conditions are</span>
 <a name="l00006"></a>00006 <span class="comment">// met:</span>
-<a name="l00007"></a>00007 <span class="comment">// </span>
+<a name="l00007"></a>00007 <span class="comment">//</span>
 <a name="l00008"></a>00008 <span class="comment">//   * Redistributions of source code must retain the above copyright</span>
 <a name="l00009"></a>00009 <span class="comment">//     notice, this list of conditions and the following disclaimer.</span>
 <a name="l00010"></a>00010 <span class="comment">//   * Redistributions in binary form must reproduce the above</span>
@@ -103,8 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment">// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
 <a name="l00022"></a>00022 <span class="comment">// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
 <a name="l00023"></a>00023 <span class="comment">// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
-<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           </span>
-<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           </span>
+<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
 <a name="l00026"></a>00026 <span class="comment">// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00027"></a>00027 <span class="comment">// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00028"></a>00028 <span class="comment">// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
@@ -153,8 +153,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00104"></a>00104 
 <a name="l00111"></a><a class="code" href="classreranker_1_1_multi_file_candidate_set_iterator.html">00111</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_multi_file_candidate_set_iterator.html" title="An implementation of the CandidateSetIterator interface that iterates over CandidateSet instances tha...">MultiFileCandidateSetIterator</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_candidate_set_iterator.html" title="An interface specifying iteration over CandidateSet instances, using Java-style semantics (sorry...">CandidateSetIterator</a> {
 <a name="l00112"></a>00112  <span class="keyword">public</span>:
-<a name="l00150"></a><a class="code" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a3e6731a7c90dc2fa62035dc135086f59">00150</a>   <a class="code" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a3e6731a7c90dc2fa62035dc135086f59" title="Constructs a new instance that iterates over the CandidateSet instances serialized in the specified s...">MultiFileCandidateSetIterator</a>(vector&lt;string&gt; files,
-<a name="l00151"></a>00151                                 <span class="keyword">const</span> <a class="code" href="classreranker_1_1_executive_feature_extractor.html" title="This class is like a regular FeatureExtractor, but has been promoted to the executive level and thus ...">ExecutiveFeatureExtractor</a> *efe,
+<a name="l00150"></a><a class="code" href="classreranker_1_1_multi_file_candidate_set_iterator.html#aa4c912f0b8571f7164fe16a18b3c623a">00150</a>   <a class="code" href="classreranker_1_1_multi_file_candidate_set_iterator.html#aa4c912f0b8571f7164fe16a18b3c623a" title="Constructs a new instance that iterates over the CandidateSet instances serialized in the specified s...">MultiFileCandidateSetIterator</a>(vector&lt;string&gt; files,
+<a name="l00151"></a>00151                                 shared_ptr&lt;const ExecutiveFeatureExtractor&gt; efe,
 <a name="l00152"></a>00152                                 <span class="keywordtype">int</span> max_examples,
 <a name="l00153"></a>00153                                 <span class="keywordtype">int</span> max_candidates,
 <a name="l00154"></a>00154                                 <span class="keywordtype">int</span> reporting_interval,
@@ -200,8 +200,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00200"></a>00200       file_open_ = <span class="keyword">true</span>;
 <a name="l00201"></a>00201     }
 <a name="l00202"></a>00202     next_candidate_set_ = shared_ptr&lt;CandidateSet&gt;();
-<a name="l00203"></a>00203     <span class="keywordflow">if</span> (efe_ != NULL) {
-<a name="l00204"></a>00204       efe_-&gt;<a class="code" href="classreranker_1_1_executive_feature_extractor.html#aa917a1e2e3730ba8858b8e8db0d50ec3" title="Indictes to this instance that iteration has been reset.">Reset</a>();
+<a name="l00203"></a>00203     <span class="keywordflow">if</span> (efe_.get() != NULL) {
+<a name="l00204"></a>00204       efe_-&gt;Reset();
 <a name="l00205"></a>00205     }
 <a name="l00206"></a>00206     ReadNext();
 <a name="l00207"></a>00207   }
@@ -227,14 +227,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00227"></a>00227         }
 <a name="l00228"></a>00228       }
 <a name="l00229"></a>00229     }
-<a name="l00230"></a>00230     <span class="keywordflow">if</span> (efe_ != NULL &amp;&amp; next_candidate_set_.get() != NULL) {
-<a name="l00231"></a>00231       efe_-&gt;<a class="code" href="classreranker_1_1_executive_feature_extractor.html#ae825fd69b80d636cb12d95e39a1c3e20" title="Extracts features for the specified CandidateSet using the suite of FeatureExtractor instances specif...">Extract</a>(*next_candidate_set_);
+<a name="l00230"></a>00230     <span class="keywordflow">if</span> (efe_.get() != NULL &amp;&amp; next_candidate_set_.get() != NULL) {
+<a name="l00231"></a>00231       efe_-&gt;Extract(*next_candidate_set_);
 <a name="l00232"></a>00232     }
 <a name="l00233"></a>00233   }
 <a name="l00234"></a>00234 
 <a name="l00235"></a>00235   <span class="comment">// data members</span>
 <a name="l00236"></a>00236   vector&lt;string&gt; files_;
-<a name="l00237"></a>00237   <span class="keyword">const</span> ExecutiveFeatureExtractor *efe_;
+<a name="l00237"></a>00237   shared_ptr&lt;const ExecutiveFeatureExtractor&gt; efe_;
 <a name="l00238"></a>00238   <span class="keywordtype">bool</span> compressed_;
 <a name="l00239"></a>00239   <span class="keywordtype">bool</span> use_base64_;
 <a name="l00240"></a>00240   <span class="keywordtype">bool</span> reader_valid_;
@@ -267,7 +267,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:10:58 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

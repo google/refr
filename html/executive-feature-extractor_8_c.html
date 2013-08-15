@@ -77,14 +77,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Defines</a>  </div>
+<a href="#define-members">Defines</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">executive-feature-extractor.C File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Provides the implementation of the <a class="el" href="classreranker_1_1_executive_feature_extractor.html" title="This class is like a regular FeatureExtractor, but has been promoted to the executive level and thus ...">reranker::ExecutiveFeatureExtractor</a> class.  
+<p>Provides the implementation of the <a class="el" href="classreranker_1_1_executive_feature_extractor.html" title="This class is like a regular FeatureExtractor, but has been promoted to the executive level and thus ...">reranker::ExecutiveFeatureExtractor</a> interface.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;fstream&gt;</code><br/>
@@ -98,6 +100,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <p><a href="executive-feature-extractor_8_c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_executive_feature_extractor_impl_constructor.html">reranker::ExecutiveFeatureExtractorImplConstructor</a></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereranker.html">reranker</a></td></tr>
@@ -106,9 +111,13 @@ Namespaces</h2></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="executive-feature-extractor_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>&#160;&#160;&#160;1</td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const Constructor<br class="typebreak"/>
+&lt; ExecutiveFeatureExtractor &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereranker.html#ac5a575c356161c4821a5b298b52ddc52">reranker::ExecutiveFeatureExtractorImpl_my_protoype</a> = Factory&lt; ExecutiveFeatureExtractor &gt;::Register(string(&quot;ExecutiveFeatureExtractorImpl&quot;), new ExecutiveFeatureExtractorImplConstructor())</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Provides the implementation of the <a class="el" href="classreranker_1_1_executive_feature_extractor.html" title="This class is like a regular FeatureExtractor, but has been promoted to the executive level and thus ...">reranker::ExecutiveFeatureExtractor</a> class. </p>
+<div class="textblock"><p>Provides the implementation of the <a class="el" href="classreranker_1_1_executive_feature_extractor.html" title="This class is like a regular FeatureExtractor, but has been promoted to the executive level and thus ...">reranker::ExecutiveFeatureExtractor</a> interface. </p>
 <p>This class executes the extraction methods of a suite of <a class="el" href="classreranker_1_1_feature_extractor.html" title="An abstract base class/interface for all feature extractors.">reranker::FeatureExtractor</a> instances. </p>
 <dl class="author"><dt><b>Author:</b></dt><dd><a href="mailto:dbikel@google.com">dbikel@google.com</a> (Dan Bikel) </dd></dl>
 
@@ -147,7 +156,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:10:59 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

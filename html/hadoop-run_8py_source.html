@@ -390,7 +390,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00308"></a>00308   <span class="keywordflow">if</span> (options.develdata):
 <a name="l00309"></a>00309     precompdevfile = options.outputdir + <span class="stringliteral">&quot;/&quot;</span>
 <a name="l00310"></a>00310     precompdevfile += os.path.basename(options.develdata).replace(<span class="stringliteral">&quot;.gz&quot;</span>,<span class="stringliteral">&quot;&quot;</span>)
-<a name="l00311"></a>00311     precompdevfile += <span class="stringliteral">&quot;.compiled.gz&quot;</span>
+<a name="l00311"></a>00311     precompdevfile += <span class="stringliteral">&quot;.&quot;</span> + options.modelname + <span class="stringliteral">&quot;.compiled.gz&quot;</span>
 <a name="l00312"></a><a class="code" href="namespacehadoop-run.html#ae78a065b3eb608a5856211edb4ee7a1a">00312</a>   symbol_dir = options.hdfsinputdir + <span class="stringliteral">&quot;/Symbols/&quot;</span>
 <a name="l00313"></a><a class="code" href="namespacehadoop-run.html#a2f9e77fd2ea474bf35a773b8bf469d87">00313</a>   precomp_dir = options.hdfsinputdir + <span class="stringliteral">&quot;/Precompiled/&quot;</span>
 <a name="l00314"></a><a class="code" href="namespacehadoop-run.html#a82ea895544777ec4d6e3bc944fa0c137">00314</a>   precompdev_dir = options.hdfsinputdir + <span class="stringliteral">&quot;/PrecompiledDev/&quot;</span>
@@ -488,14 +488,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00406"></a>00406     loss_history.append(loss)
 <a name="l00407"></a>00407     pyutil.printInfo(<span class="stringliteral">&quot;Loss for iteration &quot;</span> + str(iteration) + <span class="stringliteral">&quot;: &quot;</span> + str(loss) +
 <a name="l00408"></a>00408                      <span class="stringliteral">&quot; loss-delta: &quot;</span> + str(diff))
-<a name="l00409"></a>00409     <span class="keywordflow">if</span> (num_in_decline &lt; options.max_num_in_decline):
-<a name="l00410"></a>00410       pyutil.printInfo(<span class="stringliteral">&quot;Continuing to train as number epochs in decline is: &quot;</span> +
-<a name="l00411"></a>00411                        str(num_in_decline) + <span class="stringliteral">&quot;, which is less than &quot;</span> +
-<a name="l00412"></a>00412                        str(options.max_num_in_decline))
-<a name="l00413"></a>00413   <span class="comment"># if not done...</span>
-<a name="l00414"></a>00414   cur_model = model_output
-<a name="l00415"></a>00415 pyutil.printInfo(<span class="stringliteral">&quot;Best model is from iteration: &quot;</span> + str(best_loss_index + 1) +
-<a name="l00416"></a>00416                  <span class="stringliteral">&quot; with a devset loss of: &quot;</span> + str(loss_history[best_loss_index]))
+<a name="l00409"></a>00409     <span class="keywordflow">if</span> (num_in_decline &gt;= options.max_num_in_decline):
+<a name="l00410"></a>00410       converged = <span class="keyword">True</span>
+<a name="l00411"></a>00411       pyutil.printInfo(<span class="stringliteral">&quot;Stopping after &quot;</span> + str(num_in_decline) +
+<a name="l00412"></a>00412                        <span class="stringliteral">&quot; iterations in decline&quot;</span>)
+<a name="l00413"></a>00413     <span class="keywordflow">else</span>:
+<a name="l00414"></a>00414       pyutil.printInfo(<span class="stringliteral">&quot;Continuing to train as number epochs in decline is: &quot;</span> +
+<a name="l00415"></a>00415                        str(num_in_decline) + <span class="stringliteral">&quot;, which is less than &quot;</span> +
+<a name="l00416"></a>00416                        str(options.max_num_in_decline))
+<a name="l00417"></a>00417 
+<a name="l00418"></a>00418   cur_model = model_output
+<a name="l00419"></a>00419 pyutil.printInfo(<span class="stringliteral">&quot;Best model is from iteration: &quot;</span> + str(best_loss_index + 1) +
+<a name="l00420"></a>00420                  <span class="stringliteral">&quot; with a devset loss of: &quot;</span> + str(loss_history[best_loss_index]))
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -514,7 +518,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:29 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:10:59 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

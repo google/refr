@@ -123,8 +123,8 @@ Inheritance diagram for reranker::MultiFileCandidateSetIterator:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a3e6731a7c90dc2fa62035dc135086f59">MultiFileCandidateSetIterator</a> (vector&lt; string &gt; files, const <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> *efe, int max_examples, int max_candidates, int reporting_interval, int verbosity, bool compressed, bool use_base64)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new instance that iterates over the <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> instances serialized in the specified sequence of files.  <a href="#a3e6731a7c90dc2fa62035dc135086f59"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#aa4c912f0b8571f7164fe16a18b3c623a">MultiFileCandidateSetIterator</a> (vector&lt; string &gt; files, shared_ptr&lt; const <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> &gt; efe, int max_examples, int max_candidates, int reporting_interval, int verbosity, bool compressed, bool use_base64)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new instance that iterates over the <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> instances serialized in the specified sequence of files.  <a href="#aa4c912f0b8571f7164fe16a18b3c623a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a5c82d1ada54b5febd4de83b61e34b9b4">HasNext</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a6e2aafde5423945b3149ea91f3314b3f">Next</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#ab7aa3c23a52a31142f90368dc4d24d42">curr_file</a> () const </td></tr>
@@ -137,12 +137,12 @@ Public Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="candidate-set-iterator_8_h_source.html#l00111">111</a> of file <a class="el" href="candidate-set-iterator_8_h_source.html">candidate-set-iterator.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3e6731a7c90dc2fa62035dc135086f59"></a><!-- doxytag: member="reranker::MultiFileCandidateSetIterator::MultiFileCandidateSetIterator" ref="a3e6731a7c90dc2fa62035dc135086f59" args="(vector&lt; string &gt; files, const ExecutiveFeatureExtractor *efe, int max_examples, int max_candidates, int reporting_interval, int verbosity, bool compressed, bool use_base64)" -->
+<a class="anchor" id="aa4c912f0b8571f7164fe16a18b3c623a"></a><!-- doxytag: member="reranker::MultiFileCandidateSetIterator::MultiFileCandidateSetIterator" ref="aa4c912f0b8571f7164fe16a18b3c623a" args="(vector&lt; string &gt; files, shared_ptr&lt; const ExecutiveFeatureExtractor &gt; efe, int max_examples, int max_candidates, int reporting_interval, int verbosity, bool compressed, bool use_base64)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a3e6731a7c90dc2fa62035dc135086f59">reranker::MultiFileCandidateSetIterator::MultiFileCandidateSetIterator</a> </td>
+          <td class="memname"><a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#aa4c912f0b8571f7164fe16a18b3c623a">reranker::MultiFileCandidateSetIterator::MultiFileCandidateSetIterator</a> </td>
           <td>(</td>
           <td class="paramtype">vector&lt; string &gt;&#160;</td>
           <td class="paramname"><em>files</em>, </td>
@@ -150,7 +150,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> *&#160;</td>
+          <td class="paramtype">shared_ptr&lt; const <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> &gt;&#160;</td>
           <td class="paramname"><em>efe</em>, </td>
         </tr>
         <tr>
@@ -202,7 +202,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">files</td><td>the sequence of files containing serialized <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> instances </td></tr>
-    <tr><td class="paramname">efe</td><td>a pointer to an <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> instance; if non-<code>NULL</code>, this iterator will invoke the <a class="el" href="classreranker_1_1_executive_feature_extractor.html#ae825fd69b80d636cb12d95e39a1c3e20">ExecutiveFeatureExtractor::Extract</a> on each <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> instance returned by this iterator&rsquo;s <a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a6e2aafde5423945b3149ea91f3314b3f">Next</a> method </td></tr>
+    <tr><td class="paramname">efe</td><td>a pointer to an <a class="el" href="classreranker_1_1_executive_feature_extractor.html">ExecutiveFeatureExtractor</a> instance; if non-<code>NULL</code>, this iterator will invoke the <a class="el" href="classreranker_1_1_executive_feature_extractor.html#a526abd8110888e7ce4a71c24cad6c2a9">ExecutiveFeatureExtractor::Extract</a> on each <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> instance returned by this iterator&rsquo;s <a class="el" href="classreranker_1_1_multi_file_candidate_set_iterator.html#a6e2aafde5423945b3149ea91f3314b3f">Next</a> method </td></tr>
     <tr><td class="paramname">max_examples</td><td>the maximum number of examples to be read from each file specified by the <code>files</code> parameter (as per the first parameter of the <a class="el" href="classreranker_1_1_candidate_set_reader.html#a44f8ba2b5bbd12134bd7d42375ea390e">CandidateSetReader::CandidateSetReader(int,int,long)</a> constructor) </td></tr>
     <tr><td class="paramname">max_candidates</td><td>the maximum number of candidates to be read for each de-serialized <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> instance (as per the second parameter of the <a class="el" href="classreranker_1_1_candidate_set_reader.html#a44f8ba2b5bbd12134bd7d42375ea390e">CandidateSetReader::CandidateSetReader(int,int,long)</a> constructor) </td></tr>
     <tr><td class="paramname">reporting_interval</td><td>the number of <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> instances read after which a message will be issued to <code>cerr</code> </td></tr>
@@ -321,7 +321,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2013 11:56:30 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 15 2013 10:11:00 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
