@@ -93,7 +93,7 @@ class EnvironmentImpl;
 /// m1 = PerceptronModel(name("foo"));
 ///
 /// // Constructs a vector of Model objects and assigns it to "m_vec".
-/// m_vec = {m2, PerceptronModel(name("bar"))};
+/// m_vec = {m1, PerceptronModel(name("bar"))};
 /// \endcode
 ///
 /// More formally, a statement in this language must conform to the
