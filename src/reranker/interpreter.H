@@ -88,6 +88,12 @@ class EnvironmentImpl;
 /// write the following statement:
 /// \code
 /// b = true;  // assigns the value true to the boolean variable "b"
+///
+/// // Constructs an object of abstract type Model and assigns it to "m1"
+/// m1 = PerceptronModel(name("foo"));
+///
+/// // Constructs a vector of Model objects and assigns it to "m_vec".
+/// m_vec = {m2, PerceptronModel(name("bar"))};
 /// \endcode
 ///
 /// More formally, a statement in this language must conform to the
