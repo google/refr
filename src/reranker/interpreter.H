@@ -85,7 +85,7 @@ class EnvironmentImpl;
 ///
 /// Additionally, the interpreter can do type inference, so all the type
 /// specifiers in the previous examples are optional.  For example, one may
-/// write the following statement:
+/// write the following statements:
 /// \code
 /// b = true;  // assigns the value true to the boolean variable "b"
 ///
