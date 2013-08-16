@@ -80,6 +80,7 @@ class VarMapBase {
   /// Returns whether this instance contains primitive or primtive
   /// vector variables.
   virtual bool IsPrimitive() const { return is_primitive_; }
+
   /// Returns the type name of the variables of this instance.
   virtual const string &Name() const { return name_; }
 
@@ -131,7 +132,8 @@ class Environment {
 
   /// Sets the specified variable to the value obtained from the following
   /// tokens available from the specified token stream.
-  virtual void ReadAndSet(const string &varname, StreamTokenizer &st) = 0;
+  virtual void ReadAndSet(const string &varname, StreamTokenizer &st,
+                          const string type = "") = 0;
 
   /// Retrieves the type name of the specified variable.
   virtual const string &GetType(const string &varname) const = 0;
@@ -139,7 +141,24 @@ class Environment {
   /// Retrieves the VarMap instance for the specified variable.
   virtual VarMapBase *GetVarMap(const string &varname) = 0;
 
-  /// Retrieves the VarMap instance for the specified type.
+  /// Retrieves the VarMap instance for the specified type, or NULL if
+  /// there is no such VarMap.  The specified type must either be a
+  /// primitive type, a primitive vector type, a \link
+  /// reranker::Factory Factory\endlink-constructible type or a vector
+  /// of \link reranker::Factory Factory\endlink-constructible types.
+  ///
+  /// If the specified type is a concrete implementation of a \link
+  /// reranker::Factory Factory\endlink-constructible type, then the
+  /// pointer to the VarMap for its abstract base type is returned;
+  /// for example, if the specified type is <tt>"RankFeatureExtactor"</tt>
+  /// then this method will return the VarMap containing
+  /// <tt>"FeatureExtractor"</tt> instances.
+  ///
+  /// TODO(dbikel): Support returning the VarMap for vectors of
+  /// abstract type when the user specifies a vector of concrete type.
+  /// E.g., if the specified type is "RankFeatureExtractor[]" then
+  /// this method should return the VarMap containing
+  /// "FeatureExtractor[]" instances.
   virtual VarMapBase *GetVarMapForType(const string &type) = 0;
 
   /// Prints a human-readable string of all the variables in this environment,
@@ -193,12 +212,15 @@ class ValueString<bool> {
 };
 
 /// A partial specialization of the ValueString class to support
-/// printing of shared_ptr's to objects.
+/// printing of shared_ptr's to objects, where we simply print the typeid
+/// name followed by a colon character followed by the pointer address.
 template<typename T>
 class ValueString<shared_ptr<T> > {
  public:
   string ToString(const shared_ptr<T> &value) const {
-    return "<object>";
+    ostringstream oss;
+    oss << "<" << typeid(shared_ptr<T>).name() << ":" << value.get() << ">";
+    return oss.str();
   }
 };
 

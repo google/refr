@@ -104,7 +104,8 @@ EnvironmentImpl::EnvironmentImpl(int debug) {
 }
 
 void
-EnvironmentImpl::ReadAndSet(const string &varname, StreamTokenizer &st) {
+EnvironmentImpl::ReadAndSet(const string &varname, StreamTokenizer &st,
+                            const string type) {
   bool is_vector =
       st.PeekTokenType() == StreamTokenizer::RESERVED_CHAR &&
       st.Peek() == "{";
@@ -125,24 +126,34 @@ EnvironmentImpl::ReadAndSet(const string &varname, StreamTokenizer &st) {
   string next_tok = st.Peek();
   bool is_object_type = false;
 
-  string type = InferType(varname, st, is_vector, &is_object_type);
+  string inferred_type = InferType(varname, st, is_vector, &is_object_type);
 
   if (debug_ >= 1) {
-    cerr << "Environment::ReadAndSet: "
-         << "next_tok=" << next_tok << "; type=" << type << endl;
+    cerr << "Environment::ReadAndSet: next_tok=\"" << next_tok
+         << "\"; explicit type=\"" << type << "\"; "
+         << "inferred_type=\"" << inferred_type << "\"" << endl;
   }
 
-  if (type == "") {
+  if (type == "" && inferred_type == "") {
     ostringstream err_ss;
-    err_ss << "Environment: error: could not infer type for variable "
-           << varname;
+    err_ss << "Environment: error: no explicit type specifier and could not "
+           << "infer type for variable " << varname;
+    throw std::runtime_error(err_ss.str());
+  }
+  if (type != "" && inferred_type != "" && type != inferred_type) {
+    ostringstream err_ss;
+    err_ss << "Environment: error: explicit type " << type
+           << " and inferred type " << inferred_type
+           << " disagree for variable " << varname;
     throw std::runtime_error(err_ss.str());
   }
 
-  // Check that type is a key in var_map_.
+  // If no explicit type specifier, then the inferred_type is the type.
+  string varmap_type = type == "" ? inferred_type : type;
 
-  var_map_[type]->ReadAndSet(varname, st);
-  types_[varname] = type;
+  // Check that varmap_type is a key in var_map_.
+  var_map_[varmap_type]->ReadAndSet(varname, st);
+  types_[varname] = varmap_type;
 }
 
 string

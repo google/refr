@@ -58,6 +58,95 @@ using std::tr1::unordered_map;
 using std::tr1::unordered_set;
 using std::vector;
 
+/// We use the templated class TypeName to be able to take an actual
+/// C++ type and get the type name string used by the \link
+/// reranker::Interpreter Interpreter \endlink and \link
+/// reranker::Environment Environment \endlink classes.  This is so
+/// that the \link reranker::TypedMemberInitializer::Init Init
+/// \endlink method of the \link reranker::TypedMemberInitializer
+/// TypedMemberInitializer \endlink class, defined below, can give the
+/// \link reranker::Environment::ReadAndSet Environment::ReadAndSet
+/// \endlink method an explicit type name of the data member is about
+/// to read and set.
+///
+/// The basic implementation here works for \link reranker::Factory
+/// Factory\endlink-constructible types, returning the result of the
+/// \link reranker::Factory::BaseName Factory::BaseName \endlink
+/// method for an instance of <tt>Factory&lt;T&gt;</tt>.
+template <typename T>
+class TypeName {
+ public:
+  string ToString() {
+    Factory<T> factory;
+    return factory.BaseName();
+  }
+};
+
+/// A partial specialization so that an object of type <tt>bool</tt>
+/// converts to "bool".
+template <>
+class TypeName<bool> {
+ public:
+  string ToString() {
+    return "bool";
+  }
+};
+
+/// A partial specialization so that an object of type <tt>int</tt>
+/// converts to "int".
+template <>
+class TypeName<int> {
+ public:
+  string ToString() {
+    return "int";
+  }
+};
+
+/// A partial specialization so that an object of type <tt>double</tt>
+/// converts to "double".
+template <>
+class TypeName<double> {
+ public:
+  string ToString() {
+    return "double";
+  }
+};
+
+/// A partial specialization so that an object of type <tt>string</tt>
+/// converts to "string".
+template <>
+class TypeName<string> {
+ public:
+  string ToString() {
+    return "string";
+  }
+};
+
+/// A partial specialization so that an object of type
+/// <tt>shared_ptr&lt;T&gt;</tt>, where <tt>T</tt> is some \link
+/// reranker::Factory Factory\endlink-constructible type, converts to
+/// the string produced by <tt>TypeName&lt;T&gt;</tt>.
+template <typename T>
+class TypeName<shared_ptr<T> > {
+ public:
+  string ToString() {
+    TypeName<T> type_name;
+    return type_name.ToString();
+  }
+};
+
+/// A partial specialization so that an object of type
+/// <tt>vector&lt;T&gt;</tt> gets converted to the result of
+/// <tt>TypeName&lt;T&gt;&nbsp;+&nbsp;"[]"</tt>.
+template <typename T>
+class TypeName<vector<T> > {
+ public:
+  string ToString() {
+    TypeName<T> element_type_name;
+    return element_type_name.ToString() + "[]";
+  }
+};
+
 /// \class MemberInitializer
 ///
 /// An interface for initializers of members of a \link
@@ -88,7 +177,8 @@ class TypedMemberInitializer : public MemberInitializer {
   TypedMemberInitializer(const string &name, T *member, bool required = false) :
       MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st, Environment *env) {
-    env->ReadAndSet(Name(), st);
+    TypeName<T> type_name;
+    env->ReadAndSet(Name(), st, type_name.ToString());
     VarMapBase *var_map = env->GetVarMap(Name());
     VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
     if (typed_var_map != NULL) {

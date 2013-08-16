@@ -43,27 +43,37 @@ namespace reranker {
 
 using std::ostringstream;
 
-/// TODO(dbikel): Support explicitly declared type specifies instead of
-///               always trying to infer the type.  I.e., allow
-///                 int f = 1;
-///               in addition to
-///                 f = 1;
-///               Crucially, this will allow you to declare the type
-///               of empty vectors, such as
-///                 FeatureExtractor[] extractors = {};
-///               Currently, empty vectors are only possible when
-///               initializing a vector member of a Factory-constructible
-///               object (since the type is known beforehand).
 void
 Interpreter::Eval(StreamTokenizer &st) {
   // Keeps reading assignment statements until there are no more tokens.
   while (st.PeekTokenType() != StreamTokenizer::EOF_TYPE) {
-    // Read variable name.
+    // Read variable name or type specifier.
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
-    if (token_type != StreamTokenizer::IDENTIFIER) {
-      WrongTokenTypeError(st.PeekTokenStart(), StreamTokenizer::IDENTIFIER,
-                          token_type, st.Peek());
+    VarMapBase *varmap = env_->GetVarMapForType(st.Peek());
+    bool is_type_specifier =  varmap != NULL;
+    if (token_type != StreamTokenizer::IDENTIFIER && !is_type_specifier) {
+      string expected_type =
+          string(StreamTokenizer::TypeName(StreamTokenizer::IDENTIFIER)) +
+          " or type specifier";
+      string found_type = StreamTokenizer::TypeName(token_type);
+      WrongTokenTypeError(st.PeekTokenStart(), expected_type, found_type,
+                          st.Peek());
     }
+
+    string type = "";
+    if (is_type_specifier) {
+      // Consume and remember the type specifier.
+      st.Next();              // Explicit type could be a concrete type.
+      type = varmap->Name();  // Remember the abstract type.
+
+      // Check that next token is a variable name.
+      StreamTokenizer::TokenType token_type = st.PeekTokenType();
+      if (token_type != StreamTokenizer::IDENTIFIER) {
+        WrongTokenTypeError(st.PeekTokenStart(), StreamTokenizer::IDENTIFIER,
+                            token_type, st.Peek());
+      }
+    }
+
     string varname = st.Next();
 
     // Next, read equals sign.
@@ -84,7 +94,7 @@ Interpreter::Eval(StreamTokenizer &st) {
     }
 
     // Consume and set the value for this variable in the environment.
-    env_->ReadAndSet(varname, st);
+    env_->ReadAndSet(varname, st, type);
 
     token_type = st.PeekTokenType();
     if (st.Peek() != ";") {
@@ -113,10 +123,21 @@ Interpreter::WrongTokenTypeError(size_t pos,
                                  StreamTokenizer::TokenType expected,
                                  StreamTokenizer::TokenType found,
                                  const string &token) const {
+  WrongTokenTypeError(pos,
+                      StreamTokenizer::TypeName(expected),
+                      StreamTokenizer::TypeName(found),
+                      token);
+}
+
+void
+Interpreter::WrongTokenTypeError(size_t pos,
+                                 const string &expected_type,
+                                 const string &found_type,
+                                 const string &token) const {
   ostringstream err_ss;
   err_ss << "Interpreter:" << filename_ << ": at stream pos " << pos
-         << " expected token type " << StreamTokenizer::TypeName(expected)
-         << " but found " << StreamTokenizer::TypeName(found)
+         << " expected token type " << expected_type
+         << " but found " << found_type
          << "; token=\"" << token << "\"";
   throw std::runtime_error(err_ss.str());
 }

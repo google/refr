@@ -65,22 +65,29 @@ class EnvironmentImpl;
 /// Statements in this language look like the following:
 /// \code
 /// // This is a comment.
-/// b = true;  // assigns the value true to the boolean variable named "b"
-/// f = 1;     // assigns the int value 1 to the variable "f"
-/// g = 2.4;   // assigns the double value 2.4 to the variable "g"
-/// n = "foo"; // assigns the string value "foo" to the variable "n"
-/// b_vec = {true, false, true};  // assigns a vector of bool to "b_vec"
+/// bool b = true;    // assigns the value true to the boolean variable "b"
+/// int f = 1;        // assigns the int value 1 to the variable "f"
+/// double g = 2.4;   // assigns the double value 2.4 to the variable "g"
+/// string n = "foo"  // assigns the string value "foo" to the variable "n"
+/// bool[] b_vec = {true, false, true};  // assigns a vector of bool to "b_vec"
 ///
 /// // Constructs an object of abstract type Model and assigns it to "m1"
-/// m1 = PerceptronModel(name("foo"));
+/// Model m1 = PerceptronModel(name("foo"));
 ///
 /// // Constructs an object of type Model and assigns it to "m2", crucially
 /// // using the previously defined string variable "n" as the value for
 /// // the PerceptronModel's name parameter.
-/// m2 = PerceptronModel(name(n));
+/// Model m2 = PerceptronModel(name(n));
 ///
 /// // Constructs a vector of Model objects and assigns it to "m_vec".
-/// m_vec = {m2, PerceptronModel(name("bar"))};
+/// Model[] m_vec = {m2, PerceptronModel(name("bar"))};
+/// \endcode
+///
+/// Additionally, the interpreter can do type inference, so all the type
+/// specifiers in the previous examples are optional.  For example, one may
+/// write the following statement:
+/// \code
+/// b = true;  // assigns the value true to the boolean variable "b"
 /// \endcode
 ///
 /// More formally, a statement in this language must conform to the
@@ -96,7 +103,29 @@ class EnvironmentImpl;
 /// <tr>
 ///   <td><tt>\<statement\></tt></td>
 ///   <td><tt>::=</tt></td>
-///   <td><tt>\<variable_name\> '=' \<value\> ';' </tt></td>
+///   <td>
+///     <tt>[ \<type_specifier\> ] \<variable_name\> '=' \<value\> ';' </tt>
+///   </td>
+/// </tr>
+/// <tr>
+///   <td><tt>\<type_specifier\></tt></td>
+///   <td><tt>::=</tt></td>
+///   <td>any one of
+///       <table border=false>
+///         <tr><td><tt>bool</tt></td></tr>
+///         <tr><td><tt>int</tt></td></tr>
+///         <tr><td><tt>double</tt></td></tr>
+///         <tr><td><tt>string</tt></td></tr>
+///         <tr><td><tt>bool[]</tt></td></tr>
+///         <tr><td><tt>int[]</tt></td></tr>
+///         <tr><td><tt>double[]</tt></td></tr>
+///         <tr><td><tt>string[]</tt></td></tr>
+///         <tr><td><tt>T</tt></td></tr>
+///         <tr><td><tt>T[]</tt></td></tr>
+///       </table>
+///      where <tt>T</tt> is any \link reranker::Factory
+///      Factory\endlink-constructible type.
+///   </td>
 /// </tr>
 /// <tr>
 ///   <td><tt>\<variable_name\></tt></td>
@@ -183,18 +212,6 @@ class Interpreter {
 
  private:
   /// Evalutes the expressions contained in the specified token stream.
-  ///
-  /// TODO(dbikel): Support explicitly declared type specifies instead of
-  ///               always trying to infer the type.  I.e., allow
-  ///                 int f = 1;
-  ///               in addition to
-  ///                 f = 1;
-  ///               Crucially, this will allow you to declare the type
-  ///               of empty vectors, such as
-  ///                 FeatureExtractor[] extractors = {};
-  ///               Currently, empty vectors are only possible when
-  ///               initializing a vector member of a Factory-constructible
-  ///               object (since the type is known beforehand).
   void Eval(StreamTokenizer &st);
 
   void WrongTokenError(size_t pos,
@@ -205,6 +222,11 @@ class Interpreter {
   void WrongTokenTypeError(size_t pos,
                            StreamTokenizer::TokenType expected,
                            StreamTokenizer::TokenType found,
+                           const string &token) const;
+
+  void WrongTokenTypeError(size_t pos,
+                           const string &expected_type,
+                           const string &found_type,
                            const string &token) const;
 
   /// The environment of this interpreter.

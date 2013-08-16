@@ -81,7 +81,8 @@ class EnvironmentImpl : public Environment {
 
   /// Sets the specified variable to the value obtained from the following
   /// tokens available from the specified token stream.
-  virtual void ReadAndSet(const string &varname, StreamTokenizer &st);
+  virtual void ReadAndSet(const string &varname, StreamTokenizer &st,
+                          const string type);
 
   virtual const string &GetType(const string &varname) const {
     unordered_map<string, string>::const_iterator type_it =
@@ -110,7 +111,7 @@ class EnvironmentImpl : public Environment {
     unordered_map<string, VarMapBase *>::const_iterator var_map_it =
         var_map_.find(lookup_type);
     if (var_map_it == var_map_.end()) {
-      // Error.
+      return NULL;
     }
     return var_map_it->second;
   }
