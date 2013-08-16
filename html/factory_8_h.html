@@ -101,6 +101,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_type_name.html">reranker::TypeName&lt; T &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">We use the templated class <a class="el" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a> to be able to take an actual C++ type and get the type name string used by the <a class="el" href="classreranker_1_1_interpreter.html">Interpreter </a> and <a class="el" href="classreranker_1_1_environment.html">Environment </a> classes.  <a href="classreranker_1_1_type_name.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_type_name_3_01bool_01_4.html">reranker::TypeName&lt; bool &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A partial specialization so that an object of type <code>bool</code> converts to "bool".  <a href="classreranker_1_1_type_name_3_01bool_01_4.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_type_name_3_01int_01_4.html">reranker::TypeName&lt; int &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A partial specialization so that an object of type <code>int</code> converts to "int".  <a href="classreranker_1_1_type_name_3_01int_01_4.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_type_name_3_01double_01_4.html">reranker::TypeName&lt; double &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A partial specialization so that an object of type <code>double</code> converts to "double".  <a href="classreranker_1_1_type_name_3_01double_01_4.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_type_name_3_01string_01_4.html">reranker::TypeName&lt; string &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A partial specialization so that an object of type <code>string</code> converts to "string".  <a href="classreranker_1_1_type_name_3_01string_01_4.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_type_name_3_01shared__ptr_3_01_t_01_4_01_4.html">reranker::TypeName&lt; shared_ptr&lt; T &gt; &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A partial specialization so that an object of type <code>shared_ptr&lt;T&gt;</code>, where <code>T</code> is some <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible type, converts to the string produced by <code><a class="el" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a>&lt;T&gt;</code>.  <a href="classreranker_1_1_type_name_3_01shared__ptr_3_01_t_01_4_01_4.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_type_name_3_01vector_3_01_t_01_4_01_4.html">reranker::TypeName&lt; vector&lt; T &gt; &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A partial specialization so that an object of type <code>vector&lt;T&gt;</code> gets converted to the type name of <code>T</code> followed by the string <code>"[]"</code>, equivalent to the result of executing the following expression:  <a href="classreranker_1_1_type_name_3_01vector_3_01_t_01_4_01_4.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_member_initializer.html">reranker::MemberInitializer</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An interface for initializers of members of a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible object.  <a href="classreranker_1_1_member_initializer.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_typed_member_initializer.html">reranker::TypedMemberInitializer&lt; T &gt;</a></td></tr>
@@ -171,7 +185,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>This is a helper macro used only by the <code>REGISTER</code> macro. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00696">696</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00786">786</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -196,7 +210,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>Provides the necessary implementation for a factory for the specified <code>BASE</code> class type. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00717">717</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00807">807</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -237,7 +251,7 @@ Defines</h2></td></tr>
 <p>This macro registers the concrete subtype <em>TYPE</em> with the specified factory for instances of type <em>BASE</em>; the <em>TYPE</em> is associated with the specified <em>NAME</em>. </p>
 <p>This macro&mdash;or a macro defined using this macro&mdash;should be used in the implementation file for a concrete subclass <em>TYPE</em> of the baseclass <em>BASE</em>. Often, <em>TYPE</em> and <em>NAME</em> may be the exact same string; however, they must be different when <em>TYPE</em> contains characters that may not appear in C++ identifiers, such as colons (<em>e.g.</em>, when <em>TYPE</em> is the fully-qualified name of an inner class). </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00710">710</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00800">800</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -259,7 +273,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 15 2013 11:17:59 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 16 2013 15:23:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

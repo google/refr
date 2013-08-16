@@ -144,207 +144,211 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00078"></a><a class="code" href="classreranker_1_1_var_map_base.html#a0d49848ea240d99d8e99b38af0130564">00078</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html#a0d49848ea240d99d8e99b38af0130564">~VarMapBase</a>() { }
 <a name="l00079"></a>00079 
 <a name="l00082"></a><a class="code" href="classreranker_1_1_var_map_base.html#ac37ba67371f01d047550c6fc55177d37">00082</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map_base.html#ac37ba67371f01d047550c6fc55177d37" title="Returns whether this instance contains primitive or primtive vector variables.">IsPrimitive</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d" title="Whether this VarMap instance holds variables of primitive type or vector of primitives.">is_primitive_</a>; }
-<a name="l00084"></a><a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0">00084</a>   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a>; }
-<a name="l00085"></a>00085 
-<a name="l00088"></a>00088   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map_base.html#af9d31b9fe4a4a5b6b30ea968fd59ddf5" title="Returns whether the specified variable has a definition in this environment.">Defined</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) <span class="keyword">const</span> = 0;
-<a name="l00089"></a>00089 
-<a name="l00094"></a>00094   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map_base.html#a2870abd4bc8ad1d925fc304acb44417d" title="Reads the next value (primitive or spec for constructing a Factory-constructible object) from the spe...">ReadAndSet</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st) = 0;
-<a name="l00095"></a>00095 
-<a name="l00099"></a>00099   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map_base.html#a9e4f03b385dd93614a7a870241b6dcac" title="Prints out a human-readable string to the specified output stream containing the variables, their type and, if primitive, their values.">Print</a>(ostream &amp;os) <span class="keyword">const</span> = 0;
-<a name="l00100"></a>00100 
-<a name="l00102"></a>00102   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_var_map_base.html#ad8a03d5cb3c186131e9af106d59bf751" title="Returns a newly constructed copy of this VarMap.">Copy</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) <span class="keyword">const</span> = 0;
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104  <span class="keyword">protected</span>:
-<a name="l00107"></a><a class="code" href="classreranker_1_1_var_map_base.html#a4378638e3959e3b98135a90cbee819ea">00107</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map_base.html#a4378638e3959e3b98135a90cbee819ea" title="To allow proper implementation of Copy in VarMapBase implementation, since we don&#39;t get copying of ba...">SetMembers</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env, <span class="keywordtype">bool</span> is_primitive) {
-<a name="l00108"></a>00108     <a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a> = name;
-<a name="l00109"></a>00109     <a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a> = env;
-<a name="l00110"></a>00110     <a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d" title="Whether this VarMap instance holds variables of primitive type or vector of primitives.">is_primitive_</a> = is_primitive;
-<a name="l00111"></a>00111   }
-<a name="l00112"></a>00112 
-<a name="l00114"></a><a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca">00114</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a>;
-<a name="l00116"></a><a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944">00116</a>   <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *<a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>;
-<a name="l00119"></a><a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d">00119</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d" title="Whether this VarMap instance holds variables of primitive type or vector of primitives.">is_primitive_</a>;
-<a name="l00120"></a>00120 };
-<a name="l00121"></a>00121 
-<a name="l00124"></a><a class="code" href="classreranker_1_1_environment.html">00124</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> {
-<a name="l00125"></a>00125  <span class="keyword">public</span>:
-<a name="l00126"></a><a class="code" href="classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6">00126</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6">~Environment</a>() { }
-<a name="l00127"></a>00127 
-<a name="l00130"></a>00130   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276" title="Returns whether the specified variable has been defined in this environment.">Defined</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) <span class="keyword">const</span> = 0;
-<a name="l00131"></a>00131 
-<a name="l00134"></a>00134   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_environment.html#ae2641671e6f45d47f9432429ad5349bf" title="Sets the specified variable to the value obtained from the following tokens available from the specif...">ReadAndSet</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st) = 0;
-<a name="l00135"></a>00135 
-<a name="l00137"></a>00137   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3" title="Retrieves the type name of the specified variable.">GetType</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) <span class="keyword">const</span> = 0;
-<a name="l00138"></a>00138 
-<a name="l00140"></a>00140   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003" title="Retrieves the VarMap instance for the specified variable.">GetVarMap</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) = 0;
-<a name="l00141"></a>00141 
-<a name="l00143"></a>00143   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2" title="Retrieves the VarMap instance for the specified type.">GetVarMapForType</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type) = 0;
-<a name="l00144"></a>00144 
-<a name="l00147"></a>00147   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_environment.html#a07d328d2d2bbe0f62e7348f590e6529c" title="Prints a human-readable string of all the variables in this environment, their types and...">Print</a>(ostream &amp;os) <span class="keyword">const</span> = 0;
-<a name="l00148"></a>00148 
-<a name="l00150"></a>00150   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *<a class="code" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02" title="Returns a copy of this environment.">Copy</a>() <span class="keyword">const</span> = 0;
-<a name="l00151"></a>00151 
-<a name="l00155"></a>00155   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_environment.html#a068a3e922a02814d89b8d316bbf91830" title="Prints out a human-readable string with the names of all abstract base types and their concrete imple...">PrintFactories</a>(ostream &amp;os) <span class="keyword">const</span> = 0;
-<a name="l00156"></a>00156 
-<a name="l00158"></a>00158   <span class="keyword">static</span> <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *<a class="code" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792" title="A static factory method to create a new, empty Environment instance.">CreateEmpty</a>();
-<a name="l00159"></a>00159 };
-<a name="l00160"></a>00160 
-<a name="l00165"></a>00165 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
-<a name="l00166"></a><a class="code" href="classreranker_1_1_value_string.html">00166</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a> {
-<a name="l00167"></a>00167  <span class="keyword">public</span>:
-<a name="l00168"></a><a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">00168</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(<span class="keyword">const</span> T &amp;value)<span class="keyword"> const </span>{
-<a name="l00169"></a>00169     ostringstream oss;
-<a name="l00170"></a>00170     oss &lt;&lt; value;
-<a name="l00171"></a>00171     <span class="keywordflow">return</span> oss.str();
-<a name="l00172"></a>00172   }
-<a name="l00173"></a>00173 };
-<a name="l00174"></a>00174 
-<a name="l00177"></a>00177 <span class="keyword">template</span>&lt;&gt;
-<a name="l00178"></a><a class="code" href="classreranker_1_1_value_string_3_01string_01_4.html">00178</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;string&gt; {
-<a name="l00179"></a>00179  <span class="keyword">public</span>:
-<a name="l00180"></a><a class="code" href="classreranker_1_1_value_string_3_01string_01_4.html#afc5e189ee5ceee74c9b6cb95e26fd788">00180</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01string_01_4.html#afc5e189ee5ceee74c9b6cb95e26fd788">ToString</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;value)<span class="keyword"> const </span>{
-<a name="l00181"></a>00181     <span class="keywordflow">return</span> <span class="stringliteral">&quot;\&quot;&quot;</span> + value + <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00182"></a>00182   }
-<a name="l00183"></a>00183 };
-<a name="l00184"></a>00184 
-<a name="l00187"></a>00187 <span class="keyword">template</span>&lt;&gt;
-<a name="l00188"></a><a class="code" href="classreranker_1_1_value_string_3_01bool_01_4.html">00188</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;bool&gt; {
-<a name="l00189"></a>00189  <span class="keyword">public</span>:
-<a name="l00190"></a><a class="code" href="classreranker_1_1_value_string_3_01bool_01_4.html#ac9916644d28b8f87feef5f38953cbf15">00190</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01bool_01_4.html#ac9916644d28b8f87feef5f38953cbf15">ToString</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;value)<span class="keyword"> const </span>{
-<a name="l00191"></a>00191     <span class="keywordflow">return</span> value ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>;
-<a name="l00192"></a>00192   }
-<a name="l00193"></a>00193 };
-<a name="l00194"></a>00194 
-<a name="l00197"></a>00197 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
-<a name="l00198"></a><a class="code" href="classreranker_1_1_value_string_3_01shared__ptr_3_01_t_01_4_01_4.html">00198</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;shared_ptr&lt;T&gt; &gt; {
-<a name="l00199"></a>00199  <span class="keyword">public</span>:
-<a name="l00200"></a><a class="code" href="classreranker_1_1_value_string_3_01shared__ptr_3_01_t_01_4_01_4.html#aa78604322fa888d430a93b1ab3b6f416">00200</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01shared__ptr_3_01_t_01_4_01_4.html#aa78604322fa888d430a93b1ab3b6f416">ToString</a>(<span class="keyword">const</span> shared_ptr&lt;T&gt; &amp;value)<span class="keyword"> const </span>{
-<a name="l00201"></a>00201     <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;object&gt;&quot;</span>;
-<a name="l00202"></a>00202   }
-<a name="l00203"></a>00203 };
-<a name="l00204"></a>00204 
-<a name="l00209"></a>00209 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
-<a name="l00210"></a><a class="code" href="classreranker_1_1_value_string_3_01vector_3_01_t_01_4_01_4.html">00210</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;vector&lt;T&gt; &gt; {
-<a name="l00211"></a>00211  <span class="keyword">public</span>:
-<a name="l00212"></a><a class="code" href="classreranker_1_1_value_string_3_01vector_3_01_t_01_4_01_4.html#a73092a1f7580b9ebf7dc7c2b829c75b3">00212</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01vector_3_01_t_01_4_01_4.html#a73092a1f7580b9ebf7dc7c2b829c75b3">ToString</a>(<span class="keyword">const</span> vector&lt;T&gt; &amp;value)<span class="keyword"> const </span>{
-<a name="l00213"></a>00213     ostringstream oss;
-<a name="l00214"></a>00214     oss &lt;&lt; <span class="stringliteral">&quot;{&quot;</span>;
-<a name="l00215"></a>00215     <span class="keyword">typename</span> vector&lt;T&gt;::const_iterator it = value.begin();
-<a name="l00216"></a>00216     <a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString&lt;T&gt;</a> value_string;
-<a name="l00217"></a>00217     <span class="keywordflow">if</span> (it != value.end()) {
-<a name="l00218"></a>00218       oss &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(*it);
-<a name="l00219"></a>00219       <span class="comment">//oss &lt;&lt; *it;</span>
-<a name="l00220"></a>00220       ++it;
-<a name="l00221"></a>00221     }
-<a name="l00222"></a>00222     <span class="keywordflow">for</span> (; it != value.end(); ++it) {
-<a name="l00223"></a>00223       oss &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(*it);
-<a name="l00224"></a>00224       <span class="comment">//oss &lt;&lt; &quot;, &quot; &lt;&lt; *it;</span>
-<a name="l00225"></a>00225     }
-<a name="l00226"></a>00226     oss &lt;&lt; <span class="stringliteral">&quot;}&quot;</span>;
-<a name="l00227"></a>00227     <span class="keywordflow">return</span> oss.str();
-<a name="l00228"></a>00228   }
-<a name="l00229"></a>00229 };
-<a name="l00230"></a>00230 
-<a name="l00235"></a>00235 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
-<a name="l00236"></a><a class="code" href="classreranker_1_1_var_map.html">00236</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> {
-<a name="l00237"></a>00237  <span class="keyword">public</span>:
-<a name="l00245"></a><a class="code" href="classreranker_1_1_var_map.html#abb805680c80d7cf246b0baa9a89b9bae">00245</a>   <a class="code" href="classreranker_1_1_var_map.html#abb805680c80d7cf246b0baa9a89b9bae" title="Constructs a mapping from variables of a particular type to their values.">VarMap</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env, <span class="keywordtype">bool</span> is_primitive = <span class="keyword">true</span>) :
-<a name="l00246"></a>00246       <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a>(name, env, is_primitive) { }
-<a name="l00247"></a>00247 
-<a name="l00248"></a><a class="code" href="classreranker_1_1_var_map.html#af8844540d015ae4e5aa4c878cf85fd97">00248</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map.html#af8844540d015ae4e5aa4c878cf85fd97">~VarMap</a>() { }
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250   <span class="comment">// Accessor methods</span>
-<a name="l00251"></a>00251 
-<a name="l00257"></a><a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58">00257</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58" title="Assigns the value of the specified variable to the object pointed to by the value parameter...">Get</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, T *value)<span class="keyword"> const </span>{
-<a name="l00258"></a>00258     <span class="keyword">typename</span> unordered_map&lt;string, T&gt;::const_iterator it = vars_.find(varname);
-<a name="l00259"></a>00259     <span class="keywordflow">if</span> (it == vars_.end()) {
-<a name="l00260"></a>00260       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00261"></a>00261     } <span class="keywordflow">else</span> {
-<a name="l00262"></a>00262       *value = it-&gt;second;
-<a name="l00263"></a>00263       <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00264"></a>00264     }
-<a name="l00265"></a>00265   }
-<a name="l00266"></a>00266 
-<a name="l00268"></a><a class="code" href="classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd">00268</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd">Defined</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname)<span class="keyword"> const </span>{
-<a name="l00269"></a>00269     <span class="keywordflow">return</span> vars_.find(varname) != vars_.end();
-<a name="l00270"></a>00270   }
+<a name="l00083"></a>00083 
+<a name="l00085"></a><a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0">00085</a>   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a>; }
+<a name="l00086"></a>00086 
+<a name="l00089"></a>00089   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map_base.html#af9d31b9fe4a4a5b6b30ea968fd59ddf5" title="Returns whether the specified variable has a definition in this environment.">Defined</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) <span class="keyword">const</span> = 0;
+<a name="l00090"></a>00090 
+<a name="l00095"></a>00095   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map_base.html#a2870abd4bc8ad1d925fc304acb44417d" title="Reads the next value (primitive or spec for constructing a Factory-constructible object) from the spe...">ReadAndSet</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st) = 0;
+<a name="l00096"></a>00096 
+<a name="l00100"></a>00100   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map_base.html#a9e4f03b385dd93614a7a870241b6dcac" title="Prints out a human-readable string to the specified output stream containing the variables, their type and, if primitive, their values.">Print</a>(ostream &amp;os) <span class="keyword">const</span> = 0;
+<a name="l00101"></a>00101 
+<a name="l00103"></a>00103   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_var_map_base.html#ad8a03d5cb3c186131e9af106d59bf751" title="Returns a newly constructed copy of this VarMap.">Copy</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) <span class="keyword">const</span> = 0;
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105  <span class="keyword">protected</span>:
+<a name="l00108"></a><a class="code" href="classreranker_1_1_var_map_base.html#a4378638e3959e3b98135a90cbee819ea">00108</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map_base.html#a4378638e3959e3b98135a90cbee819ea" title="To allow proper implementation of Copy in VarMapBase implementation, since we don&#39;t get copying of ba...">SetMembers</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env, <span class="keywordtype">bool</span> is_primitive) {
+<a name="l00109"></a>00109     <a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a> = name;
+<a name="l00110"></a>00110     <a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a> = env;
+<a name="l00111"></a>00111     <a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d" title="Whether this VarMap instance holds variables of primitive type or vector of primitives.">is_primitive_</a> = is_primitive;
+<a name="l00112"></a>00112   }
+<a name="l00113"></a>00113 
+<a name="l00115"></a><a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca">00115</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a>;
+<a name="l00117"></a><a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944">00117</a>   <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *<a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>;
+<a name="l00120"></a><a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d">00120</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d" title="Whether this VarMap instance holds variables of primitive type or vector of primitives.">is_primitive_</a>;
+<a name="l00121"></a>00121 };
+<a name="l00122"></a>00122 
+<a name="l00125"></a><a class="code" href="classreranker_1_1_environment.html">00125</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> {
+<a name="l00126"></a>00126  <span class="keyword">public</span>:
+<a name="l00127"></a><a class="code" href="classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6">00127</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_environment.html#a987c93a94bcb94e3e5facdcf51109fc6">~Environment</a>() { }
+<a name="l00128"></a>00128 
+<a name="l00131"></a>00131   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276" title="Returns whether the specified variable has been defined in this environment.">Defined</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) <span class="keyword">const</span> = 0;
+<a name="l00132"></a>00132 
+<a name="l00135"></a>00135   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_environment.html#a95b0818fd8c3311b224ab177defda94f" title="Sets the specified variable to the value obtained from the following tokens available from the specif...">ReadAndSet</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st,
+<a name="l00136"></a>00136                           <span class="keyword">const</span> <span class="keywordtype">string</span> type = <span class="stringliteral">&quot;&quot;</span>) = 0;
+<a name="l00137"></a>00137 
+<a name="l00139"></a>00139   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3" title="Retrieves the type name of the specified variable.">GetType</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) <span class="keyword">const</span> = 0;
+<a name="l00140"></a>00140 
+<a name="l00142"></a>00142   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003" title="Retrieves the VarMap instance for the specified variable.">GetVarMap</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname) = 0;
+<a name="l00143"></a>00143 
+<a name="l00162"></a>00162   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2" title="Retrieves the VarMap instance for the specified type, or NULL if there is no such VarMap...">GetVarMapForType</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type) = 0;
+<a name="l00163"></a>00163 
+<a name="l00166"></a>00166   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_environment.html#a07d328d2d2bbe0f62e7348f590e6529c" title="Prints a human-readable string of all the variables in this environment, their types and...">Print</a>(ostream &amp;os) <span class="keyword">const</span> = 0;
+<a name="l00167"></a>00167 
+<a name="l00169"></a>00169   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *<a class="code" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02" title="Returns a copy of this environment.">Copy</a>() <span class="keyword">const</span> = 0;
+<a name="l00170"></a>00170 
+<a name="l00174"></a>00174   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_environment.html#a068a3e922a02814d89b8d316bbf91830" title="Prints out a human-readable string with the names of all abstract base types and their concrete imple...">PrintFactories</a>(ostream &amp;os) <span class="keyword">const</span> = 0;
+<a name="l00175"></a>00175 
+<a name="l00177"></a>00177   <span class="keyword">static</span> <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *<a class="code" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792" title="A static factory method to create a new, empty Environment instance.">CreateEmpty</a>();
+<a name="l00178"></a>00178 };
+<a name="l00179"></a>00179 
+<a name="l00184"></a>00184 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00185"></a><a class="code" href="classreranker_1_1_value_string.html">00185</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a> {
+<a name="l00186"></a>00186  <span class="keyword">public</span>:
+<a name="l00187"></a><a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">00187</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(<span class="keyword">const</span> T &amp;value)<span class="keyword"> const </span>{
+<a name="l00188"></a>00188     ostringstream oss;
+<a name="l00189"></a>00189     oss &lt;&lt; value;
+<a name="l00190"></a>00190     <span class="keywordflow">return</span> oss.str();
+<a name="l00191"></a>00191   }
+<a name="l00192"></a>00192 };
+<a name="l00193"></a>00193 
+<a name="l00196"></a>00196 <span class="keyword">template</span>&lt;&gt;
+<a name="l00197"></a><a class="code" href="classreranker_1_1_value_string_3_01string_01_4.html">00197</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;string&gt; {
+<a name="l00198"></a>00198  <span class="keyword">public</span>:
+<a name="l00199"></a><a class="code" href="classreranker_1_1_value_string_3_01string_01_4.html#afc5e189ee5ceee74c9b6cb95e26fd788">00199</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01string_01_4.html#afc5e189ee5ceee74c9b6cb95e26fd788">ToString</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;value)<span class="keyword"> const </span>{
+<a name="l00200"></a>00200     <span class="keywordflow">return</span> <span class="stringliteral">&quot;\&quot;&quot;</span> + value + <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00201"></a>00201   }
+<a name="l00202"></a>00202 };
+<a name="l00203"></a>00203 
+<a name="l00206"></a>00206 <span class="keyword">template</span>&lt;&gt;
+<a name="l00207"></a><a class="code" href="classreranker_1_1_value_string_3_01bool_01_4.html">00207</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;bool&gt; {
+<a name="l00208"></a>00208  <span class="keyword">public</span>:
+<a name="l00209"></a><a class="code" href="classreranker_1_1_value_string_3_01bool_01_4.html#ac9916644d28b8f87feef5f38953cbf15">00209</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01bool_01_4.html#ac9916644d28b8f87feef5f38953cbf15">ToString</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;value)<span class="keyword"> const </span>{
+<a name="l00210"></a>00210     <span class="keywordflow">return</span> value ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>;
+<a name="l00211"></a>00211   }
+<a name="l00212"></a>00212 };
+<a name="l00213"></a>00213 
+<a name="l00217"></a>00217 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
+<a name="l00218"></a><a class="code" href="classreranker_1_1_value_string_3_01shared__ptr_3_01_t_01_4_01_4.html">00218</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;shared_ptr&lt;T&gt; &gt; {
+<a name="l00219"></a>00219  <span class="keyword">public</span>:
+<a name="l00220"></a><a class="code" href="classreranker_1_1_value_string_3_01shared__ptr_3_01_t_01_4_01_4.html#aa78604322fa888d430a93b1ab3b6f416">00220</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01shared__ptr_3_01_t_01_4_01_4.html#aa78604322fa888d430a93b1ab3b6f416">ToString</a>(<span class="keyword">const</span> shared_ptr&lt;T&gt; &amp;value)<span class="keyword"> const </span>{
+<a name="l00221"></a>00221     ostringstream oss;
+<a name="l00222"></a>00222     oss &lt;&lt; <span class="stringliteral">&quot;&lt;&quot;</span> &lt;&lt; <span class="keyword">typeid</span>(shared_ptr&lt;T&gt;).name() &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; value.get() &lt;&lt; <span class="stringliteral">&quot;&gt;&quot;</span>;
+<a name="l00223"></a>00223     <span class="keywordflow">return</span> oss.str();
+<a name="l00224"></a>00224   }
+<a name="l00225"></a>00225 };
+<a name="l00226"></a>00226 
+<a name="l00231"></a>00231 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00232"></a><a class="code" href="classreranker_1_1_value_string_3_01vector_3_01_t_01_4_01_4.html">00232</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString</a>&lt;vector&lt;T&gt; &gt; {
+<a name="l00233"></a>00233  <span class="keyword">public</span>:
+<a name="l00234"></a><a class="code" href="classreranker_1_1_value_string_3_01vector_3_01_t_01_4_01_4.html#a73092a1f7580b9ebf7dc7c2b829c75b3">00234</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_value_string_3_01vector_3_01_t_01_4_01_4.html#a73092a1f7580b9ebf7dc7c2b829c75b3">ToString</a>(<span class="keyword">const</span> vector&lt;T&gt; &amp;value)<span class="keyword"> const </span>{
+<a name="l00235"></a>00235     ostringstream oss;
+<a name="l00236"></a>00236     oss &lt;&lt; <span class="stringliteral">&quot;{&quot;</span>;
+<a name="l00237"></a>00237     <span class="keyword">typename</span> vector&lt;T&gt;::const_iterator it = value.begin();
+<a name="l00238"></a>00238     <a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString&lt;T&gt;</a> value_string;
+<a name="l00239"></a>00239     <span class="keywordflow">if</span> (it != value.end()) {
+<a name="l00240"></a>00240       oss &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(*it);
+<a name="l00241"></a>00241       <span class="comment">//oss &lt;&lt; *it;</span>
+<a name="l00242"></a>00242       ++it;
+<a name="l00243"></a>00243     }
+<a name="l00244"></a>00244     <span class="keywordflow">for</span> (; it != value.end(); ++it) {
+<a name="l00245"></a>00245       oss &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(*it);
+<a name="l00246"></a>00246       <span class="comment">//oss &lt;&lt; &quot;, &quot; &lt;&lt; *it;</span>
+<a name="l00247"></a>00247     }
+<a name="l00248"></a>00248     oss &lt;&lt; <span class="stringliteral">&quot;}&quot;</span>;
+<a name="l00249"></a>00249     <span class="keywordflow">return</span> oss.str();
+<a name="l00250"></a>00250   }
+<a name="l00251"></a>00251 };
+<a name="l00252"></a>00252 
+<a name="l00257"></a>00257 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00258"></a><a class="code" href="classreranker_1_1_var_map.html">00258</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> {
+<a name="l00259"></a>00259  <span class="keyword">public</span>:
+<a name="l00267"></a><a class="code" href="classreranker_1_1_var_map.html#abb805680c80d7cf246b0baa9a89b9bae">00267</a>   <a class="code" href="classreranker_1_1_var_map.html#abb805680c80d7cf246b0baa9a89b9bae" title="Constructs a mapping from variables of a particular type to their values.">VarMap</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env, <span class="keywordtype">bool</span> is_primitive = <span class="keyword">true</span>) :
+<a name="l00268"></a>00268       <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a>(name, env, is_primitive) { }
+<a name="l00269"></a>00269 
+<a name="l00270"></a><a class="code" href="classreranker_1_1_var_map.html#af8844540d015ae4e5aa4c878cf85fd97">00270</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map.html#af8844540d015ae4e5aa4c878cf85fd97">~VarMap</a>() { }
 <a name="l00271"></a>00271 
-<a name="l00273"></a><a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3">00273</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3" title="Sets the specified variable to the specified value.">Set</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, T value) {
-<a name="l00274"></a>00274     vars_[varname] = value;
-<a name="l00275"></a>00275   }
-<a name="l00276"></a>00276 
-<a name="l00278"></a><a class="code" href="classreranker_1_1_var_map.html#acc6b1af4c1e73585fe3b686ca5ac1ade">00278</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map.html#acc6b1af4c1e73585fe3b686ca5ac1ade">ReadAndSet</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st) {
-<a name="l00279"></a>00279     <span class="keywordflow">if</span> (<a class="code" href="environment_8_h.html#abeee3249a73d20ce434d64f7ce0767cb">VAR_MAP_DEBUG</a> &gt;= 1) {
-<a name="l00280"></a>00280       cerr &lt;&lt; <span class="stringliteral">&quot;VarMap&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;::ReadAndSet: about to set varname &quot;</span>
-<a name="l00281"></a>00281            &lt;&lt; varname &lt;&lt; <span class="stringliteral">&quot; of type &quot;</span> &lt;&lt; <span class="keyword">typeid</span>(T).name() &lt;&lt; endl;
-<a name="l00282"></a>00282     }
-<a name="l00283"></a>00283 
-<a name="l00284"></a>00284     <span class="comment">// First check if next token is an identifier and is a variable in</span>
-<a name="l00285"></a>00285     <span class="comment">// the environment, set varname to its value.</span>
-<a name="l00286"></a>00286     <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>-&gt;<a class="code" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276" title="Returns whether the specified variable has been defined in this environment.">Defined</a>(st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>())) {
-<a name="l00287"></a>00287       <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *var_map = <a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>-&gt;<a class="code" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003" title="Retrieves the VarMap instance for the specified variable.">GetVarMap</a>(st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>());
-<a name="l00288"></a>00288       <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *typed_var_map = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *<span class="keyword">&gt;</span>(var_map);
-<a name="l00289"></a>00289       <span class="keywordflow">if</span> (typed_var_map != NULL) {
-<a name="l00290"></a>00290         <span class="comment">// Finally consume variable.</span>
-<a name="l00291"></a>00291         <span class="keywordtype">string</span> rhs_variable = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00292"></a>00292         T value = T();
-<a name="l00293"></a>00293         <span class="comment">// Retrieve rhs variable&#39;s value.</span>
-<a name="l00294"></a>00294         <span class="keywordtype">bool</span> success = typed_var_map-&gt;<a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58" title="Assigns the value of the specified variable to the object pointed to by the value parameter...">Get</a>(rhs_variable, &amp;value);
-<a name="l00295"></a>00295         <span class="comment">// Set varname to the same value.</span>
-<a name="l00296"></a>00296         <span class="keywordflow">if</span> (<a class="code" href="environment_8_h.html#abeee3249a73d20ce434d64f7ce0767cb">VAR_MAP_DEBUG</a> &gt;= 1) {
-<a name="l00297"></a>00297           cerr &lt;&lt; <span class="stringliteral">&quot;VarMap&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;::ReadAndSet: setting variable &quot;</span>
-<a name="l00298"></a>00298                &lt;&lt; varname &lt;&lt; <span class="stringliteral">&quot; to same value as rhs variable &quot;</span> &lt;&lt; rhs_variable
-<a name="l00299"></a>00299                &lt;&lt; endl;
-<a name="l00300"></a>00300         }
-<a name="l00301"></a>00301         <span class="keywordflow">if</span> (success) {
-<a name="l00302"></a>00302           <a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3" title="Sets the specified variable to the specified value.">Set</a>(varname, value);
-<a name="l00303"></a>00303         } <span class="keywordflow">else</span> {
-<a name="l00304"></a>00304           <span class="comment">// Error: we couldn&#39;t find the varname in this VarMap.</span>
-<a name="l00305"></a>00305         }
-<a name="l00306"></a>00306       } <span class="keywordflow">else</span> {
-<a name="l00307"></a>00307         <span class="comment">// Error: inferred (or, eventually, declared) type of varname is</span>
-<a name="l00308"></a>00308         <span class="comment">// different from the type of the rhs variable.</span>
-<a name="l00309"></a>00309       }
-<a name="l00310"></a>00310     } <span class="keywordflow">else</span> {
-<a name="l00311"></a>00311       T value;
-<a name="l00312"></a>00312       <a class="code" href="classreranker_1_1_initializer.html" title="A class to initialize a Factory-constructible object.">Initializer&lt;T&gt;</a> initializer(&amp;value);
-<a name="l00313"></a>00313       initializer.<a class="code" href="classreranker_1_1_initializer.html#a8ebde0ddb09e92fb714d7ef22b413845">Init</a>(st, <a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>);
-<a name="l00314"></a>00314       <a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3" title="Sets the specified variable to the specified value.">Set</a>(varname, value);
-<a name="l00315"></a>00315 
-<a name="l00316"></a>00316       <span class="keywordflow">if</span> (<a class="code" href="environment_8_h.html#abeee3249a73d20ce434d64f7ce0767cb">VAR_MAP_DEBUG</a> &gt;= 1) {
-<a name="l00317"></a>00317         <a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString&lt;T&gt;</a> value_string;
-<a name="l00318"></a>00318         cerr &lt;&lt; <span class="stringliteral">&quot;VarMap&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;::ReadAndSet: set varname &quot;</span>
-<a name="l00319"></a>00319              &lt;&lt; varname &lt;&lt; <span class="stringliteral">&quot; to value &quot;</span> &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(value)&lt;&lt; endl;
-<a name="l00320"></a>00320       }
-<a name="l00321"></a>00321     }
-<a name="l00322"></a>00322   }
-<a name="l00323"></a>00323 
-<a name="l00325"></a><a class="code" href="classreranker_1_1_var_map.html#a13dfbc0f28af2b2cb6d8a808519681a4">00325</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map.html#a13dfbc0f28af2b2cb6d8a808519681a4">Print</a>(ostream &amp;os)<span class="keyword"> const </span>{
-<a name="l00326"></a>00326     <a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString&lt;T&gt;</a> value_string;
-<a name="l00327"></a>00327     <span class="keywordflow">for</span> (<span class="keyword">typename</span> unordered_map&lt;string, T&gt;::const_iterator it = vars_.begin();
-<a name="l00328"></a>00328          it != vars_.end(); ++it) {
-<a name="l00329"></a>00329       <span class="keyword">const</span> T&amp; value = it-&gt;second;
-<a name="l00330"></a>00330       os &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot; &quot;</span>
-<a name="l00331"></a>00331          &lt;&lt; it-&gt;first
-<a name="l00332"></a>00332          &lt;&lt; <span class="stringliteral">&quot; = &quot;</span>
-<a name="l00333"></a>00333          &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(value)
-<a name="l00334"></a>00334          &lt;&lt; <span class="stringliteral">&quot;;\n&quot;</span>;
-<a name="l00335"></a>00335     }
-<a name="l00336"></a>00336     os.flush();
-<a name="l00337"></a>00337   }
-<a name="l00338"></a>00338 
-<a name="l00340"></a><a class="code" href="classreranker_1_1_var_map.html#a1e717f1d6bf0be3c038a8e5de4f3c238">00340</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_var_map.html#a1e717f1d6bf0be3c038a8e5de4f3c238">Copy</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env)<span class="keyword"> const </span>{
-<a name="l00341"></a>00341     <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *var_map_copy = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a>(*this);
-<a name="l00342"></a>00342     var_map_copy-&gt;<a class="code" href="classreranker_1_1_var_map_base.html#a4378638e3959e3b98135a90cbee819ea" title="To allow proper implementation of Copy in VarMapBase implementation, since we don&#39;t get copying of ba...">SetMembers</a>(<a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a>, env, <a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d" title="Whether this VarMap instance holds variables of primitive type or vector of primitives.">is_primitive_</a>);
-<a name="l00343"></a>00343     <span class="keywordflow">return</span> var_map_copy;
+<a name="l00272"></a>00272   <span class="comment">// Accessor methods</span>
+<a name="l00273"></a>00273 
+<a name="l00279"></a><a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58">00279</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58" title="Assigns the value of the specified variable to the object pointed to by the value parameter...">Get</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, T *value)<span class="keyword"> const </span>{
+<a name="l00280"></a>00280     <span class="keyword">typename</span> unordered_map&lt;string, T&gt;::const_iterator it = vars_.find(varname);
+<a name="l00281"></a>00281     <span class="keywordflow">if</span> (it == vars_.end()) {
+<a name="l00282"></a>00282       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00283"></a>00283     } <span class="keywordflow">else</span> {
+<a name="l00284"></a>00284       *value = it-&gt;second;
+<a name="l00285"></a>00285       <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00286"></a>00286     }
+<a name="l00287"></a>00287   }
+<a name="l00288"></a>00288 
+<a name="l00290"></a><a class="code" href="classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd">00290</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_var_map.html#a9962a54a8e138ea24f49fdb92df108dd">Defined</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname)<span class="keyword"> const </span>{
+<a name="l00291"></a>00291     <span class="keywordflow">return</span> vars_.find(varname) != vars_.end();
+<a name="l00292"></a>00292   }
+<a name="l00293"></a>00293 
+<a name="l00295"></a><a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3">00295</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3" title="Sets the specified variable to the specified value.">Set</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, T value) {
+<a name="l00296"></a>00296     vars_[varname] = value;
+<a name="l00297"></a>00297   }
+<a name="l00298"></a>00298 
+<a name="l00300"></a><a class="code" href="classreranker_1_1_var_map.html#acc6b1af4c1e73585fe3b686ca5ac1ade">00300</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map.html#acc6b1af4c1e73585fe3b686ca5ac1ade">ReadAndSet</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;varname, <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st) {
+<a name="l00301"></a>00301     <span class="keywordflow">if</span> (<a class="code" href="environment_8_h.html#abeee3249a73d20ce434d64f7ce0767cb">VAR_MAP_DEBUG</a> &gt;= 1) {
+<a name="l00302"></a>00302       cerr &lt;&lt; <span class="stringliteral">&quot;VarMap&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;::ReadAndSet: about to set varname &quot;</span>
+<a name="l00303"></a>00303            &lt;&lt; varname &lt;&lt; <span class="stringliteral">&quot; of type &quot;</span> &lt;&lt; <span class="keyword">typeid</span>(T).name() &lt;&lt; endl;
+<a name="l00304"></a>00304     }
+<a name="l00305"></a>00305 
+<a name="l00306"></a>00306     <span class="comment">// First check if next token is an identifier and is a variable in</span>
+<a name="l00307"></a>00307     <span class="comment">// the environment, set varname to its value.</span>
+<a name="l00308"></a>00308     <span class="keywordflow">if</span> (<a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>-&gt;<a class="code" href="classreranker_1_1_environment.html#aed7a464b7498b2855eb24ee4563c8276" title="Returns whether the specified variable has been defined in this environment.">Defined</a>(st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>())) {
+<a name="l00309"></a>00309       <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *var_map = <a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>-&gt;<a class="code" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003" title="Retrieves the VarMap instance for the specified variable.">GetVarMap</a>(st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>());
+<a name="l00310"></a>00310       <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *typed_var_map = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *<span class="keyword">&gt;</span>(var_map);
+<a name="l00311"></a>00311       <span class="keywordflow">if</span> (typed_var_map != NULL) {
+<a name="l00312"></a>00312         <span class="comment">// Finally consume variable.</span>
+<a name="l00313"></a>00313         <span class="keywordtype">string</span> rhs_variable = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00314"></a>00314         T value = T();
+<a name="l00315"></a>00315         <span class="comment">// Retrieve rhs variable&#39;s value.</span>
+<a name="l00316"></a>00316         <span class="keywordtype">bool</span> success = typed_var_map-&gt;<a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58" title="Assigns the value of the specified variable to the object pointed to by the value parameter...">Get</a>(rhs_variable, &amp;value);
+<a name="l00317"></a>00317         <span class="comment">// Set varname to the same value.</span>
+<a name="l00318"></a>00318         <span class="keywordflow">if</span> (<a class="code" href="environment_8_h.html#abeee3249a73d20ce434d64f7ce0767cb">VAR_MAP_DEBUG</a> &gt;= 1) {
+<a name="l00319"></a>00319           cerr &lt;&lt; <span class="stringliteral">&quot;VarMap&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;::ReadAndSet: setting variable &quot;</span>
+<a name="l00320"></a>00320                &lt;&lt; varname &lt;&lt; <span class="stringliteral">&quot; to same value as rhs variable &quot;</span> &lt;&lt; rhs_variable
+<a name="l00321"></a>00321                &lt;&lt; endl;
+<a name="l00322"></a>00322         }
+<a name="l00323"></a>00323         <span class="keywordflow">if</span> (success) {
+<a name="l00324"></a>00324           <a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3" title="Sets the specified variable to the specified value.">Set</a>(varname, value);
+<a name="l00325"></a>00325         } <span class="keywordflow">else</span> {
+<a name="l00326"></a>00326           <span class="comment">// Error: we couldn&#39;t find the varname in this VarMap.</span>
+<a name="l00327"></a>00327         }
+<a name="l00328"></a>00328       } <span class="keywordflow">else</span> {
+<a name="l00329"></a>00329         <span class="comment">// Error: inferred (or, eventually, declared) type of varname is</span>
+<a name="l00330"></a>00330         <span class="comment">// different from the type of the rhs variable.</span>
+<a name="l00331"></a>00331       }
+<a name="l00332"></a>00332     } <span class="keywordflow">else</span> {
+<a name="l00333"></a>00333       T value;
+<a name="l00334"></a>00334       <a class="code" href="classreranker_1_1_initializer.html" title="A class to initialize a Factory-constructible object.">Initializer&lt;T&gt;</a> initializer(&amp;value);
+<a name="l00335"></a>00335       initializer.<a class="code" href="classreranker_1_1_initializer.html#a8ebde0ddb09e92fb714d7ef22b413845">Init</a>(st, <a class="code" href="classreranker_1_1_var_map_base.html#aa24cb62b1c8aa7cf4049772f35712944" title="The Environment that holds this VarMap instance.">env_</a>);
+<a name="l00336"></a>00336       <a class="code" href="classreranker_1_1_var_map.html#a4facf600cb7a75264e443f70856767e3" title="Sets the specified variable to the specified value.">Set</a>(varname, value);
+<a name="l00337"></a>00337 
+<a name="l00338"></a>00338       <span class="keywordflow">if</span> (<a class="code" href="environment_8_h.html#abeee3249a73d20ce434d64f7ce0767cb">VAR_MAP_DEBUG</a> &gt;= 1) {
+<a name="l00339"></a>00339         <a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString&lt;T&gt;</a> value_string;
+<a name="l00340"></a>00340         cerr &lt;&lt; <span class="stringliteral">&quot;VarMap&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;::ReadAndSet: set varname &quot;</span>
+<a name="l00341"></a>00341              &lt;&lt; varname &lt;&lt; <span class="stringliteral">&quot; to value &quot;</span> &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(value)&lt;&lt; endl;
+<a name="l00342"></a>00342       }
+<a name="l00343"></a>00343     }
 <a name="l00344"></a>00344   }
-<a name="l00345"></a>00345  <span class="keyword">private</span>:
-<a name="l00346"></a>00346   unordered_map&lt;string, T&gt; vars_;
-<a name="l00347"></a>00347 };
-<a name="l00348"></a>00348 
-<a name="l00349"></a>00349 }  <span class="comment">// namespace reranker</span>
-<a name="l00350"></a>00350 
-<a name="l00351"></a>00351 <span class="preprocessor">#endif</span>
+<a name="l00345"></a>00345 
+<a name="l00347"></a><a class="code" href="classreranker_1_1_var_map.html#a13dfbc0f28af2b2cb6d8a808519681a4">00347</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_var_map.html#a13dfbc0f28af2b2cb6d8a808519681a4">Print</a>(ostream &amp;os)<span class="keyword"> const </span>{
+<a name="l00348"></a>00348     <a class="code" href="classreranker_1_1_value_string.html" title="A template class that helps print out values with ostream&amp; operator support and vectors of those valu...">ValueString&lt;T&gt;</a> value_string;
+<a name="l00349"></a>00349     <span class="keywordflow">for</span> (<span class="keyword">typename</span> unordered_map&lt;string, T&gt;::const_iterator it = vars_.begin();
+<a name="l00350"></a>00350          it != vars_.end(); ++it) {
+<a name="l00351"></a>00351       <span class="keyword">const</span> T&amp; value = it-&gt;second;
+<a name="l00352"></a>00352       os &lt;&lt; <a class="code" href="classreranker_1_1_var_map_base.html#acf4c7614b477b3f986c0c1e7d9551ae0" title="Returns the type name of the variables of this instance.">Name</a>() &lt;&lt; <span class="stringliteral">&quot; &quot;</span>
+<a name="l00353"></a>00353          &lt;&lt; it-&gt;first
+<a name="l00354"></a>00354          &lt;&lt; <span class="stringliteral">&quot; = &quot;</span>
+<a name="l00355"></a>00355          &lt;&lt; value_string.<a class="code" href="classreranker_1_1_value_string.html#a83762558d5d4862c2353792f0e1528b6">ToString</a>(value)
+<a name="l00356"></a>00356          &lt;&lt; <span class="stringliteral">&quot;;\n&quot;</span>;
+<a name="l00357"></a>00357     }
+<a name="l00358"></a>00358     os.flush();
+<a name="l00359"></a>00359   }
+<a name="l00360"></a>00360 
+<a name="l00362"></a><a class="code" href="classreranker_1_1_var_map.html#a1e717f1d6bf0be3c038a8e5de4f3c238">00362</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_var_map.html#a1e717f1d6bf0be3c038a8e5de4f3c238">Copy</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env)<span class="keyword"> const </span>{
+<a name="l00363"></a>00363     <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *var_map_copy = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a>(*this);
+<a name="l00364"></a>00364     var_map_copy-&gt;<a class="code" href="classreranker_1_1_var_map_base.html#a4378638e3959e3b98135a90cbee819ea" title="To allow proper implementation of Copy in VarMapBase implementation, since we don&#39;t get copying of ba...">SetMembers</a>(<a class="code" href="classreranker_1_1_var_map_base.html#aa262c6f13b3e83d428d3afcb1a5864ca" title="The type name of this VarMap.">name_</a>, env, <a class="code" href="classreranker_1_1_var_map_base.html#a6b1e6b981ae86d5acfb9889dbc69c89d" title="Whether this VarMap instance holds variables of primitive type or vector of primitives.">is_primitive_</a>);
+<a name="l00365"></a>00365     <span class="keywordflow">return</span> var_map_copy;
+<a name="l00366"></a>00366   }
+<a name="l00367"></a>00367  <span class="keyword">private</span>:
+<a name="l00368"></a>00368   unordered_map&lt;string, T&gt; vars_;
+<a name="l00369"></a>00369 };
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371 }  <span class="comment">// namespace reranker</span>
+<a name="l00372"></a>00372 
+<a name="l00373"></a>00373 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -363,7 +367,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 15 2013 11:17:58 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 16 2013 15:23:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

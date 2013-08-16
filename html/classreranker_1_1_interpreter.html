@@ -137,28 +137,38 @@ Public Member Functions</h2></td></tr>
 <p>The interpreter maintains an internal environment whereby previously defined variables may be used in the definition of subsequent ones. The syntax of this language extends the syntax of the <a class="el" href="classreranker_1_1_factory.html">Factory </a> class, described in the documentation of the <a class="el" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f">Factory::CreateOrDie </a> method.</p>
 <p>Statements in this language look like the following: </p>
 <div class="fragment"><pre class="fragment"> <span class="comment">// This is a comment.</span>
- b = <span class="keyword">true</span>;  <span class="comment">// assigns the value true to the boolean variable named &quot;b&quot;</span>
- f = 1;     <span class="comment">// assigns the int value 1 to the variable &quot;f&quot;</span>
- g = 2.4;   <span class="comment">// assigns the double value 2.4 to the variable &quot;g&quot;</span>
- n = <span class="stringliteral">&quot;foo&quot;</span>; <span class="comment">// assigns the string value &quot;foo&quot; to the variable &quot;n&quot;</span>
- b_vec = {<span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>};  <span class="comment">// assigns a vector of bool to &quot;b_vec&quot;</span>
+ <span class="keywordtype">bool</span> b = <span class="keyword">true</span>;    <span class="comment">// assigns the value true to the boolean variable &quot;b&quot;</span>
+ <span class="keywordtype">int</span> f = 1;        <span class="comment">// assigns the int value 1 to the variable &quot;f&quot;</span>
+ <span class="keywordtype">double</span> g = 2.4;   <span class="comment">// assigns the double value 2.4 to the variable &quot;g&quot;</span>
+ <span class="keywordtype">string</span> n = <span class="stringliteral">&quot;foo&quot;</span>  <span class="comment">// assigns the string value &quot;foo&quot; to the variable &quot;n&quot;</span>
+ <span class="keywordtype">bool</span>[] b_vec = {<span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>};  <span class="comment">// assigns a vector of bool to &quot;b_vec&quot;</span>
 
  <span class="comment">// Constructs an object of abstract type Model and assigns it to &quot;m1&quot;</span>
- m1 = PerceptronModel(name(<span class="stringliteral">&quot;foo&quot;</span>));
+ Model m1 = PerceptronModel(name(<span class="stringliteral">&quot;foo&quot;</span>));
 
  <span class="comment">// Constructs an object of type Model and assigns it to &quot;m2&quot;, crucially</span>
  <span class="comment">// using the previously defined string variable &quot;n&quot; as the value for</span>
  <span class="comment">// the PerceptronModel&#39;s name parameter.</span>
- m2 = PerceptronModel(name(n));
+ Model m2 = PerceptronModel(name(n));
 
  <span class="comment">// Constructs a vector of Model objects and assigns it to &quot;m_vec&quot;.</span>
- m_vec = {m2, PerceptronModel(name(<span class="stringliteral">&quot;bar&quot;</span>))};
+ Model[] m_vec = {m2, PerceptronModel(name(<span class="stringliteral">&quot;bar&quot;</span>))};
+</pre></div><p>Additionally, the interpreter can do type inference, so all the type specifiers in the previous examples are optional. For example, one may write the following statement: </p>
+<div class="fragment"><pre class="fragment"> b = <span class="keyword">true</span>;  <span class="comment">// assigns the value true to the boolean variable &quot;b&quot;</span>
 </pre></div><p>More formally, a statement in this language must conform to the following grammar, defined on top of the BNF syntax in the documentation of the <a class="el" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f">Factory::CreateOrDie </a> method: </p>
 <table  border="0">
 <tr>
 <td><code>&lt;statement_list&gt;</code> </td><td><code>::=</code> </td><td><code>[ &lt;statement&gt; ]*</code>  </td></tr>
 <tr>
-<td><code>&lt;statement&gt;</code> </td><td><code>::=</code> </td><td><code>&lt;variable_name&gt; '=' &lt;value&gt; ';' </code>  </td></tr>
+<td><code>&lt;statement&gt;</code> </td><td><code>::=</code> </td><td><code>[ &lt;type_specifier&gt; ] &lt;variable_name&gt; '=' &lt;value&gt; ';' </code>   </td></tr>
+<tr>
+<td valign="top"><code>&lt;type_specifier&gt;</code> </td><td valign="top"><code>::=</code> </td><td valign="top"><table  border="0">
+<tr>
+<td><code>"bool" | "int" | "string" | "double" | "bool[]" | "int[]" "string[]" | "double[]" | T | T[] ]</code> </td></tr>
+<tr>
+<td>where <code>T</code> is any <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible type. </td></tr>
+</table>
+</td></tr>
 <tr>
 <td><code>&lt;variable_name&gt;</code> </td><td><code>::=</code> </td><td>any valid C++ identifier  </td></tr>
 <tr>
@@ -167,7 +177,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <p>The above grammar doesn&rsquo;t contain rules covering C++ style line comments, but they have the same behavior in this language as they do in C++, i.e., everything after the <code>//</code> to the end of the current line is treated as a comment and ignored. There are no C-style comments in this language. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00120">120</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00141">141</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acafa4a552bb289cecf9ef1b9cbc25006"></a><!-- doxytag: member="reranker::Interpreter::Interpreter" ref="acafa4a552bb289cecf9ef1b9cbc25006" args="(int debug=0)" -->
 <div class="memitem">
@@ -187,7 +197,7 @@ Public Member Functions</h2></td></tr>
 <p>Constructs a new instance with the specified debug level. </p>
 <p>The wrapped <a class="el" href="classreranker_1_1_environment.html">Environment </a> will also have the specified debug level. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00125">125</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00146">146</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -207,7 +217,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Destroys this interpreter. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00130">130</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00151">151</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -229,7 +239,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a pointer to the environment of this interpreter. </p>
 <p>Crucially, this method returns a pointer to the <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> implementation class, <a class="el" href="classreranker_1_1_environment_impl.html">EnvironmentImpl</a>, so that its templated <a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">EnvironmentImpl::Get </a> method may be invoked. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00182">182</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00203">203</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -250,7 +260,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified text file. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00135">135</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00156">156</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -271,7 +281,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified stream. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00148">148</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00169">169</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -292,7 +302,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified string. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00142">142</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00163">163</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -339,7 +349,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00172">172</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00193">193</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -358,7 +368,7 @@ template&lt;typename T &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00154">154</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00175">175</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -377,7 +387,7 @@ template&lt;typename T &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00158">158</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00179">179</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -403,7 +413,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 15 2013 11:18:01 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 16 2013 15:23:17 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

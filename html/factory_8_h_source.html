@@ -137,400 +137,456 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00058"></a>00058 <span class="keyword">using</span> std::tr1::unordered_set;
 <a name="l00059"></a>00059 <span class="keyword">using</span> std::vector;
 <a name="l00060"></a>00060 
-<a name="l00065"></a><a class="code" href="classreranker_1_1_member_initializer.html">00065</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> {
-<a name="l00066"></a>00066  <span class="keyword">public</span>:
-<a name="l00067"></a><a class="code" href="classreranker_1_1_member_initializer.html#a93e6c74c8cb94bee8968e56853517bfe">00067</a>   <a class="code" href="classreranker_1_1_member_initializer.html#a93e6c74c8cb94bee8968e56853517bfe">MemberInitializer</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <span class="keywordtype">bool</span> required) :
-<a name="l00068"></a>00068       <a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92" title="The name of this member.">name_</a>(name), <a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>(0), <a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699" title="Whether this member is required to be initialized.">required_</a>(required) { }
-<a name="l00069"></a><a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">00069</a>   <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>() { <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92" title="The name of this member.">name_</a>; }
-<a name="l00070"></a>00070   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_member_initializer.html#a085d766d1e86d17d4323a46933fc012b">Init</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) = 0;
-<a name="l00073"></a><a class="code" href="classreranker_1_1_member_initializer.html#aae102105102356914b4a92d7d92b0a56">00073</a>   <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_member_initializer.html#aae102105102356914b4a92d7d92b0a56" title="Returns the number of times this member initializer&rsquo;s Init method has been invoked.">Initialized</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>; }
-<a name="l00074"></a><a class="code" href="classreranker_1_1_member_initializer.html#a628dcf5f10c9fb79f27254fcfd21cfe3">00074</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_member_initializer.html#a628dcf5f10c9fb79f27254fcfd21cfe3">Required</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699" title="Whether this member is required to be initialized.">required_</a>; }
-<a name="l00075"></a>00075  <span class="keyword">protected</span>:
-<a name="l00077"></a><a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92">00077</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92" title="The name of this member.">name_</a>;
-<a name="l00080"></a><a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1">00080</a>   <span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>;
-<a name="l00082"></a><a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699">00082</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699" title="Whether this member is required to be initialized.">required_</a>;
-<a name="l00083"></a>00083 };
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
-<a name="l00086"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html">00086</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_typed_member_initializer.html">TypedMemberInitializer</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> {
-<a name="l00087"></a>00087  <span class="keyword">public</span>:
-<a name="l00088"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html#a95c3abb535f08c9ec87a5539d1f7f1c1">00088</a>   <a class="code" href="classreranker_1_1_typed_member_initializer.html#a95c3abb535f08c9ec87a5539d1f7f1c1">TypedMemberInitializer</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, T *member, <span class="keywordtype">bool</span> required = <span class="keyword">false</span>) :
-<a name="l00089"></a>00089       <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a>(name, required), <a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">member_</a>(member) { }
-<a name="l00090"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html#afca07d3366246c6c1a4c98a0df499b30">00090</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_typed_member_initializer.html#afca07d3366246c6c1a4c98a0df499b30">Init</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) {
-<a name="l00091"></a>00091     env-&gt;<a class="code" href="classreranker_1_1_environment.html#ae2641671e6f45d47f9432429ad5349bf" title="Sets the specified variable to the value obtained from the following tokens available from the specif...">ReadAndSet</a>(<a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>(), st);
-<a name="l00092"></a>00092     <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *var_map = env-&gt;<a class="code" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003" title="Retrieves the VarMap instance for the specified variable.">GetVarMap</a>(<a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>());
-<a name="l00093"></a>00093     <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *typed_var_map = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *<span class="keyword">&gt;</span>(var_map);
-<a name="l00094"></a>00094     <span class="keywordflow">if</span> (typed_var_map != NULL) {
-<a name="l00095"></a>00095       <span class="keywordtype">bool</span> success = typed_var_map-&gt;<a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58" title="Assigns the value of the specified variable to the object pointed to by the value parameter...">Get</a>(<a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>(), <a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">member_</a>);
-<a name="l00096"></a>00096       <span class="keywordflow">if</span> (success) {
-<a name="l00097"></a>00097         ++(<a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>);
-<a name="l00098"></a>00098       }
-<a name="l00099"></a>00099     }
-<a name="l00100"></a>00100   }
-<a name="l00101"></a>00101  <span class="keyword">protected</span>:
-<a name="l00102"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">00102</a>   T *<a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">member_</a>;
-<a name="l00103"></a>00103 };
-<a name="l00104"></a>00104 
-<a name="l00111"></a><a class="code" href="classreranker_1_1_initializers.html">00111</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> {
-<a name="l00112"></a>00112  <span class="keyword">public</span>:
-<a name="l00115"></a>00115   <span class="keyword">typedef</span> unordered_map&lt;string, MemberInitializer *&gt;::const_iterator
-<a name="l00116"></a><a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035">00116</a>       <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a>;
-<a name="l00119"></a><a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05">00119</a>   <span class="keyword">typedef</span> unordered_map&lt;string, MemberInitializer *&gt;::iterator <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a>;
-<a name="l00120"></a>00120 
-<a name="l00122"></a><a class="code" href="classreranker_1_1_initializers.html#ad48cd95efd3ba7d191c54837ea74ed60">00122</a>   <a class="code" href="classreranker_1_1_initializers.html#ad48cd95efd3ba7d191c54837ea74ed60" title="Constructs a new instance.">Initializers</a>() { }
-<a name="l00124"></a><a class="code" href="classreranker_1_1_initializers.html#a4c2aba14b19b2b078a19a3749da6ceb1">00124</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_initializers.html#a4c2aba14b19b2b078a19a3749da6ceb1" title="Destroys this instance.">~Initializers</a>() {
-<a name="l00125"></a>00125     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> init_it = initializers_.begin();
-<a name="l00126"></a>00126          init_it != initializers_.end();
-<a name="l00127"></a>00127          ++init_it) {
-<a name="l00128"></a>00128       <span class="keyword">delete</span> init_it-&gt;second;
-<a name="l00129"></a>00129     }
-<a name="l00130"></a>00130   }
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
-<a name="l00133"></a><a class="code" href="classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91">00133</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91">Add</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, T *member, <span class="keywordtype">bool</span> required = <span class="keyword">false</span>) {
-<a name="l00134"></a>00134     initializers_[name] = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_typed_member_initializer.html">TypedMemberInitializer&lt;T&gt;</a>(name, member, required);
-<a name="l00135"></a>00135   }
-<a name="l00136"></a>00136 
-<a name="l00140"></a><a class="code" href="classreranker_1_1_initializers.html#a3783e6f2fa0bc7330b6103eac1c86c58">00140</a>   <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a> <a class="code" href="classreranker_1_1_initializers.html#a3783e6f2fa0bc7330b6103eac1c86c58" title="Returns a const iterator pointing to the beginning of the map from member names to pointers to TypedM...">begin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> initializers_.begin(); }
-<a name="l00145"></a><a class="code" href="classreranker_1_1_initializers.html#ad94d0fbca0b8da45e638439d9fa95bfb">00145</a>   <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a> <a class="code" href="classreranker_1_1_initializers.html#ad94d0fbca0b8da45e638439d9fa95bfb" title="Returns a const iterator pointing to the end of the map from member names to pointers to TypedMemberI...">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> initializers_.end(); }
-<a name="l00146"></a>00146 
-<a name="l00151"></a><a class="code" href="classreranker_1_1_initializers.html#a96c3cd1dc3c275530613d0c8faada55b">00151</a>   <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> <a class="code" href="classreranker_1_1_initializers.html#a96c3cd1dc3c275530613d0c8faada55b" title="Returns an iterator pointing to the beginning of the map from member names to pointers to TypedMember...">begin</a>() { <span class="keywordflow">return</span> initializers_.begin(); }
-<a name="l00155"></a><a class="code" href="classreranker_1_1_initializers.html#aec7eb1e8bf142ccf0023450e809a45d5">00155</a>   <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> <a class="code" href="classreranker_1_1_initializers.html#aec7eb1e8bf142ccf0023450e809a45d5" title="Returns an iterator pointing to the end of the map from member names to pointers to TypedMemberInitia...">end</a>() { <span class="keywordflow">return</span> initializers_.end(); }
-<a name="l00156"></a>00156 
-<a name="l00162"></a><a class="code" href="classreranker_1_1_initializers.html#ad789c774006d6d16b896c08e76de40e1">00162</a>   <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a> <a class="code" href="classreranker_1_1_initializers.html#ad789c774006d6d16b896c08e76de40e1" title="Returns a const_iterator pointing to the MemberInitializer associated with the specified name...">find</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name)<span class="keyword"> const </span>{
-<a name="l00163"></a>00163     <span class="keywordflow">return</span> initializers_.find(name);
-<a name="l00164"></a>00164   }
-<a name="l00170"></a><a class="code" href="classreranker_1_1_initializers.html#a5eb65fc3a910912b9bb7eb9cfef09185">00170</a>   <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> <a class="code" href="classreranker_1_1_initializers.html#a5eb65fc3a910912b9bb7eb9cfef09185" title="Returns an iterator pointing to the MemberInitializer associated with the specified name...">find</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name) {
-<a name="l00171"></a>00171     <span class="keywordflow">return</span> initializers_.find(name);
-<a name="l00172"></a>00172   }
-<a name="l00173"></a>00173  <span class="keyword">private</span>:
-<a name="l00174"></a>00174   unordered_map&lt;string, MemberInitializer *&gt; initializers_;
-<a name="l00175"></a>00175 };
-<a name="l00176"></a>00176 
-<a name="l00179"></a><a class="code" href="classreranker_1_1_factory_base.html">00179</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory_base.html" title="An interface for all Factory instances, specifying a few pure virtual methods.">FactoryBase</a> {
-<a name="l00180"></a>00180  <span class="keyword">public</span>:
-<a name="l00186"></a>00186   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_base.html#a2b7ed0a748bf9eefbc30355167fe8ad9" title="Clears the (possibly static) data of this factory.">Clear</a>() = 0;
-<a name="l00188"></a>00188   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_factory_base.html#a3f0dd88a8da419dde3cbe3e97fda55ab" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() <span class="keyword">const</span> = 0;
-<a name="l00195"></a>00195   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_base.html#ada8c5df4396bb4e785b690d0a6d5922f" title="Collects the names of types registered with this factory.">CollectRegistered</a>(unordered_set&lt;string&gt; &amp;registered) <span class="keyword">const</span> = 0;
-<a name="l00196"></a>00196 
-<a name="l00197"></a>00197   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory_base.html#a165b07587cacb1112b783f5191c51fd5">CreateVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) <span class="keyword">const</span> = 0;
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory_base.html#a8ba4ece87f76449fbdc2702bb6ddcb76">CreateVectorVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) <span class="keyword">const</span> = 0;
-<a name="l00200"></a>00200 };
-<a name="l00201"></a>00201 
-<a name="l00203"></a><a class="code" href="classreranker_1_1_factory_container.html">00203</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory_container.html" title="A class to hold all Factory instances that have been created.">FactoryContainer</a> {
-<a name="l00204"></a>00204  <span class="keyword">public</span>:
-<a name="l00205"></a><a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">00205</a>   <span class="keyword">typedef</span> vector&lt;FactoryBase *&gt;::iterator <a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">iterator</a>;
-<a name="l00206"></a>00206 
-<a name="l00210"></a><a class="code" href="classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324">00210</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324" title="Adds the specified factory to this container of factories.">Add</a>(<a class="code" href="classreranker_1_1_factory_base.html" title="An interface for all Factory instances, specifying a few pure virtual methods.">FactoryBase</a> *factory) {
-<a name="l00211"></a>00211     <span class="keywordflow">if</span> (!initialized_) {
-<a name="l00212"></a>00212       factories_ = <span class="keyword">new</span> vector&lt;FactoryBase *&gt;();
-<a name="l00213"></a>00213       initialized_ = 1;
-<a name="l00214"></a>00214     }
-<a name="l00215"></a>00215     factories_-&gt;push_back(factory);
-<a name="l00216"></a>00216   }
-<a name="l00218"></a><a class="code" href="classreranker_1_1_factory_container.html#ab242b39f86f6bccfae572108ef46f8e9">00218</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_container.html#ab242b39f86f6bccfae572108ef46f8e9" title="Clears this container of factories.">Clear</a>() {
-<a name="l00219"></a>00219     <span class="keywordflow">if</span> (initialized_) {
-<a name="l00220"></a>00220       <span class="keywordflow">for</span> (vector&lt;FactoryBase *&gt;::iterator it = factories_-&gt;begin();
-<a name="l00221"></a>00221            it != factories_-&gt;end();
-<a name="l00222"></a>00222            ++it) {
-<a name="l00223"></a>00223         (*it)-&gt;Clear();
-<a name="l00224"></a>00224         <span class="keyword">delete</span> *it;
-<a name="l00225"></a>00225       }
-<a name="l00226"></a>00226       <span class="keyword">delete</span> factories_;
-<a name="l00227"></a>00227     }
-<a name="l00228"></a>00228   }
-<a name="l00229"></a>00229 
-<a name="l00230"></a>00230   <span class="comment">// Provide two methods to iterate over the FactoryBase instances</span>
-<a name="l00231"></a>00231   <span class="comment">// held by this FactoryContainer.</span>
-<a name="l00232"></a><a class="code" href="classreranker_1_1_factory_container.html#a8a206cc8e159df1be3c3b9ac3f87f8a3">00232</a>   <span class="keyword">static</span> <a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">iterator</a> <a class="code" href="classreranker_1_1_factory_container.html#a8a206cc8e159df1be3c3b9ac3f87f8a3">begin</a>() {
-<a name="l00233"></a>00233     <span class="keywordflow">if</span> (factories_ == NULL) {
-<a name="l00234"></a>00234       cerr &lt;&lt; <span class="stringliteral">&quot;FactoryContainer::begin: error: no FactoryBase instances!&quot;</span>
-<a name="l00235"></a>00235            &lt;&lt; endl;
-<a name="l00236"></a>00236     }
-<a name="l00237"></a>00237     <span class="keywordflow">return</span> factories_-&gt;begin();
-<a name="l00238"></a>00238   }
-<a name="l00239"></a><a class="code" href="classreranker_1_1_factory_container.html#a34ca18c43c96d8f15f943ad3c86fd2b3">00239</a>   <span class="keyword">static</span> <a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">iterator</a> <a class="code" href="classreranker_1_1_factory_container.html#a34ca18c43c96d8f15f943ad3c86fd2b3">end</a>() {
-<a name="l00240"></a>00240     <span class="keywordflow">if</span> (factories_ == NULL) {
-<a name="l00241"></a>00241       cerr &lt;&lt; <span class="stringliteral">&quot;FactoryContainer::begin: error: no FactoryBase instances!&quot;</span>
-<a name="l00242"></a>00242            &lt;&lt; endl;
-<a name="l00243"></a>00243     }
-<a name="l00244"></a>00244     <span class="keywordflow">return</span> factories_-&gt;end();
-<a name="l00245"></a>00245   }
+<a name="l00076"></a>00076 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00077"></a><a class="code" href="classreranker_1_1_type_name.html">00077</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a> {
+<a name="l00078"></a>00078  <span class="keyword">public</span>:
+<a name="l00079"></a><a class="code" href="classreranker_1_1_type_name.html#a5f7ad50c4280ca3b7dccafd01292a861">00079</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_type_name.html#a5f7ad50c4280ca3b7dccafd01292a861">ToString</a>() {
+<a name="l00080"></a>00080     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;T&gt;</a>().BaseName();
+<a name="l00081"></a>00081   }
+<a name="l00082"></a>00082 };
+<a name="l00083"></a>00083 
+<a name="l00086"></a>00086 <span class="keyword">template</span> &lt;&gt;
+<a name="l00087"></a><a class="code" href="classreranker_1_1_type_name_3_01bool_01_4.html">00087</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a>&lt;bool&gt; {
+<a name="l00088"></a>00088  <span class="keyword">public</span>:
+<a name="l00089"></a><a class="code" href="classreranker_1_1_type_name_3_01bool_01_4.html#af46b41e8e17b8364fb7d509451de7971">00089</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_type_name_3_01bool_01_4.html#af46b41e8e17b8364fb7d509451de7971">ToString</a>() {
+<a name="l00090"></a>00090     <span class="keywordflow">return</span> <span class="stringliteral">&quot;bool&quot;</span>;
+<a name="l00091"></a>00091   }
+<a name="l00092"></a>00092 };
+<a name="l00093"></a>00093 
+<a name="l00096"></a>00096 <span class="keyword">template</span> &lt;&gt;
+<a name="l00097"></a><a class="code" href="classreranker_1_1_type_name_3_01int_01_4.html">00097</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a>&lt;int&gt; {
+<a name="l00098"></a>00098  <span class="keyword">public</span>:
+<a name="l00099"></a><a class="code" href="classreranker_1_1_type_name_3_01int_01_4.html#a43bf68a6438d411446c7b64dd1e64ca5">00099</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_type_name_3_01int_01_4.html#a43bf68a6438d411446c7b64dd1e64ca5">ToString</a>() {
+<a name="l00100"></a>00100     <span class="keywordflow">return</span> <span class="stringliteral">&quot;int&quot;</span>;
+<a name="l00101"></a>00101   }
+<a name="l00102"></a>00102 };
+<a name="l00103"></a>00103 
+<a name="l00106"></a>00106 <span class="keyword">template</span> &lt;&gt;
+<a name="l00107"></a><a class="code" href="classreranker_1_1_type_name_3_01double_01_4.html">00107</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a>&lt;double&gt; {
+<a name="l00108"></a>00108  <span class="keyword">public</span>:
+<a name="l00109"></a><a class="code" href="classreranker_1_1_type_name_3_01double_01_4.html#a68a6c91168cfc554848e1dd619a6267f">00109</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_type_name_3_01double_01_4.html#a68a6c91168cfc554848e1dd619a6267f">ToString</a>() {
+<a name="l00110"></a>00110     <span class="keywordflow">return</span> <span class="stringliteral">&quot;double&quot;</span>;
+<a name="l00111"></a>00111   }
+<a name="l00112"></a>00112 };
+<a name="l00113"></a>00113 
+<a name="l00116"></a>00116 <span class="keyword">template</span> &lt;&gt;
+<a name="l00117"></a><a class="code" href="classreranker_1_1_type_name_3_01string_01_4.html">00117</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a>&lt;string&gt; {
+<a name="l00118"></a>00118  <span class="keyword">public</span>:
+<a name="l00119"></a><a class="code" href="classreranker_1_1_type_name_3_01string_01_4.html#ac1e64d59aea0ebef6675b163b94b2e15">00119</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_type_name_3_01string_01_4.html#ac1e64d59aea0ebef6675b163b94b2e15">ToString</a>() {
+<a name="l00120"></a>00120     <span class="keywordflow">return</span> <span class="stringliteral">&quot;string&quot;</span>;
+<a name="l00121"></a>00121   }
+<a name="l00122"></a>00122 };
+<a name="l00123"></a>00123 
+<a name="l00128"></a>00128 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00129"></a><a class="code" href="classreranker_1_1_type_name_3_01shared__ptr_3_01_t_01_4_01_4.html">00129</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a>&lt;shared_ptr&lt;T&gt; &gt; {
+<a name="l00130"></a>00130  <span class="keyword">public</span>:
+<a name="l00131"></a><a class="code" href="classreranker_1_1_type_name_3_01shared__ptr_3_01_t_01_4_01_4.html#ada3094e3f39bb0e3e5aa47e3b6696860">00131</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_type_name_3_01shared__ptr_3_01_t_01_4_01_4.html#ada3094e3f39bb0e3e5aa47e3b6696860">ToString</a>() {
+<a name="l00132"></a>00132     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName&lt;T&gt;</a>().<a class="code" href="classreranker_1_1_type_name.html#a5f7ad50c4280ca3b7dccafd01292a861">ToString</a>();
+<a name="l00133"></a>00133   }
+<a name="l00134"></a>00134 };
+<a name="l00135"></a>00135 
+<a name="l00143"></a>00143 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00144"></a><a class="code" href="classreranker_1_1_type_name_3_01vector_3_01_t_01_4_01_4.html">00144</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName</a>&lt;vector&lt;T&gt; &gt; {
+<a name="l00145"></a>00145  <span class="keyword">public</span>:
+<a name="l00146"></a><a class="code" href="classreranker_1_1_type_name_3_01vector_3_01_t_01_4_01_4.html#a8ec76a5aaa57f6c7f76d86011b64ccfa">00146</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_type_name_3_01vector_3_01_t_01_4_01_4.html#a8ec76a5aaa57f6c7f76d86011b64ccfa">ToString</a>() {
+<a name="l00147"></a>00147     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName&lt;T&gt;</a>().<a class="code" href="classreranker_1_1_type_name.html#a5f7ad50c4280ca3b7dccafd01292a861">ToString</a>() + <span class="stringliteral">&quot;[]&quot;</span>;
+<a name="l00148"></a>00148   }
+<a name="l00149"></a>00149 };
+<a name="l00150"></a>00150 
+<a name="l00155"></a><a class="code" href="classreranker_1_1_member_initializer.html">00155</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> {
+<a name="l00156"></a>00156  <span class="keyword">public</span>:
+<a name="l00157"></a><a class="code" href="classreranker_1_1_member_initializer.html#a93e6c74c8cb94bee8968e56853517bfe">00157</a>   <a class="code" href="classreranker_1_1_member_initializer.html#a93e6c74c8cb94bee8968e56853517bfe">MemberInitializer</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <span class="keywordtype">bool</span> required) :
+<a name="l00158"></a>00158       <a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92" title="The name of this member.">name_</a>(name), <a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>(0), <a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699" title="Whether this member is required to be initialized.">required_</a>(required) { }
+<a name="l00159"></a><a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">00159</a>   <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>() { <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92" title="The name of this member.">name_</a>; }
+<a name="l00160"></a>00160   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_member_initializer.html#a085d766d1e86d17d4323a46933fc012b">Init</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) = 0;
+<a name="l00163"></a><a class="code" href="classreranker_1_1_member_initializer.html#aae102105102356914b4a92d7d92b0a56">00163</a>   <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_member_initializer.html#aae102105102356914b4a92d7d92b0a56" title="Returns the number of times this member initializer&rsquo;s Init method has been invoked.">Initialized</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>; }
+<a name="l00164"></a><a class="code" href="classreranker_1_1_member_initializer.html#a628dcf5f10c9fb79f27254fcfd21cfe3">00164</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_member_initializer.html#a628dcf5f10c9fb79f27254fcfd21cfe3">Required</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699" title="Whether this member is required to be initialized.">required_</a>; }
+<a name="l00165"></a>00165  <span class="keyword">protected</span>:
+<a name="l00167"></a><a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92">00167</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_member_initializer.html#a4907fd4c837c5dfc19b602228e0edc92" title="The name of this member.">name_</a>;
+<a name="l00170"></a><a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1">00170</a>   <span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>;
+<a name="l00172"></a><a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699">00172</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_member_initializer.html#aaeaa1401323e62caa4be09788f2af699" title="Whether this member is required to be initialized.">required_</a>;
+<a name="l00173"></a>00173 };
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00176"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html">00176</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_typed_member_initializer.html">TypedMemberInitializer</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> {
+<a name="l00177"></a>00177  <span class="keyword">public</span>:
+<a name="l00178"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html#a95c3abb535f08c9ec87a5539d1f7f1c1">00178</a>   <a class="code" href="classreranker_1_1_typed_member_initializer.html#a95c3abb535f08c9ec87a5539d1f7f1c1">TypedMemberInitializer</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, T *member, <span class="keywordtype">bool</span> required = <span class="keyword">false</span>) :
+<a name="l00179"></a>00179       <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a>(name, required), <a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">member_</a>(member) { }
+<a name="l00180"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html#afca07d3366246c6c1a4c98a0df499b30">00180</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_typed_member_initializer.html#afca07d3366246c6c1a4c98a0df499b30">Init</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) {
+<a name="l00181"></a>00181     env-&gt;<a class="code" href="classreranker_1_1_environment.html#a95b0818fd8c3311b224ab177defda94f" title="Sets the specified variable to the value obtained from the following tokens available from the specif...">ReadAndSet</a>(<a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>(), st, <a class="code" href="classreranker_1_1_type_name.html" title="We use the templated class TypeName to be able to take an actual C++ type and get the type name strin...">TypeName&lt;T&gt;</a>().ToString());
+<a name="l00182"></a>00182     <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *var_map = env-&gt;<a class="code" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003" title="Retrieves the VarMap instance for the specified variable.">GetVarMap</a>(<a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>());
+<a name="l00183"></a>00183     <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *typed_var_map = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;T&gt;</a> *<span class="keyword">&gt;</span>(var_map);
+<a name="l00184"></a>00184     <span class="keywordflow">if</span> (typed_var_map != NULL) {
+<a name="l00185"></a>00185       <span class="keywordtype">bool</span> success = typed_var_map-&gt;<a class="code" href="classreranker_1_1_var_map.html#a06ae9d1793c6e507b975ac23f9d7af58" title="Assigns the value of the specified variable to the object pointed to by the value parameter...">Get</a>(<a class="code" href="classreranker_1_1_member_initializer.html#abe8bbe05d631bbe1976b4de8a853eed3">Name</a>(), <a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">member_</a>);
+<a name="l00186"></a>00186       <span class="keywordflow">if</span> (success) {
+<a name="l00187"></a>00187         ++(<a class="code" href="classreranker_1_1_member_initializer.html#a337ee2f5e378b5c4ddee7f649bf0f3c1" title="The number of times this member initializer&rsquo;s Init method has been invoked.">initialized_</a>);
+<a name="l00188"></a>00188       }
+<a name="l00189"></a>00189     }
+<a name="l00190"></a>00190   }
+<a name="l00191"></a>00191  <span class="keyword">protected</span>:
+<a name="l00192"></a><a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">00192</a>   T *<a class="code" href="classreranker_1_1_typed_member_initializer.html#a35a862355f7f07417f88fa9ac67315aa">member_</a>;
+<a name="l00193"></a>00193 };
+<a name="l00194"></a>00194 
+<a name="l00201"></a><a class="code" href="classreranker_1_1_initializers.html">00201</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> {
+<a name="l00202"></a>00202  <span class="keyword">public</span>:
+<a name="l00205"></a>00205   <span class="keyword">typedef</span> unordered_map&lt;string, MemberInitializer *&gt;::const_iterator
+<a name="l00206"></a><a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035">00206</a>       <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a>;
+<a name="l00209"></a><a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05">00209</a>   <span class="keyword">typedef</span> unordered_map&lt;string, MemberInitializer *&gt;::iterator <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a>;
+<a name="l00210"></a>00210 
+<a name="l00212"></a><a class="code" href="classreranker_1_1_initializers.html#ad48cd95efd3ba7d191c54837ea74ed60">00212</a>   <a class="code" href="classreranker_1_1_initializers.html#ad48cd95efd3ba7d191c54837ea74ed60" title="Constructs a new instance.">Initializers</a>() { }
+<a name="l00214"></a><a class="code" href="classreranker_1_1_initializers.html#a4c2aba14b19b2b078a19a3749da6ceb1">00214</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_initializers.html#a4c2aba14b19b2b078a19a3749da6ceb1" title="Destroys this instance.">~Initializers</a>() {
+<a name="l00215"></a>00215     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> init_it = initializers_.begin();
+<a name="l00216"></a>00216          init_it != initializers_.end();
+<a name="l00217"></a>00217          ++init_it) {
+<a name="l00218"></a>00218       <span class="keyword">delete</span> init_it-&gt;second;
+<a name="l00219"></a>00219     }
+<a name="l00220"></a>00220   }
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
+<a name="l00223"></a><a class="code" href="classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91">00223</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91">Add</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, T *member, <span class="keywordtype">bool</span> required = <span class="keyword">false</span>) {
+<a name="l00224"></a>00224     initializers_[name] = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_typed_member_initializer.html">TypedMemberInitializer&lt;T&gt;</a>(name, member, required);
+<a name="l00225"></a>00225   }
+<a name="l00226"></a>00226 
+<a name="l00230"></a><a class="code" href="classreranker_1_1_initializers.html#a3783e6f2fa0bc7330b6103eac1c86c58">00230</a>   <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a> <a class="code" href="classreranker_1_1_initializers.html#a3783e6f2fa0bc7330b6103eac1c86c58" title="Returns a const iterator pointing to the beginning of the map from member names to pointers to TypedM...">begin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> initializers_.begin(); }
+<a name="l00235"></a><a class="code" href="classreranker_1_1_initializers.html#ad94d0fbca0b8da45e638439d9fa95bfb">00235</a>   <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a> <a class="code" href="classreranker_1_1_initializers.html#ad94d0fbca0b8da45e638439d9fa95bfb" title="Returns a const iterator pointing to the end of the map from member names to pointers to TypedMemberI...">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> initializers_.end(); }
+<a name="l00236"></a>00236 
+<a name="l00241"></a><a class="code" href="classreranker_1_1_initializers.html#a96c3cd1dc3c275530613d0c8faada55b">00241</a>   <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> <a class="code" href="classreranker_1_1_initializers.html#a96c3cd1dc3c275530613d0c8faada55b" title="Returns an iterator pointing to the beginning of the map from member names to pointers to TypedMember...">begin</a>() { <span class="keywordflow">return</span> initializers_.begin(); }
+<a name="l00245"></a><a class="code" href="classreranker_1_1_initializers.html#aec7eb1e8bf142ccf0023450e809a45d5">00245</a>   <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> <a class="code" href="classreranker_1_1_initializers.html#aec7eb1e8bf142ccf0023450e809a45d5" title="Returns an iterator pointing to the end of the map from member names to pointers to TypedMemberInitia...">end</a>() { <span class="keywordflow">return</span> initializers_.end(); }
 <a name="l00246"></a>00246 
-<a name="l00250"></a><a class="code" href="classreranker_1_1_factory_container.html#a4ecabc625093e83cb762a27f8d175d88">00250</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_container.html#a4ecabc625093e83cb762a27f8d175d88" title="Prints the base typenames for all factories along with a list of all concrete subtypes those factorie...">Print</a>(ostream &amp;os) {
-<a name="l00251"></a>00251     <span class="keywordflow">if</span> (!initialized_) {
-<a name="l00252"></a>00252       <span class="keywordflow">return</span>;
-<a name="l00253"></a>00253     }
-<a name="l00254"></a>00254     cerr &lt;&lt; <span class="stringliteral">&quot;Number of factories: &quot;</span> &lt;&lt; factories_-&gt;size() &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; endl;
-<a name="l00255"></a>00255     <span class="keywordflow">for</span> (vector&lt;FactoryBase *&gt;::iterator factory_it = factories_-&gt;begin();
-<a name="l00256"></a>00256          factory_it != factories_-&gt;end();
-<a name="l00257"></a>00257          ++factory_it) {
-<a name="l00258"></a>00258       unordered_set&lt;string&gt; registered;
-<a name="l00259"></a>00259       (*factory_it)-&gt;CollectRegistered(registered);
-<a name="l00260"></a>00260       os &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; (*factory_it)-&gt;BaseName() &lt;&lt; <span class="stringliteral">&quot;&gt; can construct:\n&quot;</span>;
-<a name="l00261"></a>00261       <span class="keywordflow">for</span> (unordered_set&lt;string&gt;::const_iterator it = registered.begin();
-<a name="l00262"></a>00262            it != registered.end();
-<a name="l00263"></a>00263            ++it) {
-<a name="l00264"></a>00264         os &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span> &lt;&lt; *it &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00265"></a>00265       }
-<a name="l00266"></a>00266     }
-<a name="l00267"></a>00267     os.flush();
-<a name="l00268"></a>00268   }
-<a name="l00269"></a>00269  <span class="keyword">private</span>:
-<a name="l00270"></a>00270   <span class="keyword">static</span> <span class="keywordtype">int</span> initialized_;
-<a name="l00271"></a>00271   <span class="keyword">static</span> vector&lt;FactoryBase *&gt; *factories_;
-<a name="l00272"></a>00272 };
-<a name="l00273"></a>00273 
-<a name="l00279"></a>00279 <span class="comment">// \tparam T the abstract type that this &lt;tt&gt;Constructor&lt;/tt&gt; constructs</span>
-<a name="l00280"></a>00280 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
-<a name="l00281"></a><a class="code" href="classreranker_1_1_constructor.html">00281</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor</a> {
-<a name="l00282"></a>00282  <span class="keyword">public</span>:
-<a name="l00283"></a>00283   <span class="keyword">virtual</span> T *<a class="code" href="classreranker_1_1_constructor.html#a7cd26a61b1ace2b0e7cf677c8f60ab39">NewInstance</a>() <span class="keyword">const</span> = 0;
-<a name="l00284"></a>00284 };
-<a name="l00285"></a>00285 
-<a name="l00288"></a><a class="code" href="classreranker_1_1_factory_constructible.html">00288</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory_constructible.html" title="An interface to make it easier to implement Factory-constructible types by implementing both required...">FactoryConstructible</a> {
-<a name="l00289"></a>00289  <span class="keyword">public</span>:
-<a name="l00290"></a><a class="code" href="classreranker_1_1_factory_constructible.html#a4a45cf0a7822b3cd26ec882f0330b788">00290</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_constructible.html#a4a45cf0a7822b3cd26ec882f0330b788">RegisterInitializers</a>(<a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> &amp;initializers) { }
-<a name="l00291"></a><a class="code" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">00291</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">Init</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg) { }
-<a name="l00292"></a>00292 };
-<a name="l00293"></a>00293 
-<a name="l00298"></a>00298 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
-<a name="l00299"></a><a class="code" href="classreranker_1_1_factory.html">00299</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_factory_base.html" title="An interface for all Factory instances, specifying a few pure virtual methods.">FactoryBase</a> {
-<a name="l00300"></a>00300  <span class="keyword">public</span>:
-<a name="l00302"></a><a class="code" href="classreranker_1_1_factory.html#ad22223cf69fd67cff3bfc6dec46ddbdd">00302</a>   <a class="code" href="classreranker_1_1_factory.html#ad22223cf69fd67cff3bfc6dec46ddbdd" title="Constructs a new factory.">Factory</a>() { }
-<a name="l00303"></a>00303 
-<a name="l00309"></a><a class="code" href="classreranker_1_1_factory.html#a555f8107c0c4866c5a00f9c8d3073ef2">00309</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory.html#a555f8107c0c4866c5a00f9c8d3073ef2" title="Clears this factory of all (possibly static) data.">Clear</a>() {
-<a name="l00310"></a>00310     <a class="code" href="classreranker_1_1_factory.html#a892eeb8c39013c68c4082c2247d1cbf3" title="Clears all static data associated with this class.">ClearStatic</a>();
-<a name="l00311"></a>00311   }
-<a name="l00312"></a>00312 
-<a name="l00465"></a><a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f">00465</a>   shared_ptr&lt;T&gt; <a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env = NULL) {
-<a name="l00466"></a>00466     shared_ptr&lt;Environment&gt; env_ptr(env == NULL ?
-<a name="l00467"></a>00467                                     <a class="code" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792" title="A static factory method to create a new, empty Environment instance.">Environment::CreateEmpty</a>() : env-&gt;<a class="code" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02" title="Returns a copy of this environment.">Copy</a>());
-<a name="l00468"></a>00468     <span class="keywordtype">size_t</span> start = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>();
-<a name="l00469"></a>00469     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">StreamTokenizer::TokenType</a> token_type = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557" title="Returns the type of the next token.">PeekTokenType</a>();
-<a name="l00470"></a>00470     <span class="keywordflow">if</span> (token_type != <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">StreamTokenizer::IDENTIFIER</a>) {
-<a name="l00471"></a>00471       ostringstream err_ss;
-<a name="l00472"></a>00472       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00473"></a>00473              &lt;&lt; <span class="stringliteral">&quot;error: expected type specifier token but found &quot;</span>
-<a name="l00474"></a>00474              &lt;&lt; <a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450" title="Returns a string type name for the specified TokenType constant.">StreamTokenizer::TypeName</a>(token_type);
-<a name="l00475"></a>00475       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00476"></a>00476     }
-<a name="l00477"></a>00477 
-<a name="l00478"></a>00478     <span class="comment">// Read the concrete type of object to be created.</span>
-<a name="l00479"></a>00479     <span class="keywordtype">string</span> type = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00480"></a>00480 
-<a name="l00481"></a>00481     <span class="comment">// Read the open parenthesis token.</span>
-<a name="l00482"></a>00482     <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;(&quot;</span>) {
-<a name="l00483"></a>00483       ostringstream err_ss;
-<a name="l00484"></a>00484       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00485"></a>00485              &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;(&#39; at stream position &quot;</span>
-<a name="l00486"></a>00486              &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00487"></a>00487       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00488"></a>00488     }
-<a name="l00489"></a>00489     st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00490"></a>00490 
-<a name="l00491"></a>00491     <span class="comment">// Attempt to create an instance of type.</span>
-<a name="l00492"></a>00492     <span class="keyword">typename</span> unordered_map&lt;string, const Constructor&lt;T&gt; *&gt;::iterator cons_it =
-<a name="l00493"></a>00493         cons_table_-&gt;find(type);
-<a name="l00494"></a>00494     <span class="keywordflow">if</span> (cons_it == cons_table_-&gt;end()) {
-<a name="l00495"></a>00495       ostringstream err_ss;
-<a name="l00496"></a>00496       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00497"></a>00497              &lt;&lt; <span class="stringliteral">&quot;error: unknown type: \&quot;&quot;</span> &lt;&lt; type &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00498"></a>00498       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00499"></a>00499     }
-<a name="l00500"></a>00500     shared_ptr&lt;T&gt; instance(cons_it-&gt;second-&gt;NewInstance());
-<a name="l00501"></a>00501 
-<a name="l00502"></a>00502     <span class="comment">// Ask new instance to set up member initializers.</span>
-<a name="l00503"></a>00503     <a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> initializers;
-<a name="l00504"></a>00504     instance-&gt;RegisterInitializers(initializers);
-<a name="l00505"></a>00505 
-<a name="l00506"></a>00506     <span class="comment">// Parse initializer list.</span>
-<a name="l00507"></a>00507     <span class="keywordflow">while</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
-<a name="l00508"></a>00508       token_type = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557" title="Returns the type of the next token.">PeekTokenType</a>();
-<a name="l00509"></a>00509       <span class="keywordflow">if</span> (token_type != <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">StreamTokenizer::IDENTIFIER</a>) {
-<a name="l00510"></a>00510         ostringstream err_ss;
-<a name="l00511"></a>00511         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00512"></a>00512                &lt;&lt; <span class="stringliteral">&quot;error: expected token of type IDENTIFIER at &quot;</span>
-<a name="l00513"></a>00513                &lt;&lt; <span class="stringliteral">&quot;stream position &quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found &quot;</span>
-<a name="l00514"></a>00514                &lt;&lt; <a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450" title="Returns a string type name for the specified TokenType constant.">StreamTokenizer::TypeName</a>(token_type) &lt;&lt; <span class="stringliteral">&quot;: \&quot;&quot;</span>
-<a name="l00515"></a>00515                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00516"></a>00516         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00517"></a>00517       }
-<a name="l00518"></a>00518       <span class="keywordtype">size_t</span> member_name_start = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>();
-<a name="l00519"></a>00519       <span class="keywordtype">string</span> member_name = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00520"></a>00520       <span class="keyword">typename</span> <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">Initializers::iterator</a> init_it = initializers.find(member_name);
-<a name="l00521"></a>00521       <span class="keywordflow">if</span> (init_it == initializers.end()) {
-<a name="l00522"></a>00522         ostringstream err_ss;
-<a name="l00523"></a>00523         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00524"></a>00524                &lt;&lt; <span class="stringliteral">&quot;error: unknown member name \&quot;&quot;</span> &lt;&lt; member_name
-<a name="l00525"></a>00525                &lt;&lt; <span class="stringliteral">&quot;\&quot; in initializer list for type &quot;</span> &lt;&lt; type &lt;&lt; <span class="stringliteral">&quot; at stream &quot;</span>
-<a name="l00526"></a>00526                &lt;&lt; <span class="stringliteral">&quot;position &quot;</span> &lt;&lt; member_name_start;
-<a name="l00527"></a>00527         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00528"></a>00528       }
-<a name="l00529"></a>00529       <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> *member_initializer = init_it-&gt;second;
-<a name="l00530"></a>00530 
-<a name="l00531"></a>00531       <span class="comment">// Read open parenthesis.</span>
-<a name="l00532"></a>00532       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;(&quot;</span>) {
-<a name="l00533"></a>00533         ostringstream err_ss;
-<a name="l00534"></a>00534         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00535"></a>00535                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;(&#39; at stream position &quot;</span>
-<a name="l00536"></a>00536                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00537"></a>00537         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00538"></a>00538       }
-<a name="l00539"></a>00539       st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00540"></a>00540 
-<a name="l00541"></a>00541       <span class="comment">// Initialize member based on following token(s).</span>
-<a name="l00542"></a>00542       member_initializer-&gt;<a class="code" href="classreranker_1_1_member_initializer.html#a085d766d1e86d17d4323a46933fc012b">Init</a>(st, env_ptr.get());
-<a name="l00543"></a>00543 
-<a name="l00544"></a>00544       <span class="comment">// Read close parenthesis for current member initializer.</span>
-<a name="l00545"></a>00545       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
-<a name="l00546"></a>00546         ostringstream err_ss;
-<a name="l00547"></a>00547         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00548"></a>00548                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;)&#39; at stream position &quot;</span>
-<a name="l00549"></a>00549                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00550"></a>00550         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00551"></a>00551       }
-<a name="l00552"></a>00552       st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00553"></a>00553 
-<a name="l00554"></a>00554       <span class="comment">// Each member initializer must be followed by a comma or the final</span>
-<a name="l00555"></a>00555       <span class="comment">// closing parenthesis.</span>
-<a name="l00556"></a>00556       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;,&quot;</span>  &amp;&amp; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
-<a name="l00557"></a>00557         ostringstream err_ss;
-<a name="l00558"></a>00558         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00559"></a>00559                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;,&#39; or &#39;)&#39; at stream position &quot;</span>
-<a name="l00560"></a>00560                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00561"></a>00561         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00562"></a>00562       }
-<a name="l00563"></a>00563       <span class="comment">// Read comma, if present.</span>
-<a name="l00564"></a>00564       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() == <span class="stringliteral">&quot;,&quot;</span>) {
-<a name="l00565"></a>00565         st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00566"></a>00566       }
-<a name="l00567"></a>00567     }
-<a name="l00568"></a>00568 
-<a name="l00569"></a>00569     <span class="comment">// Read the close parenthesis token for this factory type specification.</span>
-<a name="l00570"></a>00570     <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
-<a name="l00571"></a>00571       ostringstream err_ss;
-<a name="l00572"></a>00572       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00573"></a>00573              &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;)&#39; at stream position &quot;</span>
-<a name="l00574"></a>00574              &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00575"></a>00575       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00576"></a>00576     }
-<a name="l00577"></a>00577     st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00578"></a>00578 
-<a name="l00579"></a>00579     <span class="comment">// Run through all member initializers: if any are required but haven&#39;t</span>
-<a name="l00580"></a>00580     <span class="comment">// been invoked, it is an error.</span>
-<a name="l00581"></a>00581     <span class="keywordflow">for</span> (<span class="keyword">typename</span> <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">Initializers::const_iterator</a> init_it = initializers.begin();
-<a name="l00582"></a>00582          init_it != initializers.end();
-<a name="l00583"></a>00583          ++init_it) {
-<a name="l00584"></a>00584       <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> *member_initializer = init_it-&gt;second;
-<a name="l00585"></a>00585       <span class="keywordflow">if</span> (member_initializer-&gt;<a class="code" href="classreranker_1_1_member_initializer.html#a628dcf5f10c9fb79f27254fcfd21cfe3">Required</a>() &amp;&amp;
-<a name="l00586"></a>00586           member_initializer-&gt;<a class="code" href="classreranker_1_1_member_initializer.html#aae102105102356914b4a92d7d92b0a56" title="Returns the number of times this member initializer&rsquo;s Init method has been invoked.">Initialized</a>() == 0) {
-<a name="l00587"></a>00587         ostringstream err_ss;
-<a name="l00588"></a>00588         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
-<a name="l00589"></a>00589                &lt;&lt; <span class="stringliteral">&quot;error: initialization for member with name \&quot;&quot;</span>
-<a name="l00590"></a>00590                &lt;&lt; init_it-&gt;first &lt;&lt; <span class="stringliteral">&quot;\&quot; required but not found (current &quot;</span>
-<a name="l00591"></a>00591                &lt;&lt; <span class="stringliteral">&quot;stream position: &quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
-<a name="l00592"></a>00592         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00593"></a>00593       }
-<a name="l00594"></a>00594     }
+<a name="l00252"></a><a class="code" href="classreranker_1_1_initializers.html#ad789c774006d6d16b896c08e76de40e1">00252</a>   <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">const_iterator</a> <a class="code" href="classreranker_1_1_initializers.html#ad789c774006d6d16b896c08e76de40e1" title="Returns a const_iterator pointing to the MemberInitializer associated with the specified name...">find</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name)<span class="keyword"> const </span>{
+<a name="l00253"></a>00253     <span class="keywordflow">return</span> initializers_.find(name);
+<a name="l00254"></a>00254   }
+<a name="l00260"></a><a class="code" href="classreranker_1_1_initializers.html#a5eb65fc3a910912b9bb7eb9cfef09185">00260</a>   <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">iterator</a> <a class="code" href="classreranker_1_1_initializers.html#a5eb65fc3a910912b9bb7eb9cfef09185" title="Returns an iterator pointing to the MemberInitializer associated with the specified name...">find</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name) {
+<a name="l00261"></a>00261     <span class="keywordflow">return</span> initializers_.find(name);
+<a name="l00262"></a>00262   }
+<a name="l00263"></a>00263  <span class="keyword">private</span>:
+<a name="l00264"></a>00264   unordered_map&lt;string, MemberInitializer *&gt; initializers_;
+<a name="l00265"></a>00265 };
+<a name="l00266"></a>00266 
+<a name="l00269"></a><a class="code" href="classreranker_1_1_factory_base.html">00269</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory_base.html" title="An interface for all Factory instances, specifying a few pure virtual methods.">FactoryBase</a> {
+<a name="l00270"></a>00270  <span class="keyword">public</span>:
+<a name="l00276"></a>00276   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_base.html#a2b7ed0a748bf9eefbc30355167fe8ad9" title="Clears the (possibly static) data of this factory.">Clear</a>() = 0;
+<a name="l00278"></a>00278   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_factory_base.html#a3f0dd88a8da419dde3cbe3e97fda55ab" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() <span class="keyword">const</span> = 0;
+<a name="l00285"></a>00285   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_base.html#ada8c5df4396bb4e785b690d0a6d5922f" title="Collects the names of types registered with this factory.">CollectRegistered</a>(unordered_set&lt;string&gt; &amp;registered) <span class="keyword">const</span> = 0;
+<a name="l00286"></a>00286 
+<a name="l00287"></a>00287   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory_base.html#a165b07587cacb1112b783f5191c51fd5">CreateVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) <span class="keyword">const</span> = 0;
+<a name="l00288"></a>00288 
+<a name="l00289"></a>00289   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory_base.html#a8ba4ece87f76449fbdc2702bb6ddcb76">CreateVectorVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env) <span class="keyword">const</span> = 0;
+<a name="l00290"></a>00290 };
+<a name="l00291"></a>00291 
+<a name="l00293"></a><a class="code" href="classreranker_1_1_factory_container.html">00293</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory_container.html" title="A class to hold all Factory instances that have been created.">FactoryContainer</a> {
+<a name="l00294"></a>00294  <span class="keyword">public</span>:
+<a name="l00295"></a><a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">00295</a>   <span class="keyword">typedef</span> vector&lt;FactoryBase *&gt;::iterator <a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">iterator</a>;
+<a name="l00296"></a>00296 
+<a name="l00300"></a><a class="code" href="classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324">00300</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324" title="Adds the specified factory to this container of factories.">Add</a>(<a class="code" href="classreranker_1_1_factory_base.html" title="An interface for all Factory instances, specifying a few pure virtual methods.">FactoryBase</a> *factory) {
+<a name="l00301"></a>00301     <span class="keywordflow">if</span> (!initialized_) {
+<a name="l00302"></a>00302       factories_ = <span class="keyword">new</span> vector&lt;FactoryBase *&gt;();
+<a name="l00303"></a>00303       initialized_ = 1;
+<a name="l00304"></a>00304     }
+<a name="l00305"></a>00305     factories_-&gt;push_back(factory);
+<a name="l00306"></a>00306   }
+<a name="l00308"></a><a class="code" href="classreranker_1_1_factory_container.html#ab242b39f86f6bccfae572108ef46f8e9">00308</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_container.html#ab242b39f86f6bccfae572108ef46f8e9" title="Clears this container of factories.">Clear</a>() {
+<a name="l00309"></a>00309     <span class="keywordflow">if</span> (initialized_) {
+<a name="l00310"></a>00310       <span class="keywordflow">for</span> (vector&lt;FactoryBase *&gt;::iterator it = factories_-&gt;begin();
+<a name="l00311"></a>00311            it != factories_-&gt;end();
+<a name="l00312"></a>00312            ++it) {
+<a name="l00313"></a>00313         (*it)-&gt;Clear();
+<a name="l00314"></a>00314         <span class="keyword">delete</span> *it;
+<a name="l00315"></a>00315       }
+<a name="l00316"></a>00316       <span class="keyword">delete</span> factories_;
+<a name="l00317"></a>00317     }
+<a name="l00318"></a>00318   }
+<a name="l00319"></a>00319 
+<a name="l00320"></a>00320   <span class="comment">// Provide two methods to iterate over the FactoryBase instances</span>
+<a name="l00321"></a>00321   <span class="comment">// held by this FactoryContainer.</span>
+<a name="l00322"></a><a class="code" href="classreranker_1_1_factory_container.html#a8a206cc8e159df1be3c3b9ac3f87f8a3">00322</a>   <span class="keyword">static</span> <a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">iterator</a> <a class="code" href="classreranker_1_1_factory_container.html#a8a206cc8e159df1be3c3b9ac3f87f8a3">begin</a>() {
+<a name="l00323"></a>00323     <span class="keywordflow">if</span> (factories_ == NULL) {
+<a name="l00324"></a>00324       cerr &lt;&lt; <span class="stringliteral">&quot;FactoryContainer::begin: error: no FactoryBase instances!&quot;</span>
+<a name="l00325"></a>00325            &lt;&lt; endl;
+<a name="l00326"></a>00326     }
+<a name="l00327"></a>00327     <span class="keywordflow">return</span> factories_-&gt;begin();
+<a name="l00328"></a>00328   }
+<a name="l00329"></a><a class="code" href="classreranker_1_1_factory_container.html#a34ca18c43c96d8f15f943ad3c86fd2b3">00329</a>   <span class="keyword">static</span> <a class="code" href="classreranker_1_1_factory_container.html#a5bf60c03af9c6d6266a8065b9e45b1d1">iterator</a> <a class="code" href="classreranker_1_1_factory_container.html#a34ca18c43c96d8f15f943ad3c86fd2b3">end</a>() {
+<a name="l00330"></a>00330     <span class="keywordflow">if</span> (factories_ == NULL) {
+<a name="l00331"></a>00331       cerr &lt;&lt; <span class="stringliteral">&quot;FactoryContainer::begin: error: no FactoryBase instances!&quot;</span>
+<a name="l00332"></a>00332            &lt;&lt; endl;
+<a name="l00333"></a>00333     }
+<a name="l00334"></a>00334     <span class="keywordflow">return</span> factories_-&gt;end();
+<a name="l00335"></a>00335   }
+<a name="l00336"></a>00336 
+<a name="l00340"></a><a class="code" href="classreranker_1_1_factory_container.html#a4ecabc625093e83cb762a27f8d175d88">00340</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_container.html#a4ecabc625093e83cb762a27f8d175d88" title="Prints the base typenames for all factories along with a list of all concrete subtypes those factorie...">Print</a>(ostream &amp;os) {
+<a name="l00341"></a>00341     <span class="keywordflow">if</span> (!initialized_) {
+<a name="l00342"></a>00342       <span class="keywordflow">return</span>;
+<a name="l00343"></a>00343     }
+<a name="l00344"></a>00344     cerr &lt;&lt; <span class="stringliteral">&quot;Number of factories: &quot;</span> &lt;&lt; factories_-&gt;size() &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; endl;
+<a name="l00345"></a>00345     <span class="keywordflow">for</span> (vector&lt;FactoryBase *&gt;::iterator factory_it = factories_-&gt;begin();
+<a name="l00346"></a>00346          factory_it != factories_-&gt;end();
+<a name="l00347"></a>00347          ++factory_it) {
+<a name="l00348"></a>00348       unordered_set&lt;string&gt; registered;
+<a name="l00349"></a>00349       (*factory_it)-&gt;CollectRegistered(registered);
+<a name="l00350"></a>00350       os &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; (*factory_it)-&gt;BaseName() &lt;&lt; <span class="stringliteral">&quot;&gt; can construct:\n&quot;</span>;
+<a name="l00351"></a>00351       <span class="keywordflow">for</span> (unordered_set&lt;string&gt;::const_iterator it = registered.begin();
+<a name="l00352"></a>00352            it != registered.end();
+<a name="l00353"></a>00353            ++it) {
+<a name="l00354"></a>00354         os &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span> &lt;&lt; *it &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00355"></a>00355       }
+<a name="l00356"></a>00356     }
+<a name="l00357"></a>00357     os.flush();
+<a name="l00358"></a>00358   }
+<a name="l00359"></a>00359  <span class="keyword">private</span>:
+<a name="l00360"></a>00360   <span class="keyword">static</span> <span class="keywordtype">int</span> initialized_;
+<a name="l00361"></a>00361   <span class="keyword">static</span> vector&lt;FactoryBase *&gt; *factories_;
+<a name="l00362"></a>00362 };
+<a name="l00363"></a>00363 
+<a name="l00369"></a>00369 <span class="comment">// \tparam T the abstract type that this &lt;tt&gt;Constructor&lt;/tt&gt; constructs</span>
+<a name="l00370"></a>00370 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00371"></a><a class="code" href="classreranker_1_1_constructor.html">00371</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor</a> {
+<a name="l00372"></a>00372  <span class="keyword">public</span>:
+<a name="l00373"></a>00373   <span class="keyword">virtual</span> T *<a class="code" href="classreranker_1_1_constructor.html#a7cd26a61b1ace2b0e7cf677c8f60ab39">NewInstance</a>() <span class="keyword">const</span> = 0;
+<a name="l00374"></a>00374 };
+<a name="l00375"></a>00375 
+<a name="l00378"></a><a class="code" href="classreranker_1_1_factory_constructible.html">00378</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory_constructible.html" title="An interface to make it easier to implement Factory-constructible types by implementing both required...">FactoryConstructible</a> {
+<a name="l00379"></a>00379  <span class="keyword">public</span>:
+<a name="l00380"></a><a class="code" href="classreranker_1_1_factory_constructible.html#a4a45cf0a7822b3cd26ec882f0330b788">00380</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_constructible.html#a4a45cf0a7822b3cd26ec882f0330b788">RegisterInitializers</a>(<a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> &amp;initializers) { }
+<a name="l00381"></a><a class="code" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">00381</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">Init</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg) { }
+<a name="l00382"></a>00382 };
+<a name="l00383"></a>00383 
+<a name="l00388"></a>00388 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<a name="l00389"></a><a class="code" href="classreranker_1_1_factory.html">00389</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_factory_base.html" title="An interface for all Factory instances, specifying a few pure virtual methods.">FactoryBase</a> {
+<a name="l00390"></a>00390  <span class="keyword">public</span>:
+<a name="l00392"></a><a class="code" href="classreranker_1_1_factory.html#ad22223cf69fd67cff3bfc6dec46ddbdd">00392</a>   <a class="code" href="classreranker_1_1_factory.html#ad22223cf69fd67cff3bfc6dec46ddbdd" title="Constructs a new factory.">Factory</a>() { }
+<a name="l00393"></a>00393 
+<a name="l00399"></a><a class="code" href="classreranker_1_1_factory.html#a555f8107c0c4866c5a00f9c8d3073ef2">00399</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory.html#a555f8107c0c4866c5a00f9c8d3073ef2" title="Clears this factory of all (possibly static) data.">Clear</a>() {
+<a name="l00400"></a>00400     <a class="code" href="classreranker_1_1_factory.html#a892eeb8c39013c68c4082c2247d1cbf3" title="Clears all static data associated with this class.">ClearStatic</a>();
+<a name="l00401"></a>00401   }
+<a name="l00402"></a>00402 
+<a name="l00555"></a><a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f">00555</a>   shared_ptr&lt;T&gt; <a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> &amp;st, <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env = NULL) {
+<a name="l00556"></a>00556     shared_ptr&lt;Environment&gt; env_ptr(env == NULL ?
+<a name="l00557"></a>00557                                     <a class="code" href="classreranker_1_1_environment.html#a1214411c110887639ada037668265792" title="A static factory method to create a new, empty Environment instance.">Environment::CreateEmpty</a>() : env-&gt;<a class="code" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02" title="Returns a copy of this environment.">Copy</a>());
+<a name="l00558"></a>00558     <span class="keywordtype">size_t</span> start = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>();
+<a name="l00559"></a>00559     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">StreamTokenizer::TokenType</a> token_type = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557" title="Returns the type of the next token.">PeekTokenType</a>();
+<a name="l00560"></a>00560     <span class="keywordflow">if</span> (token_type != <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">StreamTokenizer::IDENTIFIER</a>) {
+<a name="l00561"></a>00561       ostringstream err_ss;
+<a name="l00562"></a>00562       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00563"></a>00563              &lt;&lt; <span class="stringliteral">&quot;error: expected type specifier token but found &quot;</span>
+<a name="l00564"></a>00564              &lt;&lt; <a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450" title="Returns a string type name for the specified TokenType constant.">StreamTokenizer::TypeName</a>(token_type);
+<a name="l00565"></a>00565       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00566"></a>00566     }
+<a name="l00567"></a>00567 
+<a name="l00568"></a>00568     <span class="comment">// Read the concrete type of object to be created.</span>
+<a name="l00569"></a>00569     <span class="keywordtype">string</span> type = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00570"></a>00570 
+<a name="l00571"></a>00571     <span class="comment">// Read the open parenthesis token.</span>
+<a name="l00572"></a>00572     <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;(&quot;</span>) {
+<a name="l00573"></a>00573       ostringstream err_ss;
+<a name="l00574"></a>00574       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00575"></a>00575              &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;(&#39; at stream position &quot;</span>
+<a name="l00576"></a>00576              &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00577"></a>00577       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00578"></a>00578     }
+<a name="l00579"></a>00579     st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00580"></a>00580 
+<a name="l00581"></a>00581     <span class="comment">// Attempt to create an instance of type.</span>
+<a name="l00582"></a>00582     <span class="keyword">typename</span> unordered_map&lt;string, const Constructor&lt;T&gt; *&gt;::iterator cons_it =
+<a name="l00583"></a>00583         cons_table_-&gt;find(type);
+<a name="l00584"></a>00584     <span class="keywordflow">if</span> (cons_it == cons_table_-&gt;end()) {
+<a name="l00585"></a>00585       ostringstream err_ss;
+<a name="l00586"></a>00586       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00587"></a>00587              &lt;&lt; <span class="stringliteral">&quot;error: unknown type: \&quot;&quot;</span> &lt;&lt; type &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00588"></a>00588       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00589"></a>00589     }
+<a name="l00590"></a>00590     shared_ptr&lt;T&gt; instance(cons_it-&gt;second-&gt;NewInstance());
+<a name="l00591"></a>00591 
+<a name="l00592"></a>00592     <span class="comment">// Ask new instance to set up member initializers.</span>
+<a name="l00593"></a>00593     <a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> initializers;
+<a name="l00594"></a>00594     instance-&gt;RegisterInitializers(initializers);
 <a name="l00595"></a>00595 
-<a name="l00596"></a>00596     <span class="keywordtype">size_t</span> end = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>();
-<a name="l00597"></a>00597     <span class="comment">// Invoke new instance&#39;s Init method.</span>
-<a name="l00598"></a>00598     <span class="comment">// TODO(dbikel): Possibly add the unordered_map of initializers as</span>
-<a name="l00599"></a>00599     <span class="comment">// a parameter to the init method.</span>
-<a name="l00600"></a>00600     <span class="keywordtype">string</span> stream_str = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#af4765dcb4f25bb60a13f879536d68288" title="Returns the entire sequence of characters read so far by this stream tokenizer as a newly constructed...">str</a>();
-<a name="l00601"></a>00601     <span class="comment">//cerr &lt;&lt; &quot;Full stream string is: \&quot;&quot; &lt;&lt; stream_str &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;</span>
-<a name="l00602"></a>00602     <span class="keywordtype">string</span> init_str = stream_str.substr(start, end - start);
-<a name="l00603"></a>00603     <span class="comment">//cerr &lt;&lt; &quot;Init string is: \&quot;&quot; &lt;&lt; init_str &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;</span>
-<a name="l00604"></a>00604     instance-&gt;Init(init_str);
-<a name="l00605"></a>00605 
-<a name="l00606"></a>00606     <span class="keywordflow">return</span> instance;
-<a name="l00607"></a>00607   }
-<a name="l00608"></a>00608 
-<a name="l00609"></a><a class="code" href="classreranker_1_1_factory.html#a6f4d2f54c4530cb070b90baa4877640a">00609</a>   shared_ptr&lt;T&gt; <a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec, <span class="keyword">const</span> <span class="keywordtype">string</span> err_msg,
-<a name="l00610"></a>00610                             <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env = NULL) {
-<a name="l00611"></a>00611     <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> st(spec);
-<a name="l00612"></a>00612     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(st, env);
-<a name="l00613"></a>00613   }
-<a name="l00614"></a>00614 
-<a name="l00615"></a>00615 
-<a name="l00617"></a><a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82">00617</a>   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> base_name_; }
-<a name="l00618"></a>00618 
-<a name="l00626"></a><a class="code" href="classreranker_1_1_factory.html#a5d150fb6e621783b7d71e8dac8f145cd">00626</a>   <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_factory.html#a5d150fb6e621783b7d71e8dac8f145cd" title="Returns whether the specified type has been registered with this factory (where registration happens ...">IsRegistered</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type) {
-<a name="l00627"></a>00627     <span class="keywordflow">return</span> initialized_ &amp;&amp; cons_table_-&gt;find(type) != cons_table_.end();
-<a name="l00628"></a>00628   }
-<a name="l00629"></a>00629 
-<a name="l00631"></a><a class="code" href="classreranker_1_1_factory.html#a1805fa630698b85e498cb707f81cb554">00631</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory.html#a1805fa630698b85e498cb707f81cb554">CollectRegistered</a>(unordered_set&lt;string&gt; &amp;registered)<span class="keyword"> const </span>{
-<a name="l00632"></a>00632     <span class="keywordflow">if</span> (initialized_) {
-<a name="l00633"></a>00633       <span class="keywordflow">for</span> (<span class="keyword">typename</span> unordered_map&lt;<span class="keywordtype">string</span>, <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *&gt;::iterator it =
-<a name="l00634"></a>00634                cons_table_-&gt;begin();
-<a name="l00635"></a>00635            it != cons_table_-&gt;end();
-<a name="l00636"></a>00636            ++it) {
-<a name="l00637"></a>00637         registered.insert(it-&gt;first);
-<a name="l00638"></a>00638       }
-<a name="l00639"></a>00639     }
-<a name="l00640"></a>00640   }
-<a name="l00641"></a>00641 
-<a name="l00642"></a><a class="code" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">00642</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">CreateVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env)<span class="keyword"> const </span>{
-<a name="l00643"></a>00643     <span class="keywordtype">bool</span> is_primitive = <span class="keyword">false</span>;
-<a name="l00644"></a>00644     <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;shared_ptr&lt;T&gt;</a> &gt;(<a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>(), env, is_primitive);
-<a name="l00645"></a>00645   }
-<a name="l00646"></a>00646 
-<a name="l00647"></a><a class="code" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">00647</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">CreateVectorVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env)<span class="keyword"> const </span>{
-<a name="l00648"></a>00648     <span class="keywordtype">string</span> name = <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() + <span class="stringliteral">&quot;[]&quot;</span>;
-<a name="l00649"></a>00649     <span class="keywordtype">bool</span> is_primitive = <span class="keyword">false</span>;
-<a name="l00650"></a>00650     <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;vector&lt;shared_ptr&lt;T&gt;</a> &gt; &gt;(name, env, is_primitive);
-<a name="l00651"></a>00651   }
-<a name="l00652"></a>00652 
-<a name="l00658"></a><a class="code" href="classreranker_1_1_factory.html#a91816c7ee7c55db9b20036a602d63511">00658</a>   <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *<a class="code" href="classreranker_1_1_factory.html#a91816c7ee7c55db9b20036a602d63511" title="The method used by the REGISTER_NAMED macro to ensure that subclasses add themselves to the factory...">Register</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type,
-<a name="l00659"></a>00659                                         <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *p) {
-<a name="l00660"></a>00660     <span class="keywordflow">if</span> (!initialized_) {
-<a name="l00661"></a>00661       cons_table_ = <span class="keyword">new</span> unordered_map&lt;string, const Constructor&lt;T&gt; *&gt;();
-<a name="l00662"></a>00662       initialized_ = 1;
-<a name="l00663"></a>00663       <a class="code" href="classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324" title="Adds the specified factory to this container of factories.">FactoryContainer::Add</a>(<span class="keyword">new</span> <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;T&gt;</a>());
-<a name="l00664"></a>00664     }
-<a name="l00665"></a>00665     (*cons_table_)[type] = p;
-<a name="l00666"></a>00666     <span class="keywordflow">return</span> p;
-<a name="l00667"></a>00667   }
+<a name="l00596"></a>00596     <span class="comment">// Parse initializer list.</span>
+<a name="l00597"></a>00597     <span class="keywordflow">while</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
+<a name="l00598"></a>00598       token_type = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557" title="Returns the type of the next token.">PeekTokenType</a>();
+<a name="l00599"></a>00599       <span class="keywordflow">if</span> (token_type != <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">StreamTokenizer::IDENTIFIER</a>) {
+<a name="l00600"></a>00600         ostringstream err_ss;
+<a name="l00601"></a>00601         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00602"></a>00602                &lt;&lt; <span class="stringliteral">&quot;error: expected token of type IDENTIFIER at &quot;</span>
+<a name="l00603"></a>00603                &lt;&lt; <span class="stringliteral">&quot;stream position &quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found &quot;</span>
+<a name="l00604"></a>00604                &lt;&lt; <a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450" title="Returns a string type name for the specified TokenType constant.">StreamTokenizer::TypeName</a>(token_type) &lt;&lt; <span class="stringliteral">&quot;: \&quot;&quot;</span>
+<a name="l00605"></a>00605                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00606"></a>00606         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00607"></a>00607       }
+<a name="l00608"></a>00608       <span class="keywordtype">size_t</span> member_name_start = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>();
+<a name="l00609"></a>00609       <span class="keywordtype">string</span> member_name = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00610"></a>00610       <span class="keyword">typename</span> <a class="code" href="classreranker_1_1_initializers.html#aab6c04959dce47c42a3b8e9644526a05" title="Forward the iterator typedef of the internal data structure, to make code compact and readable...">Initializers::iterator</a> init_it = initializers.find(member_name);
+<a name="l00611"></a>00611       <span class="keywordflow">if</span> (init_it == initializers.end()) {
+<a name="l00612"></a>00612         ostringstream err_ss;
+<a name="l00613"></a>00613         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00614"></a>00614                &lt;&lt; <span class="stringliteral">&quot;error: unknown member name \&quot;&quot;</span> &lt;&lt; member_name
+<a name="l00615"></a>00615                &lt;&lt; <span class="stringliteral">&quot;\&quot; in initializer list for type &quot;</span> &lt;&lt; type &lt;&lt; <span class="stringliteral">&quot; at stream &quot;</span>
+<a name="l00616"></a>00616                &lt;&lt; <span class="stringliteral">&quot;position &quot;</span> &lt;&lt; member_name_start;
+<a name="l00617"></a>00617         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00618"></a>00618       }
+<a name="l00619"></a>00619       <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> *member_initializer = init_it-&gt;second;
+<a name="l00620"></a>00620 
+<a name="l00621"></a>00621       <span class="comment">// Read open parenthesis.</span>
+<a name="l00622"></a>00622       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;(&quot;</span>) {
+<a name="l00623"></a>00623         ostringstream err_ss;
+<a name="l00624"></a>00624         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00625"></a>00625                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;(&#39; at stream position &quot;</span>
+<a name="l00626"></a>00626                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00627"></a>00627         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00628"></a>00628       }
+<a name="l00629"></a>00629       st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00630"></a>00630 
+<a name="l00631"></a>00631       <span class="comment">// Initialize member based on following token(s).</span>
+<a name="l00632"></a>00632       member_initializer-&gt;<a class="code" href="classreranker_1_1_member_initializer.html#a085d766d1e86d17d4323a46933fc012b">Init</a>(st, env_ptr.get());
+<a name="l00633"></a>00633 
+<a name="l00634"></a>00634       <span class="comment">// Read close parenthesis for current member initializer.</span>
+<a name="l00635"></a>00635       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
+<a name="l00636"></a>00636         ostringstream err_ss;
+<a name="l00637"></a>00637         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00638"></a>00638                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;)&#39; at stream position &quot;</span>
+<a name="l00639"></a>00639                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00640"></a>00640         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00641"></a>00641       }
+<a name="l00642"></a>00642       st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00643"></a>00643 
+<a name="l00644"></a>00644       <span class="comment">// Each member initializer must be followed by a comma or the final</span>
+<a name="l00645"></a>00645       <span class="comment">// closing parenthesis.</span>
+<a name="l00646"></a>00646       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;,&quot;</span>  &amp;&amp; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
+<a name="l00647"></a>00647         ostringstream err_ss;
+<a name="l00648"></a>00648         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00649"></a>00649                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;,&#39; or &#39;)&#39; at stream position &quot;</span>
+<a name="l00650"></a>00650                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00651"></a>00651         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00652"></a>00652       }
+<a name="l00653"></a>00653       <span class="comment">// Read comma, if present.</span>
+<a name="l00654"></a>00654       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() == <span class="stringliteral">&quot;,&quot;</span>) {
+<a name="l00655"></a>00655         st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00656"></a>00656       }
+<a name="l00657"></a>00657     }
+<a name="l00658"></a>00658 
+<a name="l00659"></a>00659     <span class="comment">// Read the close parenthesis token for this factory type specification.</span>
+<a name="l00660"></a>00660     <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;)&quot;</span>) {
+<a name="l00661"></a>00661       ostringstream err_ss;
+<a name="l00662"></a>00662       err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00663"></a>00663              &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;)&#39; at stream position &quot;</span>
+<a name="l00664"></a>00664              &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00665"></a>00665       <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00666"></a>00666     }
+<a name="l00667"></a>00667     st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
 <a name="l00668"></a>00668 
-<a name="l00674"></a><a class="code" href="classreranker_1_1_factory.html#a892eeb8c39013c68c4082c2247d1cbf3">00674</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory.html#a892eeb8c39013c68c4082c2247d1cbf3" title="Clears all static data associated with this class.">ClearStatic</a>() {
-<a name="l00675"></a>00675     <span class="keywordflow">if</span> (initialized_) {
-<a name="l00676"></a>00676       <span class="keywordflow">for</span> (<span class="keyword">typename</span> unordered_map&lt;<span class="keywordtype">string</span>, <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *&gt;::iterator it =
-<a name="l00677"></a>00677                cons_table_-&gt;begin();
-<a name="l00678"></a>00678            it != cons_table_-&gt;end();
-<a name="l00679"></a>00679            ++it) {
-<a name="l00680"></a>00680         <span class="keyword">delete</span> it-&gt;second;
-<a name="l00681"></a>00681       }
-<a name="l00682"></a>00682       <span class="keyword">delete</span> cons_table_;
-<a name="l00683"></a>00683       initialized_ = 0;
+<a name="l00669"></a>00669     <span class="comment">// Run through all member initializers: if any are required but haven&#39;t</span>
+<a name="l00670"></a>00670     <span class="comment">// been invoked, it is an error.</span>
+<a name="l00671"></a>00671     <span class="keywordflow">for</span> (<span class="keyword">typename</span> <a class="code" href="classreranker_1_1_initializers.html#a81b3d2bebb775df4c0b83366c833f035" title="Forward the const_iterator typedef of the internal data structure, to make code compact and readable...">Initializers::const_iterator</a> init_it = initializers.begin();
+<a name="l00672"></a>00672          init_it != initializers.end();
+<a name="l00673"></a>00673          ++init_it) {
+<a name="l00674"></a>00674       <a class="code" href="classreranker_1_1_member_initializer.html" title="An interface for initializers of members of a Factory-constructible object.">MemberInitializer</a> *member_initializer = init_it-&gt;second;
+<a name="l00675"></a>00675       <span class="keywordflow">if</span> (member_initializer-&gt;<a class="code" href="classreranker_1_1_member_initializer.html#a628dcf5f10c9fb79f27254fcfd21cfe3">Required</a>() &amp;&amp;
+<a name="l00676"></a>00676           member_initializer-&gt;<a class="code" href="classreranker_1_1_member_initializer.html#aae102105102356914b4a92d7d92b0a56" title="Returns the number of times this member initializer&rsquo;s Init method has been invoked.">Initialized</a>() == 0) {
+<a name="l00677"></a>00677         ostringstream err_ss;
+<a name="l00678"></a>00678         err_ss &lt;&lt; <span class="stringliteral">&quot;Factory&lt;&quot;</span> &lt;&lt; <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() &lt;&lt; <span class="stringliteral">&quot;&gt;: &quot;</span>
+<a name="l00679"></a>00679                &lt;&lt; <span class="stringliteral">&quot;error: initialization for member with name \&quot;&quot;</span>
+<a name="l00680"></a>00680                &lt;&lt; init_it-&gt;first &lt;&lt; <span class="stringliteral">&quot;\&quot; required but not found (current &quot;</span>
+<a name="l00681"></a>00681                &lt;&lt; <span class="stringliteral">&quot;stream position: &quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00682"></a>00682         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00683"></a>00683       }
 <a name="l00684"></a>00684     }
-<a name="l00685"></a>00685   }
-<a name="l00686"></a>00686  <span class="keyword">private</span>:
-<a name="l00687"></a>00687   <span class="comment">// data members</span>
-<a name="l00689"></a>00689 <span class="comment"></span>  <span class="keyword">static</span> <span class="keywordtype">int</span> initialized_;
-<a name="l00691"></a>00691   <span class="keyword">static</span> unordered_map&lt;string, const Constructor&lt;T&gt; *&gt; *cons_table_;
-<a name="l00692"></a>00692   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *base_name_;
-<a name="l00693"></a>00693 };
-<a name="l00694"></a>00694 
-<a name="l00696"></a><a class="code" href="factory_8_h.html#a0440aa6c8d7080a9daa203766dae388d">00696</a> <span class="preprocessor">#define DEFINE_CONS_CLASS(TYPE,NAME,BASE) \</span>
-<a name="l00697"></a>00697 <span class="preprocessor">  class NAME ## Constructor : public Constructor&lt;BASE&gt; { \</span>
-<a name="l00698"></a>00698 <span class="preprocessor">   public: virtual BASE *NewInstance() const { return new TYPE(); } };</span>
-<a name="l00699"></a>00699 <span class="preprocessor"></span>
-<a name="l00710"></a><a class="code" href="factory_8_h.html#a0b09e4aaef613d7556c07875c7d5a029">00710</a> <span class="preprocessor">#define REGISTER_NAMED(TYPE,NAME,BASE)  \</span>
-<a name="l00711"></a>00711 <span class="preprocessor">  DEFINE_CONS_CLASS(TYPE,NAME,BASE) \</span>
-<a name="l00712"></a>00712 <span class="preprocessor">  const Constructor&lt;BASE&gt; *NAME ## _my_protoype = \</span>
-<a name="l00713"></a>00713 <span class="preprocessor">      Factory&lt;BASE&gt;::Register(string(#NAME), new NAME ## Constructor());</span>
-<a name="l00714"></a>00714 <span class="preprocessor"></span>
-<a name="l00717"></a><a class="code" href="factory_8_h.html#a01b208854b036ee1381a9289186ff3c2">00717</a> <span class="preprocessor">#define IMPLEMENT_FACTORY(BASE) \</span>
-<a name="l00718"></a>00718 <span class="preprocessor">  template&lt;&gt; int Factory&lt;BASE&gt;::initialized_ = 0; \</span>
-<a name="l00719"></a>00719 <span class="preprocessor">  template&lt;&gt; unordered_map&lt;string, const Constructor&lt;BASE&gt; *&gt; * \</span>
-<a name="l00720"></a>00720 <span class="preprocessor">    Factory&lt;BASE&gt;::cons_table_ = 0; \</span>
-<a name="l00721"></a>00721 <span class="preprocessor">  template&lt;&gt; const char *Factory&lt;BASE&gt;::base_name_ = #BASE;</span>
-<a name="l00722"></a>00722 <span class="preprocessor"></span>
-<a name="l00723"></a>00723 }  <span class="comment">// namespace reranker</span>
-<a name="l00724"></a>00724 
-<a name="l00725"></a>00725 <span class="preprocessor">#endif</span>
+<a name="l00685"></a>00685 
+<a name="l00686"></a>00686     <span class="keywordtype">size_t</span> end = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>();
+<a name="l00687"></a>00687     <span class="comment">// Invoke new instance&#39;s Init method.</span>
+<a name="l00688"></a>00688     <span class="comment">// TODO(dbikel): Possibly add the unordered_map of initializers as</span>
+<a name="l00689"></a>00689     <span class="comment">// a parameter to the init method.</span>
+<a name="l00690"></a>00690     <span class="keywordtype">string</span> stream_str = st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#af4765dcb4f25bb60a13f879536d68288" title="Returns the entire sequence of characters read so far by this stream tokenizer as a newly constructed...">str</a>();
+<a name="l00691"></a>00691     <span class="comment">//cerr &lt;&lt; &quot;Full stream string is: \&quot;&quot; &lt;&lt; stream_str &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;</span>
+<a name="l00692"></a>00692     <span class="keywordtype">string</span> init_str = stream_str.substr(start, end - start);
+<a name="l00693"></a>00693     <span class="comment">//cerr &lt;&lt; &quot;Init string is: \&quot;&quot; &lt;&lt; init_str &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;</span>
+<a name="l00694"></a>00694     instance-&gt;Init(init_str);
+<a name="l00695"></a>00695 
+<a name="l00696"></a>00696     <span class="keywordflow">return</span> instance;
+<a name="l00697"></a>00697   }
+<a name="l00698"></a>00698 
+<a name="l00699"></a><a class="code" href="classreranker_1_1_factory.html#a6f4d2f54c4530cb070b90baa4877640a">00699</a>   shared_ptr&lt;T&gt; <a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec, <span class="keyword">const</span> <span class="keywordtype">string</span> err_msg,
+<a name="l00700"></a>00700                             <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env = NULL) {
+<a name="l00701"></a>00701     <a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> st(spec);
+<a name="l00702"></a>00702     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(st, env);
+<a name="l00703"></a>00703   }
+<a name="l00704"></a>00704 
+<a name="l00705"></a>00705 
+<a name="l00707"></a><a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82">00707</a>   <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> base_name_; }
+<a name="l00708"></a>00708 
+<a name="l00716"></a><a class="code" href="classreranker_1_1_factory.html#a5d150fb6e621783b7d71e8dac8f145cd">00716</a>   <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_factory.html#a5d150fb6e621783b7d71e8dac8f145cd" title="Returns whether the specified type has been registered with this factory (where registration happens ...">IsRegistered</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type) {
+<a name="l00717"></a>00717     <span class="keywordflow">return</span> initialized_ &amp;&amp; cons_table_-&gt;find(type) != cons_table_.end();
+<a name="l00718"></a>00718   }
+<a name="l00719"></a>00719 
+<a name="l00721"></a><a class="code" href="classreranker_1_1_factory.html#a1805fa630698b85e498cb707f81cb554">00721</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory.html#a1805fa630698b85e498cb707f81cb554">CollectRegistered</a>(unordered_set&lt;string&gt; &amp;registered)<span class="keyword"> const </span>{
+<a name="l00722"></a>00722     <span class="keywordflow">if</span> (initialized_) {
+<a name="l00723"></a>00723       <span class="keywordflow">for</span> (<span class="keyword">typename</span> unordered_map&lt;<span class="keywordtype">string</span>, <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *&gt;::iterator it =
+<a name="l00724"></a>00724                cons_table_-&gt;begin();
+<a name="l00725"></a>00725            it != cons_table_-&gt;end();
+<a name="l00726"></a>00726            ++it) {
+<a name="l00727"></a>00727         registered.insert(it-&gt;first);
+<a name="l00728"></a>00728       }
+<a name="l00729"></a>00729     }
+<a name="l00730"></a>00730   }
+<a name="l00731"></a>00731 
+<a name="l00732"></a><a class="code" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">00732</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7">CreateVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env)<span class="keyword"> const </span>{
+<a name="l00733"></a>00733     <span class="keywordtype">bool</span> is_primitive = <span class="keyword">false</span>;
+<a name="l00734"></a>00734     <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;shared_ptr&lt;T&gt;</a> &gt;(<a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>(), env, is_primitive);
+<a name="l00735"></a>00735   }
+<a name="l00736"></a>00736 
+<a name="l00737"></a><a class="code" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">00737</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_var_map_base.html" title="A base class for a mapping from variables of a specific type to their values.">VarMapBase</a> *<a class="code" href="classreranker_1_1_factory.html#add485d5ad36809087244990d01542336">CreateVectorVarMap</a>(<a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env)<span class="keyword"> const </span>{
+<a name="l00738"></a>00738     <span class="keywordtype">string</span> name = <a class="code" href="classreranker_1_1_factory.html#a497687eed621332ca0b9883acc60ce82" title="Returns the name of the base type of objects constructed by this factory.">BaseName</a>() + <span class="stringliteral">&quot;[]&quot;</span>;
+<a name="l00739"></a>00739     <span class="keywordtype">bool</span> is_primitive = <span class="keyword">false</span>;
+<a name="l00740"></a>00740     <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classreranker_1_1_var_map.html" title="A container to hold the mapping between named variables of a specific type and their values...">VarMap&lt;vector&lt;shared_ptr&lt;T&gt;</a> &gt; &gt;(name, env, is_primitive);
+<a name="l00741"></a>00741   }
+<a name="l00742"></a>00742 
+<a name="l00748"></a><a class="code" href="classreranker_1_1_factory.html#a91816c7ee7c55db9b20036a602d63511">00748</a>   <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *<a class="code" href="classreranker_1_1_factory.html#a91816c7ee7c55db9b20036a602d63511" title="The method used by the REGISTER_NAMED macro to ensure that subclasses add themselves to the factory...">Register</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;type,
+<a name="l00749"></a>00749                                         <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *p) {
+<a name="l00750"></a>00750     <span class="keywordflow">if</span> (!initialized_) {
+<a name="l00751"></a>00751       cons_table_ = <span class="keyword">new</span> unordered_map&lt;string, const Constructor&lt;T&gt; *&gt;();
+<a name="l00752"></a>00752       initialized_ = 1;
+<a name="l00753"></a>00753       <a class="code" href="classreranker_1_1_factory_container.html#acc7effa13e093d95c7866d95ecda9324" title="Adds the specified factory to this container of factories.">FactoryContainer::Add</a>(<span class="keyword">new</span> <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;T&gt;</a>());
+<a name="l00754"></a>00754     }
+<a name="l00755"></a>00755     (*cons_table_)[type] = p;
+<a name="l00756"></a>00756     <span class="keywordflow">return</span> p;
+<a name="l00757"></a>00757   }
+<a name="l00758"></a>00758 
+<a name="l00764"></a><a class="code" href="classreranker_1_1_factory.html#a892eeb8c39013c68c4082c2247d1cbf3">00764</a>   <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_factory.html#a892eeb8c39013c68c4082c2247d1cbf3" title="Clears all static data associated with this class.">ClearStatic</a>() {
+<a name="l00765"></a>00765     <span class="keywordflow">if</span> (initialized_) {
+<a name="l00766"></a>00766       <span class="keywordflow">for</span> (<span class="keyword">typename</span> unordered_map&lt;<span class="keywordtype">string</span>, <span class="keyword">const</span> <a class="code" href="classreranker_1_1_constructor.html" title="An interface with a single virtual method that constructs a concrete instance of the abstract type T...">Constructor&lt;T&gt;</a> *&gt;::iterator it =
+<a name="l00767"></a>00767                cons_table_-&gt;begin();
+<a name="l00768"></a>00768            it != cons_table_-&gt;end();
+<a name="l00769"></a>00769            ++it) {
+<a name="l00770"></a>00770         <span class="keyword">delete</span> it-&gt;second;
+<a name="l00771"></a>00771       }
+<a name="l00772"></a>00772       <span class="keyword">delete</span> cons_table_;
+<a name="l00773"></a>00773       initialized_ = 0;
+<a name="l00774"></a>00774     }
+<a name="l00775"></a>00775   }
+<a name="l00776"></a>00776  <span class="keyword">private</span>:
+<a name="l00777"></a>00777   <span class="comment">// data members</span>
+<a name="l00779"></a>00779 <span class="comment"></span>  <span class="keyword">static</span> <span class="keywordtype">int</span> initialized_;
+<a name="l00781"></a>00781   <span class="keyword">static</span> unordered_map&lt;string, const Constructor&lt;T&gt; *&gt; *cons_table_;
+<a name="l00782"></a>00782   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *base_name_;
+<a name="l00783"></a>00783 };
+<a name="l00784"></a>00784 
+<a name="l00786"></a><a class="code" href="factory_8_h.html#a0440aa6c8d7080a9daa203766dae388d">00786</a> <span class="preprocessor">#define DEFINE_CONS_CLASS(TYPE,NAME,BASE) \</span>
+<a name="l00787"></a>00787 <span class="preprocessor">  class NAME ## Constructor : public Constructor&lt;BASE&gt; { \</span>
+<a name="l00788"></a>00788 <span class="preprocessor">   public: virtual BASE *NewInstance() const { return new TYPE(); } };</span>
+<a name="l00789"></a>00789 <span class="preprocessor"></span>
+<a name="l00800"></a><a class="code" href="factory_8_h.html#a0b09e4aaef613d7556c07875c7d5a029">00800</a> <span class="preprocessor">#define REGISTER_NAMED(TYPE,NAME,BASE)  \</span>
+<a name="l00801"></a>00801 <span class="preprocessor">  DEFINE_CONS_CLASS(TYPE,NAME,BASE) \</span>
+<a name="l00802"></a>00802 <span class="preprocessor">  const Constructor&lt;BASE&gt; *NAME ## _my_protoype = \</span>
+<a name="l00803"></a>00803 <span class="preprocessor">      Factory&lt;BASE&gt;::Register(string(#NAME), new NAME ## Constructor());</span>
+<a name="l00804"></a>00804 <span class="preprocessor"></span>
+<a name="l00807"></a><a class="code" href="factory_8_h.html#a01b208854b036ee1381a9289186ff3c2">00807</a> <span class="preprocessor">#define IMPLEMENT_FACTORY(BASE) \</span>
+<a name="l00808"></a>00808 <span class="preprocessor">  template&lt;&gt; int Factory&lt;BASE&gt;::initialized_ = 0; \</span>
+<a name="l00809"></a>00809 <span class="preprocessor">  template&lt;&gt; unordered_map&lt;string, const Constructor&lt;BASE&gt; *&gt; * \</span>
+<a name="l00810"></a>00810 <span class="preprocessor">    Factory&lt;BASE&gt;::cons_table_ = 0; \</span>
+<a name="l00811"></a>00811 <span class="preprocessor">  template&lt;&gt; const char *Factory&lt;BASE&gt;::base_name_ = #BASE;</span>
+<a name="l00812"></a>00812 <span class="preprocessor"></span>
+<a name="l00813"></a>00813 }  <span class="comment">// namespace reranker</span>
+<a name="l00814"></a>00814 
+<a name="l00815"></a>00815 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -549,7 +605,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 15 2013 11:17:58 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 16 2013 15:23:16 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -129,8 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this environment.  <a href="#a50a9c84d509eb54b5baa1acdc0a18bfe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#ae88e17a317d959cf91bb4d5660a68c59">Defined</a> (const string &amp;varname) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the specified variable has been defined in this environment.  <a href="#ae88e17a317d959cf91bb4d5660a68c59"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#ae8549b3ea2960701a99da3e6d4054c9e">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the specified variable to the value obtained from the following tokens available from the specified token stream.  <a href="#ae8549b3ea2960701a99da3e6d4054c9e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#a21ae59281bdb6b94ec578c77ba5831d2">ReadAndSet</a> (const string &amp;varname, <a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st, const string type)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the specified variable to the value obtained from the following tokens available from the specified token stream.  <a href="#a21ae59281bdb6b94ec578c77ba5831d2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#a275a8c6c31f7c2bb32a238c82065518d">GetType</a> (const string &amp;varname) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the type name of the specified variable.  <a href="#a275a8c6c31f7c2bb32a238c82065518d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classreranker_1_1_var_map_base.html">VarMapBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_environment_impl.html#ac7b813bc8bb592d54f9f81c7b79a1c44">GetVarMap</a> (const string &amp;varname)</td></tr>
@@ -215,7 +215,7 @@ Public Member Functions</h2></td></tr>
  
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#ad5ad2fe5a00eba18331de208dd4f4b02">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00131">131</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00132">132</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -279,7 +279,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>whether the specified variable exists and its value was successfully set by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00175">175</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00176">176</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a971839d4e0e9f5a2d7e76214c81592f3">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00086">86</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00087">87</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -325,7 +325,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a64763b2d3e5a5f1cc7a69ecc018d6003">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00095">95</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00096">96</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -348,7 +348,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a3602611145e0b9c82aee80dd8e1abbf2">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00100">100</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00101">101</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -370,7 +370,7 @@ template&lt;typename T &gt; </div>
  
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a07d328d2d2bbe0f62e7348f590e6529c">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00119">119</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_h_source.html#l00120">120</a> of file <a class="el" href="environment-impl_8_h_source.html">environment-impl.H</a>.</p>
 
 </div>
 </div>
@@ -393,16 +393,16 @@ template&lt;typename T &gt; </div>
  
 <p>Implements <a class="el" href="classreranker_1_1_environment.html#a068a3e922a02814d89b8d316bbf91830">reranker::Environment</a>.</p>
 
-<p>Definition at line <a class="el" href="environment-impl_8_c_source.html#l00228">228</a> of file <a class="el" href="environment-impl_8_c_source.html">environment-impl.C</a>.</p>
+<p>Definition at line <a class="el" href="environment-impl_8_c_source.html#l00239">239</a> of file <a class="el" href="environment-impl_8_c_source.html">environment-impl.C</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae8549b3ea2960701a99da3e6d4054c9e"></a><!-- doxytag: member="reranker::EnvironmentImpl::ReadAndSet" ref="ae8549b3ea2960701a99da3e6d4054c9e" args="(const string &amp;varname, StreamTokenizer &amp;st)" -->
+<a class="anchor" id="a21ae59281bdb6b94ec578c77ba5831d2"></a><!-- doxytag: member="reranker::EnvironmentImpl::ReadAndSet" ref="a21ae59281bdb6b94ec578c77ba5831d2" args="(const string &amp;varname, StreamTokenizer &amp;st, const string type)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classreranker_1_1_environment_impl.html#ae8549b3ea2960701a99da3e6d4054c9e">reranker::EnvironmentImpl::ReadAndSet</a> </td>
+          <td class="memname">void <a class="el" href="classreranker_1_1_environment_impl.html#a21ae59281bdb6b94ec578c77ba5831d2">reranker::EnvironmentImpl::ReadAndSet</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>varname</em>, </td>
@@ -411,7 +411,13 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;&#160;</td>
-          <td class="paramname"><em>st</em>&#160;</td>
+          <td class="paramname"><em>st</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -424,7 +430,7 @@ template&lt;typename T &gt; </div>
 
 <p>Sets the specified variable to the value obtained from the following tokens available from the specified token stream. </p>
 
-<p>Implements <a class="el" href="classreranker_1_1_environment.html#ae2641671e6f45d47f9432429ad5349bf">reranker::Environment</a>.</p>
+<p>Implements <a class="el" href="classreranker_1_1_environment.html#a95b0818fd8c3311b224ab177defda94f">reranker::Environment</a>.</p>
 
 <p>Definition at line <a class="el" href="environment-impl_8_c_source.html#l00107">107</a> of file <a class="el" href="environment-impl_8_c_source.html">environment-impl.C</a>.</p>
 
@@ -452,7 +458,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 15 2013 11:18:00 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 16 2013 15:23:17 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

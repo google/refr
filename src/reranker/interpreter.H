@@ -108,23 +108,15 @@ class EnvironmentImpl;
 ///   </td>
 /// </tr>
 /// <tr>
-///   <td><tt>\<type_specifier\></tt></td>
-///   <td><tt>::=</tt></td>
-///   <td>any one of
-///       <table border=false>
-///         <tr><td><tt>bool</tt></td></tr>
-///         <tr><td><tt>int</tt></td></tr>
-///         <tr><td><tt>double</tt></td></tr>
-///         <tr><td><tt>string</tt></td></tr>
-///         <tr><td><tt>bool[]</tt></td></tr>
-///         <tr><td><tt>int[]</tt></td></tr>
-///         <tr><td><tt>double[]</tt></td></tr>
-///         <tr><td><tt>string[]</tt></td></tr>
-///         <tr><td><tt>T</tt></td></tr>
-///         <tr><td><tt>T[]</tt></td></tr>
-///       </table>
-///      where <tt>T</tt> is any \link reranker::Factory
-///      Factory\endlink-constructible type.
+///   <td valign=top><tt>\<type_specifier\></tt></td>
+///   <td valign=top><tt>::=</tt></td>
+///   <td valign=top>
+///     <table border="0">
+///       <tr><td><tt>"bool" | "int" | "string" | "double" | "bool[]" | "int[]"
+///                   "string[]" | "double[]" | T | T[]</tt></td></tr>
+///       <tr><td>where <tt>T</tt> is any \link reranker::Factory
+///               Factory\endlink-constructible type.</td></tr>
+///     </table>
 ///   </td>
 /// </tr>
 /// <tr>

@@ -72,13 +72,12 @@ using std::vector;
 /// The basic implementation here works for \link reranker::Factory
 /// Factory\endlink-constructible types, returning the result of the
 /// \link reranker::Factory::BaseName Factory::BaseName \endlink
-/// method for an instance of <tt>Factory&lt;T&gt;</tt>.
+/// method for an instance of <tt>Factory\<T\></tt>.
 template <typename T>
 class TypeName {
  public:
   string ToString() {
-    Factory<T> factory;
-    return factory.BaseName();
+    return Factory<T>().BaseName();
   }
 };
 
@@ -123,27 +122,29 @@ class TypeName<string> {
 };
 
 /// A partial specialization so that an object of type
-/// <tt>shared_ptr&lt;T&gt;</tt>, where <tt>T</tt> is some \link
+/// <tt>shared_ptr\<T\></tt>, where <tt>T</tt> is some \link
 /// reranker::Factory Factory\endlink-constructible type, converts to
-/// the string produced by <tt>TypeName&lt;T&gt;</tt>.
+/// the string produced by <tt>TypeName\<T\></tt>.
 template <typename T>
 class TypeName<shared_ptr<T> > {
  public:
   string ToString() {
-    TypeName<T> type_name;
-    return type_name.ToString();
+    return TypeName<T>().ToString();
   }
 };
 
 /// A partial specialization so that an object of type
-/// <tt>vector&lt;T&gt;</tt> gets converted to the result of
-/// <tt>TypeName&lt;T&gt;&nbsp;+&nbsp;"[]"</tt>.
+/// <tt>vector\<T\></tt> gets converted to the type name of <tt>T</tt>
+/// followed by the string <tt>"[]"</tt>, equivalent to the result of
+/// executing the following expression:
+/// \code
+/// TypeName<T>().ToString() + "[]";
+/// \endcode
 template <typename T>
 class TypeName<vector<T> > {
  public:
   string ToString() {
-    TypeName<T> element_type_name;
-    return element_type_name.ToString() + "[]";
+    return TypeName<T>().ToString() + "[]";
   }
 };
 
@@ -177,8 +178,7 @@ class TypedMemberInitializer : public MemberInitializer {
   TypedMemberInitializer(const string &name, T *member, bool required = false) :
       MemberInitializer(name, required), member_(member) { }
   virtual void Init(StreamTokenizer &st, Environment *env) {
-    TypeName<T> type_name;
-    env->ReadAndSet(Name(), st, type_name.ToString());
+    env->ReadAndSet(Name(), st, TypeName<T>().ToString());
     VarMapBase *var_map = env->GetVarMap(Name());
     VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
     if (typed_var_map != NULL) {
