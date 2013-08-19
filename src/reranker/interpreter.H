@@ -96,6 +96,22 @@ class EnvironmentImpl;
 /// m_vec = {m1, PerceptronModel(name("bar"))};
 /// \endcode
 ///
+/// Here's an example of using the interpreter after it has read the
+/// three statements from the previous example from a file called
+/// <tt>"example.infact"</tt>:
+/// \code
+/// #include "interpreter.H"
+/// // ...
+/// Interpreter i;
+/// i.Eval("example.infact");
+/// shared_ptr<Model> m;
+/// bool b;
+/// // The next statement only assigns a value to b if a variable "b"
+/// // exists in the interpreter's environment.
+/// i.Get("b", &b);
+/// i.Get("m", &m);
+/// \endcode
+///
 /// More formally, a statement in this language must conform to the
 /// following grammar, defined on top of the BNF syntax in the
 /// documentation of the \link reranker::Factory::CreateOrDie

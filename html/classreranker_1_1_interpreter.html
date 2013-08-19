@@ -161,6 +161,17 @@ Public Member Functions</h2></td></tr>
 
  <span class="comment">// Constructs a vector of Model objects and assigns it to &quot;m_vec&quot;.</span>
  m_vec = {m1, PerceptronModel(name(<span class="stringliteral">&quot;bar&quot;</span>))};
+</pre></div><p>Here's an example of using the interpreter after it has read the three statements from the previous example from a file called <code>"example.infact"</code>: </p>
+<div class="fragment"><pre class="fragment"><span class="preprocessor"> #include &quot;<a class="code" href="interpreter_8_h.html" title="Provides an interpreter for assigning primitives and Factory-constructible objects to named variables...">interpreter.H</a>&quot;</span>
+ <span class="comment">// ...</span>
+ <a class="code" href="classreranker_1_1_interpreter.html#acafa4a552bb289cecf9ef1b9cbc25006" title="Constructs a new instance with the specified debug level.">Interpreter</a> i;
+ i.Eval(<span class="stringliteral">&quot;example.infact&quot;</span>);
+ shared_ptr&lt;Model&gt; m;
+ <span class="keywordtype">bool</span> b;
+ <span class="comment">// The next statement only assigns a value to b if a variable &quot;b&quot;</span>
+ <span class="comment">// exists in the interpreter&#39;s environment.</span>
+ i.Get(<span class="stringliteral">&quot;b&quot;</span>, &amp;b);
+ i.Get(<span class="stringliteral">&quot;m&quot;</span>, &amp;m);
 </pre></div><p>More formally, a statement in this language must conform to the following grammar, defined on top of the BNF syntax in the documentation of the <a class="el" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f">Factory::CreateOrDie </a> method: </p>
 <table  border="0">
 <tr>
@@ -183,7 +194,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <p>The above grammar doesn&rsquo;t contain rules covering C++ style line comments, but they have the same behavior in this language as they do in C++, i.e., everything after the <code>//</code> to the end of the current line is treated as a comment and ignored. There are no C-style comments in this language. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00147">147</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00163">163</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acafa4a552bb289cecf9ef1b9cbc25006"></a><!-- doxytag: member="reranker::Interpreter::Interpreter" ref="acafa4a552bb289cecf9ef1b9cbc25006" args="(int debug=0)" -->
 <div class="memitem">
@@ -203,7 +214,7 @@ Public Member Functions</h2></td></tr>
 <p>Constructs a new instance with the specified debug level. </p>
 <p>The wrapped <a class="el" href="classreranker_1_1_environment.html">Environment </a> will also have the specified debug level. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00152">152</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00168">168</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -223,7 +234,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Destroys this interpreter. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00157">157</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00173">173</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -245,7 +256,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a pointer to the environment of this interpreter. </p>
 <p>Crucially, this method returns a pointer to the <a class="el" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> implementation class, <a class="el" href="classreranker_1_1_environment_impl.html">EnvironmentImpl</a>, so that its templated <a class="el" href="classreranker_1_1_environment_impl.html#ab3f0b07dc01a5fc63a4ab93ebe14bda6">EnvironmentImpl::Get </a> method may be invoked. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00209">209</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00225">225</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -266,7 +277,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified text file. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00162">162</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00178">178</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -287,7 +298,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified stream. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00175">175</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00191">191</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -308,7 +319,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Evaluates the statements in the specified string. </p>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00169">169</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00185">185</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -355,7 +366,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00199">199</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00215">215</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -374,7 +385,7 @@ template&lt;typename T &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00181">181</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00197">197</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -393,7 +404,7 @@ template&lt;typename T &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00185">185</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
+<p>Definition at line <a class="el" href="interpreter_8_h_source.html#l00201">201</a> of file <a class="el" href="interpreter_8_h_source.html">interpreter.H</a>.</p>
 
 </div>
 </div>
@@ -419,7 +430,7 @@ template&lt;typename T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:28:45 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

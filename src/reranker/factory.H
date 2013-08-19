@@ -82,7 +82,7 @@ class TypeName {
 };
 
 /// A partial specialization so that an object of type <tt>bool</tt>
-/// converts to "bool".
+/// converts to <tt>"bool"</tt>.
 template <>
 class TypeName<bool> {
  public:
@@ -92,7 +92,7 @@ class TypeName<bool> {
 };
 
 /// A partial specialization so that an object of type <tt>int</tt>
-/// converts to "int".
+/// converts to <tt>"int"</tt>.
 template <>
 class TypeName<int> {
  public:
@@ -102,7 +102,7 @@ class TypeName<int> {
 };
 
 /// A partial specialization so that an object of type <tt>double</tt>
-/// converts to "double".
+/// converts to <tt>"double"</tt>.
 template <>
 class TypeName<double> {
  public:
@@ -112,7 +112,7 @@ class TypeName<double> {
 };
 
 /// A partial specialization so that an object of type <tt>string</tt>
-/// converts to "string".
+/// converts to <tt>"string"</tt>.
 template <>
 class TypeName<string> {
  public:

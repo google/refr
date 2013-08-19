@@ -238,12 +238,10 @@ class ValueString<vector<T> > {
     ValueString<T> value_string;
     if (it != value.end()) {
       oss << value_string.ToString(*it);
-      //oss << *it;
       ++it;
     }
     for (; it != value.end(); ++it) {
       oss << ", " << value_string.ToString(*it);
-      //oss << ", " << *it;
     }
     oss << "}";
     return oss.str();
