@@ -230,6 +230,7 @@ main(int argc, char **argv) {
   // a master configuration file.  This file should be used before
   // any other command line options, which may be used to override anything
   // set in the master configuration file.
+  int master_config_arg_idx = -1;
   for (int i = 1; i < argc; ++i) {
     string arg = argv[i];
     if (arg == "--config") {
@@ -239,6 +240,7 @@ main(int argc, char **argv) {
         return -1;
       }
       master_config_file = argv[++i];
+      master_config_arg_idx = i - 1;
     }
   }
   if (master_config_file != "") {
@@ -272,6 +274,10 @@ main(int argc, char **argv) {
 
   // Process options.  The majority of code in this file is devoted to this.
   for (int i = 1; i < argc; ++i) {
+    if (i == master_config_arg_idx) {
+      ++i;
+      continue;
+    }
     string arg = argv[i];
     if (arg == "-m" || arg == "-model" || arg == "--model") {
       string err_msg = string("no model file specified with ") + arg;
