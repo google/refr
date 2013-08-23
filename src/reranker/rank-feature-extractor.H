@@ -61,22 +61,14 @@ class RankFeatureExtractor : public FeatureExtractor {
     initializers.Add("add_score_difference", &add_score_difference_);
   }
 
-  /// Initializes this instance with the specified argument string (ignored).
-  /// This method is guaranteed to be inokved by a \link Factory \endlink
-  /// just after construction.
-  ///
-  /// \param arg ignored
-  ///
-  /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-  virtual void Init(const string &arg) {
-  }
+  // No extra initialization required.
+  virtual void Init(const string &arg) { }
 
-  /// Extracts &ldquo;compiled&rdquo; features.
   virtual void Extract(Candidate &candidate,
-                       FeatureVector<int,double> &features) {
-  }
+		       FeatureVector<int,double> &features) { }
 
-  /// Extracts symbolic (or <i>string</i>) features.
+  /// Extracts symbolic (or <i>string</i>) features.  These will be
+  /// automatically compiled when training.
   ///
   /// \param[in]  candidate         the candidate for which to extract features
   /// \param[out] symbolic_features the features extracted for the specified
@@ -107,6 +99,8 @@ class RankFeatureExtractor : public FeatureExtractor {
     }
   }
 
+  /// Override the default Extract method so that it caches the score of the
+  /// top-scoring hypothesis of the baseline system.
   virtual void Extract(CandidateSet &candidate_set) {
     top_baseline_score_ = candidate_set.Get(0).baseline_score();
     FeatureExtractor::Extract(candidate_set);
