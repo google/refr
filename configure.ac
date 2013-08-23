@@ -12,6 +12,7 @@ AC_PROG_CPP
 AC_PROG_MAKE_SET
 AC_PROG_RANLIB
 AC_PROG_SED
+AM_PROG_AR
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([src/dataconvert/asr_nbest_proto.cc])
@@ -36,6 +37,10 @@ AC_PATH_PROG(PROTOC, protoc, [no])
 if test "$PROTOC" == "no"; then
     AC_MSG_FAILURE([Protocol Buffers compiler 'protoc' is required to build.])
 fi
+
+# Check that sparsehash is available.
+# Ensure the sparse hash is available
+AC_CHECK_HEADERS([google/sparse_hash_map],,[AC_MSG_ERROR([google sparse hash library is required: http://code.google.com/p/google-sparsehash/])])
 
 AM_PATH_PYTHON([2.4])
 

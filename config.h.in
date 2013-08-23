@@ -6,6 +6,9 @@
 /* Define to 1 if you have the `floor' function. */
 #undef HAVE_FLOOR
 
+/* Define to 1 if you have the <google/sparse_hash_map> header file. */
+#undef HAVE_GOOGLE_SPARSE_HASH_MAP
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
