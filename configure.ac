@@ -40,7 +40,7 @@ fi
 
 # Check that sparsehash is available.
 # Ensure the sparse hash is available
-AC_CHECK_HEADERS([google/sparse_hash_map],,[AC_MSG_ERROR([google sparse hash library is required: http://code.google.com/p/google-sparsehash/])])
+#AC_CHECK_HEADERS([google/sparse_hash_map],,[AC_MSG_ERROR([google sparse hash library is required: http://code.google.com/p/google-sparsehash/])])
 
 AM_PATH_PYTHON([2.4])
 
