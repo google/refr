@@ -35,7 +35,7 @@
 /// \author dbikel@google.com (Dan Bikel)
 
 #include <iostream>
-#include <tr1/memory>
+#include <memory>
 
 #include "candidate.H"
 #include "candidate-set.H"
@@ -43,7 +43,6 @@
 #include "example-feature-extractor.H"
 
 using namespace std;
-using namespace std::tr1;
 using namespace reranker;
 
 int

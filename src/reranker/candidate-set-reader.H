@@ -38,7 +38,7 @@
 #define RERANKER_CANDIDATE_SET_READER_H_
 
 #include <iostream>
-#include <tr1/memory>
+#include <memory>
 #include <vector>
 
 #include "candidate-set.H"
@@ -53,7 +53,7 @@ using std::cerr;
 using std::endl;
 using std::string;
 using std::vector;
-using std::tr1::shared_ptr;
+using std::shared_ptr;
 
 /// \class CandidateSetReader
 ///
@@ -125,7 +125,7 @@ class CandidateSetReader {
     bool reader_valid = true;
     while (reader_valid) {
       shared_ptr<CandidateSet> candidate_set = ReadNext(reader_valid);
-      if (candidate_set == NULL) {
+      if (candidate_set.get() == NULL) {
         break;
       }
       examples.push_back(candidate_set);

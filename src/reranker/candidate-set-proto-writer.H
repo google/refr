@@ -37,7 +37,7 @@
 #ifndef RERANKER_CANDIDATE_SET_PROTO_WRITER_H_
 #define RERANKER_CANDIDATE_SET_PROTO_WRITER_H_
 
-#include <tr1/unordered_map>
+#include <unordered_map>
 #include <vector>
 
 #include "../proto/data.pb.h"
@@ -48,7 +48,7 @@
 
 namespace reranker {
 
-using std::tr1::unordered_map;
+using std::unordered_map;
 
 using confusion_learning::CandidateSetMessage;
 using confusion_learning::CandidateMessage;

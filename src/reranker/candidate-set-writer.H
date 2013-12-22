@@ -38,7 +38,7 @@
 #define RERANKER_CANDIDATE_SET_WRITER_H_
 
 #include <iostream>
-#include <tr1/memory>
+#include <memory>
 #include <vector>
 
 #include "candidate-set.H"
@@ -53,7 +53,7 @@ using std::cerr;
 using std::endl;
 using std::string;
 using std::vector;
-using std::tr1::shared_ptr;
+using std::shared_ptr;
 
 /// \class CandidateSetWriter
 ///

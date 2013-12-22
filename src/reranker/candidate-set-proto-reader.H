@@ -37,7 +37,7 @@
 #ifndef RERANKER_CANDIDATE_SET_PROTO_READER_H_
 #define RERANKER_CANDIDATE_SET_PROTO_READER_H_
 
-#include <tr1/unordered_map>
+#include <unordered_map>
 #include <vector>
 
 #include "candidate.H"
@@ -49,7 +49,7 @@
 
 namespace reranker {
 
-using std::tr1::unordered_map;
+using std::unordered_map;
 
 using confusion_learning::CandidateSetMessage;
 

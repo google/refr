@@ -37,8 +37,8 @@
 #define RERANKER_TRAINING_VECTOR_SET_H_
 
 #include <iostream>
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
+#include <unordered_map>
+#include <unordered_set>
 
 #include "training-time.H"
 #include "feature-vector.H"
@@ -47,8 +47,8 @@ namespace reranker {
 
 using std::cerr;
 using std::endl;
-using std::tr1::unordered_map;
-using std::tr1::unordered_set;
+using std::unordered_map;
+using std::unordered_set;
 
 /// \class TrainingVectorSet
 ///

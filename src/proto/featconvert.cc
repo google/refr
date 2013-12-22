@@ -34,6 +34,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <unistd.h>
 #include "../proto/data.pb.h"
 #include "../proto/dataio.h"
 #include "../utils/kdebug.h"

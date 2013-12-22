@@ -39,8 +39,8 @@
 
 #include <sstream>
 #include <string>
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
+#include <unordered_map>
+#include <unordered_set>
 #include <typeinfo>
 
 #include "environment.H"
@@ -49,8 +49,8 @@ namespace reranker {
 
 using std::ostringstream;
 using std::string;
-using std::tr1::unordered_map;
-using std::tr1::unordered_set;
+using std::unordered_map;
+using std::unordered_set;
 
 /// Provides a set of named variables and their types, as well as the values
 /// for those variables.

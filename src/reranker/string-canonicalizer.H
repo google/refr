@@ -38,7 +38,7 @@
 
 #include <iostream>
 #include <string>
-#include <tr1/unordered_set>
+#include <unordered_set>
 
 #define STR_CANON_DEBUG 1
 
@@ -47,7 +47,7 @@ namespace reranker {
 using std::cerr;
 using std::endl;
 using std::string;
-using std::tr1::unordered_set;
+using std::unordered_set;
 
 /// \class StringCanonicalizer
 ///

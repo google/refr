@@ -35,14 +35,14 @@
 /// \author dbikel@google.com (Dan Bikel)
 
 #include <string>
-#include <tr1/unordered_map>
+#include <unordered_map>
 
 #include "symbol-table.H"
 
 namespace reranker {
 
 using std::string;
-using std::tr1::unordered_map;
+using std::unordered_map;
 
 
 string Symbols::null_symbol("");

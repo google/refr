@@ -47,6 +47,7 @@ void
 Interpreter::Eval(StreamTokenizer &st) {
   // Keeps reading assignment statements until there are no more tokens.
   while (st.PeekTokenType() != StreamTokenizer::EOF_TYPE) {
+    try {
     // Read variable name or type specifier.
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     VarMapBase *varmap = env_->GetVarMapForType(st.Peek());
@@ -102,6 +103,11 @@ Interpreter::Eval(StreamTokenizer &st) {
     }
     // Consume semicolon.
     st.Next();
+    }
+    catch (std::runtime_error &e) {
+      cerr << "threw exception: " << e.what() << endl;
+      st.Next();
+    }
   }
 }
 

@@ -40,7 +40,7 @@
 
 #include <iostream>
 #include <string>
-#include <tr1/memory>
+#include <memory>
 #include <vector>
 
 #include "candidate.H"
@@ -52,7 +52,7 @@ namespace reranker {
 
 using std::istream;
 using std::string;
-using std::tr1::shared_ptr;
+using std::shared_ptr;
 using std::vector;
 
 /// \class ExecutiveFeatureExtractor

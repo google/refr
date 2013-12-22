@@ -115,7 +115,8 @@ EnvironmentImpl::ReadAndSet(const string &varname, StreamTokenizer &st,
     st.Next();
   } else if (st.PeekTokenType() == StreamTokenizer::RESERVED_CHAR ||
              (st.PeekTokenType() == StreamTokenizer::RESERVED_WORD &&
-              st.Peek() != "true" && st.Peek() != "false")) {
+              st.Peek() != "true" && st.Peek() != "false" &&
+	      st.Peek() != "nullptr" && st.Peek() != "NULL")) {
     ostringstream err_ss;
     err_ss << "Environment: error: expected type but found token \""
            << st.Peek() << "\" of type "
@@ -233,6 +234,7 @@ EnvironmentImpl::InferType(const string &varname,
     default:
       return "";
   }
+  return "";
 }
 
 void

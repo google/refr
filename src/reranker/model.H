@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -37,7 +37,7 @@
 #define RERANKER_MODEL_H_
 
 #include <stdexcept>
-#include <tr1/memory>
+#include <memory>
 #include <vector>
 
 #include "candidate-set.H"
@@ -52,7 +52,7 @@
 namespace reranker {
 
 using std::vector;
-using std::tr1::shared_ptr;
+using std::shared_ptr;
 
 /// The default comparator for comparing two Candidate instances based on
 /// their respective scores (i.e., the values returned by invoking
@@ -222,6 +222,7 @@ class Model : public FactoryConstructible {
   /// instance.
   class Hook {
    public:
+    virtual ~Hook() { }
     /// The function to be executed by the \link Model \endlink that wraps
     /// this hook.
     ///

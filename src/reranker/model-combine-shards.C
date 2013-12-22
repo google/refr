@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -36,8 +36,9 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
-#include <tr1/memory>
+#include <memory>
 #include <math.h>
+#include <unistd.h>
 #include "../proto/data.pb.h"
 #include "../proto/dataio.h"
 #include "../proto/model.pb.h"
@@ -53,7 +54,6 @@
 #define DEFAULT_MODEL_PROTO_READER_SPEC "PerceptronModelProtoReader()"
 
 using namespace std;
-using namespace std::tr1;
 using namespace reranker;
 using confusion_learning::FeatureMessage;
 using confusion_learning::ModelMessage;
@@ -143,14 +143,14 @@ int main(int argc, char* argv[]) {
        ++fix) {
     FeatureMessage* feat =
       model_with_feats.mutable_raw_parameters()->mutable_feature(fix);
-    if (!finite(feat->value()) || !finite(feat->avg_value())) {
+    if (!isfinite(feat->value()) || !isfinite(feat->avg_value())) {
       cerr << "WARNING: feature " << feat->name() << " (ID:"
            << feat->id() << ") has non-finite value." << endl;
     } else {
       if (model_with_feats.training_errors() > 0) {
         feat->set_value(feat->value() / model_with_feats.training_errors());
         feat->set_avg_value(feat->avg_value() / model_with_feats.training_errors());
-        if (!finite(feat->value()) || !finite(feat->avg_value())) {
+        if (!isfinite(feat->value()) || !isfinite(feat->avg_value())) {
           cerr << "WARNING: after error normalization, feature "
                << feat->name() << " (ID:" << feat->id()
                << ") has non-finite value." << endl;

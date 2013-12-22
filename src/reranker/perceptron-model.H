@@ -37,8 +37,8 @@
 #define RERANKER_PERCEPTRON_MODEL_H_
 
 #include <vector>
-#include <tr1/unordered_set>
-#include <tr1/memory>
+#include <unordered_set>
+#include <memory>
 
 #include "candidate-set.H"
 #include "dot-product.H"
@@ -50,8 +50,8 @@
 
 namespace reranker {
 
-using std::tr1::shared_ptr;
-using std::tr1::unordered_set;
+using std::shared_ptr;
+using std::unordered_set;
 using std::vector;
 
 /// \class PerceptronModel

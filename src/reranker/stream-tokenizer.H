@@ -61,6 +61,8 @@ using std::endl;
 /// to customize this set.
 static const char *default_reserved_words[] = {
   "-",
+  "nullptr",
+  "NULL",
   "false",
   "true",
   "bool",
@@ -74,7 +76,7 @@ static const char *default_reserved_words[] = {
 };
 
 /// Default set of reserved characters for the StreamTokenizer class.
-static const char *default_reserved_chars = "(){},=;/";
+#define DEFAULT_RESERVED_CHARS "(){},=;/"
 
 /// \class StreamTokenizer
 ///
@@ -110,7 +112,7 @@ class StreamTokenizer {
   /// \param reserved_chars the set of single characters serving as
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(istream &is,
-                  const char *reserved_chars = default_reserved_chars) :
+                  const char *reserved_chars = DEFAULT_RESERVED_CHARS) :
       is_(is), curr_pos_(0), num_read_(0), line_number_(0),
       has_next_(false), has_prev_(false) {
     Init(reserved_chars);
@@ -123,7 +125,7 @@ class StreamTokenizer {
   /// \param reserved_chars the set of single characters serving as
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(const string &s,
-                  const char *reserved_chars = default_reserved_chars) :
+                  const char *reserved_chars = DEFAULT_RESERVED_CHARS) :
       sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), line_number_(0),
       has_next_(false), has_prev_(false) {
     Init(reserved_chars);

@@ -39,7 +39,7 @@
 
 #include <cstdio>
 #include <iostream>
-#include <tr1/memory>
+#include <memory>
 
 #include "../proto/model.pb.h"
 #include "../proto/dataio.h"
@@ -53,7 +53,7 @@ using confusion_learning::FeatureVecMessage;
 using confusion_learning::ModelMessage;
 using std::cerr;
 using std::endl;
-using std::tr1::shared_ptr;
+using std::shared_ptr;
 
 /// \class ModelProtoWriter
 ///

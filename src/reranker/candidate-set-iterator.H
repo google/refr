@@ -37,7 +37,7 @@
 #ifndef RERANKER_CANDIDATE_SET_ITERATOR_H_
 #define RERANKER_CANDIDATE_SET_ITERATOR_H_
 
-#include <tr1/memory>
+#include <memory>
 #include <vector>
 
 #include "candidate-set.H"
@@ -47,7 +47,7 @@
 namespace reranker {
 
 using std::vector;
-using std::tr1::shared_ptr;
+using std::shared_ptr;
 
 /// An interface specifying iteration over \link CandidateSet \endlink
 /// instances, using Java-style semantics (sorry, die-hard C++ iterator fans).
@@ -57,6 +57,7 @@ using std::tr1::shared_ptr;
 /// required by the \link Reset \endlink method.
 class CandidateSetIterator {
  public:
+  virtual ~CandidateSetIterator() { }
   /// Returns whether this iterator contains another \link
   /// CandidateSet \endlink.
   virtual bool HasNext() const = 0;

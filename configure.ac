@@ -38,9 +38,21 @@ if test "$PROTOC" == "no"; then
     AC_MSG_FAILURE([Protocol Buffers compiler 'protoc' is required to build.])
 fi
 
+# Check for the google sparse hash
+AC_ARG_WITH(sparsehash, AS_HELP_STRING([--with-sparsehash=PATH],
+            [specify directory containing the google sparsehash headers http://code.google.com/p/google-sparsehash/)]))
+
+if test "$with_sparsehash" -a -d "$with_sparsehash"; then
+  sparsehash_include="-I$with_sparsehash/include"
+fi
+
+AC_SUBST(CPPFLAGS, "$CPPFLAGS $sparsehash_include")
+
+AC_LANG_PUSH(C++)
 # Check that sparsehash is available.
-# Ensure the sparse hash is available
-#AC_CHECK_HEADERS([google/sparse_hash_map],,[AC_MSG_ERROR([google sparse hash library is required: http://code.google.com/p/google-sparsehash/])])
+AC_CHECK_HEADERS([sparsehash/sparse_hash_set],,\
+                 [AC_MSG_ERROR([google sparse hash library is required: http://code.google.com/p/google-sparsehash/])])
+AC_LANG_POP(C++)
 
 AM_PATH_PYTHON([2.4])
 

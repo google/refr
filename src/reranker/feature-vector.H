@@ -40,9 +40,11 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
+
+#include <sparsehash/sparse_hash_map>
 
 #include "string-canonicalizer.H"
 
@@ -53,8 +55,29 @@ using std::endl;
 using std::map;
 using std::ostream;
 using std::string;
-using std::tr1::unordered_map;
-using std::tr1::unordered_set;
+using std::unordered_map;
+using std::unordered_set;
+
+template <typename T>
+struct DelKey {
+  static const T Get() { return T(); }
+};
+
+template <>
+struct DelKey<int> {
+  static const int Get() { return -1; }
+};
+
+template <>
+struct DelKey<double> {
+  static const double Get() { return -1.0; }
+};
+
+template <>
+struct DelKey<string> {
+  static const string Get() { return ""; }
+};
+  
 
 /// \class UidGetter
 ///
@@ -87,17 +110,24 @@ struct UidGetter<string> {
 ///
 /// \tparam K the type to represent unique identifiers for each feature
 /// \tparam V the value or weight of a feature in this vector
-template <typename K, typename V, typename Map = map<K, V> >
+template <typename K, typename V,
+	  //typename Map = google::sparse_hash_map<K, V> >
+	  //typename Map = map<K, V> >
+	  typename Map = unordered_map<K, V> >
 class FeatureVector {
  public:
   /// Create an empty feature vector.
-  FeatureVector() { }
+  FeatureVector() {
+    //features_.set_deleted_key(DelKey<K>::Get());
+  }
 
   /// Copy features from the type of map used internally.
   ///
   /// \param features the map of features with which to initialize this
   ///                 feature vector
-  FeatureVector(const Map &features) : features_(features) { }
+  FeatureVector(const Map &features) : features_(features) {
+    //features_.set_deleted_key(DelKey<K>::Get());
+  }
 
   /// Copy features from any map, or any collection of (feature,value) pairs,
   /// for that matter.
@@ -108,6 +138,7 @@ class FeatureVector {
   ///                 to initialize this feature vector
   template <typename MapType>
   FeatureVector(const MapType &features) {
+    //features_.set_deleted_key(DelKey<K>::Get());
     for (typename MapType::const_iterator it = features.begin();
          it != features.end(); ++it) {
       features_.insert(*it);

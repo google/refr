@@ -39,9 +39,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
-#include <tr1/memory>
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
+#include <memory>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 #include <stdexcept>
 
@@ -50,8 +50,8 @@
 namespace reranker {
 
 using std::ostringstream;
-using std::tr1::shared_ptr;
-using std::tr1::unordered_map;
+using std::shared_ptr;
+using std::unordered_map;
 using std::vector;
 
 class Environment;
@@ -67,6 +67,7 @@ class Environment;
 class StreamInitializer {
  public:
   StreamInitializer() { }
+  virtual ~StreamInitializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) = 0;
 };
 
@@ -82,11 +83,16 @@ template <typename T>
 class Initializer : public StreamInitializer {
  public:
   Initializer(T *member) : member_(member) { }
+  virtual ~Initializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
-    if (token_type != StreamTokenizer::IDENTIFIER) {
+    bool is_null = 
+      token_type == StreamTokenizer::RESERVED_WORD &&
+      (st.Peek() == "nullptr" || st.Peek() == "NULL");
+    if (!(is_null || token_type == StreamTokenizer::IDENTIFIER)) {
       ostringstream err_ss;
-      err_ss << "FactoryInitializer: expected IDENTIFIER token at stream "
+      err_ss << "FactoryInitializer: expected \"nullptr\", \"NULL\" or "
+	     << "IDENTIFIER token at stream "
              << "position " << st.PeekTokenStart() << " but found "
              << StreamTokenizer::TypeName(token_type) << " token: \""
              << st.Peek() << "\"";
@@ -107,6 +113,7 @@ template<>
 class Initializer<int> : public StreamInitializer {
  public:
   Initializer(int *member) : member_(member) { }
+  virtual ~Initializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
@@ -130,6 +137,7 @@ template<>
 class Initializer<double> : public StreamInitializer {
  public:
   Initializer(double *member) : member_(member) { }
+  virtual ~Initializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
@@ -153,6 +161,7 @@ template<>
 class Initializer<bool> : public StreamInitializer {
  public:
   Initializer(bool *member) : member_(member) { }
+  virtual ~Initializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::RESERVED_WORD) {
@@ -188,6 +197,7 @@ template<>
 class Initializer<string> : public StreamInitializer {
  public:
   Initializer(string *member) : member_(member) { }
+  virtual ~Initializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::STRING) {
@@ -213,6 +223,7 @@ template<typename T>
 class Initializer<vector<T> > : public StreamInitializer {
  public:
   Initializer(vector<T> *member) : member_(member) { }
+  virtual ~Initializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     // Either the next token is an open brace (if reading tokens from
     // within a Factory-constructible object's member init list), or

@@ -37,8 +37,8 @@
 #define RERANKER_FEATURE_EXTRACTOR_H_
 
 #include <string>
-#include <tr1/memory>
-#include <tr1/unordered_map>
+#include <memory>
+#include <unordered_map>
 
 #include "feature-vector.H"
 #include "candidate.H"
@@ -48,8 +48,8 @@
 namespace reranker {
 
 using std::string;
-using std::tr1::shared_ptr;
-using std::tr1::unordered_map;
+using std::shared_ptr;
+using std::unordered_map;
 
 /// A free-floating function (within the \link reranker \endlink namespace)
 /// that frees statically allocated objects.

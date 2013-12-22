@@ -38,9 +38,9 @@
 
 #include <iostream>
 #include <sstream>
-#include <tr1/memory>
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
+#include <memory>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 #include <stdexcept>
 
@@ -53,9 +53,9 @@ using std::cerr;
 using std::endl;
 using std::ostream;
 using std::ostringstream;
-using std::tr1::shared_ptr;
-using std::tr1::unordered_map;
-using std::tr1::unordered_set;
+using std::shared_ptr;
+using std::unordered_map;
+using std::unordered_set;
 using std::vector;
 
 /// We use the templated class TypeName to be able to take an actual
@@ -156,6 +156,7 @@ class MemberInitializer {
  public:
   MemberInitializer(const string &name, bool required) :
       name_(name), initialized_(0), required_(required) { }
+  virtual ~MemberInitializer() { }
   virtual string Name() { return name_; }
   virtual void Init(StreamTokenizer &st, Environment *env) = 0;
   /// Returns the number of times this member initializer&rsquo;s
@@ -177,6 +178,7 @@ class TypedMemberInitializer : public MemberInitializer {
  public:
   TypedMemberInitializer(const string &name, T *member, bool required = false) :
       MemberInitializer(name, required), member_(member) { }
+  virtual ~TypedMemberInitializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env) {
     env->ReadAndSet(Name(), st, TypeName<T>().ToString());
     VarMapBase *var_map = env->GetVarMap(Name());
@@ -268,6 +270,7 @@ class Initializers {
 /// pure virtual methods.
 class FactoryBase {
  public:
+  virtual ~FactoryBase() { }
   /// Clears the (possibly static) data of this factory.
   /// \p
   /// Note that invoking this method will prevent the factory from functioning!
@@ -370,6 +373,7 @@ class FactoryContainer {
 template <typename T>
 class Constructor {
  public:
+  virtual ~Constructor() { }
   virtual T *NewInstance() const = 0;
 };
 
@@ -557,6 +561,10 @@ class Factory : public FactoryBase {
                                     Environment::CreateEmpty() : env->Copy());
     size_t start = st.tellg();
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
+    if (token_type == StreamTokenizer::RESERVED_WORD &&
+	(st.Peek() == "nullptr" || st.Peek() == "NULL")) {
+      return shared_ptr<T>();
+    }
     if (token_type != StreamTokenizer::IDENTIFIER) {
       ostringstream err_ss;
       err_ss << "Factory<" << BaseName() << ">: "
@@ -714,7 +722,7 @@ class Factory : public FactoryBase {
   /// \return whether the specified type has been registered with this
   ///         factory
   static bool IsRegistered(const string &type) {
-    return initialized_ && cons_table_->find(type) != cons_table_.end();
+    return initialized_ && cons_table_->find(type) != cons_table_->end();
   }
 
   /// \copydoc FactoryBase::CollectRegistered

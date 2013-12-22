@@ -39,7 +39,7 @@
 #ifndef RERANKER_ENVIRONMENT_H_
 #define RERANKER_ENVIRONMENT_H_
 
-#define VAR_MAP_DEBUG 0
+#define VAR_MAP_DEBUG 1
 
 #include <sstream>
 #include <vector>
@@ -53,9 +53,9 @@ using std::cerr;
 using std::endl;
 using std::ostream;
 using std::ostringstream;
-using std::tr1::shared_ptr;
-using std::tr1::unordered_map;
-using std::tr1::unordered_set;
+using std::shared_ptr;
+using std::unordered_map;
+using std::unordered_set;
 using std::vector;
 
 class Environment;

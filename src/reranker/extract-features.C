@@ -39,7 +39,7 @@
 
 #include <string>
 #include <cstdlib>
-#include <tr1/memory>
+#include <memory>
 #include <vector>
 
 #include "../proto/dataio.h"
@@ -60,7 +60,6 @@
 #define STR(arg) #arg
 
 using namespace std;
-using namespace std::tr1;
 using namespace reranker;
 using confusion_learning::SymbolMessage;
 

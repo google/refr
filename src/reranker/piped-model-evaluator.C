@@ -38,7 +38,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <tr1/memory>
+#include <memory>
+#include <unistd.h>
 
 #include "candidate-set-iterator.H"
 #include "candidate-set-reader.H"
@@ -62,7 +63,6 @@
 #define STR(arg) #arg
 
 using namespace std;
-using namespace std::tr1;
 using namespace reranker;
 
 const char *usage_msg[] = {

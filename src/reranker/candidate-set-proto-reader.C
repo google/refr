@@ -37,7 +37,7 @@
 #include <algorithm>
 #include <iterator>
 #include <set>
-#include <tr1/memory>
+#include <memory>
 
 #include "../proto/data.pb.h"
 #include "../proto/model.pb.h"
@@ -57,8 +57,8 @@ using std::endl;
 using std::insert_iterator;
 using std::ostream_iterator;
 using std::string;
-using std::tr1::unordered_map;
-using std::tr1::shared_ptr;
+using std::unordered_map;
+using std::shared_ptr;
 
 namespace reranker {
 

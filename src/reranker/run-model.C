@@ -42,7 +42,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
-#include <tr1/memory>
+#include <memory>
 #include <vector>
 
 #include "candidate.H"
@@ -77,7 +77,6 @@
 #define STR(arg) #arg
 
 using namespace std;
-using namespace std::tr1;
 using namespace reranker;
 
 const char *usage_msg[] = {
@@ -839,12 +838,12 @@ main(int argc, char **argv) {
 /// you want to output to the file named by the variable <tt>filename</tt>.
 /// \code
 /// #include <vector>
-/// #include <tr1/memory>
+/// #include <memory>
 /// #include "candidate-set.H"
 /// #include "candidate-set-writer.H"
 /// ...
 /// using std::vector;
-/// using std::tr1::shared_ptr;
+/// using std::shared_ptr;
 /// ...
 /// vector<shared_ptr<CandidateSet> > candidate_sets;
 /// while (there_are_more_candidate_sets()) {
@@ -876,11 +875,11 @@ main(int argc, char **argv) {
 /// reranker::CandidateSet CandidateSet \endlink into a single
 /// <tt>std::vector</tt> before writing them all out to disk.
 /// \code
-/// #include <tr1/memory>
+/// #include <memory>
 /// #include "candidate-set.H"
 /// #include "candidate-set-writer.H"
 /// ...
-/// using std::tr1::shared_ptr;
+/// using std::shared_ptr;
 /// ...
 /// // Set up CandidateSetWriter to begin serial writing to file.
 /// bool compressed = true;
