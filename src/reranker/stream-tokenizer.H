@@ -105,6 +105,25 @@ class StreamTokenizer {
     return names[token_type];
   }
 
+  /// Information about a token read from the underlying stream.
+  struct Token {
+    /// The token itself.
+    string tok;
+    /// The token&rsquo;s type.
+    TokenType type;
+
+    // The following three fields capture information about the underlying
+    // byte stream at the time this token was read from it.
+
+    /// The starting byte of the token in the underlying stream.
+    size_t start;
+    /// The line number of the first byte of the token in the underlying stream.
+    size_t line_number;
+    /// The current position in the underlying stream just after reading this
+    /// token.
+    size_t curr_pos;
+  };
+
   /// Constructs a new instance around the specified byte stream.
   ///
   /// \param is             the input byte stream for this stream tokenizer to
@@ -113,8 +132,8 @@ class StreamTokenizer {
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(istream &is,
                   const char *reserved_chars = DEFAULT_RESERVED_CHARS) :
-      is_(is), curr_pos_(0), num_read_(0), line_number_(0),
-      has_next_(false), has_prev_(false) {
+      is_(is), num_read_(0), line_number_(0), eof_reached_(false),
+      next_token_idx_(0) {
     Init(reserved_chars);
   }
 
@@ -126,8 +145,8 @@ class StreamTokenizer {
   ///                       &ldquo;reserved characters&rdquo;
   StreamTokenizer(const string &s,
                   const char *reserved_chars = DEFAULT_RESERVED_CHARS) :
-      sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), line_number_(0),
-      has_next_(false), has_prev_(false) {
+      sstream_(s), is_(sstream_), num_read_(0), line_number_(0),
+      eof_reached_(false), next_token_idx_(0) {
     Init(reserved_chars);
   }
 
@@ -147,60 +166,99 @@ class StreamTokenizer {
   string str() { return oss_.str(); }
 
   /// Returns the number of bytes read from the underlying byte
-  /// stream.
-  size_t tellg() const { return curr_pos_; }
+  /// stream just after scanning the most recent token, or 0 if this stream
+  /// is just about to return the first token.
+  size_t tellg() const {
+    return HasPrev() ? token_[next_token_idx_ - 1].curr_pos : 0;
+  }
 
   /// Returns the number of lines read from the underlying byte stream,
   /// where a line is any number of bytes followed by a newline character
   /// (i.e., this is ASCII-centric).
-  size_t line_number() const { return line_number_; }
+  size_t line_number() const {
+    return HasNext() ? token_[next_token_idx_].line_number : line_number_;
+  }
 
   /// Returns whether there is another token in the token stream.
-  bool HasNext() const { return has_next_; }
+  bool HasNext() const { return next_token_idx_ < token_.size(); }
 
-  bool HasPrev() const { return has_prev_; }
+  bool HasPrev() const { return next_token_idx_ > 0; }
 
-  string PeekPrev() const { return has_prev_ ? prev_tok_ : ""; }
+  string PeekPrev() const {
+    return HasPrev() ? token_[next_token_idx_ - 1].tok : "";
+  }
 
   size_t PeekPrevTokenStart() const {
-    return has_prev_ ? prev_tok_start_ : 0;
+    return HasPrev() ? token_[next_token_idx_ - 1].start : 0;
   }
 
   TokenType PeekPrevTokenType() const {
-    return has_prev_ ? prev_tok_type_ : EOF_TYPE;
+    return HasPrev() ? token_[next_token_idx_ - 1].type : EOF_TYPE;
   }
 
   /// Returns the next token in the token stream.
   string Next() {
     if (!HasNext()) {
       // Error.
+      throw std::runtime_error("invoking StreamTokenizer::Next when HasNext "
+			       "returns false");
     }
 
-    // First, preserve the next token as the previous token.
-    prev_tok_ = next_tok_;
-    prev_tok_type_ = next_tok_type_;
-    prev_tok_start_ = next_tok_start_;
-    has_prev_ = true;
+    size_t curr_token_idx = next_token_idx_;
 
-    curr_pos_ = num_read_;
-    GetNext();
-    return prev_tok_;
+    // Try to get the next token of the stream if we're about to run out of
+    // tokens.
+    if (!eof_reached_ && next_token_idx_ + 1 == token_.size()) {
+      Token next;
+      if (GetNext(&next)) {
+	token_.push_back(next);
+      }
+    }
+    // Ensure that we only advance if we haven't already reached token_.size().
+    if (next_token_idx_ < token_.size()) {
+      ++next_token_idx_;
+    }
+
+    return token_[curr_token_idx].tok;
   }
 
-  /// Returns the next token&rsquo;s start position.
+  /// Rewinds this token stream to the beginning.  If the underlying stream
+  /// has no tokens, this is a no-op.
+  void Rewind() {
+    next_token_idx_ = 0;
+  }
+  /// Rewinds this token stream by the specified number of tokens.
+  void Rewind(size_t num_tokens) {
+    next_token_idx_ -= num_tokens;
+  }
+  /// A synonym for Rewind(1).
+  void Putback() {
+    Rewind(1);
+  }
+
+  /// Returns the next token&rsquo;s start position, or the byte position
+  /// of the underlying byte stream if there is no next token.
   size_t PeekTokenStart() const {
-    return has_next_ ? next_tok_start_ : tellg();
+    return HasNext() ? token_[next_token_idx_].start : num_read_;
   }
 
-  /// Returns the type of the next token.
+  /// Returns the type of the next token, or EOF_TYPE if there is no next
+  /// token.
   TokenType PeekTokenType() const {
-    return has_next_ ? next_tok_type_ : EOF_TYPE;
+    return HasNext() ? token_[next_token_idx_].type : EOF_TYPE;
+  }
+
+  /// Returns the line number of the first byte of the next token, or
+  /// the current line number of the underlying stream if there is no
+  /// next token.
+  size_t PeekTokenLineNumber() const {
+    return HasNext() ? token_[next_token_idx_].line_number : line_number_;
   }
 
   /// Returns the next token that would be returned by the \link Next
   /// \endlink method.  The return value of this method is only valid
   /// when \link HasNext \endlink returns <tt>true</tt>.
-  string Peek() const { return has_next_ ? next_tok_ : ""; }
+  string Peek() const { return HasNext() ? token_[next_token_idx_].tok : ""; }
 
  private:
   void Init(const char *reserved_chars) {
@@ -211,7 +269,10 @@ class StreamTokenizer {
     for (int i = 0; i < num_reserved_words; ++i) {
       reserved_words_.insert(string(default_reserved_words[i]));
     }
-    GetNext();
+    Token next;
+    if (GetNext(&next)) {
+      token_.push_back(next);
+    }
   }
 
   void ConsumeChar(char c);
@@ -220,7 +281,12 @@ class StreamTokenizer {
 
   /// Retrieves the next token from the <tt>istream</tt> wrapped by this
   /// stream tokenizer.
-  void GetNext();
+  ///
+  /// \param next the token object to be filled in if there is a next token
+  ///
+  /// \return whether there was a next token in the underlying stream and
+  ///         it was successfully gotten
+  bool GetNext(Token *next);
 
   /// Returns whether the specified character represents a
   /// &ldquo;reserved character&rdquo;.
@@ -247,23 +313,19 @@ class StreamTokenizer {
   size_t num_reserved_chars_;
   set<string> reserved_words_;
 
-  // Information about the current state of this stream.
-  size_t curr_pos_;
+  // Information about the current state of the underlying byte stream.
   size_t num_read_;
   size_t line_number_;
+  bool eof_reached_;
   ostringstream oss_;
 
-  // Information about the next token in this stream.
-  string next_tok_;
-  TokenType next_tok_type_;
-  size_t next_tok_start_;
-  bool has_next_;
+  // The sequence of tokens read so far.
+  vector<Token> token_;
 
-  // Information about the previous token in this stream.
-  string prev_tok_;
-  TokenType prev_tok_type_;
-  size_t prev_tok_start_;
-  bool has_prev_;
+  // The index of the next token in this stream in token_, or token_.size()
+  // if there are no more tokens left in this stream.  Note that invocations
+  // of the Rewind and Putback methods alter this data member.
+  int next_token_idx_;
 };
 
 }  // namespace reranker

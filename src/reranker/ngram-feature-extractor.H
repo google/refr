@@ -104,19 +104,6 @@ class NgramFeatureExtractor : public FeatureExtractor {
     initializers.Add("prefix", &prefix_);
   }
 
-  /// Initializes this instance with the specified argument string,
-  /// which is expected to contain the n-gram order for this feature
-  /// extractor to extract and, optionally, a prefix string to be
-  /// prepended each feature name produced. This method is guaranteed to be
-  /// invoked by one of the object creation methods of the \link
-  /// Factory \endlink class just after construction.
-  ///
-  /// \param arg the entirety of the argument string parsed by
-  ///            \link Factory::CreateOrDie \endlink
-  ///
-  /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-  virtual void Init(const string &arg) {  }
-
   /// Does nothing.
   virtual void Extract(Candidate &candidate,
                        FeatureVector<int,double> &features) {

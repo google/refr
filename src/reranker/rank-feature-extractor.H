@@ -61,9 +61,6 @@ class RankFeatureExtractor : public FeatureExtractor {
     initializers.Add("add_score_difference", &add_score_difference_);
   }
 
-  // No extra initialization required.
-  virtual void Init(const string &arg) { }
-
   virtual void Extract(Candidate &candidate,
 		       FeatureVector<int,double> &features) { }
 

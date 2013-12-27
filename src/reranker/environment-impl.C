@@ -118,8 +118,8 @@ EnvironmentImpl::ReadAndSet(const string &varname, StreamTokenizer &st,
               st.Peek() != "true" && st.Peek() != "false" &&
 	      st.Peek() != "nullptr" && st.Peek() != "NULL")) {
     ostringstream err_ss;
-    err_ss << "Environment: error: expected type but found token \""
-           << st.Peek() << "\" of type "
+    err_ss << "Environment: error: expected literal or Factory-constructible "
+	   << "type but found token \"" << st.Peek() << "\" of type "
            << StreamTokenizer::TypeName(st.PeekTokenType());
     throw std::runtime_error(err_ss.str());
   }

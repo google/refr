@@ -90,12 +90,6 @@ class FeatureExtractor : public FactoryConstructible {
   /// Destroys this vector.
   virtual ~FeatureExtractor() {}
 
-  /// Initializes this feature extractor.  This method is guaranteed
-  /// to be invoked by a \link Factory \endlink after construction.
-  ///
-  /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-  virtual void Init(const string &arg) = 0;
-
   /// Extracts features for the specified candidate, where each
   /// feature is represented by an int for its unique identifier.
   /// \par Implementation advice:

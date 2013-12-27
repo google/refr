@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -57,40 +57,20 @@ class FileBackedLossSetter : public AbstractFileBackedFeatureExtractor {
   /// Destroys this instance.
   virtual ~FileBackedLossSetter() { }
 
+  /// Registers the initializers for the filename_ and token_idx_ members.
   virtual void RegisterInitializers(Initializers &initializers) {
     token_idx_ = 0;
     initializers.Add("filename", &filename_);
     initializers.Add("token_idx", (int *)&token_idx_);
   }
 
-  /// Initializes this instance with the specified argument string,
-  /// which is expected to be just a filename, or else a filename
-  /// followed by a tab character followed by an integer specifying
-  /// which token index of each line contains the loss value.
-  /// If the initialization string consists solely of a filename (no
-  /// tab character), then each line is assumed to contain nothing
-  /// but a floating-point loss value.
+  /// Initializes this instance.  This method is guaranteed to be
+  /// invoked by a \link Factory \endlink just after construction.
   ///
-  /// This method is guaranteed to be invoked by a \link Factory \endlink
-  /// just after construction.
-  ///
-  /// \param arg either a just the name of the file that backs
-  ///            this feature extractor, or else that filename
-  ///            followed by a tab character followed by an
-  ///            integer specifying which token index of each
-  ///            line contains the loss
+  /// \param arg ignored
   ///
   /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-  virtual void Init(const string &arg) {
-    filename_ = arg;
-    token_idx_ = 0;
-    size_t tab_pos = arg.find_first_of("\t");
-    if (tab_pos != string::npos) {
-      filename_ = arg.substr(tab_pos);
-      if (tab_pos < arg.length()) {
-        token_idx_ = atoi(arg.substr(tab_pos + 1).c_str());
-      }
-    }
+  virtual void Init(const Environment *env, const string &arg) {
     is_ = new ifstream(filename_.c_str());
   }
 

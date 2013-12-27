@@ -257,7 +257,7 @@ class PerceptronModel : public Model {
 
   /// Initializes this instance. This method is guaranteed to be
   /// invoked by a \link Factory \endlink just after construction.
-  virtual void Init(const string &arg);
+  virtual void Init(const Environment *env, const string &arg);
 
   // training methods
 

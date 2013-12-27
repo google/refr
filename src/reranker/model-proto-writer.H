@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -65,14 +65,6 @@ class ModelProtoWriter : public FactoryConstructible {
   ModelProtoWriter() { }
   /// Destroys this writer.
   virtual ~ModelProtoWriter() { }
-
-  /// Initializes this instance with the specified argument string.
-  /// The default implementation here does nothing.  This method is
-  /// typically invoked by one of the creation methods of the \link
-  /// Factory \endlink class.
-  ///
-  /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-  virtual void Init(const string &arg) { }
 
   /// Serializes a Model instance to a ModelMessage.
   ///

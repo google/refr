@@ -381,14 +381,17 @@ class Constructor {
 /// types by implementing both required methods to do nothing.
 class FactoryConstructible {
  public:
+  virtual ~FactoryConstructible() { }
   virtual void RegisterInitializers(Initializers &initializers) { }
-  virtual void Init(const string &arg) { }
+  virtual void Init(const Environment *env, const string &arg) { }
 };
 
 /// Factory for dynamically created instance of the specified type.
 ///
-/// \tparam T the type of objects created by this factory, required to have
-///           a method with the signature <tt>Init(const string &arg)</tt>
+/// \tparam T the type of objects created by this factory, required to
+///           have the two methods defined in the \link
+///           reranker::FactoryConstructible FactoryConstructible
+///           \endlink class
 template <typename T>
 class Factory : public FactoryBase {
  public:
@@ -559,7 +562,7 @@ class Factory : public FactoryBase {
   shared_ptr<T> CreateOrDie(StreamTokenizer &st, Environment *env = NULL) {
     shared_ptr<Environment> env_ptr(env == NULL ?
                                     Environment::CreateEmpty() : env->Copy());
-    size_t start = st.tellg();
+    size_t start = st.PeekTokenStart();
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type == StreamTokenizer::RESERVED_WORD &&
 	(st.Peek() == "nullptr" || st.Peek() == "NULL")) {
@@ -693,13 +696,11 @@ class Factory : public FactoryBase {
 
     size_t end = st.tellg();
     // Invoke new instance's Init method.
-    // TODO(dbikel): Possibly add the unordered_map of initializers as
-    // a parameter to the init method.
     string stream_str = st.str();
     //cerr << "Full stream string is: \"" << stream_str << "\"" << endl;
     string init_str = stream_str.substr(start, end - start);
     //cerr << "Init string is: \"" << init_str << "\"" << endl;
-    instance->Init(init_str);
+    instance->Init(env_ptr.get(), init_str);
 
     return instance;
   }

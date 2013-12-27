@@ -75,10 +75,12 @@ class ExampleFeatureExtractor : public FeatureExtractor {
   /// method is guaranteed to be invoked by a \link Factory \endlink
   /// just after construction.
   ///
+  /// \param env the environment used by the \link Factory \endlink when
+  ///            this object was constructed
   /// \param arg the argument string with which to initialize this instance
   ///
   /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-  virtual void Init(const string &arg) {
+  virtual void Init(const Environment *env, const string &arg) {
     cout << "ExampleFeatureExtractor: set arg to \"" << arg_ << "\"" << endl;
     cout << "ExampleFeatureExtractor: set strvec to {";
     for (vector<string>::const_iterator it = strvec_.begin();
@@ -89,6 +91,9 @@ class ExampleFeatureExtractor : public FeatureExtractor {
     cout << "}" << endl;
     cout << "ExampleFeatureExtractor: set b to " << (b_ ? "true" : "false")
          << endl;
+
+    cout << "Environment during construction: " << endl;
+    env->Print(cout);
   }
 
   /// Extracts &ldquo;compiled&rdquo; features.

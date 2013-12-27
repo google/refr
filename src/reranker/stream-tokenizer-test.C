@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -47,11 +47,58 @@ main(int argc, char **argv) {
   StreamTokenizer st1(test_string);
   while (st1.HasNext()) {
     StreamTokenizer::TokenType type = st1.PeekTokenType();
+    size_t start = st1.PeekTokenStart();
+    size_t line_number = st1.PeekTokenLineNumber();
     cout << "token: \"" << st1.Next() << "\""
-         << "; type=" << StreamTokenizer::TypeName(type) << endl;
-    cout << "chars so far: \"" << st1.str() << "\"" << endl;
+         << "; type=" << StreamTokenizer::TypeName(type)
+	 << "; start=" << start
+	 << "; line=" << line_number
+	 << endl;
+    cout << "chars so far: '" << st1.str() << "'" << endl;
   }
   cerr << "Done." << endl;
+
+  cerr << "\nTesting Putback:" << endl;
+  st1.Putback();
+  while (st1.HasNext()) {
+    StreamTokenizer::TokenType type = st1.PeekTokenType();
+    size_t start = st1.PeekTokenStart();
+    size_t line_number = st1.PeekTokenLineNumber();
+    cout << "token: \"" << st1.Next() << "\""
+         << "; type=" << StreamTokenizer::TypeName(type)
+	 << "; start=" << start
+	 << "; line=" << line_number
+	 << endl;
+    cout << "chars so far: '" << st1.str() << "'" << endl;
+  }
+
+  cerr << "\nTesting Rewind(3):" << endl;
+  st1.Rewind(3);
+  while (st1.HasNext()) {
+    StreamTokenizer::TokenType type = st1.PeekTokenType();
+    size_t start = st1.PeekTokenStart();
+    size_t line_number = st1.PeekTokenLineNumber();
+    cout << "token: \"" << st1.Next() << "\""
+         << "; type=" << StreamTokenizer::TypeName(type)
+	 << "; start=" << start
+	 << "; line=" << line_number
+	 << endl;
+    cout << "chars so far: '" << st1.str() << "'" << endl;
+  }
+
+  cerr << "Testing Rewind():" << endl;
+  st1.Rewind();
+  while (st1.HasNext()) {
+    StreamTokenizer::TokenType type = st1.PeekTokenType();
+    size_t start = st1.PeekTokenStart();
+    size_t line_number = st1.PeekTokenLineNumber();
+    cout << "token: \"" << st1.Next() << "\""
+         << "; type=" << StreamTokenizer::TypeName(type)
+	 << "; start=" << start
+	 << "; line=" << line_number
+	 << endl;
+    cout << "chars so far: '" << st1.str() << "'" << endl;
+  }
 
   cerr << "\nReading from stdin until EOF:" << endl;
 

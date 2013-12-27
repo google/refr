@@ -86,7 +86,10 @@ DefaultCandidateSetScorer::Score(Model *model,
 }
 
 void
-RandomPairCandidateSetScorer::Init(const string &arg) { srand(time(NULL)); }
+RandomPairCandidateSetScorer::Init(const Environment *env,
+				   const string &arg) {
+  srand(time(NULL));
+}
 
 size_t
 RandomPairCandidateSetScorer::GetRandomIndex(size_t max) {

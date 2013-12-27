@@ -79,7 +79,7 @@ PerceptronModel::RegisterInitializers(Initializers &initializers) {
 }
 
 void
-PerceptronModel::Init(const string &arg) {
+PerceptronModel::Init(const Environment *env, const string &arg) {
   model_spec_.clear();
   model_spec_.append(arg);
 }

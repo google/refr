@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -62,19 +62,14 @@ class PerceptronModelProtoReader : public ModelProtoReader {
   /// Destroys this reader.
   virtual ~PerceptronModelProtoReader() { }
 
+  /// Registers the smart_copy_ data member with the name "smart_copy".
+  ///
+  /// &ldquo;Smart copying&rdquo; is when only one of the parameter
+  /// vectors of a model is present in a message, and so this reader
+  /// automatically copies the non-empty vector&rsquo;s contents to
+  /// the empty vector
   virtual void RegisterInitializers(Initializers &initializers) {
     initializers.Add("smart_copy", &smart_copy_);
-  }
-
-  /// Initializes this instance with the contents of the argument string,
-  /// which should either be the empty string, or else be the string
-  /// <tt>&quot;true&quot;</tt> or <tt>&quot;false&quot;</tt>, indicating
-  /// whether to use &ldquo;smart copying&rdquo;.  &ldquo;Smart copying&rdquo;
-  /// is when only one of the parameter vectors of a model is present
-  /// in a message, and so this reader automatically copies the non-empty
-  /// vector&rsquo;s contents to the empty vector.
-  virtual void Init(const string &arg) {
-    smart_copy_ = arg != "false";
   }
 
   /// De-serializes a PerceptronModel instance from a ModelMessage.

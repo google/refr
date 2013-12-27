@@ -120,7 +120,7 @@ class RandomPairCandidateSetScorer : public CandidateSet::Scorer {
  public:
   /// Initializes the random seed using <tt>srand</tt> and the current time
   /// available by calling <tt>time(NULL)</tt>.
-  virtual void Init(const string &arg);
+  virtual void Init(const Environment *env, const string &arg);
   /// Picks two candidates at random from the set, scores them and
   /// then identifies which has the higher score and the lowest loss,
   /// effectively meaning that training proceeds as if those were the
@@ -242,12 +242,6 @@ class Model : public FactoryConstructible {
   /// \see Model::InitHelper
   class UpdatePredicate : public FactoryConstructible {
    public:
-    /// An initialization method, guaranteed to be invoked by \link
-    /// Factory \endlink after initial construction.  The default
-    /// implementation here does nothing.
-    ///
-    /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-    virtual void Init(const string &arg) { }
     /// Returns whether the specified needs to be updated based on the
     /// specified training example.  The specified \link Model \endlink
     /// is non-<tt>const</tt> because it may be the case that its state
@@ -273,12 +267,6 @@ class Model : public FactoryConstructible {
   /// \see Model::InitHelper
   class Updater : public FactoryConstructible {
    public:
-    /// An initialization method, guaranteed to be invoked by \link
-    /// Factory \endlink after initial construction.  The default
-    /// implementation here does nothing.
-    ///
-    /// \see Factory::Create(const string&,string&,string&,bool&,bool&)
-    virtual void Init(const string &arg) { }
     /// Updates this model based on the specified training example.
     ///
     /// \param model   the model to update

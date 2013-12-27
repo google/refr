@@ -106,7 +106,8 @@ Interpreter::Eval(StreamTokenizer &st) {
     }
     catch (std::runtime_error &e) {
       cerr << "threw exception: " << e.what() << endl;
-      st.Next();
+      //st.Next();
+      break;
     }
   }
 }

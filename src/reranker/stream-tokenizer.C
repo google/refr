@@ -54,7 +54,7 @@ bool
 StreamTokenizer::ReadChar(char *c) {
   (*c) = is_.get();
   if (!is_.good()) {
-    has_next_ = false;
+    eof_reached_ = true;
     return false;
   } else {
     ConsumeChar(*c);
@@ -62,40 +62,43 @@ StreamTokenizer::ReadChar(char *c) {
   }
 }
 
-void
-StreamTokenizer::GetNext() {
+bool
+StreamTokenizer::GetNext(Token *next) {
   if (!is_.good()) {
-    has_next_ = false;
-    return;
+    eof_reached_ = true;
+    return false;
   }
   // Get first character of next token.
   char c;
   bool is_whitespace = true;
   while (is_whitespace) {
     if (!ReadChar(&c)) {
-      return;
+      return false;
     }
     is_whitespace = isspace(c);
 
     // If we find a comment character, then read to the end of the line.
-    if (!is_whitespace && c == '/') {
+    if (!is_whitespace && c == '/' && is_.peek() == '/') {
       while (c != '\n') {
         if (!ReadChar(&c)) {
-          return;
+          return false;
         }
       }
       is_whitespace = true;
     }
   }
 
-  has_next_ = true;
-  next_tok_start_ = num_read_ - 1;
+  // In case we're successful in reading the next token, we fill in
+  // the two stream state data available now.
+  next->start = num_read_ - 1;
+  next->line_number = line_number_;
+
   bool next_tok_complete = false;
-  next_tok_.clear();
+  next->tok.clear();
   if (ReservedChar(c)) {
-    next_tok_ += c;
+    next->tok += c;
     next_tok_complete = true;
-    next_tok_type_ = RESERVED_CHAR;
+    next->type = RESERVED_CHAR;
   } else if (c == '"') {
     // We've got a string literal, so keep reading characters,
     // until hitting a non-escaped double quote.
@@ -112,25 +115,25 @@ StreamTokenizer::GetNext() {
         }
       }
       if (success) {
-        next_tok_ += c;
+        next->tok += c;
       }
     }
     if (!found_closing_quote) {
-      cerr << "reranker::StreamTokenizer: error: could not find closing "
+      cerr << "StreamTokenizer: error: could not find closing "
            << "double quote for string literal beginning at stream index "
            << string_literal_start_pos
            << "; partial string literal read: \""
-           << next_tok_ << endl;
+           << next->tok << endl;
       throw std::runtime_error("unclosed string literal");
     }
     next_tok_complete = true;
-    next_tok_type_ = STRING;
+    next->type = STRING;
   } else {
     // This is a number, a reserved word or C++ identifier token, so
     // add first character; the remainder of the token will be handled
-    // after this switch statement.
-    next_tok_ += c;
-    next_tok_type_ = (c == '-' || (c >= '0' && c <= '9')) ? NUMBER : IDENTIFIER;
+    // in the next block.
+    next->tok += c;
+    next->type = (c == '-' || (c >= '0' && c <= '9')) ? NUMBER : IDENTIFIER;
   }
   if (!next_tok_complete) {
     // The current token is a number, a reserved word or C++
@@ -149,19 +152,24 @@ StreamTokenizer::GetNext() {
           // Now that we've finished reading something that is not a
           // string literal, change its type to be RESERVED_WORD if it
           // exactly matches something in the set of reserved words.
-          if (reserved_words_.count(next_tok_) != 0) {
-            next_tok_type_ = RESERVED_WORD;
+          if (reserved_words_.count(next->tok) != 0) {
+            next->type = RESERVED_WORD;
           }
           done = true;
         } else {
           ConsumeChar(c);
-          next_tok_ += c;
+          next->tok += c;
         }
       } else {
-        has_next_ = false;
+	eof_reached_ = true;
       }
     }
   }
+  // We're about to return a successfully read token, so we make sure to record
+  // the stream position at this point in the Token object.
+  next->curr_pos = num_read_;
+
+  return true;
 }
 
 }  // namespace reranker

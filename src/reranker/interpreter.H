@@ -165,7 +165,7 @@ class Interpreter {
   /// Constructs a new instance with the specified debug level.  The
   /// wrapped \link reranker::Environment Environment \endlink will
   /// also have the specified debug level.
-  Interpreter(int debug = 0) : debug_(debug) {
+  Interpreter(int debug = 0) {
     env_ = new EnvironmentImpl(debug);
   }
 
@@ -249,9 +249,6 @@ class Interpreter {
   /// The name of the file being interpreted, or the empty string if there
   /// is no file associated with the stream being interpreted.
   string filename_;
-
-  /// The debug level of this interpreter and its associated environment.
-  int debug_;
 };
 
 }  // namespace reranker
