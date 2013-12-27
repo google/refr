@@ -14,10 +14,6 @@ int
 main(int argc, char **argv) {
   cout << "Here is a list of abstract types and the concrete implementations\n"
        << "you can construct:" << endl;
-  // NOTE: Must put a flow-through method to this method in
-  // EnvironmentImpl which can then be invoked from the Interpreter
-  // class.
-
   int debug = 1;
   Interpreter interpreter(debug);
 
