@@ -85,7 +85,7 @@ EnvironmentImpl::EnvironmentImpl(int debug) {
           concrete_to_factory_type_.find(concrete_type_name);
       if (concrete_to_factory_it != concrete_to_factory_type_.end()) {
         // Warn user that there are two entries for the same concrete type
-        // (presumably to different abstract factory types).
+        // (presumably due to different abstract factory types).
         cerr << "Environment: WARNING: trying to override existing "
              << "concrete-to-factory type mapping ["
              << concrete_type_name << " --> " << concrete_to_factory_it->second
