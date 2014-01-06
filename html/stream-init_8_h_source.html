@@ -275,49 +275,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00220"></a>00220     <span class="comment">// Either the next token is an open brace (if reading tokens from</span>
 <a name="l00221"></a>00221     <span class="comment">// within a Factory-constructible object&#39;s member init list), or</span>
 <a name="l00222"></a>00222     <span class="comment">// else we just read an open brace (if Interpreter is reading tokens).</span>
-<a name="l00223"></a>00223     <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() == <span class="stringliteral">&quot;{&quot;</span>) {
-<a name="l00224"></a>00224       <span class="comment">// Consume open brace.</span>
-<a name="l00225"></a>00225       st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00226"></a>00226     } <span class="keywordflow">else</span> {
-<a name="l00227"></a>00227       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">PeekPrev</a>() != <span class="stringliteral">&quot;{&quot;</span>) {
-<a name="l00228"></a>00228         ostringstream err_ss;
-<a name="l00229"></a>00229         err_ss &lt;&lt; <span class="stringliteral">&quot;Initializer&lt;vector&lt;T&gt;&gt;: &quot;</span>
-<a name="l00230"></a>00230                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;{&#39; at stream position &quot;</span>
-<a name="l00231"></a>00231                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#ae11b72f787861e255191a574a9391e43">PeekPrevTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span>
-<a name="l00232"></a>00232                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">PeekPrev</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00233"></a>00233         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00234"></a>00234       }
-<a name="l00235"></a>00235     }
-<a name="l00236"></a>00236     <span class="keywordflow">while</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;}&quot;</span>) {
-<a name="l00237"></a>00237       T vector_element;
-<a name="l00238"></a>00238       <a class="code" href="classreranker_1_1_initializer.html" title="A class to initialize a Factory-constructible object.">Initializer&lt;T&gt;</a> *element_init = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_initializer.html" title="A class to initialize a Factory-constructible object.">Initializer&lt;T&gt;</a>(&amp;vector_element);
-<a name="l00239"></a>00239       element_init-&gt;<a class="code" href="classreranker_1_1_initializer.html#a8ebde0ddb09e92fb714d7ef22b413845">Init</a>(st, env);
-<a name="l00240"></a>00240       member_-&gt;push_back(vector_element);
-<a name="l00241"></a>00241       <span class="keyword">delete</span> element_init;
-<a name="l00242"></a>00242       <span class="comment">// Each vector element initializer must be followed by a comma</span>
-<a name="l00243"></a>00243       <span class="comment">// or the final closing parenthesis.</span>
-<a name="l00244"></a>00244       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;,&quot;</span>  &amp;&amp; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;}&quot;</span>) {
-<a name="l00245"></a>00245         ostringstream err_ss;
-<a name="l00246"></a>00246         err_ss &lt;&lt; <span class="stringliteral">&quot;Initializer&lt;vector&lt;T&gt;&gt;: &quot;</span>
-<a name="l00247"></a>00247                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;,&#39; or &#39;}&#39; at stream position &quot;</span>
-<a name="l00248"></a>00248                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position, or the byte position of the underlying byte stream if there ...">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00249"></a>00249         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00250"></a>00250       }
-<a name="l00251"></a>00251       <span class="comment">// Read comma, if present.</span>
-<a name="l00252"></a>00252       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() == <span class="stringliteral">&quot;,&quot;</span>) {
-<a name="l00253"></a>00253         st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00254"></a>00254       }
-<a name="l00255"></a>00255     }
-<a name="l00256"></a>00256     <span class="comment">// Consume close brace.</span>
-<a name="l00257"></a>00257     st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
-<a name="l00258"></a>00258   }
-<a name="l00259"></a>00259  <span class="keyword">private</span>:
-<a name="l00260"></a>00260   vector&lt;T&gt; *member_;
-<a name="l00261"></a>00261 };
-<a name="l00262"></a>00262 
-<a name="l00263"></a>00263 }  <span class="comment">// namespace reranker</span>
-<a name="l00264"></a>00264 
-<a name="l00265"></a>00265 <span class="preprocessor">#endif</span>
+<a name="l00223"></a>00223     <span class="comment">//</span>
+<a name="l00224"></a>00224     <span class="comment">// TODO(dbikel): Change this &quot;brace optional&quot; business, now that we</span>
+<a name="l00225"></a>00225     <span class="comment">// we can rewind the token stream.</span>
+<a name="l00226"></a>00226     <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() == <span class="stringliteral">&quot;{&quot;</span>) {
+<a name="l00227"></a>00227       <span class="comment">// Consume open brace.</span>
+<a name="l00228"></a>00228       st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00229"></a>00229     } <span class="keywordflow">else</span> {
+<a name="l00230"></a>00230       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">PeekPrev</a>() != <span class="stringliteral">&quot;{&quot;</span>) {
+<a name="l00231"></a>00231         ostringstream err_ss;
+<a name="l00232"></a>00232         err_ss &lt;&lt; <span class="stringliteral">&quot;Initializer&lt;vector&lt;T&gt;&gt;: &quot;</span>
+<a name="l00233"></a>00233                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;{&#39; at stream position &quot;</span>
+<a name="l00234"></a>00234                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#ae11b72f787861e255191a574a9391e43">PeekPrevTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span>
+<a name="l00235"></a>00235                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">PeekPrev</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00236"></a>00236         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00237"></a>00237       }
+<a name="l00238"></a>00238     }
+<a name="l00239"></a>00239     <span class="keywordflow">while</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;}&quot;</span>) {
+<a name="l00240"></a>00240       T vector_element;
+<a name="l00241"></a>00241       <a class="code" href="classreranker_1_1_initializer.html" title="A class to initialize a Factory-constructible object.">Initializer&lt;T&gt;</a> *element_init = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_initializer.html" title="A class to initialize a Factory-constructible object.">Initializer&lt;T&gt;</a>(&amp;vector_element);
+<a name="l00242"></a>00242       element_init-&gt;<a class="code" href="classreranker_1_1_initializer.html#a8ebde0ddb09e92fb714d7ef22b413845">Init</a>(st, env);
+<a name="l00243"></a>00243       member_-&gt;push_back(vector_element);
+<a name="l00244"></a>00244       <span class="keyword">delete</span> element_init;
+<a name="l00245"></a>00245       <span class="comment">// Each vector element initializer must be followed by a comma</span>
+<a name="l00246"></a>00246       <span class="comment">// or the final closing parenthesis.</span>
+<a name="l00247"></a>00247       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;,&quot;</span>  &amp;&amp; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() != <span class="stringliteral">&quot;}&quot;</span>) {
+<a name="l00248"></a>00248         ostringstream err_ss;
+<a name="l00249"></a>00249         err_ss &lt;&lt; <span class="stringliteral">&quot;Initializer&lt;vector&lt;T&gt;&gt;: &quot;</span>
+<a name="l00250"></a>00250                &lt;&lt; <span class="stringliteral">&quot;error: expected &#39;,&#39; or &#39;}&#39; at stream position &quot;</span>
+<a name="l00251"></a>00251                &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position, or the byte position of the underlying byte stream if there ...">PeekTokenStart</a>() &lt;&lt; <span class="stringliteral">&quot; but found \&quot;&quot;</span> &lt;&lt; st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00252"></a>00252         <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00253"></a>00253       }
+<a name="l00254"></a>00254       <span class="comment">// Read comma, if present.</span>
+<a name="l00255"></a>00255       <span class="keywordflow">if</span> (st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>() == <span class="stringliteral">&quot;,&quot;</span>) {
+<a name="l00256"></a>00256         st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00257"></a>00257       }
+<a name="l00258"></a>00258     }
+<a name="l00259"></a>00259     <span class="comment">// Consume close brace.</span>
+<a name="l00260"></a>00260     st.<a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>();
+<a name="l00261"></a>00261   }
+<a name="l00262"></a>00262  <span class="keyword">private</span>:
+<a name="l00263"></a>00263   vector&lt;T&gt; *member_;
+<a name="l00264"></a>00264 };
+<a name="l00265"></a>00265 
+<a name="l00266"></a>00266 }  <span class="comment">// namespace reranker</span>
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -336,7 +339,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 6 2014 11:02:17 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 11:31:22 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
