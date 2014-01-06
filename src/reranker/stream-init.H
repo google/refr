@@ -128,8 +128,6 @@ class Initializer<int> : public StreamInitializer {
   int *member_;
 };
 
-/// \class Initializer
-///
 /// A specialization to initialize <tt>double</tt> data members.
 template<>
 class Initializer<double> : public StreamInitializer {
