@@ -115,29 +115,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00038"></a>00038 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00039"></a>00039 <span class="preprocessor">#include &lt;fstream&gt;</span>
 <a name="l00040"></a>00040 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00041"></a>00041 <span class="preprocessor">#include &lt;tr1/memory&gt;</span>
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="candidate-set-iterator_8_h.html" title="Provides an interface and some implementations for iterating over CandidateSet  instances.">candidate-set-iterator.H</a>&quot;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="candidate-set-reader_8_h.html" title="Class for reading streams of training or test instances, where each training or test instance is a re...">candidate-set-reader.H</a>&quot;</span>
-<a name="l00045"></a>00045 <span class="preprocessor">#include &quot;<a class="code" href="model_8_h.html" title="Reranker model interface.">model.H</a>&quot;</span>
-<a name="l00046"></a>00046 <span class="preprocessor">#include &quot;<a class="code" href="model-reader_8_h.html" title="Provides the ModelReader  class, which can create Model  instances from a file.">model-reader.H</a>&quot;</span>
-<a name="l00047"></a>00047 
-<a name="l00048"></a><a class="code" href="piped-model-evaluator_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">00048</a> <span class="preprocessor">#define DEBUG 0</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span>
-<a name="l00050"></a><a class="code" href="piped-model-evaluator_8_c.html#a44493dbd21a529ec6fdb2da73a35ac70">00050</a> <span class="preprocessor">#define PROG_NAME &quot;piped-model-evaluator&quot;</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span>
-<a name="l00052"></a><a class="code" href="piped-model-evaluator_8_c.html#a532f75d7ae60075d58f59fee8b4ccfaa">00052</a> <span class="preprocessor">#define DEFAULT_MAX_EXAMPLES -1</span>
-<a name="l00053"></a><a class="code" href="piped-model-evaluator_8_c.html#a9d6fb0cd899c98a59411c20bf68c3792">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFAULT_MAX_CANDIDATES -1</span>
-<a name="l00054"></a><a class="code" href="piped-model-evaluator_8_c.html#ab69236cfb1640d72af7bc485b4a48f7c">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFAULT_REPORTING_INTERVAL 1000</span>
-<a name="l00055"></a><a class="code" href="piped-model-evaluator_8_c.html#aff42509eec1e3179a39054b367fc994d">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFAULT_USE_WEIGHTED_LOSS true</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>
-<a name="l00057"></a>00057 <span class="comment">// We use two levels of macros to get the string version of an int constant.</span>
-<a name="l00060"></a><a class="code" href="piped-model-evaluator_8_c.html#afc0fe0597af089c04afb9bc5a6475705">00060</a> <span class="comment"></span><span class="preprocessor">#define XSTR(arg) STR(arg)</span>
-<a name="l00061"></a>00061 <span class="preprocessor"></span>
-<a name="l00062"></a><a class="code" href="piped-model-evaluator_8_c.html#a878d88fe9bab9d7372961ce77b00fa26">00062</a> <span class="preprocessor">#define STR(arg) #arg</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span>
-<a name="l00064"></a>00064 <span class="keyword">using namespace </span>std;
-<a name="l00065"></a>00065 <span class="keyword">using namespace </span>std::tr1;
+<a name="l00041"></a>00041 <span class="preprocessor">#include &lt;memory&gt;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &lt;unistd.h&gt;</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="candidate-set-iterator_8_h.html" title="Provides an interface and some implementations for iterating over CandidateSet  instances.">candidate-set-iterator.H</a>&quot;</span>
+<a name="l00045"></a>00045 <span class="preprocessor">#include &quot;<a class="code" href="candidate-set-reader_8_h.html" title="Class for reading streams of training or test instances, where each training or test instance is a re...">candidate-set-reader.H</a>&quot;</span>
+<a name="l00046"></a>00046 <span class="preprocessor">#include &quot;<a class="code" href="model_8_h.html" title="Reranker model interface.">model.H</a>&quot;</span>
+<a name="l00047"></a>00047 <span class="preprocessor">#include &quot;<a class="code" href="model-reader_8_h.html" title="Provides the ModelReader  class, which can create Model  instances from a file.">model-reader.H</a>&quot;</span>
+<a name="l00048"></a>00048 
+<a name="l00049"></a><a class="code" href="piped-model-evaluator_8_c.html#ad72dbcf6d0153db1b8d8a58001feed83">00049</a> <span class="preprocessor">#define DEBUG 0</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span>
+<a name="l00051"></a><a class="code" href="piped-model-evaluator_8_c.html#a44493dbd21a529ec6fdb2da73a35ac70">00051</a> <span class="preprocessor">#define PROG_NAME &quot;piped-model-evaluator&quot;</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span>
+<a name="l00053"></a><a class="code" href="piped-model-evaluator_8_c.html#a532f75d7ae60075d58f59fee8b4ccfaa">00053</a> <span class="preprocessor">#define DEFAULT_MAX_EXAMPLES -1</span>
+<a name="l00054"></a><a class="code" href="piped-model-evaluator_8_c.html#a9d6fb0cd899c98a59411c20bf68c3792">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFAULT_MAX_CANDIDATES -1</span>
+<a name="l00055"></a><a class="code" href="piped-model-evaluator_8_c.html#ab69236cfb1640d72af7bc485b4a48f7c">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFAULT_REPORTING_INTERVAL 1000</span>
+<a name="l00056"></a><a class="code" href="piped-model-evaluator_8_c.html#aff42509eec1e3179a39054b367fc994d">00056</a> <span class="preprocessor"></span><span class="preprocessor">#define DEFAULT_USE_WEIGHTED_LOSS true</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span>
+<a name="l00058"></a>00058 <span class="comment">// We use two levels of macros to get the string version of an int constant.</span>
+<a name="l00061"></a><a class="code" href="piped-model-evaluator_8_c.html#afc0fe0597af089c04afb9bc5a6475705">00061</a> <span class="comment"></span><span class="preprocessor">#define XSTR(arg) STR(arg)</span>
+<a name="l00062"></a>00062 <span class="preprocessor"></span>
+<a name="l00063"></a><a class="code" href="piped-model-evaluator_8_c.html#a878d88fe9bab9d7372961ce77b00fa26">00063</a> <span class="preprocessor">#define STR(arg) #arg</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span>
+<a name="l00065"></a>00065 <span class="keyword">using namespace </span>std;
 <a name="l00066"></a>00066 <span class="keyword">using namespace </span>reranker;
 <a name="l00067"></a>00067 
 <a name="l00068"></a><a class="code" href="piped-model-evaluator_8_c.html#ab14fc1012197db1b38cabd8b431160b7">00068</a> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="compile-features_8_c.html#ab14fc1012197db1b38cabd8b431160b7">usage_msg</a>[] = {
@@ -379,7 +379,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:04 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

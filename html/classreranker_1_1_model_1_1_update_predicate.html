@@ -125,8 +125,6 @@ Inheritance diagram for reranker::Model::UpdatePredicate:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_1_1_update_predicate.html#a47a46797969316fb3ee558e5d34d27e7">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An initialization method, guaranteed to be invoked by <a class="el" href="classreranker_1_1_factory.html">Factory</a> after initial construction.  <a href="#a47a46797969316fb3ee558e5d34d27e7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_1_1_update_predicate.html#a5a62afd01a1873c97843a21954703ec9">NeedToUpdate</a> (<a class="el" href="classreranker_1_1_model.html">Model</a> *model, <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> &amp;example)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the specified needs to be updated based on the specified training example.  <a href="#a5a62afd01a1873c97843a21954703ec9"></a><br/></td></tr>
 </table>
@@ -135,37 +133,12 @@ Public Member Functions</h2></td></tr>
 <p>Typically, implementations of this interface will be inner classes of the concrete <a class="el" href="classreranker_1_1_model.html">Model</a> implementation to which they apply.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classreranker_1_1_model.html#a2fff2752a2ec18289f26954daf526cb3" title="Indicates whether the current model needs to be updated.">Model::NeedToUpdate</a> </dd>
 <dd>
-<a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">Model::Init</a> </dd>
+<a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">Model::Init</a> </dd>
 <dd>
 Model::InitHelper </dd></dl>
 
-<p>Definition at line <a class="el" href="model_8_h_source.html#l00242">242</a> of file <a class="el" href="model_8_h_source.html">model.H</a>.</p>
+<p>Definition at line <a class="el" href="model_8_h_source.html#l00243">243</a> of file <a class="el" href="model_8_h_source.html">model.H</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a47a46797969316fb3ee558e5d34d27e7"></a><!-- doxytag: member="reranker::Model::UpdatePredicate::Init" ref="a47a46797969316fb3ee558e5d34d27e7" args="(const string &amp;arg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_model_1_1_update_predicate.html#a47a46797969316fb3ee558e5d34d27e7">reranker::Model::UpdatePredicate::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>An initialization method, guaranteed to be invoked by <a class="el" href="classreranker_1_1_factory.html">Factory</a> after initial construction. </p>
-<p>The default implementation here does nothing.</p>
-<dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">reranker::FactoryConstructible</a>.</p>
-
-<p>Definition at line <a class="el" href="model_8_h_source.html#l00249">249</a> of file <a class="el" href="model_8_h_source.html">model.H</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a5a62afd01a1873c97843a21954703ec9"></a><!-- doxytag: member="reranker::Model::UpdatePredicate::NeedToUpdate" ref="a5a62afd01a1873c97843a21954703ec9" args="(Model *model, CandidateSet &amp;example)=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -224,7 +197,7 @@ Model::InitHelper </dd></dl>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

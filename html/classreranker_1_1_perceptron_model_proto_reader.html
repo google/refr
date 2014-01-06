@@ -129,8 +129,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#a66348e1f9e5c4d608ce9430715f0fb77">~PerceptronModelProtoReader</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this reader.  <a href="#a66348e1f9e5c4d608ce9430715f0fb77"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#a0655c95b4a80ed36f141834d365c76e5">RegisterInitializers</a> (<a class="el" href="classreranker_1_1_initializers.html">Initializers</a> &amp;initializers)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7e2abc375fd398ee2ca65fe2a9f25c0">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the contents of the argument string, which should either be the empty string, or else be the string <code>"true"</code> or <code>"false"</code>, indicating whether to use &ldquo;smart copying&rdquo;.  <a href="#ad7e2abc375fd398ee2ca65fe2a9f25c0"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the smart_copy_ data member with the name "smart_copy".  <a href="#a0655c95b4a80ed36f141834d365c76e5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#a15d0fdf95b8c589c3451b813b3f25d54">Read</a> (const ModelMessage &amp;model_message, <a class="el" href="classreranker_1_1_model.html">Model</a> *model) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">De-serializes a <a class="el" href="classreranker_1_1_perceptron_model.html" title="This class implements a perceptron model reranker.">PerceptronModel</a> instance from a ModelMessage.  <a href="#a15d0fdf95b8c589c3451b813b3f25d54"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#a6ae54905e41bc2e509939bec4e6e0133">ReadFeatures</a> (istream &amp;is, <a class="el" href="classreranker_1_1_model.html">Model</a> *model, bool skip_key, const string &amp;separator) const </td></tr>
@@ -183,30 +182,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ad7e2abc375fd398ee2ca65fe2a9f25c0"></a><!-- doxytag: member="reranker::PerceptronModelProtoReader::Init" ref="ad7e2abc375fd398ee2ca65fe2a9f25c0" args="(const string &amp;arg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7e2abc375fd398ee2ca65fe2a9f25c0">reranker::PerceptronModelProtoReader::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initializes this instance with the contents of the argument string, which should either be the empty string, or else be the string <code>"true"</code> or <code>"false"</code>, indicating whether to use &ldquo;smart copying&rdquo;. </p>
-<p>&ldquo;Smart copying&rdquo; is when only one of the parameter vectors of a model is present in a message, and so this reader automatically copies the non-empty vector&rsquo;s contents to the empty vector. </p>
-
-<p>Reimplemented from <a class="el" href="classreranker_1_1_model_proto_reader.html#a388a2231cdc8ac10fddf63b90e74c37d">reranker::ModelProtoReader</a>.</p>
-
-<p>Definition at line <a class="el" href="perceptron-model-proto-reader_8_h_source.html#l00076">76</a> of file <a class="el" href="perceptron-model-proto-reader_8_h_source.html">perceptron-model-proto-reader.H</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a15d0fdf95b8c589c3451b813b3f25d54"></a><!-- doxytag: member="reranker::PerceptronModelProtoReader::Read" ref="a15d0fdf95b8c589c3451b813b3f25d54" args="(const ModelMessage &amp;model_message, Model *model) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -316,9 +291,12 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Registers the smart_copy_ data member with the name "smart_copy". </p>
+<p>&ldquo;Smart copying&rdquo; is when only one of the parameter vectors of a model is present in a message, and so this reader automatically copies the non-empty vector&rsquo;s contents to the empty vector </p>
+
 <p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a4a45cf0a7822b3cd26ec882f0330b788">reranker::FactoryConstructible</a>.</p>
 
-<p>Definition at line <a class="el" href="perceptron-model-proto-reader_8_h_source.html#l00065">65</a> of file <a class="el" href="perceptron-model-proto-reader_8_h_source.html">perceptron-model-proto-reader.H</a>.</p>
+<p>Definition at line <a class="el" href="perceptron-model-proto-reader_8_h_source.html#l00071">71</a> of file <a class="el" href="perceptron-model-proto-reader_8_h_source.html">perceptron-model-proto-reader.H</a>.</p>
 
 </div>
 </div>
@@ -344,7 +322,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

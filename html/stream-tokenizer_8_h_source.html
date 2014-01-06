@@ -118,184 +118,233 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00040"></a>00040 <span class="preprocessor">#include &lt;set&gt;</span>
 <a name="l00041"></a>00041 <span class="preprocessor">#include &lt;sstream&gt;</span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">namespace </span>reranker {
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048 <span class="keyword">using</span> std::istream;
-<a name="l00049"></a>00049 <span class="keyword">using</span> std::istringstream;
-<a name="l00050"></a>00050 <span class="keyword">using</span> std::ostringstream;
-<a name="l00051"></a>00051 <span class="keyword">using</span> std::set;
-<a name="l00052"></a>00052 <span class="keyword">using</span> std::streampos;
-<a name="l00053"></a>00053 <span class="keyword">using</span> std::string;
-<a name="l00054"></a>00054 <span class="keyword">using</span> std::vector;
-<a name="l00055"></a>00055 <span class="keyword">using</span> std::cerr;
-<a name="l00056"></a>00056 <span class="keyword">using</span> std::endl;
-<a name="l00057"></a>00057 
-<a name="l00062"></a>00062 <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *default_reserved_words[] = {
-<a name="l00063"></a>00063   <span class="stringliteral">&quot;-&quot;</span>,
-<a name="l00064"></a>00064   <span class="stringliteral">&quot;false&quot;</span>,
-<a name="l00065"></a>00065   <span class="stringliteral">&quot;true&quot;</span>,
-<a name="l00066"></a>00066   <span class="stringliteral">&quot;bool&quot;</span>,
-<a name="l00067"></a>00067   <span class="stringliteral">&quot;int&quot;</span>,
-<a name="l00068"></a>00068   <span class="stringliteral">&quot;double&quot;</span>,
-<a name="l00069"></a>00069   <span class="stringliteral">&quot;string&quot;</span>,
-<a name="l00070"></a>00070   <span class="stringliteral">&quot;bool[]&quot;</span>,
-<a name="l00071"></a>00071   <span class="stringliteral">&quot;int[]&quot;</span>,
-<a name="l00072"></a>00072   <span class="stringliteral">&quot;double[]&quot;</span>,
-<a name="l00073"></a>00073   <span class="stringliteral">&quot;string[]&quot;</span>,
-<a name="l00074"></a>00074 };
-<a name="l00075"></a>00075 
-<a name="l00077"></a>00077 <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *default_reserved_chars = <span class="stringliteral">&quot;(){},=;/&quot;</span>;
+<a name="l00042"></a>00042 <span class="preprocessor">#include &lt;stdexcept&gt;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00045"></a>00045 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="keyword">namespace </span>reranker {
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 <span class="keyword">using</span> std::istream;
+<a name="l00050"></a>00050 <span class="keyword">using</span> std::istringstream;
+<a name="l00051"></a>00051 <span class="keyword">using</span> std::ostringstream;
+<a name="l00052"></a>00052 <span class="keyword">using</span> std::set;
+<a name="l00053"></a>00053 <span class="keyword">using</span> std::streampos;
+<a name="l00054"></a>00054 <span class="keyword">using</span> std::string;
+<a name="l00055"></a>00055 <span class="keyword">using</span> std::vector;
+<a name="l00056"></a>00056 <span class="keyword">using</span> std::cerr;
+<a name="l00057"></a>00057 <span class="keyword">using</span> std::endl;
+<a name="l00058"></a>00058 
+<a name="l00063"></a>00063 <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *default_reserved_words[] = {
+<a name="l00064"></a>00064   <span class="stringliteral">&quot;-&quot;</span>,
+<a name="l00065"></a>00065   <span class="stringliteral">&quot;nullptr&quot;</span>,
+<a name="l00066"></a>00066   <span class="stringliteral">&quot;NULL&quot;</span>,
+<a name="l00067"></a>00067   <span class="stringliteral">&quot;false&quot;</span>,
+<a name="l00068"></a>00068   <span class="stringliteral">&quot;true&quot;</span>,
+<a name="l00069"></a>00069   <span class="stringliteral">&quot;bool&quot;</span>,
+<a name="l00070"></a>00070   <span class="stringliteral">&quot;int&quot;</span>,
+<a name="l00071"></a>00071   <span class="stringliteral">&quot;double&quot;</span>,
+<a name="l00072"></a>00072   <span class="stringliteral">&quot;string&quot;</span>,
+<a name="l00073"></a>00073   <span class="stringliteral">&quot;bool[]&quot;</span>,
+<a name="l00074"></a>00074   <span class="stringliteral">&quot;int[]&quot;</span>,
+<a name="l00075"></a>00075   <span class="stringliteral">&quot;double[]&quot;</span>,
+<a name="l00076"></a>00076   <span class="stringliteral">&quot;string[]&quot;</span>,
+<a name="l00077"></a>00077 };
 <a name="l00078"></a>00078 
-<a name="l00084"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html">00084</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> {
-<a name="l00085"></a>00085  <span class="keyword">public</span>:
-<a name="l00089"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da">00089</a>   <span class="keyword">enum</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> {
-<a name="l00090"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">00090</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">EOF_TYPE</a>,
-<a name="l00091"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daaf92bc177d9920c389a149fa718c9ff3a">00091</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daaf92bc177d9920c389a149fa718c9ff3a">RESERVED_CHAR</a>,
-<a name="l00092"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa900de35c73023cf15ec3954852da6809">00092</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa900de35c73023cf15ec3954852da6809">RESERVED_WORD</a>,
-<a name="l00093"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6719f11fc4a17c542500088211a08df3">00093</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6719f11fc4a17c542500088211a08df3">STRING</a>,
-<a name="l00094"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa033acb728cba240ddf92404a8e709b79">00094</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa033acb728cba240ddf92404a8e709b79">NUMBER</a>,
-<a name="l00095"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">00095</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">IDENTIFIER</a>
-<a name="l00096"></a>00096   };
-<a name="l00097"></a>00097 
-<a name="l00099"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450">00099</a>   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450" title="Returns a string type name for the specified TokenType constant.">TypeName</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> token_type) {
-<a name="l00100"></a>00100     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *names[] = {
-<a name="l00101"></a>00101       <span class="stringliteral">&quot;EOF&quot;</span>, <span class="stringliteral">&quot;RESERVED_CHAR&quot;</span>, <span class="stringliteral">&quot;RESERVED_WORD&quot;</span>, <span class="stringliteral">&quot;STRING&quot;</span>, <span class="stringliteral">&quot;NUMBER&quot;</span>, <span class="stringliteral">&quot;IDENTIFIER&quot;</span>
-<a name="l00102"></a>00102     };
-<a name="l00103"></a>00103     <span class="keywordflow">return</span> names[token_type];
-<a name="l00104"></a>00104   }
-<a name="l00105"></a>00105 
-<a name="l00112"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a9f58e55e682573883cd8872da9dce149">00112</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a9f58e55e682573883cd8872da9dce149" title="Constructs a new instance around the specified byte stream.">StreamTokenizer</a>(istream &amp;is,
-<a name="l00113"></a>00113                   <span class="keyword">const</span> <span class="keywordtype">char</span> *reserved_chars = default_reserved_chars) :
-<a name="l00114"></a>00114       is_(is), curr_pos_(0), num_read_(0), line_number_(0),
-<a name="l00115"></a>00115       has_next_(false), has_prev_(false) {
-<a name="l00116"></a>00116     Init(reserved_chars);
-<a name="l00117"></a>00117   }
+<a name="l00080"></a><a class="code" href="stream-tokenizer_8_h.html#aa6dcca782316d8f09a268865ae5f924b">00080</a> <span class="preprocessor">#define DEFAULT_RESERVED_CHARS &quot;(){},=;/&quot;</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span>
+<a name="l00087"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html">00087</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_stream_tokenizer.html" title="A simple class for tokenizing a stream of tokens for the formally specified language used to construc...">StreamTokenizer</a> {
+<a name="l00088"></a>00088  <span class="keyword">public</span>:
+<a name="l00092"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da">00092</a>   <span class="keyword">enum</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> {
+<a name="l00093"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">00093</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">EOF_TYPE</a>,
+<a name="l00094"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daaf92bc177d9920c389a149fa718c9ff3a">00094</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daaf92bc177d9920c389a149fa718c9ff3a">RESERVED_CHAR</a>,
+<a name="l00095"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa900de35c73023cf15ec3954852da6809">00095</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa900de35c73023cf15ec3954852da6809">RESERVED_WORD</a>,
+<a name="l00096"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6719f11fc4a17c542500088211a08df3">00096</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6719f11fc4a17c542500088211a08df3">STRING</a>,
+<a name="l00097"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa033acb728cba240ddf92404a8e709b79">00097</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa033acb728cba240ddf92404a8e709b79">NUMBER</a>,
+<a name="l00098"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">00098</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa6f3f909fb7f4fdc76c355f131a0cd392">IDENTIFIER</a>
+<a name="l00099"></a>00099   };
+<a name="l00100"></a>00100 
+<a name="l00102"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450">00102</a>   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classreranker_1_1_stream_tokenizer.html#ad9765fd0018581aa96914ac773cbe450" title="Returns a string type name for the specified TokenType constant.">TypeName</a>(<a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> token_type) {
+<a name="l00103"></a>00103     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *names[] = {
+<a name="l00104"></a>00104       <span class="stringliteral">&quot;EOF&quot;</span>, <span class="stringliteral">&quot;RESERVED_CHAR&quot;</span>, <span class="stringliteral">&quot;RESERVED_WORD&quot;</span>, <span class="stringliteral">&quot;STRING&quot;</span>, <span class="stringliteral">&quot;NUMBER&quot;</span>, <span class="stringliteral">&quot;IDENTIFIER&quot;</span>
+<a name="l00105"></a>00105     };
+<a name="l00106"></a>00106     <span class="keywordflow">return</span> names[token_type];
+<a name="l00107"></a>00107   }
+<a name="l00108"></a>00108 
+<a name="l00110"></a><a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html">00110</a>   <span class="keyword">struct </span><a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html" title="Information about a token read from the underlying stream.">Token</a> {
+<a name="l00112"></a><a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#a0fde8d1cf3cecb621854dc9f43b43d69">00112</a>     <span class="keywordtype">string</span> <a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#a0fde8d1cf3cecb621854dc9f43b43d69" title="The token itself.">tok</a>;
+<a name="l00114"></a><a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#a71ec517c8fe42650f7faf4ae95c2473f">00114</a>     <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> <a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#a71ec517c8fe42650f7faf4ae95c2473f" title="The token&rsquo;s type.">type</a>;
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116     <span class="comment">// The following three fields capture information about the underlying</span>
+<a name="l00117"></a>00117     <span class="comment">// byte stream at the time this token was read from it.</span>
 <a name="l00118"></a>00118 
-<a name="l00125"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a71d2bdbd46b7225892d86aed90fabed1">00125</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a9f58e55e682573883cd8872da9dce149" title="Constructs a new instance around the specified byte stream.">StreamTokenizer</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;s,
-<a name="l00126"></a>00126                   <span class="keyword">const</span> <span class="keywordtype">char</span> *reserved_chars = default_reserved_chars) :
-<a name="l00127"></a>00127       sstream_(s), is_(sstream_), curr_pos_(0), num_read_(0), line_number_(0),
-<a name="l00128"></a>00128       has_next_(false), has_prev_(false) {
-<a name="l00129"></a>00129     Init(reserved_chars);
-<a name="l00130"></a>00130   }
-<a name="l00131"></a>00131 
-<a name="l00134"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a60647671d07982e301b6d517192cc537">00134</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a60647671d07982e301b6d517192cc537" title="Sets the set of &ldquo;reserved words&rdquo; used by this stream tokenizer.">set_reserved_words</a>(set&lt;string&gt; &amp;reserved_words) {
-<a name="l00135"></a>00135     reserved_words_ = reserved_words;
-<a name="l00136"></a>00136   }
-<a name="l00137"></a>00137 
-<a name="l00139"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a4e49fac1cca5675cddb0bad5b28db74f">00139</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a4e49fac1cca5675cddb0bad5b28db74f" title="Destroys this instance.">~StreamTokenizer</a>() {
-<a name="l00140"></a>00140     <span class="keyword">delete</span>[] reserved_chars_;
-<a name="l00141"></a>00141   }
-<a name="l00142"></a>00142 
-<a name="l00145"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#af4765dcb4f25bb60a13f879536d68288">00145</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#af4765dcb4f25bb60a13f879536d68288" title="Returns the entire sequence of characters read so far by this stream tokenizer as a newly constructed...">str</a>() { <span class="keywordflow">return</span> oss_.str(); }
-<a name="l00146"></a>00146 
-<a name="l00149"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79">00149</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> curr_pos_; }
-<a name="l00150"></a>00150 
-<a name="l00154"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a9c45df83d9bd8319465459e8510e741f">00154</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a9c45df83d9bd8319465459e8510e741f" title="Returns the number of lines read from the underlying byte stream, where a line is any number of bytes...">line_number</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> line_number_; }
-<a name="l00155"></a>00155 
-<a name="l00157"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e">00157</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> has_next_; }
-<a name="l00158"></a>00158 
-<a name="l00159"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">00159</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">HasPrev</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> has_prev_; }
-<a name="l00160"></a>00160 
-<a name="l00161"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">00161</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">PeekPrev</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> has_prev_ ? prev_tok_ : <span class="stringliteral">&quot;&quot;</span>; }
-<a name="l00162"></a>00162 
-<a name="l00163"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ae11b72f787861e255191a574a9391e43">00163</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#ae11b72f787861e255191a574a9391e43">PeekPrevTokenStart</a>()<span class="keyword"> const </span>{
-<a name="l00164"></a>00164     <span class="keywordflow">return</span> has_prev_ ? prev_tok_start_ : 0;
-<a name="l00165"></a>00165   }
-<a name="l00166"></a>00166 
-<a name="l00167"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ae3d8731cc6ffb815a8a2fe44f9d27bf9">00167</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> <a class="code" href="classreranker_1_1_stream_tokenizer.html#ae3d8731cc6ffb815a8a2fe44f9d27bf9">PeekPrevTokenType</a>()<span class="keyword"> const </span>{
-<a name="l00168"></a>00168     <span class="keywordflow">return</span> has_prev_ ? prev_tok_type_ : <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">EOF_TYPE</a>;
-<a name="l00169"></a>00169   }
-<a name="l00170"></a>00170 
-<a name="l00172"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e">00172</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>() {
-<a name="l00173"></a>00173     <span class="keywordflow">if</span> (!<a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>()) {
-<a name="l00174"></a>00174       <span class="comment">// Error.</span>
-<a name="l00175"></a>00175     }
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177     <span class="comment">// First, preserve the next token as the previous token.</span>
-<a name="l00178"></a>00178     prev_tok_ = next_tok_;
-<a name="l00179"></a>00179     prev_tok_type_ = next_tok_type_;
-<a name="l00180"></a>00180     prev_tok_start_ = next_tok_start_;
-<a name="l00181"></a>00181     has_prev_ = <span class="keyword">true</span>;
+<a name="l00120"></a><a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#a487d1b2ae2f1f2b4dd1e6c496f0bc733">00120</a>     <span class="keywordtype">size_t</span> <a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#a487d1b2ae2f1f2b4dd1e6c496f0bc733" title="The starting byte of the token in the underlying stream.">start</a>;
+<a name="l00122"></a><a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#ae0fad8cd83b8e60991ff852f246ea571">00122</a>     <span class="keywordtype">size_t</span> <a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#ae0fad8cd83b8e60991ff852f246ea571" title="The line number of the first byte of the token in the underlying stream.">line_number</a>;
+<a name="l00125"></a><a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#af61e34767c1dd60f41ad6be15d2bc205">00125</a>     <span class="keywordtype">size_t</span> <a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html#af61e34767c1dd60f41ad6be15d2bc205" title="The current position in the underlying stream just after reading this token.">curr_pos</a>;
+<a name="l00126"></a>00126   };
+<a name="l00127"></a>00127 
+<a name="l00134"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ade23726be42b2cac280fe18890f783cc">00134</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#ade23726be42b2cac280fe18890f783cc" title="Constructs a new instance around the specified byte stream.">StreamTokenizer</a>(istream &amp;is,
+<a name="l00135"></a>00135                   <span class="keyword">const</span> <span class="keywordtype">char</span> *reserved_chars = <a class="code" href="stream-tokenizer_8_h.html#aa6dcca782316d8f09a268865ae5f924b" title="Default set of reserved characters for the StreamTokenizer class.">DEFAULT_RESERVED_CHARS</a>) :
+<a name="l00136"></a>00136       is_(is), num_read_(0), line_number_(0), eof_reached_(false),
+<a name="l00137"></a>00137       next_token_idx_(0) {
+<a name="l00138"></a>00138     Init(reserved_chars);
+<a name="l00139"></a>00139   }
+<a name="l00140"></a>00140 
+<a name="l00147"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#aa38b06c8b888a35cdf285b6953de7acb">00147</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#ade23726be42b2cac280fe18890f783cc" title="Constructs a new instance around the specified byte stream.">StreamTokenizer</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;s,
+<a name="l00148"></a>00148                   <span class="keyword">const</span> <span class="keywordtype">char</span> *reserved_chars = <a class="code" href="stream-tokenizer_8_h.html#aa6dcca782316d8f09a268865ae5f924b" title="Default set of reserved characters for the StreamTokenizer class.">DEFAULT_RESERVED_CHARS</a>) :
+<a name="l00149"></a>00149       sstream_(s), is_(sstream_), num_read_(0), line_number_(0),
+<a name="l00150"></a>00150       eof_reached_(false), next_token_idx_(0) {
+<a name="l00151"></a>00151     Init(reserved_chars);
+<a name="l00152"></a>00152   }
+<a name="l00153"></a>00153 
+<a name="l00156"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a60647671d07982e301b6d517192cc537">00156</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a60647671d07982e301b6d517192cc537" title="Sets the set of &ldquo;reserved words&rdquo; used by this stream tokenizer.">set_reserved_words</a>(set&lt;string&gt; &amp;reserved_words) {
+<a name="l00157"></a>00157     reserved_words_ = reserved_words;
+<a name="l00158"></a>00158   }
+<a name="l00159"></a>00159 
+<a name="l00161"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a4e49fac1cca5675cddb0bad5b28db74f">00161</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a4e49fac1cca5675cddb0bad5b28db74f" title="Destroys this instance.">~StreamTokenizer</a>() {
+<a name="l00162"></a>00162     <span class="keyword">delete</span>[] reserved_chars_;
+<a name="l00163"></a>00163   }
+<a name="l00164"></a>00164 
+<a name="l00167"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#af4765dcb4f25bb60a13f879536d68288">00167</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#af4765dcb4f25bb60a13f879536d68288" title="Returns the entire sequence of characters read so far by this stream tokenizer as a newly constructed...">str</a>() { <span class="keywordflow">return</span> oss_.str(); }
+<a name="l00168"></a>00168 
+<a name="l00172"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79">00172</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream just after scanning the most recent ...">tellg</a>()<span class="keyword"> const </span>{
+<a name="l00173"></a>00173     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">HasPrev</a>() ? token_[next_token_idx_ - 1].curr_pos : 0;
+<a name="l00174"></a>00174   }
+<a name="l00175"></a>00175 
+<a name="l00179"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a9c45df83d9bd8319465459e8510e741f">00179</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a9c45df83d9bd8319465459e8510e741f" title="Returns the number of lines read from the underlying byte stream, where a line is any number of bytes...">line_number</a>()<span class="keyword"> const </span>{
+<a name="l00180"></a>00180     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>() ? token_[next_token_idx_].line_number : line_number_;
+<a name="l00181"></a>00181   }
 <a name="l00182"></a>00182 
-<a name="l00183"></a>00183     curr_pos_ = num_read_;
-<a name="l00184"></a>00184     GetNext();
-<a name="l00185"></a>00185     <span class="keywordflow">return</span> prev_tok_;
-<a name="l00186"></a>00186   }
+<a name="l00184"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e">00184</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> next_token_idx_ &lt; token_.size(); }
+<a name="l00185"></a>00185 
+<a name="l00186"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">00186</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">HasPrev</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> next_token_idx_ &gt; 0; }
 <a name="l00187"></a>00187 
-<a name="l00189"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc">00189</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position.">PeekTokenStart</a>()<span class="keyword"> const </span>{
-<a name="l00190"></a>00190     <span class="keywordflow">return</span> has_next_ ? next_tok_start_ : <a class="code" href="classreranker_1_1_stream_tokenizer.html#a6afa23fd8d78598209e49b8723683b79" title="Returns the number of bytes read from the underlying byte stream.">tellg</a>();
-<a name="l00191"></a>00191   }
-<a name="l00192"></a>00192 
-<a name="l00194"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557">00194</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557" title="Returns the type of the next token.">PeekTokenType</a>()<span class="keyword"> const </span>{
-<a name="l00195"></a>00195     <span class="keywordflow">return</span> has_next_ ? next_tok_type_ : <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">EOF_TYPE</a>;
-<a name="l00196"></a>00196   }
-<a name="l00197"></a>00197 
-<a name="l00201"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42">00201</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> has_next_ ? next_tok_ : <span class="stringliteral">&quot;&quot;</span>; }
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203  <span class="keyword">private</span>:
-<a name="l00204"></a>00204   <span class="keywordtype">void</span> Init(<span class="keyword">const</span> <span class="keywordtype">char</span> *reserved_chars) {
-<a name="l00205"></a>00205     num_reserved_chars_ = strlen(reserved_chars);
-<a name="l00206"></a>00206     reserved_chars_ = <span class="keyword">new</span> <span class="keywordtype">char</span>[num_reserved_chars_];
-<a name="l00207"></a>00207     strcpy(reserved_chars_, reserved_chars);
-<a name="l00208"></a>00208     <span class="keywordtype">int</span> num_reserved_words = <span class="keyword">sizeof</span>(default_reserved_words)/<span class="keyword">sizeof</span>(<span class="keyword">const</span> <span class="keywordtype">char</span>*);
-<a name="l00209"></a>00209     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_reserved_words; ++i) {
-<a name="l00210"></a>00210       reserved_words_.insert(<span class="keywordtype">string</span>(default_reserved_words[i]));
-<a name="l00211"></a>00211     }
-<a name="l00212"></a>00212     GetNext();
-<a name="l00213"></a>00213   }
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215   <span class="keywordtype">void</span> ConsumeChar(<span class="keywordtype">char</span> c);
-<a name="l00216"></a>00216 
-<a name="l00217"></a>00217   <span class="keywordtype">bool</span> ReadChar(<span class="keywordtype">char</span> *c);
-<a name="l00218"></a>00218 
-<a name="l00221"></a>00221   <span class="keywordtype">void</span> GetNext();
+<a name="l00188"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">00188</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5ca21d5cc8edfba7e220e71a553973ce">PeekPrev</a>()<span class="keyword"> const </span>{
+<a name="l00189"></a>00189     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">HasPrev</a>() ? token_[next_token_idx_ - 1].tok : <span class="stringliteral">&quot;&quot;</span>;
+<a name="l00190"></a>00190   }
+<a name="l00191"></a>00191 
+<a name="l00192"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ae11b72f787861e255191a574a9391e43">00192</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#ae11b72f787861e255191a574a9391e43">PeekPrevTokenStart</a>()<span class="keyword"> const </span>{
+<a name="l00193"></a>00193     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">HasPrev</a>() ? token_[next_token_idx_ - 1].start : 0;
+<a name="l00194"></a>00194   }
+<a name="l00195"></a>00195 
+<a name="l00196"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ae3d8731cc6ffb815a8a2fe44f9d27bf9">00196</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> <a class="code" href="classreranker_1_1_stream_tokenizer.html#ae3d8731cc6ffb815a8a2fe44f9d27bf9">PeekPrevTokenType</a>()<span class="keyword"> const </span>{
+<a name="l00197"></a>00197     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a5838d7201c6a6f5a1131f5cfe4f1a8af">HasPrev</a>() ? token_[next_token_idx_ - 1].type : <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">EOF_TYPE</a>;
+<a name="l00198"></a>00198   }
+<a name="l00199"></a>00199 
+<a name="l00201"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e">00201</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a8fad418b62ae370295fe324229e5d43e" title="Returns the next token in the token stream.">Next</a>() {
+<a name="l00202"></a>00202     <span class="keywordflow">if</span> (!<a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>()) {
+<a name="l00203"></a>00203       <span class="comment">// Error.</span>
+<a name="l00204"></a>00204       <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;invoking StreamTokenizer::Next when HasNext &quot;</span>
+<a name="l00205"></a>00205                                <span class="stringliteral">&quot;returns false&quot;</span>);
+<a name="l00206"></a>00206     }
+<a name="l00207"></a>00207 
+<a name="l00208"></a>00208     <span class="keywordtype">size_t</span> curr_token_idx = next_token_idx_;
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210     <span class="comment">// Try to get the next token of the stream if we&#39;re about to run out of</span>
+<a name="l00211"></a>00211     <span class="comment">// tokens.</span>
+<a name="l00212"></a>00212     <span class="keywordflow">if</span> (!eof_reached_ &amp;&amp; next_token_idx_ + 1 == token_.size()) {
+<a name="l00213"></a>00213       <a class="code" href="structreranker_1_1_stream_tokenizer_1_1_token.html" title="Information about a token read from the underlying stream.">Token</a> next;
+<a name="l00214"></a>00214       <span class="keywordflow">if</span> (GetNext(&amp;next)) {
+<a name="l00215"></a>00215         token_.push_back(next);
+<a name="l00216"></a>00216       }
+<a name="l00217"></a>00217     }
+<a name="l00218"></a>00218     <span class="comment">// Ensure that we only advance if we haven&#39;t already reached token_.size().</span>
+<a name="l00219"></a>00219     <span class="keywordflow">if</span> (next_token_idx_ &lt; token_.size()) {
+<a name="l00220"></a>00220       ++next_token_idx_;
+<a name="l00221"></a>00221     }
 <a name="l00222"></a>00222 
-<a name="l00225"></a>00225   <span class="keywordtype">bool</span> ReservedChar(<span class="keywordtype">char</span> c)<span class="keyword"> const </span>{
-<a name="l00226"></a>00226     <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; num_reserved_chars_; ++i) {
-<a name="l00227"></a>00227       <span class="keywordflow">if</span> (c == reserved_chars_[i]) {
-<a name="l00228"></a>00228         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00229"></a>00229       }
-<a name="l00230"></a>00230     }
-<a name="l00231"></a>00231     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00232"></a>00232   }
-<a name="l00233"></a>00233 
-<a name="l00234"></a>00234   <span class="comment">// data members</span>
-<a name="l00235"></a>00235 
-<a name="l00236"></a>00236   <span class="comment">// The stream itself.</span>
-<a name="l00239"></a>00239 <span class="comment"></span>  istringstream sstream_;
-<a name="l00241"></a>00241   istream &amp;is_;
-<a name="l00242"></a>00242 
-<a name="l00243"></a>00243   <span class="comment">// Information about special tokens.</span>
-<a name="l00244"></a>00244   <span class="keywordtype">char</span> *reserved_chars_;
-<a name="l00245"></a>00245   <span class="keywordtype">size_t</span> num_reserved_chars_;
-<a name="l00246"></a>00246   set&lt;string&gt; reserved_words_;
-<a name="l00247"></a>00247 
-<a name="l00248"></a>00248   <span class="comment">// Information about the current state of this stream.</span>
-<a name="l00249"></a>00249   <span class="keywordtype">size_t</span> curr_pos_;
-<a name="l00250"></a>00250   <span class="keywordtype">size_t</span> num_read_;
-<a name="l00251"></a>00251   <span class="keywordtype">size_t</span> line_number_;
-<a name="l00252"></a>00252   ostringstream oss_;
-<a name="l00253"></a>00253 
-<a name="l00254"></a>00254   <span class="comment">// Information about the next token in this stream.</span>
-<a name="l00255"></a>00255   <span class="keywordtype">string</span> next_tok_;
-<a name="l00256"></a>00256   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> next_tok_type_;
-<a name="l00257"></a>00257   <span class="keywordtype">size_t</span> next_tok_start_;
-<a name="l00258"></a>00258   <span class="keywordtype">bool</span> has_next_;
-<a name="l00259"></a>00259 
-<a name="l00260"></a>00260   <span class="comment">// Information about the previous token in this stream.</span>
-<a name="l00261"></a>00261   <span class="keywordtype">string</span> prev_tok_;
-<a name="l00262"></a>00262   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> prev_tok_type_;
-<a name="l00263"></a>00263   <span class="keywordtype">size_t</span> prev_tok_start_;
-<a name="l00264"></a>00264   <span class="keywordtype">bool</span> has_prev_;
-<a name="l00265"></a>00265 };
-<a name="l00266"></a>00266 
-<a name="l00267"></a>00267 }  <span class="comment">// namespace reranker</span>
-<a name="l00268"></a>00268 
-<a name="l00269"></a>00269 <span class="preprocessor">#endif</span>
+<a name="l00223"></a>00223     <span class="keywordflow">return</span> token_[curr_token_idx].tok;
+<a name="l00224"></a>00224   }
+<a name="l00225"></a>00225 
+<a name="l00228"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#acc2a87fc596a2724cef28e571c6484ff">00228</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#acc2a87fc596a2724cef28e571c6484ff" title="Rewinds this token stream to the beginning.">Rewind</a>() {
+<a name="l00229"></a>00229     next_token_idx_ = 0;
+<a name="l00230"></a>00230   }
+<a name="l00231"></a>00231 
+<a name="l00236"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#aeb0013aef895ba217b74e0da3b044237">00236</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#aeb0013aef895ba217b74e0da3b044237" title="Rewinds this token stream by the specified number of tokens.">Rewind</a>(<span class="keywordtype">size_t</span> num_tokens) {
+<a name="l00237"></a>00237     <span class="comment">// Cannot rewind more than the number of tokens read so far.</span>
+<a name="l00238"></a>00238     <span class="keywordflow">if</span> (num_tokens &gt; next_token_idx_) {
+<a name="l00239"></a>00239       num_tokens = next_token_idx_;
+<a name="l00240"></a>00240     }
+<a name="l00241"></a>00241     next_token_idx_ -= num_tokens;
+<a name="l00242"></a>00242   }
+<a name="l00243"></a>00243 
+<a name="l00245"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a52aa7efc2f02fe3a5a53781dc14bd728">00245</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a52aa7efc2f02fe3a5a53781dc14bd728" title="A synonym for Rewind(1).">Putback</a>() {
+<a name="l00246"></a>00246     <a class="code" href="classreranker_1_1_stream_tokenizer.html#acc2a87fc596a2724cef28e571c6484ff" title="Rewinds this token stream to the beginning.">Rewind</a>(1);
+<a name="l00247"></a>00247   }
+<a name="l00248"></a>00248 
+<a name="l00251"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc">00251</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a2f79a9d009fac16c76c9bcf653fb88cc" title="Returns the next token&rsquo;s start position, or the byte position of the underlying byte stream if there ...">PeekTokenStart</a>()<span class="keyword"> const </span>{
+<a name="l00252"></a>00252     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>() ? token_[next_token_idx_].start : num_read_;
+<a name="l00253"></a>00253   }
+<a name="l00254"></a>00254 
+<a name="l00257"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557">00257</a>   <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412da" title="The set of types of tokens read by this stream tokenizer.">TokenType</a> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a69295644dad07656c4790d6d5ed87557" title="Returns the type of the next token, or EOF_TYPE if there is no next token.">PeekTokenType</a>()<span class="keyword"> const </span>{
+<a name="l00258"></a>00258     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>() ? token_[next_token_idx_].type : <a class="code" href="classreranker_1_1_stream_tokenizer.html#a43c556f438853bde82330f852de412daa5c9b72ada7604069ee7c91fb7c77cc88">EOF_TYPE</a>;
+<a name="l00259"></a>00259   }
+<a name="l00260"></a>00260 
+<a name="l00264"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#ae4f33e59c60be5a5f38e4b63e97ebf92">00264</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#ae4f33e59c60be5a5f38e4b63e97ebf92" title="Returns the line number of the first byte of the next token, or the current line number of the underl...">PeekTokenLineNumber</a>()<span class="keyword"> const </span>{
+<a name="l00265"></a>00265     <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>() ? token_[next_token_idx_].line_number : line_number_;
+<a name="l00266"></a>00266   }
+<a name="l00267"></a>00267 
+<a name="l00271"></a><a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42">00271</a>   <span class="keywordtype">string</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a7f53bc3134419cb7b7f00bbd39430b42" title="Returns the next token that would be returned by the Next method.">Peek</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classreranker_1_1_stream_tokenizer.html#a1e015bd9bd6dd38c6c1cd4993e44a77e" title="Returns whether there is another token in the token stream.">HasNext</a>() ? token_[next_token_idx_].tok : <span class="stringliteral">&quot;&quot;</span>; }
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273  <span class="keyword">private</span>:
+<a name="l00274"></a>00274   <span class="keywordtype">void</span> Init(<span class="keyword">const</span> <span class="keywordtype">char</span> *reserved_chars) {
+<a name="l00275"></a>00275     num_reserved_chars_ = strlen(reserved_chars);
+<a name="l00276"></a>00276     reserved_chars_ = <span class="keyword">new</span> <span class="keywordtype">char</span>[num_reserved_chars_];
+<a name="l00277"></a>00277     strcpy(reserved_chars_, reserved_chars);
+<a name="l00278"></a>00278     <span class="keywordtype">int</span> num_reserved_words = <span class="keyword">sizeof</span>(default_reserved_words)/<span class="keyword">sizeof</span>(<span class="keyword">const</span> <span class="keywordtype">char</span>*);
+<a name="l00279"></a>00279     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_reserved_words; ++i) {
+<a name="l00280"></a>00280       reserved_words_.insert(<span class="keywordtype">string</span>(default_reserved_words[i]));
+<a name="l00281"></a>00281     }
+<a name="l00282"></a>00282     Token next;
+<a name="l00283"></a>00283     <span class="keywordflow">if</span> (GetNext(&amp;next)) {
+<a name="l00284"></a>00284       token_.push_back(next);
+<a name="l00285"></a>00285     }
+<a name="l00286"></a>00286   }
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288   <span class="keywordtype">void</span> ConsumeChar(<span class="keywordtype">char</span> c);
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290   <span class="keywordtype">bool</span> ReadChar(<span class="keywordtype">char</span> *c);
+<a name="l00291"></a>00291 
+<a name="l00299"></a>00299   <span class="keywordtype">bool</span> GetNext(Token *next);
+<a name="l00300"></a>00300 
+<a name="l00303"></a>00303   <span class="keywordtype">bool</span> ReservedChar(<span class="keywordtype">char</span> c)<span class="keyword"> const </span>{
+<a name="l00304"></a>00304     <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; num_reserved_chars_; ++i) {
+<a name="l00305"></a>00305       <span class="keywordflow">if</span> (c == reserved_chars_[i]) {
+<a name="l00306"></a>00306         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00307"></a>00307       }
+<a name="l00308"></a>00308     }
+<a name="l00309"></a>00309     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00310"></a>00310   }
+<a name="l00311"></a>00311 
+<a name="l00312"></a>00312   <span class="comment">// data members</span>
+<a name="l00313"></a>00313 
+<a name="l00314"></a>00314   <span class="comment">// The stream itself.</span>
+<a name="l00317"></a>00317 <span class="comment"></span>  istringstream sstream_;
+<a name="l00319"></a>00319   istream &amp;is_;
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321   <span class="comment">// Information about special tokens.</span>
+<a name="l00322"></a>00322   <span class="keywordtype">char</span> *reserved_chars_;
+<a name="l00323"></a>00323   <span class="keywordtype">size_t</span> num_reserved_chars_;
+<a name="l00324"></a>00324   set&lt;string&gt; reserved_words_;
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326   <span class="comment">// Information about the current state of the underlying byte stream.</span>
+<a name="l00327"></a>00327   <span class="keywordtype">size_t</span> num_read_;
+<a name="l00328"></a>00328   <span class="keywordtype">size_t</span> line_number_;
+<a name="l00329"></a>00329   <span class="keywordtype">bool</span> eof_reached_;
+<a name="l00330"></a>00330   ostringstream oss_;
+<a name="l00331"></a>00331 
+<a name="l00332"></a>00332   <span class="comment">// The sequence of tokens read so far.</span>
+<a name="l00333"></a>00333   vector&lt;Token&gt; token_;
+<a name="l00334"></a>00334 
+<a name="l00335"></a>00335   <span class="comment">// The index of the next token in this stream in token_, or token_.size()</span>
+<a name="l00336"></a>00336   <span class="comment">// if there are no more tokens left in this stream.  Note that invocations</span>
+<a name="l00337"></a>00337   <span class="comment">// of the Rewind and Putback methods alter this data member.</span>
+<a name="l00338"></a>00338   <span class="keywordtype">size_t</span> next_token_idx_;
+<a name="l00339"></a>00339 };
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341 }  <span class="comment">// namespace reranker</span>
+<a name="l00342"></a>00342 
+<a name="l00343"></a>00343 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -314,7 +363,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:04 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -178,7 +178,7 @@ Friends</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_feature_vector.html#ab17a2e88eac7592792ebdb62b731426b">operator&lt;&lt;</a> (ostream &amp;os, const <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; K, V &gt; &amp;fv)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt;<br/>
+<div class="textblock"><h3>template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt;<br/>
 class reranker::FeatureVector&lt; K, V, Map &gt;</h3>
 
 <p>A class to represent a feature vector, where features are represented by unique identifiers, and feature values are represented by the template type. </p>
@@ -190,13 +190,13 @@ class reranker::FeatureVector&lt; K, V, Map &gt;</h3>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00091">91</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00114">114</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="a8dc4093ae778bffb30d2840002f02ba1"></a><!-- doxytag: member="reranker::FeatureVector::const_iterator" ref="a8dc4093ae778bffb30d2840002f02ba1" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef FeatureMap::const_iterator <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a8dc4093ae778bffb30d2840002f02ba1">const_iterator</a></td>
@@ -207,7 +207,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>The type of const iterator for the feature-weight pairs in this vector. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00129">129</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00157">157</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -215,7 +215,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef Map <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#acf6076a07743206afbc35acf99a8f2df">FeatureMap</a></td>
@@ -226,7 +226,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>The underlying type that this class stores the mapping of feature uid's to their weights. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00127">127</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00155">155</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -234,7 +234,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef K <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#ad77b756f443ca3cd938369dd0a5b617c">key_type</a></td>
@@ -245,7 +245,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>The type of vector component/feature uid's in this vector. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00121">121</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00149">149</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -253,7 +253,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#af1d4a320e7577f785791e5df70391264">mapped_type</a></td>
@@ -264,7 +264,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>The type of values/feature weights in this vector. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00123">123</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00151">151</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -273,7 +273,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a> </td>
@@ -287,7 +287,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>Create an empty feature vector. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00094">94</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00117">117</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -295,7 +295,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a> </td>
@@ -316,7 +316,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00100">100</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00125">125</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -324,7 +324,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename MapType &gt; </div>
       <table class="memname">
@@ -353,7 +353,7 @@ template&lt;typename MapType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00110">110</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00137">137</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -361,7 +361,7 @@ template&lt;typename MapType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">virtual <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::~<a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a> </td>
@@ -373,7 +373,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00117">117</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00145">145</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -382,7 +382,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename Collection &gt; </div>
       <table class="memname">
@@ -425,7 +425,7 @@ template&lt;typename Collection &gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>this vector, having been modified by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00345">345</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00373">373</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -433,7 +433,7 @@ template&lt;typename Collection &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt;K,V&gt;&amp; <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a76c6244a176999e72a54c78726ee718f">AddScaledVector</a> </td>
@@ -467,7 +467,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>this vector, having been modified by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00320">320</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00348">348</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -475,7 +475,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classreranker_1_1_feature_vector.html#a8dc4093ae778bffb30d2840002f02ba1">const_iterator</a> <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#ae0c185e646996daff25fcad9b224eda5">begin</a> </td>
@@ -489,7 +489,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>Returns a const iterator pointing to the first of the feature-value pairs of this feature vector. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00135">135</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00163">163</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -497,7 +497,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a7082611256f0b6dc90ba4b38cc43e4ab">clear</a> </td>
@@ -511,7 +511,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>Sets all feature weights to zero and, because this is a sparse vector, clears all storage. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00377">377</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00405">405</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -519,7 +519,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a03929c2f26faf01b1406074943f99b86">Dot</a> </td>
@@ -535,7 +535,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <p>Computes the dot product of this feature vector with the specified <a class="el" href="classreranker_1_1_feature_vector.html" title="A class to represent a feature vector, where features are represented by unique identifiers, and feature values are represented by the template type.">FeatureVector</a>. </p>
 <p>This primitive operation is one out of which a multitude of kernel functions may be constructed. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00219">219</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00247">247</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -543,7 +543,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a72b41f295541c52d9ad4a25e789b7ba4">empty</a> </td>
@@ -555,7 +555,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00214">214</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00242">242</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -563,7 +563,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classreranker_1_1_feature_vector.html#a8dc4093ae778bffb30d2840002f02ba1">const_iterator</a> <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a9f2539faf4e600c2f75b613763d49fcd">end</a> </td>
@@ -577,7 +577,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>Returns a const iterator pointing to the end of the feature-value pairs of this feature vector. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00141">141</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00169">169</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -585,7 +585,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">unordered_set&lt;K&gt;&amp; <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a87bccd3acb055b98a674e6ed7d29af4b">GetNonZeroFeatures</a> </td>
@@ -608,7 +608,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the specified set, having been modified by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00153">153</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00181">181</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -616,7 +616,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a565133f9b5b31de43d07aea909631be5">GetValue</a> </td>
@@ -637,7 +637,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00207">207</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00235">235</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -645,7 +645,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a0786ae9b9f6b579a80d8ae601edfd80a">GetWeight</a> </td>
@@ -666,7 +666,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00199">199</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00227">227</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -674,7 +674,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a2829655419a2dfd5014094e6834836df">IncrementValue</a> </td>
@@ -708,7 +708,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the new value for the specified vector component </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00276">276</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00304">304</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -716,7 +716,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a541f26184a4407f62eb5dad8102cf375">IncrementWeight</a> </td>
@@ -750,7 +750,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the new value for the specified feature </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00241">241</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00269">269</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -758,7 +758,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename Collection &gt; </div>
       <table class="memname">
@@ -793,7 +793,7 @@ template&lt;typename Collection &gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>this vector, having been modified by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00365">365</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00393">393</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -801,7 +801,7 @@ template&lt;typename Collection &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">unordered_set&lt;K&gt;&amp; <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a56cdaf41599879784f9342e6d94250b0">RemoveEqualFeatures</a> </td>
@@ -834,7 +834,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the specified set having been modified </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00182">182</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00210">210</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -842,7 +842,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">unordered_set&lt;K&gt;&amp; <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#ae4e7570b1829aa527fb6a487016437f0">RemoveNonZeroFeatures</a> </td>
@@ -865,7 +865,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the specified set having been modified </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00168">168</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00196">196</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -873,7 +873,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt;K,V&gt;&amp; <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a0535e2a994950ccd367a47fde39faa98">Scale</a> </td>
@@ -895,7 +895,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>this vector, having been modified by this method </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00303">303</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00331">331</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -903,7 +903,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#ac0a4fceef14eba9efb471f5ec0476579">SetValue</a> </td>
@@ -928,7 +928,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>Synonym for <a class="el" href="classreranker_1_1_feature_vector.html#ad94d388ef81023981d6924a2020268d2">SetWeight</a>. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00295">295</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00323">323</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -936,7 +936,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">V <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#ad94d388ef81023981d6924a2020268d2">SetWeight</a> </td>
@@ -969,7 +969,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the old weight for the specified feature </dd></dl>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00284">284</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00312">312</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -977,7 +977,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">size_t <a class="el" href="classreranker_1_1_feature_vector.html">reranker::FeatureVector</a>&lt; K, V, Map &gt;::<a class="el" href="classreranker_1_1_feature_vector.html#a08a5b65bae6cc0bb35e035e5797a00f2">size</a> </td>
@@ -991,7 +991,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 <p>Returns the number of non-zero feature components of this feature vector. </p>
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00212">212</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00240">240</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -1000,7 +1000,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
+template&lt;typename K, typename V, typename Map = unordered_map&lt;K, V&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">ostream&amp; operator&lt;&lt; </td>
@@ -1023,7 +1023,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00385">385</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-vector_8_h_source.html#l00413">413</a> of file <a class="el" href="feature-vector_8_h_source.html">feature-vector.H</a>.</p>
 
 </div>
 </div>
@@ -1048,7 +1048,7 @@ template&lt;typename K, typename V, typename Map = map&lt;K, V&gt;&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -129,8 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_example_feature_extractor.html#a23bf6814cd58ce48b6cca75dd5238377">~ExampleFeatureExtractor</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this instance.  <a href="#a23bf6814cd58ce48b6cca75dd5238377"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_example_feature_extractor.html#a53c0cf9f66922b417d08f42a816cdd35">RegisterInitializers</a> (<a class="el" href="classreranker_1_1_initializers.html">Initializers</a> &amp;initializers)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_example_feature_extractor.html#a87896ca90018afad336202eb61df37a2">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the specified argument string.  <a href="#a87896ca90018afad336202eb61df37a2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_example_feature_extractor.html#a174f1626e9220dbb072fcf08f534ddb2">Init</a> (const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env, const string &amp;arg)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the specified argument string.  <a href="#a174f1626e9220dbb072fcf08f534ddb2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_example_feature_extractor.html#a8b12be611b02ee796b2bafb3e594cdd6">Extract</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;features)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts &ldquo;compiled&rdquo; features.  <a href="#a8b12be611b02ee796b2bafb3e594cdd6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_example_feature_extractor.html#ac45ecd80f2929c8dbbb705e36a407718">ExtractSymbolic</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; string, double &gt; &amp;symbolic_features)</td></tr>
@@ -220,7 +220,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#af1c46248eb454384594dc3fcb61b0e70">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="example-feature-extractor_8_h_source.html#l00104">104</a> of file <a class="el" href="example-feature-extractor_8_h_source.html">example-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="example-feature-extractor_8_h_source.html#l00109">109</a> of file <a class="el" href="example-feature-extractor_8_h_source.html">example-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -260,20 +260,30 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#aa35034d5100e4a2cbe83325cad6c4a6b">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="example-feature-extractor_8_h_source.html#l00115">115</a> of file <a class="el" href="example-feature-extractor_8_h_source.html">example-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="example-feature-extractor_8_h_source.html#l00120">120</a> of file <a class="el" href="example-feature-extractor_8_h_source.html">example-feature-extractor.H</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a87896ca90018afad336202eb61df37a2"></a><!-- doxytag: member="reranker::ExampleFeatureExtractor::Init" ref="a87896ca90018afad336202eb61df37a2" args="(const string &amp;arg)" -->
+<a class="anchor" id="a174f1626e9220dbb072fcf08f534ddb2"></a><!-- doxytag: member="reranker::ExampleFeatureExtractor::Init" ref="a174f1626e9220dbb072fcf08f534ddb2" args="(const Environment *env, const string &amp;arg)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_example_feature_extractor.html#a87896ca90018afad336202eb61df37a2">reranker::ExampleFeatureExtractor::Init</a> </td>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_example_feature_extractor.html#a174f1626e9220dbb072fcf08f534ddb2">reranker::ExampleFeatureExtractor::Init</a> </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -283,15 +293,16 @@ Public Member Functions</h2></td></tr>
 <p>This method is guaranteed to be invoked by a <a class="el" href="classreranker_1_1_factory.html">Factory</a> just after construction.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
+    <tr><td class="paramname">env</td><td>the environment used by the <a class="el" href="classreranker_1_1_factory.html">Factory</a> when this object was constructed </td></tr>
     <tr><td class="paramname">arg</td><td>the argument string with which to initialize this instance</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
 
-<p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#a2ec99fbd293b35e90f9553a729e6f649">reranker::FeatureExtractor</a>.</p>
+<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">reranker::FactoryConstructible</a>.</p>
 
-<p>Definition at line <a class="el" href="example-feature-extractor_8_h_source.html#l00081">81</a> of file <a class="el" href="example-feature-extractor_8_h_source.html">example-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="example-feature-extractor_8_h_source.html#l00083">83</a> of file <a class="el" href="example-feature-extractor_8_h_source.html">example-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -337,7 +348,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:05 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -103,8 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment">// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
 <a name="l00022"></a>00022 <span class="comment">// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
 <a name="l00023"></a>00023 <span class="comment">// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
-<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           </span>
-<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           </span>
+<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
 <a name="l00026"></a>00026 <span class="comment">// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00027"></a>00027 <span class="comment">// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00028"></a>00028 <span class="comment">// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
@@ -129,28 +129,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00061"></a><a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7271a1199fecac50cf0e6ef9da088e8">00061</a>   <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7271a1199fecac50cf0e6ef9da088e8" title="Constructs a new instance that can serialize Model instances to ModelMessage protocol buffer messages...">PerceptronModelProtoReader</a>() : smart_copy_(true) { }
 <a name="l00063"></a><a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a66348e1f9e5c4d608ce9430715f0fb77">00063</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a66348e1f9e5c4d608ce9430715f0fb77" title="Destroys this reader.">~PerceptronModelProtoReader</a>() { }
 <a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a0655c95b4a80ed36f141834d365c76e5">00065</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a0655c95b4a80ed36f141834d365c76e5">RegisterInitializers</a>(<a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> &amp;initializers) {
-<a name="l00066"></a>00066     initializers.<a class="code" href="classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91">Add</a>(<span class="stringliteral">&quot;smart_copy&quot;</span>, &amp;smart_copy_);
-<a name="l00067"></a>00067   }
-<a name="l00068"></a>00068 
-<a name="l00076"></a><a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7e2abc375fd398ee2ca65fe2a9f25c0">00076</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7e2abc375fd398ee2ca65fe2a9f25c0" title="Initializes this instance with the contents of the argument string, which should either be the empty ...">Init</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg) {
-<a name="l00077"></a>00077     smart_copy_ = arg != <span class="stringliteral">&quot;false&quot;</span>;
-<a name="l00078"></a>00078   }
-<a name="l00079"></a>00079 
-<a name="l00086"></a>00086   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a15d0fdf95b8c589c3451b813b3f25d54" title="De-serializes a PerceptronModel instance from a ModelMessage.">Read</a>(<span class="keyword">const</span> ModelMessage &amp;model_message, <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model) <span class="keyword">const</span>;
-<a name="l00087"></a>00087 
-<a name="l00094"></a>00094   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a6ae54905e41bc2e509939bec4e6e0133" title="De-serializes Features from an instance.">ReadFeatures</a>(istream&amp; is,
-<a name="l00095"></a>00095                             <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
-<a name="l00096"></a>00096                             <span class="keywordtype">bool</span> skip_key,
-<a name="l00097"></a>00097                             <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; separator) <span class="keyword">const</span>;
-<a name="l00098"></a>00098  <span class="keyword">private</span>:
-<a name="l00099"></a>00099   <a class="code" href="classreranker_1_1_feature_vector_reader.html" title="A class to de-serialize FeatureVector instances from FeatureVecMessage instances.">FeatureVectorReader&lt;FeatureVector&lt;int,double&gt;</a> &gt; fv_reader_;
-<a name="l00100"></a>00100   <span class="keywordtype">bool</span> smart_copy_;
-<a name="l00101"></a>00101 };
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103 }  <span class="comment">// namespace reranker</span>
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105 <span class="preprocessor">#endif</span>
+<a name="l00071"></a><a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a0655c95b4a80ed36f141834d365c76e5">00071</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a0655c95b4a80ed36f141834d365c76e5" title="Registers the smart_copy_ data member with the name &quot;smart_copy&quot;.">RegisterInitializers</a>(<a class="code" href="classreranker_1_1_initializers.html" title="A container for all the member initializers for a particular Factory-constructible instance...">Initializers</a> &amp;initializers) {
+<a name="l00072"></a>00072     initializers.<a class="code" href="classreranker_1_1_initializers.html#a9554990729db9c5d1b85925fc3c42d91">Add</a>(<span class="stringliteral">&quot;smart_copy&quot;</span>, &amp;smart_copy_);
+<a name="l00073"></a>00073   }
+<a name="l00074"></a>00074 
+<a name="l00081"></a>00081   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a15d0fdf95b8c589c3451b813b3f25d54" title="De-serializes a PerceptronModel instance from a ModelMessage.">Read</a>(<span class="keyword">const</span> ModelMessage &amp;model_message, <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model) <span class="keyword">const</span>;
+<a name="l00082"></a>00082 
+<a name="l00089"></a>00089   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_perceptron_model_proto_reader.html#a6ae54905e41bc2e509939bec4e6e0133" title="De-serializes Features from an instance.">ReadFeatures</a>(istream&amp; is,
+<a name="l00090"></a>00090                             <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
+<a name="l00091"></a>00091                             <span class="keywordtype">bool</span> skip_key,
+<a name="l00092"></a>00092                             <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; separator) <span class="keyword">const</span>;
+<a name="l00093"></a>00093  <span class="keyword">private</span>:
+<a name="l00094"></a>00094   <a class="code" href="classreranker_1_1_feature_vector_reader.html" title="A class to de-serialize FeatureVector instances from FeatureVecMessage instances.">FeatureVectorReader&lt;FeatureVector&lt;int,double&gt;</a> &gt; fv_reader_;
+<a name="l00095"></a>00095   <span class="keywordtype">bool</span> smart_copy_;
+<a name="l00096"></a>00096 };
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098 }  <span class="comment">// namespace reranker</span>
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -169,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:04 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

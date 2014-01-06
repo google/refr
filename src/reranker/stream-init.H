@@ -86,7 +86,7 @@ class Initializer : public StreamInitializer {
   virtual ~Initializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
-    bool is_null = 
+    bool is_null =
       token_type == StreamTokenizer::RESERVED_WORD &&
       (st.Peek() == "nullptr" || st.Peek() == "NULL");
     if (!(is_null || token_type == StreamTokenizer::IDENTIFIER)) {
@@ -105,8 +105,6 @@ class Initializer : public StreamInitializer {
   T *member_;
 };
 
-/// \class Initializer<int>
-///
 /// A specialization to allow Factory-constructible objects to initialize
 /// <tt>int</tt> data members.
 template<>
@@ -130,7 +128,7 @@ class Initializer<int> : public StreamInitializer {
   int *member_;
 };
 
-/// \class Initializer<double>
+/// \class Initializer
 ///
 /// A specialization to initialize <tt>double</tt> data members.
 template<>
@@ -154,8 +152,6 @@ class Initializer<double> : public StreamInitializer {
   double *member_;
 };
 
-/// \class Initializer<bool>
-///
 /// A specialization to initialize <tt>bool</tt> data members.
 template<>
 class Initializer<bool> : public StreamInitializer {
@@ -190,8 +186,6 @@ class Initializer<bool> : public StreamInitializer {
   bool *member_;
 };
 
-/// \class Initializer<string>
-///
 /// A specialization to initialize <tt>string</tt> data members.
 template<>
 class Initializer<string> : public StreamInitializer {

@@ -134,8 +134,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an empty feature vector.  <a href="#a45a7d1ef3fbc27fcac06e2167bde1907"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_feature_extractor.html#a92ea3deaf805a3db9b78a837e2aa2aff">~FeatureExtractor</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this vector.  <a href="#a92ea3deaf805a3db9b78a837e2aa2aff"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_feature_extractor.html#a2ec99fbd293b35e90f9553a729e6f649">Init</a> (const string &amp;arg)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this feature extractor.  <a href="#a2ec99fbd293b35e90f9553a729e6f649"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_feature_extractor.html#af1c46248eb454384594dc3fcb61b0e70">Extract</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;features)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts features for the specified candidate, where each feature is represented by an int for its unique identifier.  <a href="#af1c46248eb454384594dc3fcb61b0e70"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_feature_extractor.html#aa35034d5100e4a2cbe83325cad6c4a6b">ExtractSymbolic</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; string, double &gt; &amp;symbolic_features)=0</td></tr>
@@ -243,7 +241,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#aeee5adf6726cb98adb1151b566d01b79">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a6c6d31af782109224da56bee01316523">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_example_feature_extractor.html#a8b12be611b02ee796b2bafb3e594cdd6">reranker::ExampleFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_ngram_feature_extractor.html#a2376e8f3a73cdac208c82189835c7c8d">reranker::FileBackedNgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a1582a78931b69d33af342a1c075af4bd">reranker::FileBackedLossSetter</a>, <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a24cf11b7c18c69b916f561a6c932d2c1">reranker::RankFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_basic_file_backed_feature_extractor.html#a5a42152a8957f32caef319d532f9de76">reranker::BasicFileBackedFeatureExtractor</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_example_feature_extractor.html#a8b12be611b02ee796b2bafb3e594cdd6">reranker::ExampleFeatureExtractor</a>, <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#aeee5adf6726cb98adb1151b566d01b79">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a6c6d31af782109224da56bee01316523">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_ngram_feature_extractor.html#a2376e8f3a73cdac208c82189835c7c8d">reranker::FileBackedNgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a1582a78931b69d33af342a1c075af4bd">reranker::FileBackedLossSetter</a>, <a class="el" href="classreranker_1_1_basic_file_backed_feature_extractor.html#a5a42152a8957f32caef319d532f9de76">reranker::BasicFileBackedFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a24cf11b7c18c69b916f561a6c932d2c1">reranker::RankFeatureExtractor</a>.</p>
 
 </div>
 </div>
@@ -273,7 +271,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#af0993c4d905f72381d188dd6322d4a3d">reranker::AbstractFileBackedFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a2337c97c74c0c0f4dbbd733580337a8c">reranker::RankFeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="feature-extractor_8_h_source.html#l00145">145</a> of file <a class="el" href="feature-extractor_8_h_source.html">feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-extractor_8_h_source.html#l00139">139</a> of file <a class="el" href="feature-extractor_8_h_source.html">feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -312,32 +310,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a2990e7fc936e8c697414949d5e0eb17f">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_example_feature_extractor.html#ac45ecd80f2929c8dbbb705e36a407718">reranker::ExampleFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_ngram_feature_extractor.html#a5d00f653c80bb8f502f7228a6c27c5d2">reranker::FileBackedNgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#afdbfa39e53be2006eebea77d5d1cc640">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#ac5074ad24b993ea7c3735ddcf4627c03">reranker::FileBackedLossSetter</a>, <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a463f859a276742150edfa5c8ffb7400f">reranker::RankFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_basic_file_backed_feature_extractor.html#ad43d543b51470fbc0e6bbdbd16791c30">reranker::BasicFileBackedFeatureExtractor</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2ec99fbd293b35e90f9553a729e6f649"></a><!-- doxytag: member="reranker::FeatureExtractor::Init" ref="a2ec99fbd293b35e90f9553a729e6f649" args="(const string &amp;arg)=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_feature_extractor.html#a2ec99fbd293b35e90f9553a729e6f649">reranker::FeatureExtractor::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initializes this feature extractor. </p>
-<p>This method is guaranteed to be invoked by a <a class="el" href="classreranker_1_1_factory.html">Factory</a> after construction.</p>
-<dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">reranker::FactoryConstructible</a>.</p>
-
-<p>Implemented in <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a06c5cf086e02b2b84a8cbe218599778c">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a8f10510be662115b0452f860285c0cde">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a01f504b9a7d64b4f7b537d29d3bc989c">reranker::FileBackedLossSetter</a>, <a class="el" href="classreranker_1_1_example_feature_extractor.html#a87896ca90018afad336202eb61df37a2">reranker::ExampleFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a7b3bbefff678ef95e7234feee224e57f">reranker::RankFeatureExtractor</a>.</p>
+<p>Implemented in <a class="el" href="classreranker_1_1_example_feature_extractor.html#ac45ecd80f2929c8dbbb705e36a407718">reranker::ExampleFeatureExtractor</a>, <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a2990e7fc936e8c697414949d5e0eb17f">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#afdbfa39e53be2006eebea77d5d1cc640">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_ngram_feature_extractor.html#a5d00f653c80bb8f502f7228a6c27c5d2">reranker::FileBackedNgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#ac5074ad24b993ea7c3735ddcf4627c03">reranker::FileBackedLossSetter</a>, <a class="el" href="classreranker_1_1_basic_file_backed_feature_extractor.html#ad43d543b51470fbc0e6bbdbd16791c30">reranker::BasicFileBackedFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a463f859a276742150edfa5c8ffb7400f">reranker::RankFeatureExtractor</a>.</p>
 
 </div>
 </div>
@@ -360,7 +333,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#aa156423a870877982dd9ceea36e0be54">reranker::AbstractFileBackedFeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="feature-extractor_8_h_source.html#l00134">134</a> of file <a class="el" href="feature-extractor_8_h_source.html">feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="feature-extractor_8_h_source.html#l00128">128</a> of file <a class="el" href="feature-extractor_8_h_source.html">feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -385,7 +358,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:05 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

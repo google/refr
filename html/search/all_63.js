@@ -74,5 +74,6 @@ var searchData=
   ['createvarmap',['CreateVarMap',['../classreranker_1_1_factory_base.html#a165b07587cacb1112b783f5191c51fd5',1,'reranker::FactoryBase::CreateVarMap()'],['../classreranker_1_1_factory.html#ad4254b84185e3c479811ee9c68cb28c7',1,'reranker::Factory::CreateVarMap()']]],
   ['createvectorvarmap',['CreateVectorVarMap',['../classreranker_1_1_factory_base.html#a8ba4ece87f76449fbdc2702bb6ddcb76',1,'reranker::FactoryBase::CreateVectorVarMap()'],['../classreranker_1_1_factory.html#add485d5ad36809087244990d01542336',1,'reranker::Factory::CreateVectorVarMap()']]],
   ['cur_5fmodel',['cur_model',['../namespacehadoop-run.html#a710f4968870f4e191ea575db56a192e7',1,'hadoop-run']]],
-  ['curr_5ffile',['curr_file',['../classreranker_1_1_multi_file_candidate_set_iterator.html#ab7aa3c23a52a31142f90368dc4d24d42',1,'reranker::MultiFileCandidateSetIterator']]]
+  ['curr_5ffile',['curr_file',['../classreranker_1_1_multi_file_candidate_set_iterator.html#ab7aa3c23a52a31142f90368dc4d24d42',1,'reranker::MultiFileCandidateSetIterator']]],
+  ['curr_5fpos',['curr_pos',['../structreranker_1_1_stream_tokenizer_1_1_token.html#af61e34767c1dd60f41ad6be15d2bc205',1,'reranker::StreamTokenizer::Token']]]
 ];

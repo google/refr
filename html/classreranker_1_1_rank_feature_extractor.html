@@ -129,14 +129,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_rank_feature_extractor.html#a310922904e2aacb2a016b17acc1ae077">~RankFeatureExtractor</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this instance.  <a href="#a310922904e2aacb2a016b17acc1ae077"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_rank_feature_extractor.html#a621df811a16546ca546e1ea867048cd1">RegisterInitializers</a> (<a class="el" href="classreranker_1_1_initializers.html">Initializers</a> &amp;initializers)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_rank_feature_extractor.html#a7b3bbefff678ef95e7234feee224e57f">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the specified argument string (ignored).  <a href="#a7b3bbefff678ef95e7234feee224e57f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_rank_feature_extractor.html#a24cf11b7c18c69b916f561a6c932d2c1">Extract</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;features)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts &ldquo;compiled&rdquo; features.  <a href="#a24cf11b7c18c69b916f561a6c932d2c1"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts features for the specified candidate, where each feature is represented by an int for its unique identifier.  <a href="#a24cf11b7c18c69b916f561a6c932d2c1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_rank_feature_extractor.html#a463f859a276742150edfa5c8ffb7400f">ExtractSymbolic</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; string, double &gt; &amp;symbolic_features)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts symbolic (or <em>string</em>) features.  <a href="#a463f859a276742150edfa5c8ffb7400f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_rank_feature_extractor.html#a2337c97c74c0c0f4dbbd733580337a8c">Extract</a> (<a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> &amp;candidate_set)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts features for all the candidates in the specified <a class="el" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a>.  <a href="#a2337c97c74c0c0f4dbbd733580337a8c"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Override the default Extract method so that it caches the score of the top-scoring hypothesis of the baseline system.  <a href="#a2337c97c74c0c0f4dbbd733580337a8c"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Encodes the baseline rank as a boolean feature. </p>
@@ -209,11 +207,19 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Extracts &ldquo;compiled&rdquo; features. </p>
+<p>Extracts features for the specified candidate, where each feature is represented by an int for its unique identifier. </p>
+<dl class="user"><dt><b>Implementation advice:</b></dt><dd>Please play nice with others! For efficiency, the feature vector you are modifying is the actual feature vector inside the specified <a class="el" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a>. Please use <a class="el" href="classreranker_1_1_feature_vector.html#a541f26184a4407f62eb5dad8102cf375" title="Increments the weight of the specified feature by the specified amount.">FeatureVector::IncrementWeight</a> wherever possible; only use <a class="el" href="classreranker_1_1_feature_vector.html#ad94d388ef81023981d6924a2020268d2" title="Sets the weight of the specified feature to the specified value.">FeatureVector::SetWeight</a> if you truly want to blow away any existing weight for a feature.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">candidate</td><td>the candidate for which to extract features </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">features</td><td>the features extracted for the specified candidate </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#af1c46248eb454384594dc3fcb61b0e70">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="rank-feature-extractor_8_h_source.html#l00075">75</a> of file <a class="el" href="rank-feature-extractor_8_h_source.html">rank-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="rank-feature-extractor_8_h_source.html#l00064">64</a> of file <a class="el" href="rank-feature-extractor_8_h_source.html">rank-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -232,18 +238,11 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Extracts features for all the candidates in the specified <a class="el" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a>. </p>
-<p>The default implementation here uses the concrete implementations of the <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a24cf11b7c18c69b916f561a6c932d2c1">Extract(Candidate&amp;,FeatureVector&lt;int,double&gt;&amp;)</a> and <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a463f859a276742150edfa5c8ffb7400f">ExtractSymbolic</a> methods.</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">candidate_set</td><td>the set of candidates for which to extract features. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Override the default Extract method so that it caches the score of the top-scoring hypothesis of the baseline system. </p>
 
 <p>Reimplemented from <a class="el" href="classreranker_1_1_feature_extractor.html#ae7e30e3985d450909d7e70fc2c9658f2">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="rank-feature-extractor_8_h_source.html#l00110">110</a> of file <a class="el" href="rank-feature-extractor_8_h_source.html">rank-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="rank-feature-extractor_8_h_source.html#l00101">101</a> of file <a class="el" href="rank-feature-extractor_8_h_source.html">rank-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -273,6 +272,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Extracts symbolic (or <em>string</em>) features. </p>
+<p>These will be automatically compiled when training.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">candidate</td><td>the candidate for which to extract features </td></tr>
@@ -283,38 +283,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#aa35034d5100e4a2cbe83325cad6c4a6b">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="rank-feature-extractor_8_h_source.html#l00084">84</a> of file <a class="el" href="rank-feature-extractor_8_h_source.html">rank-feature-extractor.H</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7b3bbefff678ef95e7234feee224e57f"></a><!-- doxytag: member="reranker::RankFeatureExtractor::Init" ref="a7b3bbefff678ef95e7234feee224e57f" args="(const string &amp;arg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a7b3bbefff678ef95e7234feee224e57f">reranker::RankFeatureExtractor::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initializes this instance with the specified argument string (ignored). </p>
-<p>This method is guaranteed to be inokved by a <a class="el" href="classreranker_1_1_factory.html">Factory</a> just after construction.</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">arg</td><td>ignored</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
-
-<p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#a2ec99fbd293b35e90f9553a729e6f649">reranker::FeatureExtractor</a>.</p>
-
-<p>Definition at line <a class="el" href="rank-feature-extractor_8_h_source.html#l00071">71</a> of file <a class="el" href="rank-feature-extractor_8_h_source.html">rank-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="rank-feature-extractor_8_h_source.html#l00073">73</a> of file <a class="el" href="rank-feature-extractor_8_h_source.html">rank-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -360,7 +329,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:07 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

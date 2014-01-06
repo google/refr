@@ -126,8 +126,6 @@ Inheritance diagram for reranker::CandidateSet::Scorer:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_candidate_set_1_1_scorer.html#a681feabcbb88443b83b747112c534b91">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An initialization method, guaranteed to be invoked by <a class="el" href="classreranker_1_1_factory.html">Factory</a> after initial construction.  <a href="#a681feabcbb88443b83b747112c534b91"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_candidate_set_1_1_scorer.html#af73e05dcda420101a4df2c0dfe8fd735">Score</a> (<a class="el" href="classreranker_1_1_model.html">Model</a> *model, <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> &amp;candidates, bool training)=0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -135,33 +133,6 @@ Public Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="candidate-set_8_h_source.html#l00079">79</a> of file <a class="el" href="candidate-set_8_h_source.html">candidate-set.H</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a681feabcbb88443b83b747112c534b91"></a><!-- doxytag: member="reranker::CandidateSet::Scorer::Init" ref="a681feabcbb88443b83b747112c534b91" args="(const string &amp;arg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_candidate_set_1_1_scorer.html#a681feabcbb88443b83b747112c534b91">reranker::CandidateSet::Scorer::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>An initialization method, guaranteed to be invoked by <a class="el" href="classreranker_1_1_factory.html">Factory</a> after initial construction. </p>
-<p>The default implementation here does nothing.</p>
-<dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">reranker::FactoryConstructible</a>.</p>
-
-<p>Reimplemented in <a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a7abfd508156ab23d326794cab17bd530">reranker::RandomPairCandidateSetScorer</a>.</p>
-
-<p>Definition at line <a class="el" href="candidate-set_8_h_source.html#l00086">86</a> of file <a class="el" href="candidate-set_8_h_source.html">candidate-set.H</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="af73e05dcda420101a4df2c0dfe8fd735"></a><!-- doxytag: member="reranker::CandidateSet::Scorer::Score" ref="af73e05dcda420101a4df2c0dfe8fd735" args="(Model *model, CandidateSet &amp;candidates, bool training)=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -218,7 +189,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:05 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -103,8 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment">// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
 <a name="l00022"></a>00022 <span class="comment">// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
 <a name="l00023"></a>00023 <span class="comment">// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
-<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           </span>
-<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           </span>
+<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
 <a name="l00026"></a>00026 <span class="comment">// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00027"></a>00027 <span class="comment">// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00028"></a>00028 <span class="comment">// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
@@ -117,7 +117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span>
 <a name="l00041"></a>00041 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;tr1/memory&gt;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;memory&gt;</span>
 <a name="l00044"></a>00044 <span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046 <span class="preprocessor">#include &quot;<a class="code" href="candidate_8_h.html" title="Provides the reranker::Candidate class for representing a candidate hypothesis from an initial model...">candidate.H</a>&quot;</span>
@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049 <span class="keyword">namespace </span>reranker {
 <a name="l00050"></a>00050 
-<a name="l00051"></a>00051 <span class="keyword">using</span> std::tr1::shared_ptr;
+<a name="l00051"></a>00051 <span class="keyword">using</span> std::shared_ptr;
 <a name="l00052"></a>00052 <span class="keyword">using</span> std::ostream;
 <a name="l00053"></a>00053 <span class="keyword">using</span> std::string;
 <a name="l00054"></a>00054 <span class="keyword">using</span> std::vector;
@@ -141,141 +141,140 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00075"></a>00075 
 <a name="l00079"></a><a class="code" href="classreranker_1_1_candidate_set_1_1_scorer.html">00079</a>   <span class="keyword">class </span><a class="code" href="classreranker_1_1_candidate_set_1_1_scorer.html" title="An inner interface for a model to score a CandidateSet.">Scorer</a> : <span class="keyword">public</span> <a class="code" href="classreranker_1_1_factory_constructible.html" title="An interface to make it easier to implement Factory-constructible types by implementing both required...">FactoryConstructible</a> {
 <a name="l00080"></a>00080    <span class="keyword">public</span>:
-<a name="l00086"></a><a class="code" href="classreranker_1_1_candidate_set_1_1_scorer.html#a681feabcbb88443b83b747112c534b91">00086</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set_1_1_scorer.html#a681feabcbb88443b83b747112c534b91" title="An initialization method, guaranteed to be invoked by Factory after initial construction.">Init</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg) { }
-<a name="l00087"></a>00087     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set_1_1_scorer.html#af73e05dcda420101a4df2c0dfe8fd735">Score</a>(<a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
-<a name="l00088"></a>00088                        <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidates, <span class="keywordtype">bool</span> training) = 0;
-<a name="l00089"></a>00089   };
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091   <span class="comment">// accessors</span>
-<a name="l00092"></a><a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">00092</a>   <a class="code" href="classreranker_1_1_candidate_set.html#aa907c4710944e91361cef4d465116544">const_iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> candidates_.begin(); }
+<a name="l00081"></a>00081     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set_1_1_scorer.html#af73e05dcda420101a4df2c0dfe8fd735">Score</a>(<a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
+<a name="l00082"></a>00082                        <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidates, <span class="keywordtype">bool</span> training) = 0;
+<a name="l00083"></a>00083   };
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085   <span class="comment">// accessors</span>
+<a name="l00086"></a><a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">00086</a>   <a class="code" href="classreranker_1_1_candidate_set.html#aa907c4710944e91361cef4d465116544">const_iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> candidates_.begin(); }
+<a name="l00087"></a>00087 
+<a name="l00088"></a><a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">00088</a>   <a class="code" href="classreranker_1_1_candidate_set.html#aa907c4710944e91361cef4d465116544">const_iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> candidates_.end(); }
+<a name="l00089"></a>00089 
+<a name="l00090"></a><a class="code" href="classreranker_1_1_candidate_set.html#a73137a6ac7c77efa584f322087210d36">00090</a>   <a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#a73137a6ac7c77efa584f322087210d36">begin</a>() { <span class="keywordflow">return</span> candidates_.begin(); }
+<a name="l00091"></a>00091 
+<a name="l00092"></a><a class="code" href="classreranker_1_1_candidate_set.html#a4af84404fe4f9a46a0866e2269c54083">00092</a>   <a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#a4af84404fe4f9a46a0866e2269c54083">end</a>() { <span class="keywordflow">return</span> candidates_.end(); }
 <a name="l00093"></a>00093 
-<a name="l00094"></a><a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">00094</a>   <a class="code" href="classreranker_1_1_candidate_set.html#aa907c4710944e91361cef4d465116544">const_iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> candidates_.end(); }
+<a name="l00094"></a><a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">00094</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> candidates_.size(); }
 <a name="l00095"></a>00095 
-<a name="l00096"></a><a class="code" href="classreranker_1_1_candidate_set.html#a73137a6ac7c77efa584f322087210d36">00096</a>   <a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#a73137a6ac7c77efa584f322087210d36">begin</a>() { <span class="keywordflow">return</span> candidates_.begin(); }
-<a name="l00097"></a>00097 
-<a name="l00098"></a><a class="code" href="classreranker_1_1_candidate_set.html#a4af84404fe4f9a46a0866e2269c54083">00098</a>   <a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> <a class="code" href="classreranker_1_1_candidate_set.html#a4af84404fe4f9a46a0866e2269c54083">end</a>() { <span class="keywordflow">return</span> candidates_.end(); }
-<a name="l00099"></a>00099 
-<a name="l00100"></a><a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">00100</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> candidates_.size(); }
-<a name="l00101"></a>00101 
-<a name="l00102"></a><a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">00102</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">best_scoring_index</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> best_scoring_index_; }
-<a name="l00103"></a><a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">00103</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">gold_index</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> gold_index_; }
+<a name="l00096"></a><a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">00096</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_candidate_set.html#a6052873186168c21186705c3e016d223">best_scoring_index</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> best_scoring_index_; }
+<a name="l00097"></a><a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">00097</a>   <span class="keywordtype">size_t</span> <a class="code" href="classreranker_1_1_candidate_set.html#aec1af01230233ff19c30174a93a1e1b4">gold_index</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> gold_index_; }
+<a name="l00098"></a>00098 
+<a name="l00099"></a><a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">00099</a>   <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">training_key</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> training_key_; }
+<a name="l00100"></a>00100 
+<a name="l00101"></a><a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">00101</a>   <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">Get</a>(<span class="keywordtype">size_t</span> idx) {
+<a name="l00102"></a>00102     <span class="keywordflow">return</span> *(candidates_[idx]);
+<a name="l00103"></a>00103   }
 <a name="l00104"></a>00104 
-<a name="l00105"></a><a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">00105</a>   <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">training_key</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> training_key_; }
-<a name="l00106"></a>00106 
-<a name="l00107"></a><a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">00107</a>   <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">Get</a>(<span class="keywordtype">size_t</span> idx) {
-<a name="l00108"></a>00108     <span class="keywordflow">return</span> *(candidates_[idx]);
-<a name="l00109"></a>00109   }
-<a name="l00110"></a>00110 
-<a name="l00111"></a><a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">00111</a>   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">GetGold</a>()<span class="keyword"> const </span>{
-<a name="l00112"></a>00112     <span class="keywordflow">return</span> *(candidates_[gold_index_]);
-<a name="l00113"></a>00113   }
-<a name="l00114"></a><a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">00114</a>   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">GetBestScoring</a>()<span class="keyword"> const </span>{
-<a name="l00115"></a>00115     <span class="keywordflow">return</span> *(candidates_[best_scoring_index_]);
+<a name="l00105"></a><a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">00105</a>   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a30da3565fca2f14edafafce0255a35ea">GetGold</a>()<span class="keyword"> const </span>{
+<a name="l00106"></a>00106     <span class="keywordflow">return</span> *(candidates_[gold_index_]);
+<a name="l00107"></a>00107   }
+<a name="l00108"></a><a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">00108</a>   <span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#ae2d8533d6d2d3cd10a2c23a8660eefc3">GetBestScoring</a>()<span class="keyword"> const </span>{
+<a name="l00109"></a>00109     <span class="keywordflow">return</span> *(candidates_[best_scoring_index_]);
+<a name="l00110"></a>00110   }
+<a name="l00111"></a>00111 
+<a name="l00112"></a><a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">00112</a>   <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">reference_string</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> reference_string_; }
+<a name="l00113"></a>00113 
+<a name="l00114"></a><a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">00114</a>   <span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">reference_string_token_count</a>()<span class="keyword"> const </span>{
+<a name="l00115"></a>00115     <span class="keywordflow">return</span> reference_string_token_count_;
 <a name="l00116"></a>00116   }
 <a name="l00117"></a>00117 
-<a name="l00118"></a><a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">00118</a>   <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">reference_string</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> reference_string_; }
-<a name="l00119"></a>00119 
-<a name="l00120"></a><a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">00120</a>   <span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">reference_string_token_count</a>()<span class="keyword"> const </span>{
-<a name="l00121"></a>00121     <span class="keywordflow">return</span> reference_string_token_count_;
-<a name="l00122"></a>00122   }
-<a name="l00123"></a>00123 
-<a name="l00128"></a><a class="code" href="classreranker_1_1_candidate_set.html#a9bd2e0995871ec942b8117dc01293631">00128</a>   <span class="keywordtype">double</span> <a class="code" href="classreranker_1_1_candidate_set.html#a9bd2e0995871ec942b8117dc01293631" title="Returns the weight of the loss for this candidate set&rsquo;s reference.">loss_weight</a>()<span class="keyword"> const </span>{
-<a name="l00129"></a>00129     <span class="keywordflow">return</span> reference_string_token_count_;
-<a name="l00130"></a>00130   }
+<a name="l00122"></a><a class="code" href="classreranker_1_1_candidate_set.html#a9bd2e0995871ec942b8117dc01293631">00122</a>   <span class="keywordtype">double</span> <a class="code" href="classreranker_1_1_candidate_set.html#a9bd2e0995871ec942b8117dc01293631" title="Returns the weight of the loss for this candidate set&rsquo;s reference.">loss_weight</a>()<span class="keyword"> const </span>{
+<a name="l00123"></a>00123     <span class="keywordflow">return</span> reference_string_token_count_;
+<a name="l00124"></a>00124   }
+<a name="l00125"></a>00125 
+<a name="l00130"></a><a class="code" href="classreranker_1_1_candidate_set.html#a193de6980a2b77923dc43ab2ddba20dd">00130</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_candidate_set.html#a193de6980a2b77923dc43ab2ddba20dd" title="Returns whether any symbolic features in any of the candidates in this candidate set were compiled by...">compiled</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> compiled_; }
 <a name="l00131"></a>00131 
-<a name="l00136"></a><a class="code" href="classreranker_1_1_candidate_set.html#a193de6980a2b77923dc43ab2ddba20dd">00136</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_candidate_set.html#a193de6980a2b77923dc43ab2ddba20dd" title="Returns whether any symbolic features in any of the candidates in this candidate set were compiled by...">compiled</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> compiled_; }
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138   <span class="comment">// mutators</span>
-<a name="l00139"></a><a class="code" href="classreranker_1_1_candidate_set.html#adcb001dd18d4119f04f8a95ca7547f27">00139</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#adcb001dd18d4119f04f8a95ca7547f27">AddCandidate</a>(shared_ptr&lt;Candidate&gt; candidate) {
-<a name="l00140"></a>00140     candidates_.push_back(candidate);
-<a name="l00141"></a>00141   }
-<a name="l00142"></a>00142 
-<a name="l00169"></a><a class="code" href="classreranker_1_1_candidate_set.html#a844b1e8edd6a75de2ffc5b295d558e36">00169</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_candidate_set.html#a844b1e8edd6a75de2ffc5b295d558e36" title="Compiles any symbolic features in this candidate set.">CompileFeatures</a>(<a class="code" href="classreranker_1_1_symbols.html" title="An interface specifying a converter from symbols (strings) to int indices.">Symbols</a> *symbols,
-<a name="l00170"></a>00170                        <span class="keywordtype">bool</span> clear_features = <span class="keyword">false</span>,
-<a name="l00171"></a>00171                        <span class="keywordtype">bool</span> clear_symbolic_features = <span class="keyword">true</span>,
-<a name="l00172"></a>00172                        <span class="keywordtype">bool</span> force = <span class="keyword">false</span>) {
-<a name="l00173"></a>00173     <span class="keywordflow">if</span> (!compiled_ || force) {
-<a name="l00174"></a>00174       <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> it = <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>(); ++it) {
-<a name="l00175"></a>00175         compiled_ |= (*it)-&gt;Compile(symbols, clear_features,
-<a name="l00176"></a>00176                                     clear_symbolic_features, force);
-<a name="l00177"></a>00177       }
-<a name="l00178"></a>00178     }
-<a name="l00179"></a>00179     <span class="keywordflow">return</span> compiled_;
-<a name="l00180"></a>00180   }
-<a name="l00181"></a>00181 
-<a name="l00203"></a><a class="code" href="classreranker_1_1_candidate_set.html#acf9fb683cb0435f29188de9218941bca">00203</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#acf9fb683cb0435f29188de9218941bca" title="Decompiles any non-symbolic features in the candidates in this candidate set.">DecompileFeatures</a>(<a class="code" href="classreranker_1_1_symbols.html" title="An interface specifying a converter from symbols (strings) to int indices.">Symbols</a> *symbols,
-<a name="l00204"></a>00204                          <span class="keywordtype">bool</span> clear_symbolic_features = <span class="keyword">false</span>,
-<a name="l00205"></a>00205                          <span class="keywordtype">bool</span> clear_features = <span class="keyword">true</span>,
-<a name="l00206"></a>00206                          <span class="keywordtype">bool</span> force = <span class="keyword">false</span>) {
-<a name="l00207"></a>00207     <span class="keywordflow">if</span> (compiled_ || force) {
-<a name="l00208"></a>00208       <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> it = <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>(); ++it) {
-<a name="l00209"></a>00209         (*it)-&gt;Decompile(symbols, clear_symbolic_features,
-<a name="l00210"></a>00210                          clear_features, force);
-<a name="l00211"></a>00211       }
-<a name="l00212"></a>00212     }
-<a name="l00213"></a>00213     compiled_ = <span class="keyword">false</span>;
-<a name="l00214"></a>00214   }
-<a name="l00215"></a>00215 
-<a name="l00218"></a><a class="code" href="classreranker_1_1_candidate_set.html#a09a5f6f6fa810a96359bef2ca4831d3c">00218</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a09a5f6f6fa810a96359bef2ca4831d3c" title="Clears the raw data for all candidates in this set by setting each to be the empty string...">ClearRawData</a>() {
-<a name="l00219"></a>00219     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> it = <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>(); ++it) {
-<a name="l00220"></a>00220       (*it)-&gt;set_raw_data(empty_string);
-<a name="l00221"></a>00221     }
-<a name="l00222"></a>00222   }
-<a name="l00223"></a>00223 
-<a name="l00224"></a><a class="code" href="classreranker_1_1_candidate_set.html#a34bcb7712a2b693b53bb55cea253335e">00224</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a34bcb7712a2b693b53bb55cea253335e">set_best_scoring_index</a>(<span class="keywordtype">size_t</span> index) {
-<a name="l00225"></a>00225     best_scoring_index_ = index;
-<a name="l00226"></a>00226   }
-<a name="l00227"></a>00227 
-<a name="l00228"></a><a class="code" href="classreranker_1_1_candidate_set.html#a0bf052223c63c89219c33fd76a5779aa">00228</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a0bf052223c63c89219c33fd76a5779aa">set_gold_index</a>(<span class="keywordtype">size_t</span> index) {
-<a name="l00229"></a>00229     gold_index_ = index;
-<a name="l00230"></a>00230   }
-<a name="l00231"></a>00231 
-<a name="l00232"></a><a class="code" href="classreranker_1_1_candidate_set.html#a56bff734fb3274c49c134bde82892a19">00232</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a56bff734fb3274c49c134bde82892a19">set_training_key</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">training_key</a>) {
-<a name="l00233"></a>00233     training_key_ = <a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">training_key</a>;
-<a name="l00234"></a>00234   }
-<a name="l00235"></a>00235 
-<a name="l00236"></a><a class="code" href="classreranker_1_1_candidate_set.html#abfcb8e323ce912e71fe68812ab9f4be6">00236</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#abfcb8e323ce912e71fe68812ab9f4be6">set_reference_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">reference_string</a>) {
-<a name="l00237"></a>00237     reference_string_ = <a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">reference_string</a>;
-<a name="l00238"></a>00238   }
+<a name="l00132"></a>00132   <span class="comment">// mutators</span>
+<a name="l00133"></a><a class="code" href="classreranker_1_1_candidate_set.html#adcb001dd18d4119f04f8a95ca7547f27">00133</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#adcb001dd18d4119f04f8a95ca7547f27">AddCandidate</a>(shared_ptr&lt;Candidate&gt; candidate) {
+<a name="l00134"></a>00134     candidates_.push_back(candidate);
+<a name="l00135"></a>00135   }
+<a name="l00136"></a>00136 
+<a name="l00163"></a><a class="code" href="classreranker_1_1_candidate_set.html#a844b1e8edd6a75de2ffc5b295d558e36">00163</a>   <span class="keywordtype">bool</span> <a class="code" href="classreranker_1_1_candidate_set.html#a844b1e8edd6a75de2ffc5b295d558e36" title="Compiles any symbolic features in this candidate set.">CompileFeatures</a>(<a class="code" href="classreranker_1_1_symbols.html" title="An interface specifying a converter from symbols (strings) to int indices.">Symbols</a> *symbols,
+<a name="l00164"></a>00164                        <span class="keywordtype">bool</span> clear_features = <span class="keyword">false</span>,
+<a name="l00165"></a>00165                        <span class="keywordtype">bool</span> clear_symbolic_features = <span class="keyword">true</span>,
+<a name="l00166"></a>00166                        <span class="keywordtype">bool</span> force = <span class="keyword">false</span>) {
+<a name="l00167"></a>00167     <span class="keywordflow">if</span> (!compiled_ || force) {
+<a name="l00168"></a>00168       <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> it = <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>(); ++it) {
+<a name="l00169"></a>00169         compiled_ |= (*it)-&gt;Compile(symbols, clear_features,
+<a name="l00170"></a>00170                                     clear_symbolic_features, force);
+<a name="l00171"></a>00171       }
+<a name="l00172"></a>00172     }
+<a name="l00173"></a>00173     <span class="keywordflow">return</span> compiled_;
+<a name="l00174"></a>00174   }
+<a name="l00175"></a>00175 
+<a name="l00197"></a><a class="code" href="classreranker_1_1_candidate_set.html#acf9fb683cb0435f29188de9218941bca">00197</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#acf9fb683cb0435f29188de9218941bca" title="Decompiles any non-symbolic features in the candidates in this candidate set.">DecompileFeatures</a>(<a class="code" href="classreranker_1_1_symbols.html" title="An interface specifying a converter from symbols (strings) to int indices.">Symbols</a> *symbols,
+<a name="l00198"></a>00198                          <span class="keywordtype">bool</span> clear_symbolic_features = <span class="keyword">false</span>,
+<a name="l00199"></a>00199                          <span class="keywordtype">bool</span> clear_features = <span class="keyword">true</span>,
+<a name="l00200"></a>00200                          <span class="keywordtype">bool</span> force = <span class="keyword">false</span>) {
+<a name="l00201"></a>00201     <span class="keywordflow">if</span> (compiled_ || force) {
+<a name="l00202"></a>00202       <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> it = <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>(); ++it) {
+<a name="l00203"></a>00203         (*it)-&gt;Decompile(symbols, clear_symbolic_features,
+<a name="l00204"></a>00204                          clear_features, force);
+<a name="l00205"></a>00205       }
+<a name="l00206"></a>00206     }
+<a name="l00207"></a>00207     compiled_ = <span class="keyword">false</span>;
+<a name="l00208"></a>00208   }
+<a name="l00209"></a>00209 
+<a name="l00212"></a><a class="code" href="classreranker_1_1_candidate_set.html#a09a5f6f6fa810a96359bef2ca4831d3c">00212</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a09a5f6f6fa810a96359bef2ca4831d3c" title="Clears the raw data for all candidates in this set by setting each to be the empty string...">ClearRawData</a>() {
+<a name="l00213"></a>00213     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#a466bf9e9ff2852608e9e702f7182bb81">iterator</a> it = <a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <a class="code" href="classreranker_1_1_candidate_set.html#aab273fd7ef076bc5221e0d099c38b8aa">end</a>(); ++it) {
+<a name="l00214"></a>00214       (*it)-&gt;set_raw_data(empty_string);
+<a name="l00215"></a>00215     }
+<a name="l00216"></a>00216   }
+<a name="l00217"></a>00217 
+<a name="l00218"></a><a class="code" href="classreranker_1_1_candidate_set.html#a34bcb7712a2b693b53bb55cea253335e">00218</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a34bcb7712a2b693b53bb55cea253335e">set_best_scoring_index</a>(<span class="keywordtype">size_t</span> index) {
+<a name="l00219"></a>00219     best_scoring_index_ = index;
+<a name="l00220"></a>00220   }
+<a name="l00221"></a>00221 
+<a name="l00222"></a><a class="code" href="classreranker_1_1_candidate_set.html#a0bf052223c63c89219c33fd76a5779aa">00222</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a0bf052223c63c89219c33fd76a5779aa">set_gold_index</a>(<span class="keywordtype">size_t</span> index) {
+<a name="l00223"></a>00223     gold_index_ = index;
+<a name="l00224"></a>00224   }
+<a name="l00225"></a>00225 
+<a name="l00226"></a><a class="code" href="classreranker_1_1_candidate_set.html#a56bff734fb3274c49c134bde82892a19">00226</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#a56bff734fb3274c49c134bde82892a19">set_training_key</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">training_key</a>) {
+<a name="l00227"></a>00227     training_key_ = <a class="code" href="classreranker_1_1_candidate_set.html#a050bb0adf3b30066add60a9491e46280">training_key</a>;
+<a name="l00228"></a>00228   }
+<a name="l00229"></a>00229 
+<a name="l00230"></a><a class="code" href="classreranker_1_1_candidate_set.html#abfcb8e323ce912e71fe68812ab9f4be6">00230</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#abfcb8e323ce912e71fe68812ab9f4be6">set_reference_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">reference_string</a>) {
+<a name="l00231"></a>00231     reference_string_ = <a class="code" href="classreranker_1_1_candidate_set.html#a8ab76850370e2ebddf717cee8bbd4f9e">reference_string</a>;
+<a name="l00232"></a>00232   }
+<a name="l00233"></a>00233 
+<a name="l00234"></a><a class="code" href="classreranker_1_1_candidate_set.html#ab355d0469ae1607c8dcd929f3253b446">00234</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#ab355d0469ae1607c8dcd929f3253b446">set_reference_string_token_count</a>(<span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">reference_string_token_count</a>) {
+<a name="l00235"></a>00235     reference_string_token_count_ = <a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">reference_string_token_count</a>;
+<a name="l00236"></a>00236   }
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238   <span class="comment">// I/O methods</span>
 <a name="l00239"></a>00239 
-<a name="l00240"></a><a class="code" href="classreranker_1_1_candidate_set.html#ab355d0469ae1607c8dcd929f3253b446">00240</a>   <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_candidate_set.html#ab355d0469ae1607c8dcd929f3253b446">set_reference_string_token_count</a>(<span class="keywordtype">int</span> <a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">reference_string_token_count</a>) {
-<a name="l00241"></a>00241     reference_string_token_count_ = <a class="code" href="classreranker_1_1_candidate_set.html#aa49b72dc29358d30a4ccbe36cd1d4f03">reference_string_token_count</a>;
-<a name="l00242"></a>00242   }
-<a name="l00243"></a>00243 
-<a name="l00244"></a>00244   <span class="comment">// I/O methods</span>
-<a name="l00245"></a>00245 
-<a name="l00246"></a><a class="code" href="classreranker_1_1_candidate_set.html#a4232f5f5d112930ee1cf4a5748345106">00246</a>   <span class="keyword">friend</span> ostream &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a4232f5f5d112930ee1cf4a5748345106">operator&lt;&lt;</a>(ostream &amp;os, <span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;<span class="keyword">set</span>) {
-<a name="l00247"></a>00247     os &lt;&lt; <span class="stringliteral">&quot;Candidate set with key \&quot;&quot;</span> &lt;&lt; <span class="keyword">set</span>.training_key()
-<a name="l00248"></a>00248        &lt;&lt; <span class="stringliteral">&quot;\&quot; and reference string\n\t&quot;</span> &lt;&lt; <span class="keyword">set</span>.reference_string()
-<a name="l00249"></a>00249        &lt;&lt; <span class="stringliteral">&quot;\nwith &quot;</span> &lt;&lt; <span class="keyword">set</span>.size() &lt;&lt; <span class="stringliteral">&quot; candidates:\n&quot;</span>;
-<a name="l00250"></a>00250     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#aa907c4710944e91361cef4d465116544">const_iterator</a> it = <span class="keyword">set</span>.<a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <span class="keyword">set</span>.end(); ++it) {
-<a name="l00251"></a>00251       os &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span> &lt;&lt; *(*it) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00252"></a>00252     }
-<a name="l00253"></a>00253     <span class="keywordflow">return</span> os;
-<a name="l00254"></a>00254   }
-<a name="l00255"></a>00255 
-<a name="l00256"></a>00256  <span class="keyword">private</span>:
-<a name="l00257"></a>00257   <span class="comment">// data members</span>
-<a name="l00259"></a>00259 <span class="comment"></span>  vector&lt;shared_ptr&lt;Candidate&gt; &gt; candidates_;
-<a name="l00261"></a>00261   <span class="keywordtype">string</span> training_key_;
-<a name="l00263"></a>00263   <span class="keywordtype">size_t</span> gold_index_;
-<a name="l00265"></a>00265   <span class="keywordtype">size_t</span> best_scoring_index_;
-<a name="l00267"></a>00267   <span class="keywordtype">string</span> reference_string_;
-<a name="l00269"></a>00269   <span class="keywordtype">int</span> reference_string_token_count_;
-<a name="l00271"></a>00271   <span class="keywordtype">bool</span> compiled_;
-<a name="l00272"></a>00272 
-<a name="l00273"></a>00273   <span class="keyword">static</span> <span class="keywordtype">string</span> empty_string;
-<a name="l00274"></a>00274 };
-<a name="l00275"></a>00275 
-<a name="l00276"></a><a class="code" href="candidate-set_8_h.html#a52a29004a9078724be84910deb33e785">00276</a> <span class="preprocessor">#define REGISTER_NAMED_CANDIDATE_SET_SCORER(TYPE,NAME) \</span>
-<a name="l00277"></a>00277 <span class="preprocessor">  REGISTER_NAMED(TYPE,NAME,CandidateSet::Scorer)</span>
-<a name="l00278"></a>00278 <span class="preprocessor"></span>
-<a name="l00279"></a><a class="code" href="candidate-set_8_h.html#a9fec9685a3457b12ed31ddc799a30166">00279</a> <span class="preprocessor">#define REGISTER_CANDIDATE_SET_SCORER(TYPE) \</span>
-<a name="l00280"></a>00280 <span class="preprocessor">  REGISTER_NAMED_CANDIDATE_SET_SCORER(TYPE,TYPE)</span>
-<a name="l00281"></a>00281 <span class="preprocessor"></span>
-<a name="l00282"></a>00282 }  <span class="comment">// namespace reranker</span>
-<a name="l00283"></a>00283 
-<a name="l00284"></a>00284 <span class="preprocessor">#endif</span>
+<a name="l00240"></a><a class="code" href="classreranker_1_1_candidate_set.html#a4232f5f5d112930ee1cf4a5748345106">00240</a>   <span class="keyword">friend</span> ostream &amp;<a class="code" href="classreranker_1_1_candidate_set.html#a4232f5f5d112930ee1cf4a5748345106">operator&lt;&lt;</a>(ostream &amp;os, <span class="keyword">const</span> <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;<span class="keyword">set</span>) {
+<a name="l00241"></a>00241     os &lt;&lt; <span class="stringliteral">&quot;Candidate set with key \&quot;&quot;</span> &lt;&lt; <span class="keyword">set</span>.training_key()
+<a name="l00242"></a>00242        &lt;&lt; <span class="stringliteral">&quot;\&quot; and reference string\n\t&quot;</span> &lt;&lt; <span class="keyword">set</span>.reference_string()
+<a name="l00243"></a>00243        &lt;&lt; <span class="stringliteral">&quot;\nwith &quot;</span> &lt;&lt; <span class="keyword">set</span>.size() &lt;&lt; <span class="stringliteral">&quot; candidates:\n&quot;</span>;
+<a name="l00244"></a>00244     <span class="keywordflow">for</span> (<a class="code" href="classreranker_1_1_candidate_set.html#aa907c4710944e91361cef4d465116544">const_iterator</a> it = <span class="keyword">set</span>.<a class="code" href="classreranker_1_1_candidate_set.html#a2a6e17ba0eff32f7c48435c9456c7fe7">begin</a>(); it != <span class="keyword">set</span>.end(); ++it) {
+<a name="l00245"></a>00245       os &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span> &lt;&lt; *(*it) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00246"></a>00246     }
+<a name="l00247"></a>00247     <span class="keywordflow">return</span> os;
+<a name="l00248"></a>00248   }
+<a name="l00249"></a>00249 
+<a name="l00250"></a>00250  <span class="keyword">private</span>:
+<a name="l00251"></a>00251   <span class="comment">// data members</span>
+<a name="l00253"></a>00253 <span class="comment"></span>  vector&lt;shared_ptr&lt;Candidate&gt; &gt; candidates_;
+<a name="l00255"></a>00255   <span class="keywordtype">string</span> training_key_;
+<a name="l00257"></a>00257   <span class="keywordtype">size_t</span> gold_index_;
+<a name="l00259"></a>00259   <span class="keywordtype">size_t</span> best_scoring_index_;
+<a name="l00261"></a>00261   <span class="keywordtype">string</span> reference_string_;
+<a name="l00263"></a>00263   <span class="keywordtype">int</span> reference_string_token_count_;
+<a name="l00265"></a>00265   <span class="keywordtype">bool</span> compiled_;
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267   <span class="keyword">static</span> <span class="keywordtype">string</span> empty_string;
+<a name="l00268"></a>00268 };
+<a name="l00269"></a>00269 
+<a name="l00270"></a><a class="code" href="candidate-set_8_h.html#a52a29004a9078724be84910deb33e785">00270</a> <span class="preprocessor">#define REGISTER_NAMED_CANDIDATE_SET_SCORER(TYPE,NAME) \</span>
+<a name="l00271"></a>00271 <span class="preprocessor">  REGISTER_NAMED(TYPE,NAME,CandidateSet::Scorer)</span>
+<a name="l00272"></a>00272 <span class="preprocessor"></span>
+<a name="l00273"></a><a class="code" href="candidate-set_8_h.html#a9fec9685a3457b12ed31ddc799a30166">00273</a> <span class="preprocessor">#define REGISTER_CANDIDATE_SET_SCORER(TYPE) \</span>
+<a name="l00274"></a>00274 <span class="preprocessor">  REGISTER_NAMED_CANDIDATE_SET_SCORER(TYPE,TYPE)</span>
+<a name="l00275"></a>00275 <span class="preprocessor"></span>
+<a name="l00276"></a>00276 }  <span class="comment">// namespace reranker</span>
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -294,7 +293,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:03 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

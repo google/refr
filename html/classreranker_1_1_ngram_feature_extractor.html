@@ -130,12 +130,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this instance.  <a href="#aff9cd248d84fac26ce1bbf32a6d4f49b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a6774904d88f979c8c8246883eb25fbd9">RegisterInitializers</a> (<a class="el" href="classreranker_1_1_initializers.html">Initializers</a> &amp;initializers)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers two variables that may be initialized when this object is constructed via <a class="el" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f">Factory::CreateOrDie</a>.  <a href="#a6774904d88f979c8c8246883eb25fbd9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a06c5cf086e02b2b84a8cbe218599778c">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the specified argument string, which is expected to contain the n-gram order for this feature extractor to extract and, optionally, a prefix string to be prepended each feature name produced.  <a href="#a06c5cf086e02b2b84a8cbe218599778c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_ngram_feature_extractor.html#aeee5adf6726cb98adb1151b566d01b79">Extract</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;features)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Does nothing.  <a href="#aeee5adf6726cb98adb1151b566d01b79"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a2990e7fc936e8c697414949d5e0eb17f">ExtractSymbolic</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; string, double &gt; &amp;symbolic_features)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts n-gram features according to the n-gram order specified via the <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a06c5cf086e02b2b84a8cbe218599778c">Init</a> method.  <a href="#a2990e7fc936e8c697414949d5e0eb17f"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts n-gram features according to the n-gram order specified via the <a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">Init</a> method.  <a href="#a2990e7fc936e8c697414949d5e0eb17f"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Extracts n-gram features for candidate hypotheses on the fly. </p>
@@ -212,7 +210,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#af1c46248eb454384594dc3fcb61b0e70">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="ngram-feature-extractor_8_h_source.html#l00121">121</a> of file <a class="el" href="ngram-feature-extractor_8_h_source.html">ngram-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="ngram-feature-extractor_8_h_source.html#l00108">108</a> of file <a class="el" href="ngram-feature-extractor_8_h_source.html">ngram-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -241,7 +239,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Extracts n-gram features according to the n-gram order specified via the <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a06c5cf086e02b2b84a8cbe218599778c">Init</a> method. </p>
+<p>Extracts n-gram features according to the n-gram order specified via the <a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">Init</a> method. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">candidate</td><td>the candidate for which to extract features </td></tr>
@@ -253,37 +251,6 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#aa35034d5100e4a2cbe83325cad6c4a6b">reranker::FeatureExtractor</a>.</p>
 
 <p>Definition at line <a class="el" href="ngram-feature-extractor_8_c_source.html#l00075">75</a> of file <a class="el" href="ngram-feature-extractor_8_c_source.html">ngram-feature-extractor.C</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a06c5cf086e02b2b84a8cbe218599778c"></a><!-- doxytag: member="reranker::NgramFeatureExtractor::Init" ref="a06c5cf086e02b2b84a8cbe218599778c" args="(const string &amp;arg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a06c5cf086e02b2b84a8cbe218599778c">reranker::NgramFeatureExtractor::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initializes this instance with the specified argument string, which is expected to contain the n-gram order for this feature extractor to extract and, optionally, a prefix string to be prepended each feature name produced. </p>
-<p>This method is guaranteed to be invoked by one of the object creation methods of the <a class="el" href="classreranker_1_1_factory.html">Factory</a> class just after construction.</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">arg</td><td>the entirety of the argument string parsed by <a class="el" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f">Factory::CreateOrDie</a></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
-
-<p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#a2ec99fbd293b35e90f9553a729e6f649">reranker::FeatureExtractor</a>.</p>
-
-<p>Definition at line <a class="el" href="ngram-feature-extractor_8_h_source.html#l00118">118</a> of file <a class="el" href="ngram-feature-extractor_8_h_source.html">ngram-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -340,7 +307,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

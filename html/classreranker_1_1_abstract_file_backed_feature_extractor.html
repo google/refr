@@ -135,8 +135,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this instance.  <a href="#aabac653d0cbf2bcb372622919fdfa1ec"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a55f7c8c8ed682a6c5dfe8ee16f0657d1">RegisterInitializers</a> (<a class="el" href="classreranker_1_1_initializers.html">Initializers</a> &amp;initializers)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the data member to be initialized when an instance of this class is constructed by a <a class="el" href="classreranker_1_1_factory.html">Factory</a>.  <a href="#a55f7c8c8ed682a6c5dfe8ee16f0657d1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a8f10510be662115b0452f860285c0cde">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is guaranteed to be inokved by a <a class="el" href="classreranker_1_1_factory.html">Factory</a> after invoking the <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a55f7c8c8ed682a6c5dfe8ee16f0657d1">RegisterInitializers</a> method just after construction.  <a href="#a8f10510be662115b0452f860285c0cde"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#ac4c468a49a2916746069c03cb430237d">Init</a> (const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env, const string &amp;arg)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is guaranteed to be inokved by a <a class="el" href="classreranker_1_1_factory.html">Factory</a> after invoking the <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a55f7c8c8ed682a6c5dfe8ee16f0657d1">RegisterInitializers</a> method just after construction.  <a href="#ac4c468a49a2916746069c03cb430237d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a6c6d31af782109224da56bee01316523">Extract</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;features)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#afdbfa39e53be2006eebea77d5d1cc640">ExtractSymbolic</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; string, double &gt; &amp;symbolic_features)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#aa156423a870877982dd9ceea36e0be54">Reset</a> ()</td></tr>
@@ -274,7 +274,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classreranker_1_1_feature_extractor.html#ae7e30e3985d450909d7e70fc2c9658f2">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00126">126</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00127">127</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -318,16 +318,26 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8f10510be662115b0452f860285c0cde"></a><!-- doxytag: member="reranker::AbstractFileBackedFeatureExtractor::Init" ref="a8f10510be662115b0452f860285c0cde" args="(const string &amp;arg)" -->
+<a class="anchor" id="ac4c468a49a2916746069c03cb430237d"></a><!-- doxytag: member="reranker::AbstractFileBackedFeatureExtractor::Init" ref="ac4c468a49a2916746069c03cb430237d" args="(const Environment *env, const string &amp;arg)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a8f10510be662115b0452f860285c0cde">reranker::AbstractFileBackedFeatureExtractor::Init</a> </td>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#ac4c468a49a2916746069c03cb430237d">reranker::AbstractFileBackedFeatureExtractor::Init</a> </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -336,17 +346,18 @@ Protected Attributes</h2></td></tr>
 <p>This method is guaranteed to be inokved by a <a class="el" href="classreranker_1_1_factory.html">Factory</a> after invoking the <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a55f7c8c8ed682a6c5dfe8ee16f0657d1">RegisterInitializers</a> method just after construction. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
+    <tr><td class="paramname">env</td><td>the environment just after initializing this object </td></tr>
     <tr><td class="paramname">arg</td><td>the string parsed by the <a class="el" href="classreranker_1_1_factory.html">Factory</a></td></tr>
   </table>
   </dd>
 </dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">Factory::CreateOrDie</a> </dd></dl>
 
-<p>Implements <a class="el" href="classreranker_1_1_feature_extractor.html#a2ec99fbd293b35e90f9553a729e6f649">reranker::FeatureExtractor</a>.</p>
+<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">reranker::FactoryConstructible</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a01f504b9a7d64b4f7b537d29d3bc989c">reranker::FileBackedLossSetter</a>.</p>
+<p>Reimplemented in <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a8f884761e0906e7abf630912af1ab70b">reranker::FileBackedLossSetter</a>.</p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00098">98</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00099">99</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -366,7 +377,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns the current number of lines read by this feature extractor from the underlying stream. </p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00139">139</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00140">140</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -387,7 +398,7 @@ Protected Attributes</h2></td></tr>
 <p>Reads from the stream. </p>
 <p>The default implementation here reads a single line and puts it into the protected <code>line_</code> member. </p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00144">144</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00145">145</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -441,7 +452,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classreranker_1_1_feature_extractor.html#aff5c63502be6a9e662d0db49a174a5f7">reranker::FeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00112">112</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00113">113</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -459,7 +470,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The name of the file backing this feature extractor. </p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00159">159</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00160">160</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -476,7 +487,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The stream created from the file backing this feature extractor. </p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00161">161</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00162">162</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -493,7 +504,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The last line read by this feature extractor. </p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00163">163</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00164">164</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -510,7 +521,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The number of lines read so far by this feature extractor. </p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00165">165</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00166">166</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -527,7 +538,7 @@ Protected Attributes</h2></td></tr>
 
 <p>A simple whitespace tokenizer for use by concrete subclasses. </p>
 
-<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00167">167</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
+<p>Definition at line <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html#l00168">168</a> of file <a class="el" href="abstract-file-backed-feature-extractor_8_h_source.html">abstract-file-backed-feature-extractor.H</a>.</p>
 
 </div>
 </div>
@@ -552,7 +563,7 @@ Protected Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:05 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

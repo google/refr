@@ -103,8 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment">// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
 <a name="l00022"></a>00022 <span class="comment">// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
 <a name="l00023"></a>00023 <span class="comment">// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
-<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           </span>
-<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           </span>
+<a name="l00024"></a>00024 <span class="comment">// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<a name="l00025"></a>00025 <span class="comment">// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
 <a name="l00026"></a>00026 <span class="comment">// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00027"></a>00027 <span class="comment">// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00028"></a>00028 <span class="comment">// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
@@ -130,26 +130,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00057"></a><a class="code" href="classreranker_1_1_model_proto_reader.html#a39c85b6acc6420e94b1acae0ef3e1f58">00057</a>   <a class="code" href="classreranker_1_1_model_proto_reader.html#a39c85b6acc6420e94b1acae0ef3e1f58" title="Constructs a new instance that can de-serialize Model instances from ModelMessage protocol buffer mes...">ModelProtoReader</a>() { }
 <a name="l00059"></a><a class="code" href="classreranker_1_1_model_proto_reader.html#a2a95ed664d20fb097b867cee8d47b10f">00059</a>   <span class="keyword">virtual</span> <a class="code" href="classreranker_1_1_model_proto_reader.html#a2a95ed664d20fb097b867cee8d47b10f" title="Destroys this reader.">~ModelProtoReader</a>() { }
 <a name="l00060"></a>00060 
-<a name="l00069"></a><a class="code" href="classreranker_1_1_model_proto_reader.html#a388a2231cdc8ac10fddf63b90e74c37d">00069</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_model_proto_reader.html#a388a2231cdc8ac10fddf63b90e74c37d" title="Initializes this instance with the specified argument string The default implementation here does not...">Init</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg) { }
-<a name="l00070"></a>00070 
-<a name="l00077"></a>00077   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_model_proto_reader.html#ae1030db367542c6cd57b387c2ff0a65e" title="De-serializes a Model instance from a ModelMessage.">Read</a>(<span class="keyword">const</span> ModelMessage &amp;model_message, <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model) <span class="keyword">const</span> = 0;
-<a name="l00078"></a>00078 
-<a name="l00086"></a>00086   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_model_proto_reader.html#ae02cb75f8e2996255a81030e33af1094" title="De-serializes FeatureMessage instances from the specified input stream.">ReadFeatures</a>(istream&amp; is,
-<a name="l00087"></a>00087                             <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
-<a name="l00088"></a>00088                             <span class="keywordtype">bool</span> skip_key = <span class="keyword">false</span>,
-<a name="l00089"></a>00089                             <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; separator = <span class="stringliteral">&quot;\t&quot;</span>) <span class="keyword">const</span> = 0;
-<a name="l00090"></a>00090 };
-<a name="l00091"></a>00091 
-<a name="l00096"></a><a class="code" href="model-proto-reader_8_h.html#a369f9a617ed136d60b1ba77e7702f0ac">00096</a> <span class="preprocessor">#define REGISTER_NAMED_MODEL_PROTO_READER(TYPE,NAME) \</span>
-<a name="l00097"></a>00097 <span class="preprocessor">  REGISTER_NAMED(TYPE,NAME,ModelProtoReader)</span>
-<a name="l00098"></a>00098 <span class="preprocessor"></span>
-<a name="l00103"></a><a class="code" href="model-proto-reader_8_h.html#a6592f002ac5117ad9820aa19b8e4a1fa">00103</a> <span class="preprocessor">#define REGISTER_MODEL_PROTO_READER(TYPE) \</span>
-<a name="l00104"></a>00104 <span class="preprocessor">  REGISTER_NAMED_MODEL_PROTO_READER(TYPE,TYPE)</span>
-<a name="l00105"></a>00105 <span class="preprocessor"></span>
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107 }  <span class="comment">// namespace reranker</span>
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109 <span class="preprocessor">#endif</span>
+<a name="l00067"></a>00067   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_model_proto_reader.html#ae1030db367542c6cd57b387c2ff0a65e" title="De-serializes a Model instance from a ModelMessage.">Read</a>(<span class="keyword">const</span> ModelMessage &amp;model_message, <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model) <span class="keyword">const</span> = 0;
+<a name="l00068"></a>00068 
+<a name="l00076"></a>00076   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classreranker_1_1_model_proto_reader.html#ae02cb75f8e2996255a81030e33af1094" title="De-serializes FeatureMessage instances from the specified input stream.">ReadFeatures</a>(istream&amp; is,
+<a name="l00077"></a>00077                             <a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
+<a name="l00078"></a>00078                             <span class="keywordtype">bool</span> skip_key = <span class="keyword">false</span>,
+<a name="l00079"></a>00079                             <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; separator = <span class="stringliteral">&quot;\t&quot;</span>) <span class="keyword">const</span> = 0;
+<a name="l00080"></a>00080 };
+<a name="l00081"></a>00081 
+<a name="l00086"></a><a class="code" href="model-proto-reader_8_h.html#a369f9a617ed136d60b1ba77e7702f0ac">00086</a> <span class="preprocessor">#define REGISTER_NAMED_MODEL_PROTO_READER(TYPE,NAME) \</span>
+<a name="l00087"></a>00087 <span class="preprocessor">  REGISTER_NAMED(TYPE,NAME,ModelProtoReader)</span>
+<a name="l00088"></a>00088 <span class="preprocessor"></span>
+<a name="l00093"></a><a class="code" href="model-proto-reader_8_h.html#a6592f002ac5117ad9820aa19b8e4a1fa">00093</a> <span class="preprocessor">#define REGISTER_MODEL_PROTO_READER(TYPE) \</span>
+<a name="l00094"></a>00094 <span class="preprocessor">  REGISTER_NAMED_MODEL_PROTO_READER(TYPE,TYPE)</span>
+<a name="l00095"></a>00095 <span class="preprocessor"></span>
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097 }  <span class="comment">// namespace reranker</span>
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -168,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:04 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

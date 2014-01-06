@@ -118,8 +118,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00041"></a>00041 <span class="preprocessor">#include &lt;fstream&gt;</span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;tr1/unordered_map&gt;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include &lt;tr1/unordered_set&gt;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;unordered_map&gt;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &lt;unordered_set&gt;</span>
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046 <span class="preprocessor">#include &quot;<a class="code" href="environment-impl_8_h.html" title="Provides an environment for variables and their values, either primitive or Factory-constructible obj...">environment-impl.H</a>&quot;</span>
 <a name="l00047"></a>00047 
@@ -132,7 +132,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00054"></a>00054 
 <a name="l00163"></a><a class="code" href="classreranker_1_1_interpreter.html">00163</a> <span class="keyword">class </span><a class="code" href="classreranker_1_1_interpreter.html" title="Provides an interpreter for assigning primitives and Factory-constructible objects to named variables...">Interpreter</a> {
 <a name="l00164"></a>00164  <span class="keyword">public</span>:
-<a name="l00168"></a><a class="code" href="classreranker_1_1_interpreter.html#acafa4a552bb289cecf9ef1b9cbc25006">00168</a>   <a class="code" href="classreranker_1_1_interpreter.html#acafa4a552bb289cecf9ef1b9cbc25006" title="Constructs a new instance with the specified debug level.">Interpreter</a>(<span class="keywordtype">int</span> debug = 0) : debug_(debug) {
+<a name="l00168"></a><a class="code" href="classreranker_1_1_interpreter.html#acafa4a552bb289cecf9ef1b9cbc25006">00168</a>   <a class="code" href="classreranker_1_1_interpreter.html#acafa4a552bb289cecf9ef1b9cbc25006" title="Constructs a new instance with the specified debug level.">Interpreter</a>(<span class="keywordtype">int</span> debug = 0) {
 <a name="l00169"></a>00169     env_ = <span class="keyword">new</span> <a class="code" href="classreranker_1_1_environment_impl.html" title="Provides a set of named variables and their types, as well as the values for those variables...">EnvironmentImpl</a>(debug);
 <a name="l00170"></a>00170   }
 <a name="l00171"></a>00171 
@@ -193,13 +193,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00247"></a>00247   <a class="code" href="classreranker_1_1_environment_impl.html" title="Provides a set of named variables and their types, as well as the values for those variables...">EnvironmentImpl</a> *env_;
 <a name="l00248"></a>00248 
 <a name="l00251"></a>00251   <span class="keywordtype">string</span> filename_;
-<a name="l00252"></a>00252 
-<a name="l00254"></a>00254   <span class="keywordtype">int</span> debug_;
-<a name="l00255"></a>00255 };
-<a name="l00256"></a>00256 
-<a name="l00257"></a>00257 }  <span class="comment">// namespace reranker</span>
-<a name="l00258"></a>00258 
-<a name="l00259"></a>00259 <span class="preprocessor">#endif</span>
+<a name="l00252"></a>00252 };
+<a name="l00253"></a>00253 
+<a name="l00254"></a>00254 }  <span class="comment">// namespace reranker</span>
+<a name="l00255"></a>00255 
+<a name="l00256"></a>00256 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -218,7 +216,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:04 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

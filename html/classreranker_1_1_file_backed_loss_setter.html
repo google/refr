@@ -130,9 +130,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_file_backed_loss_setter.html#addab88573da47b330fb55eea9fc9232e">~FileBackedLossSetter</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this instance.  <a href="#addab88573da47b330fb55eea9fc9232e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a85c5a0cff9de382353359b50d3f21e84">RegisterInitializers</a> (<a class="el" href="classreranker_1_1_initializers.html">Initializers</a> &amp;initializers)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the data member to be initialized when an instance of this class is constructed by a <a class="el" href="classreranker_1_1_factory.html">Factory</a>.  <a href="#a85c5a0cff9de382353359b50d3f21e84"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a01f504b9a7d64b4f7b537d29d3bc989c">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the specified argument string, which is expected to be just a filename, or else a filename followed by a tab character followed by an integer specifying which token index of each line contains the loss value.  <a href="#a01f504b9a7d64b4f7b537d29d3bc989c"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the initializers for the filename_ and token_idx_ members.  <a href="#a85c5a0cff9de382353359b50d3f21e84"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a8f884761e0906e7abf630912af1ab70b">Init</a> (const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env, const string &amp;arg)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance.  <a href="#a8f884761e0906e7abf630912af1ab70b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a1582a78931b69d33af342a1c075af4bd">Extract</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;features)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the loss for the specified candidate based on what was read from the last line in the stream backing this <a class="el" href="classreranker_1_1_feature_extractor.html" title="An abstract base class/interface for all feature extractors.">FeatureExtractor</a> instance.  <a href="#a1582a78931b69d33af342a1c075af4bd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_file_backed_loss_setter.html#ac5074ad24b993ea7c3735ddcf4627c03">ExtractSymbolic</a> (<a class="el" href="classreranker_1_1_candidate.html">Candidate</a> &amp;candidate, <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; string, double &gt; &amp;symbolic_features)</td></tr>
@@ -246,39 +246,49 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#afdbfa39e53be2006eebea77d5d1cc640">reranker::AbstractFileBackedFeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="file-backed-loss-setter_8_h_source.html#l00103">103</a> of file <a class="el" href="file-backed-loss-setter_8_h_source.html">file-backed-loss-setter.H</a>.</p>
+<p>Definition at line <a class="el" href="file-backed-loss-setter_8_h_source.html#l00084">84</a> of file <a class="el" href="file-backed-loss-setter_8_h_source.html">file-backed-loss-setter.H</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a01f504b9a7d64b4f7b537d29d3bc989c"></a><!-- doxytag: member="reranker::FileBackedLossSetter::Init" ref="a01f504b9a7d64b4f7b537d29d3bc989c" args="(const string &amp;arg)" -->
+<a class="anchor" id="a8f884761e0906e7abf630912af1ab70b"></a><!-- doxytag: member="reranker::FileBackedLossSetter::Init" ref="a8f884761e0906e7abf630912af1ab70b" args="(const Environment *env, const string &amp;arg)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a01f504b9a7d64b4f7b537d29d3bc989c">reranker::FileBackedLossSetter::Init</a> </td>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a8f884761e0906e7abf630912af1ab70b">reranker::FileBackedLossSetter::Init</a> </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Initializes this instance with the specified argument string, which is expected to be just a filename, or else a filename followed by a tab character followed by an integer specifying which token index of each line contains the loss value. </p>
-<p>If the initialization string consists solely of a filename (no tab character), then each line is assumed to contain nothing but a floating-point loss value.</p>
+<p>Initializes this instance. </p>
 <p>This method is guaranteed to be invoked by a <a class="el" href="classreranker_1_1_factory.html">Factory</a> just after construction.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">arg</td><td>either a just the name of the file that backs this feature extractor, or else that filename followed by a tab character followed by an integer specifying which token index of each line contains the loss</td></tr>
+    <tr><td class="paramname">env</td><td>the environment just after initializing this object </td></tr>
+    <tr><td class="paramname">arg</td><td>ignored</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a8f10510be662115b0452f860285c0cde">reranker::AbstractFileBackedFeatureExtractor</a>.</p>
+<p>Reimplemented from <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#ac4c468a49a2916746069c03cb430237d">reranker::AbstractFileBackedFeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="file-backed-loss-setter_8_h_source.html#l00084">84</a> of file <a class="el" href="file-backed-loss-setter_8_h_source.html">file-backed-loss-setter.H</a>.</p>
+<p>Definition at line <a class="el" href="file-backed-loss-setter_8_h_source.html#l00074">74</a> of file <a class="el" href="file-backed-loss-setter_8_h_source.html">file-backed-loss-setter.H</a>.</p>
 
 </div>
 </div>
@@ -297,17 +307,11 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Registers the data member to be initialized when an instance of this class is constructed by a <a class="el" href="classreranker_1_1_factory.html">Factory</a>. </p>
-<table class="doxtable">
-<tr>
-<th>Variable name </th><th>Type </th><th>Required </th><th>Description </th><th>Default value  </th></tr>
-<tr>
-<td><code>filename</code> </td><td><code>string</code> </td><td>Yes </td><td>The name of the file backing this feature extractor. </td><td>n/a  </td></tr>
-</table>
+<p>Registers the initializers for the filename_ and token_idx_ members. </p>
 
 <p>Reimplemented from <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a55f7c8c8ed682a6c5dfe8ee16f0657d1">reranker::AbstractFileBackedFeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="file-backed-loss-setter_8_h_source.html#l00060">60</a> of file <a class="el" href="file-backed-loss-setter_8_h_source.html">file-backed-loss-setter.H</a>.</p>
+<p>Definition at line <a class="el" href="file-backed-loss-setter_8_h_source.html#l00061">61</a> of file <a class="el" href="file-backed-loss-setter_8_h_source.html">file-backed-loss-setter.H</a>.</p>
 
 </div>
 </div>
@@ -333,7 +337,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -128,8 +128,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new instance that can serialize <a class="el" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> instances to ModelMessage protocol buffer messages.  <a href="#a09616f340545a72bd9bf0a7494969929"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_writer.html#a8be4b7bb01e85af45408bfc736eece49">~ModelProtoWriter</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this writer.  <a href="#a8be4b7bb01e85af45408bfc736eece49"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_writer.html#ac43ef7a3952990c7a88e6b11c66e9f40">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the specified argument string.  <a href="#ac43ef7a3952990c7a88e6b11c66e9f40"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_writer.html#a8d53e498fb3c11c13de332b483264c5a">Write</a> (const <a class="el" href="classreranker_1_1_model.html">Model</a> *model, ModelMessage *model_message, bool write_features=true) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes a <a class="el" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> instance to a ModelMessage.  <a href="#a8d53e498fb3c11c13de332b483264c5a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_writer.html#a36b26c1a4350412fdd66d0aadb56e273">WriteFeatures</a> (const <a class="el" href="classreranker_1_1_model.html">Model</a> *model, ostream &amp;os, bool output_best_epoch=false, double weight=1.0, bool output_key=false, const string separator=&quot;\t&quot;) const =0</td></tr>
@@ -181,31 +179,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ac43ef7a3952990c7a88e6b11c66e9f40"></a><!-- doxytag: member="reranker::ModelProtoWriter::Init" ref="ac43ef7a3952990c7a88e6b11c66e9f40" args="(const string &amp;arg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_model_proto_writer.html#ac43ef7a3952990c7a88e6b11c66e9f40">reranker::ModelProtoWriter::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initializes this instance with the specified argument string. </p>
-<p>The default implementation here does nothing. This method is typically invoked by one of the creation methods of the <a class="el" href="classreranker_1_1_factory.html">Factory</a> class.</p>
-<dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">reranker::FactoryConstructible</a>.</p>
-
-<p>Definition at line <a class="el" href="model-proto-writer_8_h_source.html#l00075">75</a> of file <a class="el" href="model-proto-writer_8_h_source.html">model-proto-writer.H</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a8d53e498fb3c11c13de332b483264c5a"></a><!-- doxytag: member="reranker::ModelProtoWriter::Write" ref="a8d53e498fb3c11c13de332b483264c5a" args="(const Model *model, ModelMessage *model_message, bool write_features=true) const =0" -->
 <div class="memitem">
 <div class="memproto">
@@ -338,7 +311,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

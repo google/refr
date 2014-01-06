@@ -128,8 +128,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new instance that can de-serialize <a class="el" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> instances from ModelMessage protocol buffer messages.  <a href="#a39c85b6acc6420e94b1acae0ef3e1f58"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_reader.html#a2a95ed664d20fb097b867cee8d47b10f">~ModelProtoReader</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys this reader.  <a href="#a2a95ed664d20fb097b867cee8d47b10f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_reader.html#a388a2231cdc8ac10fddf63b90e74c37d">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this instance with the specified argument string The default implementation here does nothing.  <a href="#a388a2231cdc8ac10fddf63b90e74c37d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_reader.html#ae1030db367542c6cd57b387c2ff0a65e">Read</a> (const ModelMessage &amp;model_message, <a class="el" href="classreranker_1_1_model.html">Model</a> *model) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">De-serializes a <a class="el" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> instance from a ModelMessage.  <a href="#ae1030db367542c6cd57b387c2ff0a65e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_model_proto_reader.html#ae02cb75f8e2996255a81030e33af1094">ReadFeatures</a> (istream &amp;is, <a class="el" href="classreranker_1_1_model.html">Model</a> *model, bool skip_key=false, const string &amp;separator=&quot;\t&quot;) const =0</td></tr>
@@ -181,39 +179,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a388a2231cdc8ac10fddf63b90e74c37d"></a><!-- doxytag: member="reranker::ModelProtoReader::Init" ref="a388a2231cdc8ac10fddf63b90e74c37d" args="(const string &amp;arg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_model_proto_reader.html#a388a2231cdc8ac10fddf63b90e74c37d">reranker::ModelProtoReader::Init</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initializes this instance with the specified argument string The default implementation here does nothing. </p>
-<p>This method is guaranteed to be invoked after construction via a <a class="el" href="classreranker_1_1_factory.html">Factory</a> instance.</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">arg</td><td>the string with which to initialize this instance.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>Factory::Create(const string&amp;,string&amp;,string&amp;,bool&amp;,bool&amp;) </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">reranker::FactoryConstructible</a>.</p>
-
-<p>Reimplemented in <a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7e2abc375fd398ee2ca65fe2a9f25c0">reranker::PerceptronModelProtoReader</a>.</p>
-
-<p>Definition at line <a class="el" href="model-proto-reader_8_h_source.html#l00069">69</a> of file <a class="el" href="model-proto-reader_8_h_source.html">model-proto-reader.H</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ae1030db367542c6cd57b387c2ff0a65e"></a><!-- doxytag: member="reranker::ModelProtoReader::Read" ref="ae1030db367542c6cd57b387c2ff0a65e" args="(const ModelMessage &amp;model_message, Model *model) const =0" -->
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +290,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

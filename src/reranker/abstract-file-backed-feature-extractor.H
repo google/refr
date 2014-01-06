@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -92,12 +92,13 @@ class AbstractFileBackedFeatureExtractor : public FeatureExtractor {
   /// \endlink after invoking the \link RegisterInitializers \endlink
   /// method just after construction
   ///
+  /// \param env the environment just after initializing this object
   /// \param arg the string parsed by the \link Factory \endlink
   ///
   /// \see Factory::CreateOrDie
   virtual void Init(const Environment *env, const string &arg) {
     delete is_;
-    is_ = new ifstream(filename_.c_str());    
+    is_ = new ifstream(filename_.c_str());
   }
 
   /// \copydoc FeatureExtractor::Extract
@@ -111,7 +112,7 @@ class AbstractFileBackedFeatureExtractor : public FeatureExtractor {
 
   virtual void Reset() {
     delete is_;
-    is_ = new ifstream(filename_.c_str());    
+    is_ = new ifstream(filename_.c_str());
   }
 
 

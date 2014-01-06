@@ -124,6 +124,7 @@ Inheritance diagram for reranker::Initializer&lt; T &gt;:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer.html#adfc78e83ade2267f907de2d6009a98cf">Initializer</a> (T *member)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer.html#af5fa996beff78e860c64389f62f32ae1">~Initializer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_initializer.html#a8ebde0ddb09e92fb714d7ef22b413845">Init</a> (<a class="el" href="classreranker_1_1_stream_tokenizer.html">StreamTokenizer</a> &amp;st, <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env=NULL)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -131,10 +132,7 @@ Public Member Functions</h2></td></tr>
 class reranker::Initializer&lt; T &gt;</h3>
 
 <p>A class to initialize a <a class="el" href="classreranker_1_1_factory.html">Factory</a>-constructible object. </p>
-<p>A specialization to initialize <code>string</code> data members.</p>
-<p>A specialization to initialize <code>bool</code> data members.</p>
 <p>A specialization to initialize <code>double</code> data members.</p>
-<p>A specialization to allow Factory-constructible objects to initialize <code>int</code> data members.</p>
 <dl class=""><dt><b>Template Parameters:</b></dt><dd>
   <table class="">
     <tr><td class="paramname">T</td><td>a <code>shared_ptr</code> to any type constructible by a <a class="el" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory</a></td></tr>
@@ -142,7 +140,7 @@ class reranker::Initializer&lt; T &gt;</h3>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00082">82</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00083">83</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="adfc78e83ade2267f907de2d6009a98cf"></a><!-- doxytag: member="reranker::Initializer::Initializer" ref="adfc78e83ade2267f907de2d6009a98cf" args="(T *member)" -->
 <div class="memitem">
@@ -161,7 +159,27 @@ template&lt;typename T&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00084">84</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00085">85</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af5fa996beff78e860c64389f62f32ae1"></a><!-- doxytag: member="reranker::Initializer::~Initializer" ref="af5fa996beff78e860c64389f62f32ae1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_initializer.html">reranker::Initializer</a>&lt; T &gt;::~<a class="el" href="classreranker_1_1_initializer.html">Initializer</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00086">86</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
 
 </div>
 </div>
@@ -195,7 +213,7 @@ template&lt;typename T&gt; </div>
 
 <p>Implements <a class="el" href="classreranker_1_1_stream_initializer.html#aa0b38f3a7283ef6297b7bd2da89991a4">reranker::StreamInitializer</a>.</p>
 
-<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00085">85</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
+<p>Definition at line <a class="el" href="stream-init_8_h_source.html#l00087">87</a> of file <a class="el" href="stream-init_8_h_source.html">stream-init.H</a>.</p>
 
 </div>
 </div>
@@ -220,7 +238,7 @@ template&lt;typename T&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:07 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

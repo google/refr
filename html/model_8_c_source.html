@@ -163,100 +163,103 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00086"></a>00086 }
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088 <span class="keywordtype">void</span>
-<a name="l00089"></a><a class="code" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a7abfd508156ab23d326794cab17bd530">00089</a> RandomPairCandidateSetScorer::Init(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg) { srand(time(NULL)); }
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="keywordtype">size_t</span>
-<a name="l00092"></a>00092 RandomPairCandidateSetScorer::GetRandomIndex(<span class="keywordtype">size_t</span> max) {
-<a name="l00093"></a>00093   <span class="comment">// Get an index proportional to the reciprocal rank.</span>
-<a name="l00094"></a>00094   <span class="comment">// First, get a floating-point value that is distributed uniformly (roughly)</span>
-<a name="l00096"></a>00096 <span class="comment"></span>  <span class="keywordtype">double</span> r = rand() / (double)RAND_MAX;
-<a name="l00097"></a>00097   <span class="comment">// We compute the cummulative density function, or cdf, of the</span>
-<a name="l00098"></a>00098   <span class="comment">// reciprocal rank distribution over the fixed set of items.  As soon as</span>
-<a name="l00099"></a>00099   <span class="comment">// our uniformly-distributed r is less than the cdf at index i, we</span>
-<a name="l00100"></a>00100   <span class="comment">// return that index.</span>
-<a name="l00101"></a>00101   <span class="keywordtype">double</span> cdf = 0.0;
-<a name="l00102"></a>00102   <span class="keywordtype">double</span> denominator = (max * (max + 1)) / 2;
-<a name="l00103"></a>00103   <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; max; ++i) {
-<a name="l00104"></a>00104     cdf += (max - i) / denominator;
-<a name="l00105"></a>00105     <span class="keywordflow">if</span> (r &lt;= cdf) {
-<a name="l00106"></a>00106       <span class="keywordflow">return</span> i;
-<a name="l00107"></a>00107     }
-<a name="l00108"></a>00108   }
-<a name="l00109"></a>00109   <span class="keywordflow">return</span> max - 1;
-<a name="l00110"></a>00110 }
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112 <span class="keywordtype">void</span>
-<a name="l00113"></a><a class="code" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a9e1eba023ff20c3b354cc009bc885db1">00113</a> RandomPairCandidateSetScorer::Score(<a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
-<a name="l00114"></a>00114                                     <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidates, <span class="keywordtype">bool</span> training) {
-<a name="l00115"></a>00115   <span class="comment">// First, pick two candidate indices at random.</span>
-<a name="l00116"></a>00116   <span class="keywordtype">size_t</span> idx1 = GetRandomIndex(candidates.<a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">size</a>());
-<a name="l00117"></a>00117   <span class="keywordtype">size_t</span> idx2 = GetRandomIndex(candidates.<a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">size</a>());
-<a name="l00118"></a>00118   <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;c1 = candidates.<a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">Get</a>(idx1);
-<a name="l00119"></a>00119   <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;c2 = candidates.<a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">Get</a>(idx2);
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121   <span class="comment">// Next, just score those two candidates.</span>
-<a name="l00122"></a>00122   model-&gt;<a class="code" href="classreranker_1_1_model.html#a5c8423bb022156759515b808f93751a9" title="Scores a candidate according to either the raw or averaged version of this perceptron model...">ScoreCandidate</a>(c1, training);
-<a name="l00123"></a>00123   model-&gt;<a class="code" href="classreranker_1_1_model.html#a5c8423bb022156759515b808f93751a9" title="Scores a candidate according to either the raw or averaged version of this perceptron model...">ScoreCandidate</a>(c2, training);
-<a name="l00124"></a>00124 
-<a name="l00125"></a>00125   <span class="comment">// Finally, set indices of best scoring and gold amongst just those two.</span>
-<a name="l00126"></a>00126   <span class="keywordtype">int</span> score_cmp = model-&gt;<a class="code" href="classreranker_1_1_model.html#aa58b2fee786c6402ea7429f7c2d27431" title="Returns a pointer to the score comparator used by this model.">score_comparator</a>()-&gt;Compare(*model, c1, c2);
-<a name="l00127"></a>00127   candidates.<a class="code" href="classreranker_1_1_candidate_set.html#a34bcb7712a2b693b53bb55cea253335e">set_best_scoring_index</a>(score_cmp &gt; 0 ? c1.index() : c2.<a class="code" href="classreranker_1_1_candidate.html#a614992f57ceed690dee107b1e4c40696" title="Returns the index of this candidate relative to the other candidates.">index</a>());
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129   <span class="keywordtype">int</span> gold_cmp = model-&gt;<a class="code" href="classreranker_1_1_model.html#ae13ea77e614feaf88faebfe37cd45224" title="Returns a pointer to the gold comparator used by this model.">gold_comparator</a>()-&gt;Compare(*model, c1, c2);
-<a name="l00130"></a>00130   candidates.<a class="code" href="classreranker_1_1_candidate_set.html#a0bf052223c63c89219c33fd76a5779aa">set_gold_index</a>(gold_cmp &gt; 0 ? c1.index() : c2.<a class="code" href="classreranker_1_1_candidate.html#a614992f57ceed690dee107b1e4c40696" title="Returns the index of this candidate relative to the other candidates.">index</a>());
-<a name="l00131"></a>00131 }
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133 <span class="keywordtype">void</span>
-<a name="l00134"></a><a class="code" href="classreranker_1_1_model.html#a85e014c8643c0a12db3a891e4eb5dc5c">00134</a> Model::CheckNumberOfTokens(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg,
-<a name="l00135"></a>00135                            <span class="keyword">const</span> vector&lt;string&gt; &amp;tokens,
-<a name="l00136"></a>00136                            <span class="keywordtype">size_t</span> min_expected_number,
-<a name="l00137"></a>00137                            <span class="keywordtype">size_t</span> max_expected_number,
-<a name="l00138"></a>00138                            <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;class_name)<span class="keyword"> const </span>{
-<a name="l00139"></a>00139   <span class="keywordflow">if</span> ((min_expected_number &gt; 0 &amp;&amp; tokens.size() &lt; min_expected_number) ||
-<a name="l00140"></a>00140       (max_expected_number &gt; 0 &amp;&amp; tokens.size() &gt; max_expected_number)) {
-<a name="l00141"></a>00141     std::stringstream err_ss;
-<a name="l00142"></a>00142     err_ss &lt;&lt; class_name &lt;&lt; <span class="stringliteral">&quot;::Init: error parsing init string \&quot;&quot;</span>
-<a name="l00143"></a>00143            &lt;&lt; arg &lt;&lt; <span class="stringliteral">&quot;\&quot;: expected between &quot;</span>
-<a name="l00144"></a>00144            &lt;&lt; min_expected_number &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; max_expected_number
-<a name="l00145"></a>00145            &lt;&lt; <span class="stringliteral">&quot; tokens but found &quot;</span> &lt;&lt; tokens.size() &lt;&lt; <span class="stringliteral">&quot; tokens&quot;</span>;
-<a name="l00146"></a>00146     cerr &lt;&lt; err_ss.str() &lt;&lt; endl;
-<a name="l00147"></a>00147     <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
-<a name="l00148"></a>00148   }
-<a name="l00149"></a>00149 }
-<a name="l00150"></a>00150 
-<a name="l00151"></a>00151 shared_ptr&lt;Candidate::Comparator&gt;
-<a name="l00152"></a><a class="code" href="classreranker_1_1_model.html#ab33dc7e4ee114be828db6eebf15bc47c">00152</a> Model::GetComparator(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
-<a name="l00153"></a>00153   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;Candidate::Comparator&gt;</a> comparator_factory;
-<a name="l00154"></a>00154   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
-<a name="l00155"></a>00155       <span class="stringliteral">&quot;Candidate::Comparator from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00156"></a>00156   <span class="keywordflow">return</span>  comparator_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
-<a name="l00157"></a>00157 }
-<a name="l00158"></a>00158 
-<a name="l00159"></a>00159 shared_ptr&lt;CandidateSet::Scorer&gt;
-<a name="l00160"></a><a class="code" href="classreranker_1_1_model.html#a570719cf2126c0bb7d120a3dcd19f0f4">00160</a> Model::GetCandidateSetScorer(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
-<a name="l00161"></a>00161   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;CandidateSet::Scorer&gt;</a> candidate_set_scorer_factory;
-<a name="l00162"></a>00162   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
-<a name="l00163"></a>00163       <span class="stringliteral">&quot;Candidate::Scorer from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00164"></a>00164   <span class="keywordflow">return</span> candidate_set_scorer_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
-<a name="l00165"></a>00165 }
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167 shared_ptr&lt;Model::UpdatePredicate&gt;
-<a name="l00168"></a><a class="code" href="classreranker_1_1_model.html#a1f79bda31ef5b3ed236d77a79403d789">00168</a> Model::GetUpdatePredicate(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
-<a name="l00169"></a>00169   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;Model::UpdatePredicate&gt;</a> update_predicate_factory;
-<a name="l00170"></a>00170   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
-<a name="l00171"></a>00171       <span class="stringliteral">&quot;Model::UpdatePredicate from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00172"></a>00172   <span class="keywordflow">return</span> update_predicate_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
-<a name="l00173"></a>00173 }
-<a name="l00174"></a>00174 
-<a name="l00175"></a>00175 shared_ptr&lt;Model::Updater&gt;
-<a name="l00176"></a><a class="code" href="classreranker_1_1_model.html#a66309617d0bdc5a615d843b2ae88e9d8">00176</a> Model::GetUpdater(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
-<a name="l00177"></a>00177   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;Model::Updater&gt;</a> updater_factory;
-<a name="l00178"></a>00178   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
-<a name="l00179"></a>00179       <span class="stringliteral">&quot;Model::Updater from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
-<a name="l00180"></a>00180   <span class="keywordflow">return</span> updater_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
-<a name="l00181"></a>00181 }
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183 }  <span class="comment">// namespace reranker</span>
+<a name="l00089"></a><a class="code" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a9f9c2074f5fa3cdf76fea6ef93059861">00089</a> RandomPairCandidateSetScorer::Init(<span class="keyword">const</span> <a class="code" href="classreranker_1_1_environment.html" title="An interface for an environment in which variables of various types are mapped to their values...">Environment</a> *env,
+<a name="l00090"></a>00090                                    <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg) {
+<a name="l00091"></a>00091   srand(time(NULL));
+<a name="l00092"></a>00092 }
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 <span class="keywordtype">size_t</span>
+<a name="l00095"></a>00095 RandomPairCandidateSetScorer::GetRandomIndex(<span class="keywordtype">size_t</span> max) {
+<a name="l00096"></a>00096   <span class="comment">// Get an index proportional to the reciprocal rank.</span>
+<a name="l00097"></a>00097   <span class="comment">// First, get a floating-point value that is distributed uniformly (roughly)</span>
+<a name="l00099"></a>00099 <span class="comment"></span>  <span class="keywordtype">double</span> r = rand() / (double)RAND_MAX;
+<a name="l00100"></a>00100   <span class="comment">// We compute the cummulative density function, or cdf, of the</span>
+<a name="l00101"></a>00101   <span class="comment">// reciprocal rank distribution over the fixed set of items.  As soon as</span>
+<a name="l00102"></a>00102   <span class="comment">// our uniformly-distributed r is less than the cdf at index i, we</span>
+<a name="l00103"></a>00103   <span class="comment">// return that index.</span>
+<a name="l00104"></a>00104   <span class="keywordtype">double</span> cdf = 0.0;
+<a name="l00105"></a>00105   <span class="keywordtype">double</span> denominator = (max * (max + 1)) / 2;
+<a name="l00106"></a>00106   <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; max; ++i) {
+<a name="l00107"></a>00107     cdf += (max - i) / denominator;
+<a name="l00108"></a>00108     <span class="keywordflow">if</span> (r &lt;= cdf) {
+<a name="l00109"></a>00109       <span class="keywordflow">return</span> i;
+<a name="l00110"></a>00110     }
+<a name="l00111"></a>00111   }
+<a name="l00112"></a>00112   <span class="keywordflow">return</span> max - 1;
+<a name="l00113"></a>00113 }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 <span class="keywordtype">void</span>
+<a name="l00116"></a><a class="code" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a9e1eba023ff20c3b354cc009bc885db1">00116</a> RandomPairCandidateSetScorer::Score(<a class="code" href="classreranker_1_1_model.html" title="Model is an interface for reranking models.">Model</a> *model,
+<a name="l00117"></a>00117                                     <a class="code" href="classreranker_1_1_candidate_set.html" title="A class to hold a set of candidates, either for training or test.">CandidateSet</a> &amp;candidates, <span class="keywordtype">bool</span> training) {
+<a name="l00118"></a>00118   <span class="comment">// First, pick two candidate indices at random.</span>
+<a name="l00119"></a>00119   <span class="keywordtype">size_t</span> idx1 = GetRandomIndex(candidates.<a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">size</a>());
+<a name="l00120"></a>00120   <span class="keywordtype">size_t</span> idx2 = GetRandomIndex(candidates.<a class="code" href="classreranker_1_1_candidate_set.html#aa04c4a91de2030af08f16b3bda90984a">size</a>());
+<a name="l00121"></a>00121   <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;c1 = candidates.<a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">Get</a>(idx1);
+<a name="l00122"></a>00122   <a class="code" href="classreranker_1_1_candidate.html" title="A class to represent a candidate in a set of candidates that constitutes a training instance for a re...">Candidate</a> &amp;c2 = candidates.<a class="code" href="classreranker_1_1_candidate_set.html#ae64208b8b3a7e0b19f3be10e779e2630">Get</a>(idx2);
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124   <span class="comment">// Next, just score those two candidates.</span>
+<a name="l00125"></a>00125   model-&gt;<a class="code" href="classreranker_1_1_model.html#a5c8423bb022156759515b808f93751a9" title="Scores a candidate according to either the raw or averaged version of this perceptron model...">ScoreCandidate</a>(c1, training);
+<a name="l00126"></a>00126   model-&gt;<a class="code" href="classreranker_1_1_model.html#a5c8423bb022156759515b808f93751a9" title="Scores a candidate according to either the raw or averaged version of this perceptron model...">ScoreCandidate</a>(c2, training);
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128   <span class="comment">// Finally, set indices of best scoring and gold amongst just those two.</span>
+<a name="l00129"></a>00129   <span class="keywordtype">int</span> score_cmp = model-&gt;<a class="code" href="classreranker_1_1_model.html#aa58b2fee786c6402ea7429f7c2d27431" title="Returns a pointer to the score comparator used by this model.">score_comparator</a>()-&gt;Compare(*model, c1, c2);
+<a name="l00130"></a>00130   candidates.<a class="code" href="classreranker_1_1_candidate_set.html#a34bcb7712a2b693b53bb55cea253335e">set_best_scoring_index</a>(score_cmp &gt; 0 ? c1.index() : c2.<a class="code" href="classreranker_1_1_candidate.html#a614992f57ceed690dee107b1e4c40696" title="Returns the index of this candidate relative to the other candidates.">index</a>());
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132   <span class="keywordtype">int</span> gold_cmp = model-&gt;<a class="code" href="classreranker_1_1_model.html#ae13ea77e614feaf88faebfe37cd45224" title="Returns a pointer to the gold comparator used by this model.">gold_comparator</a>()-&gt;Compare(*model, c1, c2);
+<a name="l00133"></a>00133   candidates.<a class="code" href="classreranker_1_1_candidate_set.html#a0bf052223c63c89219c33fd76a5779aa">set_gold_index</a>(gold_cmp &gt; 0 ? c1.index() : c2.<a class="code" href="classreranker_1_1_candidate.html#a614992f57ceed690dee107b1e4c40696" title="Returns the index of this candidate relative to the other candidates.">index</a>());
+<a name="l00134"></a>00134 }
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136 <span class="keywordtype">void</span>
+<a name="l00137"></a><a class="code" href="classreranker_1_1_model.html#a85e014c8643c0a12db3a891e4eb5dc5c">00137</a> Model::CheckNumberOfTokens(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;arg,
+<a name="l00138"></a>00138                            <span class="keyword">const</span> vector&lt;string&gt; &amp;tokens,
+<a name="l00139"></a>00139                            <span class="keywordtype">size_t</span> min_expected_number,
+<a name="l00140"></a>00140                            <span class="keywordtype">size_t</span> max_expected_number,
+<a name="l00141"></a>00141                            <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;class_name)<span class="keyword"> const </span>{
+<a name="l00142"></a>00142   <span class="keywordflow">if</span> ((min_expected_number &gt; 0 &amp;&amp; tokens.size() &lt; min_expected_number) ||
+<a name="l00143"></a>00143       (max_expected_number &gt; 0 &amp;&amp; tokens.size() &gt; max_expected_number)) {
+<a name="l00144"></a>00144     std::stringstream err_ss;
+<a name="l00145"></a>00145     err_ss &lt;&lt; class_name &lt;&lt; <span class="stringliteral">&quot;::Init: error parsing init string \&quot;&quot;</span>
+<a name="l00146"></a>00146            &lt;&lt; arg &lt;&lt; <span class="stringliteral">&quot;\&quot;: expected between &quot;</span>
+<a name="l00147"></a>00147            &lt;&lt; min_expected_number &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; max_expected_number
+<a name="l00148"></a>00148            &lt;&lt; <span class="stringliteral">&quot; tokens but found &quot;</span> &lt;&lt; tokens.size() &lt;&lt; <span class="stringliteral">&quot; tokens&quot;</span>;
+<a name="l00149"></a>00149     cerr &lt;&lt; err_ss.str() &lt;&lt; endl;
+<a name="l00150"></a>00150     <span class="keywordflow">throw</span> std::runtime_error(err_ss.str());
+<a name="l00151"></a>00151   }
+<a name="l00152"></a>00152 }
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154 shared_ptr&lt;Candidate::Comparator&gt;
+<a name="l00155"></a><a class="code" href="classreranker_1_1_model.html#ab33dc7e4ee114be828db6eebf15bc47c">00155</a> Model::GetComparator(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
+<a name="l00156"></a>00156   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;Candidate::Comparator&gt;</a> comparator_factory;
+<a name="l00157"></a>00157   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
+<a name="l00158"></a>00158       <span class="stringliteral">&quot;Candidate::Comparator from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00159"></a>00159   <span class="keywordflow">return</span>  comparator_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
+<a name="l00160"></a>00160 }
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162 shared_ptr&lt;CandidateSet::Scorer&gt;
+<a name="l00163"></a><a class="code" href="classreranker_1_1_model.html#a570719cf2126c0bb7d120a3dcd19f0f4">00163</a> Model::GetCandidateSetScorer(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
+<a name="l00164"></a>00164   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;CandidateSet::Scorer&gt;</a> candidate_set_scorer_factory;
+<a name="l00165"></a>00165   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
+<a name="l00166"></a>00166       <span class="stringliteral">&quot;Candidate::Scorer from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00167"></a>00167   <span class="keywordflow">return</span> candidate_set_scorer_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
+<a name="l00168"></a>00168 }
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170 shared_ptr&lt;Model::UpdatePredicate&gt;
+<a name="l00171"></a><a class="code" href="classreranker_1_1_model.html#a1f79bda31ef5b3ed236d77a79403d789">00171</a> Model::GetUpdatePredicate(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
+<a name="l00172"></a>00172   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;Model::UpdatePredicate&gt;</a> update_predicate_factory;
+<a name="l00173"></a>00173   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
+<a name="l00174"></a>00174       <span class="stringliteral">&quot;Model::UpdatePredicate from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00175"></a>00175   <span class="keywordflow">return</span> update_predicate_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
+<a name="l00176"></a>00176 }
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178 shared_ptr&lt;Model::Updater&gt;
+<a name="l00179"></a><a class="code" href="classreranker_1_1_model.html#a66309617d0bdc5a615d843b2ae88e9d8">00179</a> Model::GetUpdater(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;spec)<span class="keyword"> const </span>{
+<a name="l00180"></a>00180   <a class="code" href="classreranker_1_1_factory.html" title="Factory for dynamically created instance of the specified type.">Factory&lt;Model::Updater&gt;</a> updater_factory;
+<a name="l00181"></a>00181   <span class="keywordtype">string</span> err_msg = <span class="stringliteral">&quot;error: model &quot;</span> + name() + <span class="stringliteral">&quot;: could not construct &quot;</span> +
+<a name="l00182"></a>00182       <span class="stringliteral">&quot;Model::Updater from specification string \&quot;&quot;</span> + spec + <span class="stringliteral">&quot;\&quot;&quot;</span>;
+<a name="l00183"></a>00183   <span class="keywordflow">return</span> updater_factory.<a class="code" href="classreranker_1_1_factory.html#a68117013334b03c94fc525e62080311f" title="Dynamically creates an object, whose type and initialization are contained in a specification string...">CreateOrDie</a>(spec, err_msg);
+<a name="l00184"></a>00184 }
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186 }  <span class="comment">// namespace reranker</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -275,7 +278,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:41 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:04 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -131,32 +131,62 @@ Inheritance diagram for reranker::FactoryConstructible:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_constructible.html#a2624e3cbe74b266a004d70c28920ce34">~FactoryConstructible</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_constructible.html#a4a45cf0a7822b3cd26ec882f0330b788">RegisterInitializers</a> (<a class="el" href="classreranker_1_1_initializers.html">Initializers</a> &amp;initializers)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">Init</a> (const string &amp;arg)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">Init</a> (const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env, const string &amp;arg)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>An interface to make it easier to implement Factory-constructible types by implementing both required methods to do nothing. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00378">378</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a0da3c3a5ce59818137e59a9364162101"></a><!-- doxytag: member="reranker::FactoryConstructible::Init" ref="a0da3c3a5ce59818137e59a9364162101" args="(const string &amp;arg)" -->
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00382">382</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a2624e3cbe74b266a004d70c28920ce34"></a><!-- doxytag: member="reranker::FactoryConstructible::~FactoryConstructible" ref="a2624e3cbe74b266a004d70c28920ce34" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classreranker_1_1_factory_constructible.html#a0da3c3a5ce59818137e59a9364162101">reranker::FactoryConstructible::Init</a> </td>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_factory_constructible.html#a2624e3cbe74b266a004d70c28920ce34">reranker::FactoryConstructible::~FactoryConstructible</a> </td>
           <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classreranker_1_1_model_1_1_updater.html#af60b901342616c37d7ceb6efb4b3f78c">reranker::Model::Updater</a>, <a class="el" href="classreranker_1_1_perceptron_model.html#ae2972c3b76402f2bafc6938984025090">reranker::PerceptronModel</a>, <a class="el" href="classreranker_1_1_model_1_1_update_predicate.html#a47a46797969316fb3ee558e5d34d27e7">reranker::Model::UpdatePredicate</a>, <a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a7abfd508156ab23d326794cab17bd530">reranker::RandomPairCandidateSetScorer</a>, <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a06c5cf086e02b2b84a8cbe218599778c">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_candidate_1_1_comparator.html#ac409d5c25fcc8c66117dfb11a9676e79">reranker::Candidate::Comparator</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a8f10510be662115b0452f860285c0cde">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_feature_extractor.html#a2ec99fbd293b35e90f9553a729e6f649">reranker::FeatureExtractor</a>, <a class="el" href="classreranker_1_1_candidate_set_1_1_scorer.html#a681feabcbb88443b83b747112c534b91">reranker::CandidateSet::Scorer</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a01f504b9a7d64b4f7b537d29d3bc989c">reranker::FileBackedLossSetter</a>, <a class="el" href="classreranker_1_1_example_feature_extractor.html#a87896ca90018afad336202eb61df37a2">reranker::ExampleFeatureExtractor</a>, <a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#ad7e2abc375fd398ee2ca65fe2a9f25c0">reranker::PerceptronModelProtoReader</a>, <a class="el" href="classreranker_1_1_model_proto_writer.html#ac43ef7a3952990c7a88e6b11c66e9f40">reranker::ModelProtoWriter</a>, <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a7b3bbefff678ef95e7234feee224e57f">reranker::RankFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_model_proto_reader.html#a388a2231cdc8ac10fddf63b90e74c37d">reranker::ModelProtoReader</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00384">384</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00381">381</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a5a323858b80346e85b3282ddba53d4ad"></a><!-- doxytag: member="reranker::FactoryConstructible::Init" ref="a5a323858b80346e85b3282ddba53d4ad" args="(const Environment *env, const string &amp;arg)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">reranker::FactoryConstructible::Init</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classreranker_1_1_perceptron_model.html#a2043a39df9801a012c7f834fd4c54be0">reranker::PerceptronModel</a>, <a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a9f9c2074f5fa3cdf76fea6ef93059861">reranker::RandomPairCandidateSetScorer</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#ac4c468a49a2916746069c03cb430237d">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_example_feature_extractor.html#a174f1626e9220dbb072fcf08f534ddb2">reranker::ExampleFeatureExtractor</a>, and <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a8f884761e0906e7abf630912af1ab70b">reranker::FileBackedLossSetter</a>.</p>
+
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00386">386</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -175,9 +205,9 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classreranker_1_1_perceptron_model.html#aa2ce4f882d64528ae8e8daba60a54d3f">reranker::PerceptronModel</a>, <a class="el" href="classreranker_1_1_mira_style_model.html#a9a1d3a3402248cb41e99ed4226732192">reranker::MiraStyleModel</a>, <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a6774904d88f979c8c8246883eb25fbd9">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_ngram_feature_extractor.html#ae803956c36ce57c7f826f10714a2caf6">reranker::FileBackedNgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a55f7c8c8ed682a6c5dfe8ee16f0657d1">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_example_feature_extractor.html#a53c0cf9f66922b417d08f42a816cdd35">reranker::ExampleFeatureExtractor</a>, <a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#a0655c95b4a80ed36f141834d365c76e5">reranker::PerceptronModelProtoReader</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a85c5a0cff9de382353359b50d3f21e84">reranker::FileBackedLossSetter</a>, and <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a621df811a16546ca546e1ea867048cd1">reranker::RankFeatureExtractor</a>.</p>
+<p>Reimplemented in <a class="el" href="classreranker_1_1_perceptron_model.html#aa2ce4f882d64528ae8e8daba60a54d3f">reranker::PerceptronModel</a>, <a class="el" href="classreranker_1_1_mira_style_model.html#a9a1d3a3402248cb41e99ed4226732192">reranker::MiraStyleModel</a>, <a class="el" href="classreranker_1_1_ngram_feature_extractor.html#a6774904d88f979c8c8246883eb25fbd9">reranker::NgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_ngram_feature_extractor.html#ae803956c36ce57c7f826f10714a2caf6">reranker::FileBackedNgramFeatureExtractor</a>, <a class="el" href="classreranker_1_1_abstract_file_backed_feature_extractor.html#a55f7c8c8ed682a6c5dfe8ee16f0657d1">reranker::AbstractFileBackedFeatureExtractor</a>, <a class="el" href="classreranker_1_1_perceptron_model_proto_reader.html#a0655c95b4a80ed36f141834d365c76e5">reranker::PerceptronModelProtoReader</a>, <a class="el" href="classreranker_1_1_example_feature_extractor.html#a53c0cf9f66922b417d08f42a816cdd35">reranker::ExampleFeatureExtractor</a>, <a class="el" href="classreranker_1_1_file_backed_loss_setter.html#a85c5a0cff9de382353359b50d3f21e84">reranker::FileBackedLossSetter</a>, and <a class="el" href="classreranker_1_1_rank_feature_extractor.html#a621df811a16546ca546e1ea867048cd1">reranker::RankFeatureExtractor</a>.</p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00380">380</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00385">385</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -202,7 +232,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:05 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

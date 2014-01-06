@@ -123,6 +123,7 @@ Inheritance diagram for reranker::KernelFunction:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_kernel_function.html#a1633f0a8ab8b83e7bdd80a10b0940eec">~KernelFunction</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_kernel_function.html#ab274007dc0adedfaeb835910ccb5435a">Apply</a> (const <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;fv1, const <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;fv2)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies this kernel function to the specified feature vectors.  <a href="#ab274007dc0adedfaeb835910ccb5435a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_kernel_function.html#af3b512fcfb211c737ac7096bd610aaff">Apply</a> (const <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;fv1, int index1, const <a class="el" href="classreranker_1_1_feature_vector.html">FeatureVector</a>&lt; int, double &gt; &amp;fv2, int index2) const =0</td></tr>
@@ -133,7 +134,26 @@ Public Member Functions</h2></td></tr>
 <p>The two index arguments can be of help to kernel function implementations that either cache results, or else have access to the precomputed square matrix of kernel function values for all training vectors. </p>
 
 <p>Definition at line <a class="el" href="kernel-function_8_h_source.html#l00050">50</a> of file <a class="el" href="kernel-function_8_h_source.html">kernel-function.H</a>.</p>
-</div><hr/><h2>Member Function Documentation</h2>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1633f0a8ab8b83e7bdd80a10b0940eec"></a><!-- doxytag: member="reranker::KernelFunction::~KernelFunction" ref="a1633f0a8ab8b83e7bdd80a10b0940eec" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classreranker_1_1_kernel_function.html#a1633f0a8ab8b83e7bdd80a10b0940eec">reranker::KernelFunction::~KernelFunction</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="kernel-function_8_h_source.html#l00052">52</a> of file <a class="el" href="kernel-function_8_h_source.html">kernel-function.H</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ab274007dc0adedfaeb835910ccb5435a"></a><!-- doxytag: member="reranker::KernelFunction::Apply" ref="ab274007dc0adedfaeb835910ccb5435a" args="(const FeatureVector&lt; int, double &gt; &amp;fv1, const FeatureVector&lt; int, double &gt; &amp;fv2)" -->
 <div class="memitem">
 <div class="memproto">
@@ -161,7 +181,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Applies this kernel function to the specified feature vectors. </p>
 
-<p>Definition at line <a class="el" href="kernel-function_8_h_source.html#l00053">53</a> of file <a class="el" href="kernel-function_8_h_source.html">kernel-function.H</a>.</p>
+<p>Definition at line <a class="el" href="kernel-function_8_h_source.html#l00054">54</a> of file <a class="el" href="kernel-function_8_h_source.html">kernel-function.H</a>.</p>
 
 </div>
 </div>
@@ -238,7 +258,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:42 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['score_5fcomparator_5f',['score_comparator_',['../classreranker_1_1_model.html#a9e7183bee1f50b058b17ab8e43cdbeef',1,'reranker::Model']]],
+  ['start',['start',['../structreranker_1_1_stream_tokenizer_1_1_token.html#a487d1b2ae2f1f2b4dd1e6c496f0bc733',1,'reranker::StreamTokenizer::Token']]],
   ['step_5fsize_5f',['step_size_',['../classreranker_1_1_perceptron_model.html#af852ec770ce5135acbf6f5db34b9d4fc',1,'reranker::PerceptronModel']]],
   ['streamingjar',['streamingjar',['../namespacehadoop-run.html#a9c952cd08d17abdf2b70ff7db0124ca2',1,'hadoop-run']]],
   ['streamingloc',['streamingloc',['../namespacehadoop-run.html#af780d860089b1ed86b289118d7bb8e09',1,'hadoop-run']]],

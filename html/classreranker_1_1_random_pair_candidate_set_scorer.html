@@ -124,8 +124,8 @@ Inheritance diagram for reranker::RandomPairCandidateSetScorer:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a7abfd508156ab23d326794cab17bd530">Init</a> (const string &amp;arg)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the random seed using <code>srand</code> and the current time available by calling <code>time(NULL)</code>.  <a href="#a7abfd508156ab23d326794cab17bd530"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a9f9c2074f5fa3cdf76fea6ef93059861">Init</a> (const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *env, const string &amp;arg)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the random seed using <code>srand</code> and the current time available by calling <code>time(NULL)</code>.  <a href="#a9f9c2074f5fa3cdf76fea6ef93059861"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a9e1eba023ff20c3b354cc009bc885db1">Score</a> (<a class="el" href="classreranker_1_1_model.html">Model</a> *model, <a class="el" href="classreranker_1_1_candidate_set.html">CandidateSet</a> &amp;candidates, bool training)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Picks two candidates at random from the set, scores them and then identifies which has the higher score and the lowest loss, effectively meaning that training proceeds as if those were the only two candidates.  <a href="#a9e1eba023ff20c3b354cc009bc885db1"></a><br/></td></tr>
 </table>
@@ -134,16 +134,26 @@ Public Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="model_8_h_source.html#l00119">119</a> of file <a class="el" href="model_8_h_source.html">model.H</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a7abfd508156ab23d326794cab17bd530"></a><!-- doxytag: member="reranker::RandomPairCandidateSetScorer::Init" ref="a7abfd508156ab23d326794cab17bd530" args="(const string &amp;arg)" -->
+<a class="anchor" id="a9f9c2074f5fa3cdf76fea6ef93059861"></a><!-- doxytag: member="reranker::RandomPairCandidateSetScorer::Init" ref="a9f9c2074f5fa3cdf76fea6ef93059861" args="(const Environment *env, const string &amp;arg)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a7abfd508156ab23d326794cab17bd530">reranker::RandomPairCandidateSetScorer::Init</a> </td>
+          <td class="memname">void <a class="el" href="classreranker_1_1_random_pair_candidate_set_scorer.html#a9f9c2074f5fa3cdf76fea6ef93059861">reranker::RandomPairCandidateSetScorer::Init</a> </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="classreranker_1_1_environment.html">Environment</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td><code> [virtual]</code></td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -151,7 +161,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Initializes the random seed using <code>srand</code> and the current time available by calling <code>time(NULL)</code>. </p>
 
-<p>Reimplemented from <a class="el" href="classreranker_1_1_candidate_set_1_1_scorer.html#a681feabcbb88443b83b747112c534b91">reranker::CandidateSet::Scorer</a>.</p>
+<p>Reimplemented from <a class="el" href="classreranker_1_1_factory_constructible.html#a5a323858b80346e85b3282ddba53d4ad">reranker::FactoryConstructible</a>.</p>
 
 <p>Definition at line <a class="el" href="model_8_c_source.html#l00089">89</a> of file <a class="el" href="model_8_c_source.html">model.C</a>.</p>
 
@@ -192,7 +202,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classreranker_1_1_candidate_set_1_1_scorer.html#af73e05dcda420101a4df2c0dfe8fd735">reranker::CandidateSet::Scorer</a>.</p>
 
-<p>Definition at line <a class="el" href="model_8_c_source.html#l00113">113</a> of file <a class="el" href="model_8_c_source.html">model.C</a>.</p>
+<p>Definition at line <a class="el" href="model_8_c_source.html#l00116">116</a> of file <a class="el" href="model_8_c_source.html">model.C</a>.</p>
 
 </div>
 </div>
@@ -218,7 +228,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 16 2013 15:45:43 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 6 2014 10:46:06 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
