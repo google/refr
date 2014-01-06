@@ -47,11 +47,12 @@ if test "$with_sparsehash" -a -d "$with_sparsehash"; then
 fi
 
 AC_SUBST(CPPFLAGS, "$CPPFLAGS $sparsehash_include")
+AC_SUBST(CPPFLAGS, "$CPPFLAGS -std=c++0x")
 
 AC_LANG_PUSH(C++)
 # Check that sparsehash is available.
-AC_CHECK_HEADERS([sparsehash/sparse_hash_set],,\
-                 [AC_MSG_ERROR([google sparse hash library is required: http://code.google.com/p/google-sparsehash/])])
+#AC_CHECK_HEADERS([sparsehash/sparse_hash_set],,\
+#                 [AC_MSG_ERROR([google sparse hash library is required: http://code.google.com/p/google-sparsehash/])])
 AC_LANG_POP(C++)
 
 AM_PATH_PYTHON([2.4])

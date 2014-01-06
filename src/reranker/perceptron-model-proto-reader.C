@@ -1,10 +1,10 @@
 // Copyright 2012, Google Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
-// 
+//
 //   * Redistributions of source code must retain the above copyright
 //     notice, this list of conditions and the following disclaimer.
 //   * Redistributions in binary form must reproduce the above
@@ -21,8 +21,8 @@
 // A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 // OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -126,7 +126,7 @@ void PerceptronModelProtoReader::ReadFeatures(istream& is,
       uid = symbols->GetIndex(feature_msg.name());
     }
     double value = feature_msg.value();
-    if (isnan(value)) {
+    if (std::isnan(value)) {
         cerr << "PerceptronModelProtoReader: WARNING: feature "
              << uid << " has value that is NaN" << endl;
     } else {
@@ -134,7 +134,7 @@ void PerceptronModelProtoReader::ReadFeatures(istream& is,
     }
     if (feature_msg.has_avg_value()) {
       double avg_value = feature_msg.avg_value();
-      if (isnan(avg_value)) {
+      if (std::isnan(avg_value)) {
         cerr << "PerceptronModelProtoReader: WARNING: feature "
              << uid << " has avg_value that is NaN" << endl;
       } else {

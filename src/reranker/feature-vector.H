@@ -44,8 +44,6 @@
 #include <unordered_set>
 #include <vector>
 
-#include <sparsehash/sparse_hash_map>
-
 #include "string-canonicalizer.H"
 
 namespace reranker {
@@ -77,7 +75,6 @@ template <>
 struct DelKey<string> {
   static const string Get() { return ""; }
 };
-  
 
 /// \class UidGetter
 ///

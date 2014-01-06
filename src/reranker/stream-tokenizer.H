@@ -39,6 +39,7 @@
 #include <iostream>
 #include <set>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <string.h>
 #include <vector>
@@ -227,10 +228,19 @@ class StreamTokenizer {
   void Rewind() {
     next_token_idx_ = 0;
   }
-  /// Rewinds this token stream by the specified number of tokens.
+
+  /// Rewinds this token stream by the specified number of tokens.  If the
+  /// specified number of tokens is greater than the number of tokens read
+  /// so far, invoking this method will be functionally equivalent to invoking
+  /// the no-argument Rewind() method.
   void Rewind(size_t num_tokens) {
+    // Cannot rewind more than the number of tokens read so far.
+    if (num_tokens > next_token_idx_) {
+      num_tokens = next_token_idx_;
+    }
     next_token_idx_ -= num_tokens;
   }
+
   /// A synonym for Rewind(1).
   void Putback() {
     Rewind(1);
@@ -325,7 +335,7 @@ class StreamTokenizer {
   // The index of the next token in this stream in token_, or token_.size()
   // if there are no more tokens left in this stream.  Note that invocations
   // of the Rewind and Putback methods alter this data member.
-  int next_token_idx_;
+  size_t next_token_idx_;
 };
 
 }  // namespace reranker
