@@ -324,8 +324,8 @@ class VarMap : public VarMapBase {
           // Error: we couldn't find the varname in this VarMap.
         }
       } else {
-        // Error: inferred (or, eventually, declared) type of varname is
-        // different from the type of the rhs variable.
+        // Error: inferred or declared type of varname is different
+        // from the type of the rhs variable.
       }
     } else {
       T value;

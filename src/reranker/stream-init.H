@@ -220,6 +220,9 @@ class Initializer<vector<T> > : public StreamInitializer {
     // Either the next token is an open brace (if reading tokens from
     // within a Factory-constructible object's member init list), or
     // else we just read an open brace (if Interpreter is reading tokens).
+    //
+    // TODO(dbikel): Change this "brace optional" business, now that we
+    // we can rewind the token stream.
     if (st.Peek() == "{") {
       // Consume open brace.
       st.Next();

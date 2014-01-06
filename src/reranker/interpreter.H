@@ -104,12 +104,14 @@ class EnvironmentImpl;
 /// // ...
 /// Interpreter i;
 /// i.Eval("example.infact");
-/// shared_ptr<Model> m;
+/// shared_ptr<Model> model;
+/// vector<shared_ptr<Model> > model_vector;
 /// bool b;
 /// // The next statement only assigns a value to b if a variable "b"
 /// // exists in the interpreter's environment.
 /// i.Get("b", &b);
-/// i.Get("m", &m);
+/// i.Get("m1", &model);
+/// i.Get("m_vec", &model_vector);
 /// \endcode
 ///
 /// More formally, a statement in this language must conform to the
