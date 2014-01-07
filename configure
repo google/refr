@@ -4610,7 +4610,7 @@ esac
 ac_config_headers="$ac_config_headers config.h"
 
 
-ac_config_files="$ac_config_files Makefile src/scripts/python_wrapper src/Makefile src/dataconvert/Makefile src/gzstream/Makefile src/libb64/Makefile src/libb64/base64/Makefile src/libb64/src/Makefile src/proto/Makefile src/reranker/Makefile"
+ac_config_files="$ac_config_files Makefile src/scripts/python_wrapper src/Makefile src/dataconvert/Makefile src/gzstream/Makefile src/libb64/Makefile src/libb64/base64/Makefile src/libb64/src/Makefile src/proto/Makefile src/infact/Makefile src/reranker/Makefile"
 
 
 # Checks for libraries.
@@ -6241,6 +6241,7 @@ do
     "src/libb64/base64/Makefile") CONFIG_FILES="$CONFIG_FILES src/libb64/base64/Makefile" ;;
     "src/libb64/src/Makefile") CONFIG_FILES="$CONFIG_FILES src/libb64/src/Makefile" ;;
     "src/proto/Makefile") CONFIG_FILES="$CONFIG_FILES src/proto/Makefile" ;;
+    "src/infact/Makefile") CONFIG_FILES="$CONFIG_FILES src/infact/Makefile" ;;
     "src/reranker/Makefile") CONFIG_FILES="$CONFIG_FILES src/reranker/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

@@ -1,1 +1,1 @@
-SUBDIRS = gzstream libb64 proto dataconvert reranker
+SUBDIRS = gzstream libb64 proto dataconvert infact reranker

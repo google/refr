@@ -25,6 +25,7 @@ AC_CONFIG_FILES([Makefile
                  src/libb64/base64/Makefile
                  src/libb64/src/Makefile
                  src/proto/Makefile
+		 src/infact/Makefile
                  src/reranker/Makefile])
 
 # Checks for libraries.
