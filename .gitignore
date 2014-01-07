@@ -14,9 +14,10 @@
 *.log
 stamp-h1
 Makefile
-src/python_wrapper
+src/infact/html
 src/infact/bin
 src/infact/lib
+src/python_wrapper
 src/reranker/html
 src/reranker/bin
 src/reranker/dep
