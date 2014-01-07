@@ -219,14 +219,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00141"></a>00141     <span class="comment">// &quot;reserved character&quot;, a whitespace character or EOF.</span>
 <a name="l00142"></a>00142     <span class="keywordtype">bool</span> done = <span class="keyword">false</span>;
 <a name="l00143"></a>00143     <span class="keywordflow">while</span> (!done &amp;&amp; is_.good()) {
-<a name="l00144"></a>00144       <span class="comment">// We don&#39;t call ReadChar here because we might need to put the</span>
-<a name="l00145"></a>00145       <span class="comment">// character back into the underlying stream if it tells us that</span>
-<a name="l00146"></a>00146       <span class="comment">// the current token has ended (i.e., if it&#39;s a reserved</span>
-<a name="l00147"></a>00147       <span class="comment">// character, a double quote or a whitespace character).</span>
-<a name="l00148"></a>00148       c = is_.get();
-<a name="l00149"></a>00149       <span class="keywordflow">if</span> (is_.good()) {
-<a name="l00150"></a>00150         <span class="keywordflow">if</span> (ReservedChar(c) || c == <span class="charliteral">&#39;&quot;&#39;</span> || isspace(c)) {
-<a name="l00151"></a>00151           is_.putback(c);
+<a name="l00144"></a>00144       <span class="comment">// We don&#39;t call ReadChar below because the next character might</span>
+<a name="l00145"></a>00145       <span class="comment">// tell us that the current token has ended (i.e., if it&#39;s a</span>
+<a name="l00146"></a>00146       <span class="comment">// reserved character, a double quote or a whitespace</span>
+<a name="l00147"></a>00147       <span class="comment">// character).</span>
+<a name="l00148"></a>00148       <span class="keywordtype">int</span> peek = is_.peek();
+<a name="l00149"></a>00149       <span class="keywordflow">if</span> (peek != EOF) {
+<a name="l00150"></a>00150         <span class="keywordtype">char</span> next_char = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(peek);
+<a name="l00151"></a>00151         <span class="keywordflow">if</span> (ReservedChar(next_char) || next_char == <span class="charliteral">&#39;&quot;&#39;</span> || isspace(next_char)) {
 <a name="l00152"></a>00152           <span class="comment">// Now that we&#39;ve finished reading something that is not a</span>
 <a name="l00153"></a>00153           <span class="comment">// string literal, change its type to be RESERVED_WORD if it</span>
 <a name="l00154"></a>00154           <span class="comment">// exactly matches something in the set of reserved words.</span>
@@ -235,7 +235,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00157"></a>00157           }
 <a name="l00158"></a>00158           done = <span class="keyword">true</span>;
 <a name="l00159"></a>00159         } <span class="keywordflow">else</span> {
-<a name="l00160"></a>00160           ConsumeChar(c);
+<a name="l00160"></a>00160           ReadChar(&amp;c);
 <a name="l00161"></a>00161           next-&gt;tok += c;
 <a name="l00162"></a>00162         }
 <a name="l00163"></a>00163       } <span class="keywordflow">else</span> {
@@ -269,7 +269,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 6 2014 11:31:22 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 7 2014 15:12:05 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

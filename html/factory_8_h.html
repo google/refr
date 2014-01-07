@@ -138,7 +138,7 @@ Namespaces</h2></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factory_8_h.html#a0440aa6c8d7080a9daa203766dae388d">DEFINE_CONS_CLASS</a>(TYPE, NAME, BASE)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a helper macro used only by the <code>REGISTER</code> macro.  <a href="#a0440aa6c8d7080a9daa203766dae388d"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A macro to define a subclass of <a class="el" href="classreranker_1_1_constructor.html">Constructor </a> whose NewInstance method constructs an instance of <em>TYPE</em>, a concrete subclass of <em>BASE</em>.  <a href="#a0440aa6c8d7080a9daa203766dae388d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factory_8_h.html#a0b09e4aaef613d7556c07875c7d5a029">REGISTER_NAMED</a>(TYPE, NAME, BASE)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro registers the concrete subtype <em>TYPE</em> with the specified factory for instances of type <em>BASE</em>; the <em>TYPE</em> is associated with the specified <em>NAME</em>.  <a href="#a0b09e4aaef613d7556c07875c7d5a029"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factory_8_h.html#a01b208854b036ee1381a9289186ff3c2">IMPLEMENT_FACTORY</a>(BASE)</td></tr>
@@ -183,9 +183,10 @@ Defines</h2></td></tr>
 <b>Value:</b><div class="fragment"><pre class="fragment"><span class="keyword">class </span>NAME ## Constructor : <span class="keyword">public</span> Constructor&lt;BASE&gt; { \
    public: <span class="keyword">virtual</span> BASE *NewInstance()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">new</span> TYPE(); } };
 </pre></div>
-<p>This is a helper macro used only by the <code>REGISTER</code> macro. </p>
+<p>A macro to define a subclass of <a class="el" href="classreranker_1_1_constructor.html">Constructor </a> whose NewInstance method constructs an instance of <em>TYPE</em>, a concrete subclass of <em>BASE</em>. </p>
+<p>The concrete subclass <em>TYPE</em> must have a no-argument constructor. <code>This</code> is a helper macro used only by the <code>REGISTER</code> macro. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00795">795</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00800">800</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -210,7 +211,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>Provides the necessary implementation for a factory for the specified <code>BASE</code> class type. </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00816">816</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00821">821</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -244,14 +245,14 @@ Defines</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="factory_8_h.html#a0440aa6c8d7080a9daa203766dae388d" title="This is a helper macro used only by the REGISTER macro.">DEFINE_CONS_CLASS</a>(TYPE,NAME,BASE) \
+<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="factory_8_h.html#a0440aa6c8d7080a9daa203766dae388d" title="A macro to define a subclass of Constructor  whose NewInstance method constructs an instance of TYPE...">DEFINE_CONS_CLASS</a>(TYPE,NAME,BASE) \
   const Constructor&lt;BASE&gt; *NAME ## _my_protoype = \
       Factory&lt;BASE&gt;::Register(<span class="keywordtype">string</span>(#NAME), <span class="keyword">new</span> NAME ## Constructor());
 </pre></div>
 <p>This macro registers the concrete subtype <em>TYPE</em> with the specified factory for instances of type <em>BASE</em>; the <em>TYPE</em> is associated with the specified <em>NAME</em>. </p>
 <p>This macro&mdash;or a macro defined using this macro&mdash;should be used in the implementation file for a concrete subclass <em>TYPE</em> of the baseclass <em>BASE</em>. Often, <em>TYPE</em> and <em>NAME</em> may be the exact same string; however, they must be different when <em>TYPE</em> contains characters that may not appear in C++ identifiers, such as colons (<em>e.g.</em>, when <em>TYPE</em> is the fully-qualified name of an inner class). </p>
 
-<p>Definition at line <a class="el" href="factory_8_h_source.html#l00809">809</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
+<p>Definition at line <a class="el" href="factory_8_h_source.html#l00814">814</a> of file <a class="el" href="factory_8_h_source.html">factory.H</a>.</p>
 
 </div>
 </div>
@@ -273,7 +274,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 6 2014 11:31:22 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 7 2014 15:12:05 for Reranker Framework (ReFr) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
