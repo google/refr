@@ -141,14 +141,14 @@ StreamTokenizer::GetNext(Token *next) {
     // "reserved character", a whitespace character or EOF.
     bool done = false;
     while (!done && is_.good()) {
-      // We don't call ReadChar here because we might need to put the
-      // character back into the underlying stream if it tells us that
-      // the current token has ended (i.e., if it's a reserved
-      // character, a double quote or a whitespace character).
-      c = is_.get();
-      if (is_.good()) {
-        if (ReservedChar(c) || c == '"' || isspace(c)) {
-          is_.putback(c);
+      // We don't call ReadChar below because the next character might
+      // tell us that the current token has ended (i.e., if it's a
+      // reserved character, a double quote or a whitespace
+      // character).
+      int peek = is_.peek();
+      if (peek != EOF) {
+        char next_char = static_cast<char>(peek);
+        if (ReservedChar(next_char) || next_char == '"' || isspace(next_char)) {
           // Now that we've finished reading something that is not a
           // string literal, change its type to be RESERVED_WORD if it
           // exactly matches something in the set of reserved words.
@@ -157,7 +157,7 @@ StreamTokenizer::GetNext(Token *next) {
           }
           done = true;
         } else {
-          ConsumeChar(c);
+          ReadChar(&c);
           next->tok += c;
         }
       } else {

@@ -791,6 +791,11 @@ class Factory : public FactoryBase {
   static const char *base_name_;
 };
 
+/// A macro to define a subclass of \link reranker::Constructor
+/// Constructor \endlink whose NewInstance method constructs an
+/// instance of \a TYPE, a concrete subclass of \a BASE.  The concrete
+/// subclass \a TYPE must have a no-argument constructor.
+/// \p
 /// This is a helper macro used only by the <tt>REGISTER</tt> macro.
 #define DEFINE_CONS_CLASS(TYPE,NAME,BASE) \
   class NAME ## Constructor : public Constructor<BASE> { \
