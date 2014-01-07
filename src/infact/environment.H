@@ -394,11 +394,11 @@ class VarMap<vector<T> > : public VarMapBase {
  public:
   /// Constructs a mapping from variables of a particular type to their values.
   ///
-  /// \param name         the type name of the variables in this instance
-  /// \param env          the \link infact::Environment Environment \endlink
-  ///                     that contains this VarMap instance
-  /// \param is_primitive whether this instance contains primitive or primitive
-  ///                     vector variables
+  /// \param name             the type name of the variables in this instance
+  /// \param element_typename the type name of the elements of the vectors
+  ///                         held by this instance
+  /// \param env              the \link infact::Environment Environment \endlink
+  ///                         that contains this VarMap instance
   VarMap(const string &name, const string &element_typename, Environment *env)
       : VarMapBase(name, env, false), element_typename_(element_typename) { }
 

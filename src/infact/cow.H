@@ -74,6 +74,7 @@ public:
   /// </table>
   virtual void RegisterInitializers(Initializers &initializers) {
     initializers.Add("name", &name_, true);
+    initializers.Add("age", &age_);
   }
 
   /// Returns the name of this animal.
@@ -83,6 +84,7 @@ public:
 
 private:
   string name_;
+  int age_;
 };
 
 }  // namespace reranker

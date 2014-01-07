@@ -30,7 +30,8 @@
 //
 //
 /// \file
-/// Test driver for the \link infact::Tokenizer Tokenizer \endlink class.
+/// Test driver for the \link infact::StreamTokenizer StreamTokenizer \endlink
+/// class.
 /// \author dbikel@google.com (Dan Bikel)
 
 #include <iostream>

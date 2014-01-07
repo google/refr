@@ -423,24 +423,21 @@ class Factory : public FactoryBase {
   /// </ul>
   /// In the case of members that are vectors, the init string can be
   /// a comma-separated list of of initializers for its elements.  For
-  /// example, the class ExampleFeatureExtractor class has three members
+  /// example, the class Cow has two members
   /// that are registered to be initialized by \link
-  /// Factory\endlink\<\link FeatureExtractor\endlink\> (via the \link
-  /// ExampleFeatureExtractor::RegisterInitializers \endlink method):
-  /// <ul><li>a member named <tt>arg</tt> of type <tt>string</tt>,
-  ///     <li>a member named <tt>strvec</tt> of type <tt>vector\<string\></tt>
-  ///         and
-  ///     <li>a member named <tt>b</tt> of type <tt>bool</tt>.
+  /// Factory\endlink\<\link Cow\endlink\> (via the \link
+  /// Cow::RegisterInitializers \endlink method):
+  /// <ul><li>a member named <tt>name</tt> of type <tt>string</tt>,
+  ///     <li>a member named <tt>age</tt> of type <tt>int</tt>
   /// </ul>
-  /// None of these is a &ldquo;required&rdquo; member, meaning they act
-  /// like optional arguments to a constructor.  The following are all
-  /// legal specification strings for constructing instances of
-  /// ExampleFeatureExtractor:
+  /// Only the first of these is a &ldquo;required&rdquo; member, meaning
+  /// the <tt>age</tt> member acts like an optional argument to a constructor.
+  /// The following are all legal specification strings for constructing
+  /// instances of Cow:
   /// \code
-  /// ExampleFeatureExtractor(arg("foo"), strvec({"foo", "bar", "baz"}), b(true))
-  /// ExampleFeatureExtractor(strvec({"foo", "bar", "baz",}))
-  /// ExampleFeatureExtractor(b(false))
-  /// ExampleFeatureExtractor()
+  /// Cow(name("foo"), age(3))
+  /// Cow(age(3), name("foo"))
+  /// Cow(name("foo"))
   /// \endcode
   /// Crucially, note how a vector can have an optional comma at the
   /// end of its list (the second example), and how a boolean may be
