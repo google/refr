@@ -30,12 +30,16 @@
 //
 //
 /// \file
-/// Implementation of the HumanPetOwner class
+/// Provides implementations of the various example classes.
 
-#include "human-pet-owner.H"
+#include "example.H"
 
 namespace infact {
 
+IMPLEMENT_FACTORY(Animal)
+REGISTER_ANIMAL(Cow)
+
+IMPLEMENT_FACTORY(PetOwner)
 REGISTER_PET_OWNER(HumanPetOwner)
 
 }  // namespace infact

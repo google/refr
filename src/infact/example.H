@@ -30,14 +30,36 @@
 //
 //
 /// \file
-/// Provides the Cow class.
+/// Provides various example class headers.
+/// \author dbikel@google.com (Dan Bikel)
 
-#ifndef INFACT_COW_H_
-#define INFACT_COW_H_
+#ifndef INFACT_EXAMPLE_H_
+#define INFACT_EXAMPLE_H_
 
-#include "animal.H"
+#include <string>
+
+#include "factory.H"
 
 namespace infact {
+
+/// A very simple class to represent an animal.
+class Animal : public FactoryConstructible {
+ public:
+  /// Constructs a generic animal.
+  Animal() {}
+  /// Destroys this animal.
+  virtual ~Animal() {}
+
+  /// Returns the name of this animal.
+  virtual string GetName() = 0;
+};
+
+/// Registers the \link infact::Animal Animal \endlink with the
+/// specified subtype <tt>TYPE</tt> and <tt>NAME</tt> with the \link
+/// infact::Animal Animal \endlink \link infact::Factory
+/// Factory\endlink.
+#define REGISTER_ANIMAL(TYPE) \
+  REGISTER_NAMED(TYPE,TYPE,Animal)
 
 /// A class to represent a cow.
 class Cow : public Animal {
@@ -88,6 +110,53 @@ private:
   int age_;
 };
 
-}  // namespace reranker
+/// An owner of a pet.
+class PetOwner : public FactoryConstructible {
+ public:
+  /// Constructs a generic pet owner.
+  PetOwner() {}
+
+  /// Destroys this pet owner.
+  virtual ~PetOwner() {}
+
+  /// Returns the number of pets owned by this pet owner.
+  virtual int GetNumberOfPets() = 0;
+
+  /// Gets the pet with the specified index owned by this pet owner.
+  virtual shared_ptr<Animal> GetPet(int i) = 0;
+};
+
+#define REGISTER_PET_OWNER(TYPE) \
+  REGISTER_NAMED(TYPE,TYPE,PetOwner)
+
+/// A concrete type of PetOwner that can be constructed by a \link
+/// Factory\endlink\<\link PetOwner \endlink\> instance.
+class HumanPetOwner : public PetOwner {
+ public:
+  /// Constructs a human pet owner.
+  HumanPetOwner() : PetOwner() { }
+
+  // Destroys a human pet owner.
+  virtual ~HumanPetOwner() { }
+
+  virtual void RegisterInitializers(Initializers &initializers) {
+    initializers.Add("pets", &pets_, true);
+  }
+
+  /// Returns the number of pets owned by this pet owner.
+  virtual int GetNumberOfPets() {
+    return pets_.size();
+  }
+
+  /// Gets the pet with the specified index owned by this pet owner.
+  virtual shared_ptr<Animal> GetPet(int i) {
+    return pets_.at(i);
+  }
+
+ private:
+  vector<shared_ptr<Animal> > pets_;
+};
+
+}  // namespace infact
 
 #endif
