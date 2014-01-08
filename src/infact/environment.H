@@ -492,8 +492,7 @@ class VarMap<vector<T> > : public VarMapBase {
       vector<T> value;
       int element_idx = 0;
       while (st.Peek() != "}") {
-        // Copy the environment, since we create fake names for each element
-        // (which is actually nameless).
+        // Copy the environment, since we create fake names for each element.
         shared_ptr<Environment> env_ptr(env_->Copy());
         ostringstream element_name_oss;
         element_name_oss << "____" << varname << "_" << (element_idx++)
