@@ -14,7 +14,10 @@ int
 main(int argc, char **argv) {
   cout << "Here is a list of abstract types and the concrete implementations\n"
        << "you can construct:" << endl;
-  int debug = 1;
+
+  int debug = 0;
+  cout << "Debug level: " << debug << endl;
+
   Interpreter interpreter(debug);
 
   cout << endl;

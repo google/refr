@@ -39,7 +39,7 @@
 #ifndef INFACT_ENVIRONMENT_H_
 #define INFACT_ENVIRONMENT_H_
 
-#define VAR_MAP_DEBUG 1
+#define VAR_MAP_DEBUG 0
 
 #include <sstream>
 #include <vector>
