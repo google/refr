@@ -68,7 +68,7 @@ class StreamInitializer {
  public:
   StreamInitializer() { }
   virtual ~StreamInitializer() { }
-  virtual void Init(StreamTokenizer &st, Environment *env = NULL) = 0;
+  virtual void Init(StreamTokenizer &st, Environment *env = nullptr) = 0;
 };
 
 template <typename T> class Factory;
@@ -84,14 +84,14 @@ class Initializer : public StreamInitializer {
  public:
   Initializer(T *member) : member_(member) { }
   virtual ~Initializer() { }
-  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
+  virtual void Init(StreamTokenizer &st, Environment *env = nullptr) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     bool is_null =
       token_type == StreamTokenizer::RESERVED_WORD &&
-      (st.Peek() == "nullptr" || st.Peek() == "NULL");
+      (st.Peek() == "nullptr" || st.Peek() == "nullptr");
     if (!(is_null || token_type == StreamTokenizer::IDENTIFIER)) {
       ostringstream err_ss;
-      err_ss << "FactoryInitializer: expected \"nullptr\", \"NULL\" or "
+      err_ss << "FactoryInitializer: expected \"nullptr\", \"nullptr\" or "
 	     << "IDENTIFIER token at stream "
              << "position " << st.PeekTokenStart() << " but found "
              << StreamTokenizer::TypeName(token_type) << " token: \""
@@ -112,7 +112,7 @@ class Initializer<int> : public StreamInitializer {
  public:
   Initializer(int *member) : member_(member) { }
   virtual ~Initializer() { }
-  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
+  virtual void Init(StreamTokenizer &st, Environment *env = nullptr) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
       ostringstream err_ss;
@@ -134,7 +134,7 @@ class Initializer<double> : public StreamInitializer {
  public:
   Initializer(double *member) : member_(member) { }
   virtual ~Initializer() { }
-  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
+  virtual void Init(StreamTokenizer &st, Environment *env = nullptr) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::NUMBER) {
       ostringstream err_ss;
@@ -156,7 +156,7 @@ class Initializer<bool> : public StreamInitializer {
  public:
   Initializer(bool *member) : member_(member) { }
   virtual ~Initializer() { }
-  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
+  virtual void Init(StreamTokenizer &st, Environment *env = nullptr) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::RESERVED_WORD) {
       ostringstream err_ss;
@@ -190,7 +190,7 @@ class Initializer<string> : public StreamInitializer {
  public:
   Initializer(string *member) : member_(member) { }
   virtual ~Initializer() { }
-  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
+  virtual void Init(StreamTokenizer &st, Environment *env = nullptr) {
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     if (token_type != StreamTokenizer::STRING) {
       ostringstream err_ss;

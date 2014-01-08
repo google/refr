@@ -111,7 +111,7 @@ class EnvironmentImpl : public Environment {
     unordered_map<string, VarMapBase *>::const_iterator var_map_it =
         var_map_.find(lookup_type);
     if (var_map_it == var_map_.end()) {
-      return NULL;
+      return nullptr;
     }
     return var_map_it->second;
   }
@@ -202,7 +202,7 @@ EnvironmentImpl::Get(const string &varname, T *value) const {
   VarMapBase *var_map = var_map_it->second;
   VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
 
-  if (typed_var_map == NULL) {
+  if (typed_var_map == nullptr) {
     ostringstream err_ss;
     err_ss << "Environment::Get: error: no value for variable "
            << varname << " of type " << typeid(*value).name()

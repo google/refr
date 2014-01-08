@@ -141,7 +141,7 @@ class Environment {
   /// Retrieves the VarMap instance for the specified variable.
   virtual VarMapBase *GetVarMap(const string &varname) = 0;
 
-  /// Retrieves the VarMap instance for the specified type, or NULL if
+  /// Retrieves the VarMap instance for the specified type, or nullptr if
   /// there is no such VarMap.  The specified type must either be a
   /// primitive type, a primitive vector type, a \link
   /// infact::Factory Factory\endlink-constructible type or a vector
@@ -315,7 +315,7 @@ class VarMapImpl : public VarMapBase {
   virtual VarMapBase *Copy(Environment *env) const {
     // Invoke Derived class' copy constructor.
     const Derived *derived = dynamic_cast<const Derived *>(this);
-    if (derived == NULL) {
+    if (derived == nullptr) {
       throw std::runtime_error("bad dynamic cast");
     }
     Derived *var_map_copy = new Derived(*derived);
@@ -330,7 +330,7 @@ class VarMapImpl : public VarMapBase {
     if (env()->Defined(st.Peek())) {
       VarMapBase *var_map = env()->GetVarMap(st.Peek());
       Derived *typed_var_map = dynamic_cast<Derived *>(var_map);
-      if (typed_var_map != NULL) {
+      if (typed_var_map != nullptr) {
         // Finally consume variable.
         string rhs_variable = st.Next();
         T value = T();

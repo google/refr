@@ -51,7 +51,7 @@ Interpreter::Eval(StreamTokenizer &st) {
     // Read variable name or type specifier.
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
     VarMapBase *varmap = env_->GetVarMapForType(st.Peek());
-    bool is_type_specifier =  varmap != NULL;
+    bool is_type_specifier =  varmap != nullptr;
     if (token_type != StreamTokenizer::IDENTIFIER && !is_type_specifier) {
       string expected_type =
           string(StreamTokenizer::TypeName(StreamTokenizer::IDENTIFIER)) +

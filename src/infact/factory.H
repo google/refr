@@ -219,7 +219,7 @@ class TypedMemberInitializer : public MemberInitializer {
   //                  appear in spec strings parsed by the
   ///                 \link Factory::CreateOrDie \endlink method
   /// \param member   a pointer to a data member of a C++ class to be
-  ///                 initialized, or NULL if this initializer should only
+  ///                 initialized, or nullptr if this initializer should only
   ///                 modify the Environment (providing a mapping between a
   ///                 name a value that might be used by a class&rsquo;
   ///         \link FactoryConstructible::Init(const Environment*,const string&)
@@ -231,10 +231,10 @@ class TypedMemberInitializer : public MemberInitializer {
   virtual ~TypedMemberInitializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env) {
     env->ReadAndSet(Name(), st, TypeName<T>().ToString());
-    if (member_ != NULL) {
+    if (member_ != nullptr) {
       VarMapBase *var_map = env->GetVarMap(Name());
       VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
-      if (typed_var_map != NULL) {
+      if (typed_var_map != nullptr) {
 	bool success = typed_var_map->Get(Name(), member_);
 	if (success) {
 	  ++initialized_;
@@ -403,14 +403,14 @@ class FactoryContainer {
   // Provide two methods to iterate over the FactoryBase instances
   // held by this FactoryContainer.
   static iterator begin() {
-    if (factories_ == NULL) {
+    if (factories_ == nullptr) {
       cerr << "FactoryContainer::begin: error: no FactoryBase instances!"
            << endl;
     }
     return factories_->begin();
   }
   static iterator end() {
-    if (factories_ == NULL) {
+    if (factories_ == nullptr) {
       cerr << "FactoryContainer::begin: error: no FactoryBase instances!"
            << endl;
     }
@@ -634,10 +634,10 @@ class Factory : public FactoryBase {
   /// \param st  the stream tokenizer providing tokens according to the
   ///            grammar shown above
   /// \param env the \link infact::Environment Environment \endlink in
-  ///            this method was called, or <tt>NULL</tt> if there is
+  ///            this method was called, or <tt>nullptr</tt> if there is
   ///            no calling environment
-  shared_ptr<T> CreateOrDie(StreamTokenizer &st, Environment *env = NULL) {
-    shared_ptr<Environment> env_ptr(env == NULL ?
+  shared_ptr<T> CreateOrDie(StreamTokenizer &st, Environment *env = nullptr) {
+    shared_ptr<Environment> env_ptr(env == nullptr ?
                                     Environment::CreateEmpty() : env->Copy());
     size_t start = st.PeekTokenStart();
     StreamTokenizer::TokenType token_type = st.PeekTokenType();
@@ -785,7 +785,7 @@ class Factory : public FactoryBase {
   }
 
   shared_ptr<T> CreateOrDie(const string &spec, const string err_msg,
-                            Environment *env = NULL) {
+                            Environment *env = nullptr) {
     StreamTokenizer st(spec);
     return CreateOrDie(st, env);
   }
