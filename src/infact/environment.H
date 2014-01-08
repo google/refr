@@ -256,6 +256,11 @@ class ValueString<vector<T> > {
 /// implement the \link infact::VarMapBase::Copy VarMapBase::Copy
 /// \endlink method, as well as the protected method \link
 /// ReadAndSetFromExistingVariable\endlink.
+///
+/// \tparam T       the type of variables stored in this (partial
+///                 implementation of a) variable map
+/// \tparam Derived the type of the class using this as its base class
+///                 (a.k.a. CRTP, or the "curiously recurring template pattern")
 template <typename T, typename Derived>
 class VarMapImpl : public VarMapBase {
  public:
@@ -405,7 +410,7 @@ class VarMap : public VarMapImpl<T, VarMap<T> > {
       T value;
       Initializer<T> initializer(&value);
       initializer.Init(st, Base::env());
-      Set(varname, value);
+      this->Set(varname, value);
 
       if (VAR_MAP_DEBUG >= 1) {
         ValueString<T> value_string;
@@ -419,7 +424,7 @@ class VarMap : public VarMapImpl<T, VarMap<T> > {
 /// A partial specialization to allow initialization of a vector of
 /// values, where the values can either be literals (if T is a
 /// primitive type), spec strings for constructing
-/// Factory-constructible objects, or variable names (where each
+/// \link Factory\endlink-constructible objects, or variable names (where each
 /// variable must be of type T).
 ///
 /// TODO(dbikel): Avoid repeating much of the unchanged implementation
@@ -428,6 +433,8 @@ class VarMap : public VarMapImpl<T, VarMap<T> > {
 /// stuff and have VarMap<T> contain a VarMapImpl<T> data member, and
 /// have VarMap<vector<T>> contain a VarMapImpl<vector<T>> data
 /// member.
+///
+/// \tparam T the element type for vectors stored in this variable map
 template <typename T>
 class VarMap<vector<T> > : public VarMapImpl<vector<T>, VarMap<vector<T> > > {
  public:
@@ -510,7 +517,7 @@ class VarMap<vector<T> > : public VarMapImpl<vector<T>, VarMap<vector<T> > > {
 
 
       // Finally, set the newly-constructed value.
-      Set(varname, value);
+      this->Set(varname, value);
     }
   }
  private:
