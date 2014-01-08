@@ -154,15 +154,43 @@ class TypeName<vector<T> > {
 /// infact::Factory Factory\endlink-constructible object.
 class MemberInitializer {
  public:
+  /// Initializes this base class.
+  ///
+  /// \param name     the name of the member to be initialized, as it should
+  //                  appear in spec strings parsed by the
+  ///                 \link Factory::CreateOrDie \endlink method
+  /// \param required whether this member is required to be initialized in a
+  ///                 spec string
   MemberInitializer(const string &name, bool required) :
       name_(name), initialized_(0), required_(required) { }
+
+  /// Destroys this instance.
   virtual ~MemberInitializer() { }
+
+  /// Returns the name of the member initialized by this instance, as
+  /// it should appear in a spec string parsed by \link
+  /// Factory::CreateOrDie\endlink.  While it is not a requirement
+  /// that this name be identical to the declared name of the member
+  /// in its C++ class, the convention is to use the declared name
+  /// without an underscore.
   virtual string Name() { return name_; }
+
+  /// Initializes this instance based on the following tokens obtained from
+  /// the specified \link StreamTokenizer\endlink.
+  ///
+  /// \param st  the stream tokenizer whose next tokens contain the information
+  ///            to initialize this data member
+  /// \param env the current environment, to be modified by this member&rsquo;s
+  ///            initialization
   virtual void Init(StreamTokenizer &st, Environment *env) = 0;
+
   /// Returns the number of times this member initializer&rsquo;s
   /// \link Init \endlink method has been invoked.
   virtual int Initialized() const { return initialized_; }
+
+  /// Whether this member is required to be initialized in a spec string.
   virtual bool Required() const { return required_; }
+
  protected:
   /// The name of this member.
   string name_;
@@ -184,18 +212,39 @@ class MemberInitializer {
 template <typename T>
 class TypedMemberInitializer : public MemberInitializer {
  public:
+  /// A concrete implementation of the MemberInitializer base class, holding
+  /// a pointer to a typed member that needs to be initialized.
+  ///
+  /// \param name     the name of the member to be initialized, as it should
+  //                  appear in spec strings parsed by the
+  ///                 \link Factory::CreateOrDie \endlink method
+  /// \param member   a pointer to a data member of a C++ class to be
+  ///                 initialized, or NULL if this initializer should only
+  ///                 modify the Environment (providing a mapping between a
+  ///                 name a value that might be used by a class&rsquo;
+  ///         \link FactoryConstructible::Init(const Environment*,const string&)
+  ///                 Init \endlink method
+  /// \param required whether this member is required to be initialized in a
+  ///                 spec string
   TypedMemberInitializer(const string &name, T *member, bool required = false) :
       MemberInitializer(name, required), member_(member) { }
   virtual ~TypedMemberInitializer() { }
   virtual void Init(StreamTokenizer &st, Environment *env) {
     env->ReadAndSet(Name(), st, TypeName<T>().ToString());
-    VarMapBase *var_map = env->GetVarMap(Name());
-    VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
-    if (typed_var_map != NULL) {
-      bool success = typed_var_map->Get(Name(), member_);
-      if (success) {
-        ++(initialized_);
+    if (member_ != NULL) {
+      VarMapBase *var_map = env->GetVarMap(Name());
+      VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
+      if (typed_var_map != NULL) {
+	bool success = typed_var_map->Get(Name(), member_);
+	if (success) {
+	  ++initialized_;
+	}
       }
+    } else {
+      // When the goal is simply to modify the environment, we say that this
+      // "non-member" has been successfully initialized when we've modified
+      // the environment.
+      ++initialized_;
     }
   }
  protected:
@@ -229,8 +278,31 @@ class Initializers {
     }
   }
 
+  /// This method is the raison d'etre of this class: a method to make it
+  /// easy to add all supported types of members of a class to be initialized
+  /// upon construction by its \link infact::Factory Factory\endlink.
+  ///
+  /// \param name     the name of the member to be initialized (as it
+  ///                 should appear in the initialization spec string;
+  ///                 note that this string does not have to be
+  ///                 identical to the actual member name in the C++
+  ///                 class definition, but the convention is to make
+  ///                 it identical but without an underscore
+  ///                 character)
+  /// \param member   a pointer to the class instance's member that is
+  ///                 to be initialized based on tokens in a spec
+  ///                 string parsed by the \link
+  ///                 infact::Factory::CreateOrDie
+  ///                 Factory::CreateOrDie \endlink method
+  /// \param required whether this member must be specified in a spec string
   template<typename T>
   void Add(const string &name, T *member, bool required = false) {
+    if (initializers_.find(name) != initializers_.end()) {
+      ostringstream err_ss;
+      err_ss << "Initializers::Add: error: two members have the same name: "
+	     << name;
+      throw std::runtime_error(err_ss.str());
+    }
     initializers_[name] = new TypedMemberInitializer<T>(name, member, required);
   }
 
