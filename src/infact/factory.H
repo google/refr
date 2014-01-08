@@ -752,7 +752,9 @@ class Factory : public FactoryBase {
 
   virtual VarMapBase *CreateVectorVarMap(Environment *env) const {
     string name = BaseName() + "[]";
-    return new VarMap<vector<shared_ptr<T> > >(name, BaseName(), env);
+    bool is_primitive = false;
+    return new VarMap<vector<shared_ptr<T> > >(name, BaseName(), env,
+					       is_primitive);
   }
 
   /// The method used by the \link REGISTER_NAMED \endlink macro to ensure
