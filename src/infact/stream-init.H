@@ -206,61 +206,6 @@ class Initializer<string> : public StreamInitializer {
   string *member_;
 };
 
-/*
-/// A partial specialization to allow initialization of a vector of
-/// any primitive type or any \link Factory\endlink-constructible
-/// type.  The syntax for a vector initialization is an open brace '{'
-/// followed by a comma-separated list of values followed by a close
-/// brace '}'.
-template<typename T>
-class Initializer<vector<T> > : public StreamInitializer {
- public:
-  Initializer(vector<T> *member) : member_(member) { }
-  virtual ~Initializer() { }
-  virtual void Init(StreamTokenizer &st, Environment *env = NULL) {
-    // Either the next token is an open brace (if reading tokens from
-    // within a Factory-constructible object's member init list), or
-    // else we just read an open brace (if Interpreter is reading tokens).
-    if (st.Peek() == "{") {
-      // Consume open brace.
-      cerr << "Consuming open brace." << endl;
-      st.Next();
-    } else {
-      ostringstream err_ss;
-      err_ss << "Initializer<vector<T>>: "
-             << "error: expected '{' at stream position "
-             << st.PeekPrevTokenStart() << " but found \""
-             << st.PeekPrev() << "\"";
-      throw std::runtime_error(err_ss.str());
-    }
-    while (st.Peek() != "}") {
-      T vector_element;
-      Initializer<T> *element_init = new Initializer<T>(&vector_element);
-      element_init->Init(st, env);
-      member_->push_back(vector_element);
-      delete element_init;
-      // Each vector element initializer must be followed by a comma
-      // or the final closing parenthesis.
-      if (st.Peek() != ","  && st.Peek() != "}") {
-        ostringstream err_ss;
-        err_ss << "Initializer<vector<T>>: "
-               << "error: expected ',' or '}' at stream position "
-               << st.PeekTokenStart() << " but found \"" << st.Peek() << "\"";
-        throw std::runtime_error(err_ss.str());
-      }
-      // Read comma, if present.
-      if (st.Peek() == ",") {
-        st.Next();
-      }
-    }
-    // Consume close brace.
-    st.Next();
-  }
- private:
-  vector<T> *member_;
-};
-*/
-
 }  // namespace infact
 
 #endif
