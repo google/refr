@@ -39,6 +39,7 @@
 
 namespace infact {
 
+/// A class to represent a cow.
 class Cow : public Animal {
 public:
   /// Constructs a cow.

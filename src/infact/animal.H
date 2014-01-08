@@ -42,6 +42,7 @@
 
 namespace infact {
 
+/// A very simple class to represent an animal.
 class Animal : public FactoryConstructible {
  public:
   /// Constructs a generic animal.

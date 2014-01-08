@@ -248,24 +248,21 @@ class ValueString<vector<T> > {
   }
 };
 
-/// A container to hold the mapping between named variables of a specific
-/// type and their values.
+/// A partial implementation of the VarMapBase interface that is common
+/// to both VarMap<T> and the VarMap<vector<T> > partial specialization.
 ///
-/// \tparam T the type of variables held by this variable map
-template <typename T>
-class VarMap : public VarMapBase {
+/// In a delightful twist, this partial implementation of VarMapBase
+/// uses the curiously recurring template pattern (CRTP) in order to
+/// implement the \link infact::VarMapBase::Copy VarMapBase::Copy
+/// \endlink method, as well as the protected method \link
+/// ReadAndSetFromExistingVariable\endlink.
+template <typename T, typename Derived>
+class VarMapImpl : public VarMapBase {
  public:
-  /// Constructs a mapping from variables of a particular type to their values.
-  ///
-  /// \param name         the type name of the variables in this instance
-  /// \param env          the \link infact::Environment Environment \endlink
-  ///                     that contains this VarMap instance
-  /// \param is_primitive whether this instance contains primitive or primitive
-  ///                     vector variables
-  VarMap(const string &name, Environment *env, bool is_primitive = true) :
+  VarMapImpl(const string &name, Environment *env, bool is_primitive = true) :
       VarMapBase(name, env, is_primitive) { }
 
-  virtual ~VarMap() { }
+  virtual ~VarMapImpl() { }
 
   // Accessor methods
 
@@ -294,64 +291,6 @@ class VarMap : public VarMapBase {
     vars_[varname] = value;
   }
 
-  /// \copydoc VarMapBase::ReadAndSet
-  virtual void ReadAndSet(const string &varname, StreamTokenizer &st) {
-    if (VAR_MAP_DEBUG >= 1) {
-      cerr << "VarMap<" << Name() << ">::ReadAndSet: about to set varname "
-           << varname << " of type " << typeid(T).name()
-           << "; prev_token=" << st.PeekPrev() << "; next_tok=" << st.Peek()
-           << endl;
-    }
-
-    // First check if next token is an identifier and is a variable in
-    // the environment, set varname to its value.
-    if (env_->Defined(st.Peek())) {
-      VarMapBase *var_map = env_->GetVarMap(st.Peek());
-      VarMap<T> *typed_var_map = dynamic_cast<VarMap<T> *>(var_map);
-      if (typed_var_map != NULL) {
-        // Finally consume variable.
-        string rhs_variable = st.Next();
-        T value = T();
-        // Retrieve rhs variable's value.
-        bool success = typed_var_map->Get(rhs_variable, &value);
-        // Set varname to the same value.
-        if (VAR_MAP_DEBUG >= 1) {
-          cerr << "VarMap<" << Name() << ">::ReadAndSet: setting variable "
-               << varname << " to same value as rhs variable " << rhs_variable
-               << endl;
-        }
-        if (success) {
-          Set(varname, value);
-        } else {
-          // Error: we couldn't find the varname in this VarMap.
-          if (VAR_MAP_DEBUG >= 1) {
-            cerr << "VarMap<" << Name() << ">::ReadAndSet: no variable "
-                 << rhs_variable << " found " << endl;
-          }
-        }
-      } else {
-        // Error: inferred or declared type of varname is different
-        // from the type of the rhs variable.
-        if (VAR_MAP_DEBUG >= 1) {
-          cerr << "VarMap<" << Name() << ">::ReadAndSet: variable "
-               << st.Peek() << " is of type " << var_map->Name()
-               << " but expecting " << typeid(T).name() << endl;
-        }
-      }
-    } else {
-      T value;
-      Initializer<T> initializer(&value);
-      initializer.Init(st, env_);
-      Set(varname, value);
-
-      if (VAR_MAP_DEBUG >= 1) {
-        ValueString<T> value_string;
-        cerr << "VarMap<" << Name() << ">::ReadAndSet: set varname "
-             << varname << " to value " << value_string.ToString(value)<< endl;
-      }
-    }
-  }
-
   /// \copydoc VarMapBase::Print
   virtual void Print(ostream &os) const {
     ValueString<T> value_string;
@@ -369,85 +308,33 @@ class VarMap : public VarMapBase {
 
   /// \copydoc VarMapBase::Copy
   virtual VarMapBase *Copy(Environment *env) const {
-    VarMap<T> *var_map_copy = new VarMap<T>(*this);
+    // Invoke Derived class' copy constructor.
+    const Derived *derived = dynamic_cast<const Derived *>(this);
+    if (derived == NULL) {
+      throw std::runtime_error("bad dynamic cast");
+    }
+    Derived *var_map_copy = new Derived(*derived);
     var_map_copy->SetMembers(name_, env, is_primitive_);
     return var_map_copy;
   }
- private:
-  unordered_map<string, T> vars_;
-};
-
-/// A partial specialization to allow initialization of a vector of
-/// values, where the values can either be literals (if T is a
-/// primitive type), spec strings for constructing
-/// Factory-constructible objects, or variable names (where each
-/// variable must be of type T).
-///
-/// TODO(dbikel): Avoid repeating much of the unchanged implementation
-/// from the non-specialized VarMap<T>, above, by using the PIMPL
-/// design pattern (i.e., create VarMapImpl<T> that does the generic
-/// stuff and have VarMap<T> contain a VarMapImpl<T> data member, and
-/// have VarMap<vector<T>> contain a VarMapImpl<vector<T>> data
-/// member.
-template <typename T>
-class VarMap<vector<T> > : public VarMapBase {
- public:
-  /// Constructs a mapping from variables of a particular type to their values.
-  ///
-  /// \param name             the type name of the variables in this instance
-  /// \param element_typename the type name of the elements of the vectors
-  ///                         held by this instance
-  /// \param env              the \link infact::Environment Environment \endlink
-  ///                         that contains this VarMap instance
-  VarMap(const string &name, const string &element_typename, Environment *env)
-      : VarMapBase(name, env, false), element_typename_(element_typename) { }
-
-  virtual ~VarMap() { }
-
-  // Accessor methods
-
-  /// Assigns the value of the specified variable to the object pointed to
-  /// by the <tt>value</tt> parameter.
-  ///
-  /// \return whether the specified variable exists and the assignment
-  ///         was successful
-  bool Get(const string &varname, vector<T> *value) const {
-    typename unordered_map<string, vector<T> >::const_iterator it =
-        vars_.find(varname);
-    if (it == vars_.end()) {
-      return false;
-    } else {
-      *value = it->second;
-      return true;
-    }
-  }
-
-  /// \copydoc VarMapBase::Defined
-  virtual bool Defined(const string &varname) const {
-    return vars_.find(varname) != vars_.end();
-  }
-
-  /// Sets the specified variable to the specified value.
-  void Set(const string &varname, vector<T> value) {
-    vars_[varname] = value;
-  }
-
-  virtual void ReadAndSet(const string &varname, StreamTokenizer &st) {
-    // First check if next token is an identifier and is a variable in
-    // the environment, set varname to its value.
-    if (env_->Defined(st.Peek())) {
-      VarMapBase *var_map = env_->GetVarMap(st.Peek());
-      VarMap<vector<T> > *typed_var_map =
-          dynamic_cast<VarMap<vector<T> > *>(var_map);
+ protected:
+  /// Checks if the next token is an identifier and is a variable in
+  /// the environment, and, if so, sets varname to the variable&rsquo;s value.
+  bool ReadAndSetFromExistingVariable(const string &varname,
+                                      StreamTokenizer &st) {
+    if (env()->Defined(st.Peek())) {
+      VarMapBase *var_map = env()->GetVarMap(st.Peek());
+      Derived *typed_var_map = dynamic_cast<Derived *>(var_map);
       if (typed_var_map != NULL) {
         // Finally consume variable.
         string rhs_variable = st.Next();
-        vector<T> value;
+        T value = T();
         // Retrieve rhs variable's value.
         bool success = typed_var_map->Get(rhs_variable, &value);
         // Set varname to the same value.
         if (VAR_MAP_DEBUG >= 1) {
-          cerr << "VarMap<" << Name() << ">::ReadAndSet: setting variable "
+          cerr << "VarMap<" << Name() << ">::ReadAndSet: "
+               << "setting variable "
                << varname << " to same value as rhs variable " << rhs_variable
                << endl;
         }
@@ -469,7 +356,99 @@ class VarMap<vector<T> > : public VarMapBase {
                << " but expecting " << typeid(T).name() << endl;
         }
       }
+      return true;
     } else {
+      return false;
+    }
+  }
+
+  /// A protected method to access the environment contained by this
+  /// VarMapBase instance, for the two concrete VarMap implementations, below.
+  Environment *env() { return VarMapBase::env_; }
+
+ private:
+  unordered_map<string, T> vars_;
+};
+
+/// A container to hold the mapping between named variables of a specific
+/// type and their values.
+///
+/// \tparam T the type of variables held by this variable map
+template <typename T>
+class VarMap : public VarMapImpl<T, VarMap<T> > {
+ public:
+  typedef VarMapImpl<T, VarMap<T> > Base;
+
+  /// Constructs a mapping from variables of a particular type to their values.
+  ///
+  /// \param name         the type name of the variables in this instance
+  /// \param env          the \link infact::Environment Environment \endlink
+  ///                     that contains this VarMap instance
+  /// \param is_primitive whether this instance contains primitive or primitive
+  ///                     vector variables
+  VarMap(const string &name, Environment *env, bool is_primitive = true) :
+      Base(name, env, is_primitive) { }
+
+  virtual ~VarMap() { }
+
+  /// \copydoc VarMapBase::ReadAndSet
+  virtual void ReadAndSet(const string &varname, StreamTokenizer &st) {
+    if (VAR_MAP_DEBUG >= 1) {
+      cerr << "VarMap<" << Base::Name() << ">::ReadAndSet: "
+           << "about to set varname " << varname << " of type "
+           << typeid(T).name()
+           << "; prev_token=" << st.PeekPrev() << "; next_tok=" << st.Peek()
+           << endl;
+    }
+
+    if (!Base::ReadAndSetFromExistingVariable(varname, st)) {
+      T value;
+      Initializer<T> initializer(&value);
+      initializer.Init(st, Base::env());
+      Set(varname, value);
+
+      if (VAR_MAP_DEBUG >= 1) {
+        ValueString<T> value_string;
+        cerr << "VarMap<" << Base::Name() << ">::ReadAndSet: set varname "
+             << varname << " to value " << value_string.ToString(value)<< endl;
+      }
+    }
+  }
+};
+
+/// A partial specialization to allow initialization of a vector of
+/// values, where the values can either be literals (if T is a
+/// primitive type), spec strings for constructing
+/// Factory-constructible objects, or variable names (where each
+/// variable must be of type T).
+///
+/// TODO(dbikel): Avoid repeating much of the unchanged implementation
+/// from the non-specialized VarMap<T>, above, by using the PIMPL
+/// design pattern (i.e., create VarMapImpl<T> that does the generic
+/// stuff and have VarMap<T> contain a VarMapImpl<T> data member, and
+/// have VarMap<vector<T>> contain a VarMapImpl<vector<T>> data
+/// member.
+template <typename T>
+class VarMap<vector<T> > : public VarMapImpl<vector<T>, VarMap<vector<T> > > {
+ public:
+  typedef VarMapImpl<vector<T>, VarMap<vector<T> > > Base;
+
+  /// Constructs a mapping from variables of a particular type to their values.
+  ///
+  /// \param name             the type name of the variables in this instance
+  /// \param element_typename the type name of the elements of the vectors
+  ///                         held by this instance
+  /// \param env              the \link infact::Environment Environment \endlink
+  ///                         that contains this VarMap instance
+  VarMap(const string &name, const string &element_typename, Environment *env)
+      : Base(name, env, false), element_typename_(element_typename) { }
+
+  virtual ~VarMap() { }
+
+  virtual void ReadAndSet(const string &varname, StreamTokenizer &st) {
+    // First check if next token is an identifier and is a variable in
+    // the environment, set varname to its value.
+    if (!Base::ReadAndSetFromExistingVariable(varname, st)) {
       // This entire block reads the array of values.
 
       // Either the next token is an open brace (if reading tokens from
@@ -477,8 +456,6 @@ class VarMap<vector<T> > : public VarMapBase {
       // else we just read an open brace (if Interpreter is reading tokens).
       if (st.Peek() == "{") {
         // Consume open brace.
-        cerr << "VarMap<" << Name() << ">::ReadAndSet: consuming open brace."
-             << endl;
         st.Next();
       } else {
         ostringstream err_ss;
@@ -493,7 +470,7 @@ class VarMap<vector<T> > : public VarMapBase {
       int element_idx = 0;
       while (st.Peek() != "}") {
         // Copy the environment, since we create fake names for each element.
-        shared_ptr<Environment> env_ptr(env_->Copy());
+        shared_ptr<Environment> env_ptr(Base::env()->Copy());
         ostringstream element_name_oss;
         element_name_oss << "____" << varname << "_" << (element_idx++)
                          << "____";
@@ -508,7 +485,7 @@ class VarMap<vector<T> > : public VarMapBase {
         bool success = typed_element_var_map->Get(element_name, &element);
         if (!success) {
           ostringstream err_ss;
-          err_ss << "VarMap<" << Name() << ">::ReadAndSet: trouble "
+          err_ss << "VarMap<" << Base::Name() << ">::ReadAndSet: trouble "
                  << "initializing element " << (element_idx - 1)
                  << " of variable " << varname;
           throw std::runtime_error(err_ss.str());
@@ -536,32 +513,7 @@ class VarMap<vector<T> > : public VarMapBase {
       Set(varname, value);
     }
   }
-
-  /// \copydoc VarMapBase::Print
-  virtual void Print(ostream &os) const {
-    ValueString<vector<T> > value_string;
-    for (typename unordered_map<string, vector<T> >::const_iterator it =
-             vars_.begin();
-         it != vars_.end(); ++it) {
-      const vector<T> &value = it->second;
-      os << Name() << " "
-         << it->first
-         << " = "
-         << value_string.ToString(value)
-         << ";\n";
-    }
-    os.flush();
-  }
-
-  /// \copydoc VarMapBase::Copy
-  virtual VarMapBase *Copy(Environment *env) const {
-    VarMap<vector<T> > *var_map_copy = new VarMap<vector<T> >(*this);
-    var_map_copy->SetMembers(name_, env, is_primitive_);
-    return var_map_copy;
-  }
-
  private:
-  unordered_map<string, vector<T> > vars_;
   string element_typename_;
 };
 

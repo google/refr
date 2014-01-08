@@ -150,7 +150,7 @@ class TypeName<vector<T> > {
 
 /// \class MemberInitializer
 ///
-/// An interface for initializers of members of a \link
+/// An interface for data member initializers of members of a \link
 /// infact::Factory Factory\endlink-constructible object.
 class MemberInitializer {
  public:
@@ -173,6 +173,14 @@ class MemberInitializer {
   bool required_;
 };
 
+/// A concrete, typed implementation of the MemberInitializer base class.
+/// This class holds a pointer to a particular type of data member from
+/// some \link Factory\endlink-constructible class that it can initialize
+/// from a \link StreamTokenizer \endlink instance.
+///
+/// \tparam T a type of data member from a \link Factory\endlink-constructible
+///           class that this class can initialize by reading tokens from
+///           a \link StreamTokenizer \endlink instance
 template <typename T>
 class TypedMemberInitializer : public MemberInitializer {
  public:

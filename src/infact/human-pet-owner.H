@@ -39,6 +39,8 @@
 
 namespace infact {
 
+/// A concrete type of PetOwner that can be constructed by a \link
+/// Factory\endlink\<\link PetOwner \endlink\> instance.
 class HumanPetOwner : public PetOwner {
  public:
   /// Constructs a human pet owner.

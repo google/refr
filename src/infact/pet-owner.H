@@ -42,6 +42,7 @@
 
 namespace infact {
 
+/// An owner of a pet.
 class PetOwner : public FactoryConstructible {
  public:
   /// Constructs a generic pet owner.
