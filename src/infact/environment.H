@@ -447,6 +447,8 @@ class VarMap<vector<T> > : public VarMapImpl<vector<T>, VarMap<vector<T> > > {
   ///                         held by this instance
   /// \param env              the \link infact::Environment Environment \endlink
   ///                         that contains this VarMap instance
+  /// \param is_primitive     whether the variables held in this variable map
+  ///                         are primitives or vectors of primitives
   VarMap(const string &name, const string &element_typename, Environment *env,
 	 bool is_primitive = true)
       : Base(name, env, is_primitive), element_typename_(element_typename) { }

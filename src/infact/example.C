@@ -51,7 +51,14 @@ REGISTER_PET_OWNER(HumanPetOwner)
 
 void Sheep::Init(StreamTokenizer &st, Environment *env) {
   int env_age;
-  if (((EnvironmentImpl *)env)->Get("age", &env_age)) {
+  // Note how we need to cast Environment down to EnvironmentImpl,
+  // because only the implementation has the templated \link
+  // EnvironmentImpl::Get \endlink method, because only an
+  // implementation can be aware of the all the \link
+  // Factory\endlink-constructible types.
+  EnvironmentImpl *env_impl = dynamic_cast<EnvironmentImpl *>(env);
+  if (env_impl != nullptr &&
+      env_impl->Get("age", &env_age)) {
     age_ = env_age * 2;
   }
 }
