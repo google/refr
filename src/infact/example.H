@@ -265,9 +265,10 @@ class HumanPetOwner : public PetOwner {
   /// Constructs a human pet owner.
   HumanPetOwner() : PetOwner() {}
 
-  // Destroys a human pet owner.
+  /// Destroys a human pet owner.
   virtual ~HumanPetOwner() {}
 
+  /// Registers a single required initializer.
   virtual void RegisterInitializers(Initializers &initializers) {
     initializers.Add("pets", &pets_, true);
   }
