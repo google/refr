@@ -33,13 +33,27 @@
 /// Provides implementations of the various example classes.
 
 #include "example.H"
+#include "environment-impl.H"
 
 namespace infact {
+
+IMPLEMENT_FACTORY(Date)
+REGISTER_DATE(DateImpl)
+
+IMPLEMENT_FACTORY(Person)
+REGISTER_PERSON(PersonImpl)
 
 IMPLEMENT_FACTORY(Animal)
 REGISTER_ANIMAL(Cow)
 
 IMPLEMENT_FACTORY(PetOwner)
 REGISTER_PET_OWNER(HumanPetOwner)
+
+void Sheep::Init(StreamTokenizer &st, Environment *env) {
+  int env_age;
+  if (((EnvironmentImpl *)env)->Get("age", &env_age)) {
+    age_ = env_age * 2;
+  }
+}
 
 }  // namespace infact

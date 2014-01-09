@@ -30,7 +30,11 @@
 //
 //
 /// \file
-/// Provides various example class headers.
+/// Provides various example class headers.  Please note the presence
+/// of the various <tt>REGISTER_*</tt> macros sprinkled throughout
+/// this file.  The convention is for a <tt>REGISTER</tt>_<i>type</i>
+/// macro to be placed just below the declaration of the <i>type</i>
+/// interface declaration.
 /// \author dbikel@google.com (Dan Bikel)
 
 #ifndef INFACT_EXAMPLE_H_
@@ -42,6 +46,69 @@
 
 namespace infact {
 
+class Date : public FactoryConstructible {
+ public:
+  Date() {}
+  virtual ~Date() {}
+
+  virtual int year() const = 0;
+  virtual int month() const = 0;
+  virtual int day() const = 0;
+};
+
+#define REGISTER_DATE(TYPE) \
+  REGISTER_NAMED(TYPE,TYPE,Date)
+
+class DateImpl : public Date {
+ public:
+  DateImpl() : Date() {}
+  virtual ~DateImpl() {}
+
+  virtual void RegisterInitializers(Initializers &initializers) {
+    bool required = true;
+    initializers.Add("year", &year_, required);
+    initializers.Add("month", &month_, required);
+    initializers.Add("day", &day_, required);
+  }
+
+  virtual int year() const { return year_; }
+  virtual int month() const { return month_; }
+  virtual int day() const { return day_; }
+
+ private:
+  int year_;
+  int month_;
+  int day_;
+};
+
+class Person : public FactoryConstructible {
+ public:
+  Person() {}
+  virtual ~Person() {}
+
+  virtual const string &name() const = 0;
+  virtual const int height() const = 0;
+  virtual shared_ptr<const Date> birthday() const = 0;
+};
+
+#define REGISTER_PERSON(TYPE) \
+  REGISTER_NAMED(TYPE,TYPE,Person)
+
+class PersonImpl : public Person {
+ public:
+  PersonImpl() : Person() {}
+  virtual ~PersonImpl() {}
+
+  virtual const string &name() const { return name_; }
+  virtual const int height() const { return cm_height_; }
+  virtual shared_ptr<const Date> birthday() const { return birthday_; }
+
+ private:
+  string name_;
+  int cm_height_;
+  shared_ptr<Date> birthday_;
+};
+
 /// A very simple class to represent an animal.
 class Animal : public FactoryConstructible {
  public:
@@ -51,7 +118,10 @@ class Animal : public FactoryConstructible {
   virtual ~Animal() {}
 
   /// Returns the name of this animal.
-  virtual string GetName() = 0;
+  virtual const string &name() const = 0;
+
+  /// Returns the age of this animal.
+  virtual int age() const = 0;
 };
 
 /// Registers the \link infact::Animal Animal \endlink with the
@@ -65,49 +135,59 @@ class Animal : public FactoryConstructible {
 class Cow : public Animal {
 public:
   /// Constructs a cow.
-  Cow() : Animal() { }
+  Cow() : Animal() {
+    age_ = 2; // default age, since age is optional
+  }
 
   // Destroys this instance.
-  virtual ~Cow() { }
+  virtual ~Cow() {}
 
-  /// Registers the two variables that may be initialized when this object
-  /// is constructed via \link Factory::CreateOrDie\endlink.
-  /// <table>
-  /// <tr>
-  ///   <th>Variable name</th>
-  ///   <th>Type</th>
-  ///   <th>Required</th>
-  ///   <th>Description</th>
-  ///   <th>Default value</th>
-  /// </tr>
-  /// <tr>
-  ///   <td><tt>name</tt></td>
-  ///   <td><tt>string</tt></td>
-  ///   <td>Yes</td>
-  ///   <td>The name of this model animal.</td>
-  ///   <td>n/a</td>
-  /// </tr>
-  /// <tr>
-  ///   <td><tt>age</tt></td>
-  ///   <td><tt>int</tt></td>
-  ///   <td>No</td>
-  ///   <td>The age of this animal.</td>
-  ///   <td>0</td>
-  /// </tr>
-  /// </table>
   virtual void RegisterInitializers(Initializers &initializers) {
-    initializers.Add("name", &name_, true);
+    bool required = true;
+    initializers.Add("name", &name_, required);
     initializers.Add("age", &age_);
   }
 
   /// Returns the name of this animal.
-  virtual string GetName() {
-    return name_;
-  }
-
+  virtual const string &name() const { return name_; }
+  virtual int age() const { return age_; }
 private:
   string name_;
   int age_;
+};
+
+class Sheep : public Animal {
+  /// Constructs a sheep.
+  Sheep() : Animal() {}
+  virtual ~Sheep() {}
+
+  virtual void RegisterInitializers(Initializers &initializers) {
+    bool required = true;
+    initializers.Add("name", &name_, required);
+    initializers.Add("counts", &counts_);
+    // We can pass in a nullptr, if we don't want to directly
+    // initialize a data member of this class, but instead want to
+    // simply grab something from the Environment after this method
+    // has been invoked; see the Init method declared below (defined
+    // in example.C).
+    initializers.Add("age", (int *)nullptr);
+  }
+
+  /// Grabs the variable named "age" from the Environment (set up by
+  /// RegisterInitializers, above) and sets this sheep&rsquo;s age to
+  /// be twice that value.
+  virtual void Init(StreamTokenizer &st, Environment *env);
+
+  virtual const string &name() const { return name_; }
+  virtual int age() const {
+    return -1;  // Always returns -1, because sheep are timeless.
+  }
+  const vector<int> &counts() { return counts_; }
+ private:
+  string name_;
+  int age_;
+  // The various times people have counted this sheep when falling asleep.
+  vector<int> counts_;
 };
 
 /// An owner of a pet.
@@ -134,10 +214,10 @@ class PetOwner : public FactoryConstructible {
 class HumanPetOwner : public PetOwner {
  public:
   /// Constructs a human pet owner.
-  HumanPetOwner() : PetOwner() { }
+  HumanPetOwner() : PetOwner() {}
 
   // Destroys a human pet owner.
-  virtual ~HumanPetOwner() { }
+  virtual ~HumanPetOwner() {}
 
   virtual void RegisterInitializers(Initializers &initializers) {
     initializers.Add("pets", &pets_, true);
