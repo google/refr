@@ -194,12 +194,15 @@ private:
   int age_;
 };
 
+/// A sheep.
 class Sheep : public Animal {
  public:
   /// Constructs a sheep.
   Sheep() : Animal() {}
+  /// Destroys a sheep.
   virtual ~Sheep() {}
 
+  /// Registers one required and two optional inititalizers.
   virtual void RegisterInitializers(Initializers &initializers) {
     bool required = true;
     initializers.Add("name", &name_, required);
@@ -217,10 +220,13 @@ class Sheep : public Animal {
   /// be twice that value.
   virtual void Init(StreamTokenizer &st, Environment *env);
 
+  /// \copydoc Animal::name
   virtual const string &name() const { return name_; }
+  /// \copydoc Animal::age
   virtual int age() const {
     return -1;  // Always returns -1, because sheep are timeless.
   }
+  /// Returns the counts of this sheep.
   const vector<int> &counts() { return counts_; }
  private:
   string name_;
