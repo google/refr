@@ -37,6 +37,12 @@
 
 namespace infact {
 
+// Normally, the various IMPLEMENT_FACTORY declarations would be
+// separate from the various REGISTER_* declarations, which would
+// usually appear in the separate concrete implementations' .C files.
+// For compactness, we have this single .C file, so everything is
+// lumped together.
+
 IMPLEMENT_FACTORY(Date)
 REGISTER_DATE(DateImpl)
 
@@ -45,6 +51,7 @@ REGISTER_PERSON(PersonImpl)
 
 IMPLEMENT_FACTORY(Animal)
 REGISTER_ANIMAL(Cow)
+REGISTER_ANIMAL(Sheep)
 
 IMPLEMENT_FACTORY(PetOwner)
 REGISTER_PET_OWNER(HumanPetOwner)

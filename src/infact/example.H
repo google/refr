@@ -46,24 +46,37 @@
 
 namespace infact {
 
+/// An interface to represent a date.
 class Date : public FactoryConstructible {
  public:
+  /// Constructs this date.
   Date() {}
+  /// Destroys this date.
   virtual ~Date() {}
 
+  /// Returns the year.
   virtual int year() const = 0;
+  /// Returns the month.
   virtual int month() const = 0;
+  /// Returns the day.
   virtual int day() const = 0;
 };
 
 #define REGISTER_DATE(TYPE) \
   REGISTER_NAMED(TYPE,TYPE,Date)
 
+/// An implementation of the Date interface that can be constructed by
+/// a \link Factory \endlink (because of the
+/// <tt>REGISTER_DATE(DateImpl)</tt> declaration in
+/// <tt>example.C</tt>).
 class DateImpl : public Date {
  public:
+  /// Constructs this instance.
   DateImpl() : Date() {}
+  /// Destroys this instance.
   virtual ~DateImpl() {}
 
+  /// Registers three required initializers.
   virtual void RegisterInitializers(Initializers &initializers) {
     bool required = true;
     initializers.Add("year", &year_, required);
@@ -71,8 +84,11 @@ class DateImpl : public Date {
     initializers.Add("day", &day_, required);
   }
 
+  /// \copydoc Date::year
   virtual int year() const { return year_; }
+  /// \copydoc Date::month
   virtual int month() const { return month_; }
+  /// \copydoc Date::day
   virtual int day() const { return day_; }
 
  private:
@@ -81,26 +97,41 @@ class DateImpl : public Date {
   int day_;
 };
 
+/// An interface representing a person.
 class Person : public FactoryConstructible {
  public:
+  /// Constructs this abstract person.
   Person() {}
+  /// Destroys this abstract person.
   virtual ~Person() {}
 
+  /// Returns the name of this person.
   virtual const string &name() const = 0;
+  /// Returns the height of this person.
   virtual const int height() const = 0;
+  /// Returns the birthday of this person.
   virtual shared_ptr<const Date> birthday() const = 0;
 };
 
 #define REGISTER_PERSON(TYPE) \
   REGISTER_NAMED(TYPE,TYPE,Person)
 
+/// A concrete implementation of the Person interface that can be
+/// constructed by a \link Factory \endlink (because of the
+/// <tt>REGISTER_PERSON(PersonImpl)</tt> declaration in
+/// <tt>example.C</tt>).
 class PersonImpl : public Person {
  public:
+  /// Constructs this person.
   PersonImpl() : Person() {}
+  /// Destroys this person.
   virtual ~PersonImpl() {}
 
+  /// \copydoc Person::name
   virtual const string &name() const { return name_; }
+  /// \copydoc Person::height
   virtual const int height() const { return cm_height_; }
+  /// \copydoc Person::birthday
   virtual shared_ptr<const Date> birthday() const { return birthday_; }
 
  private:
@@ -157,6 +188,7 @@ private:
 };
 
 class Sheep : public Animal {
+ public:
   /// Constructs a sheep.
   Sheep() : Animal() {}
   virtual ~Sheep() {}
