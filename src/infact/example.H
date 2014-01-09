@@ -62,6 +62,9 @@ class Date : public FactoryConstructible {
   virtual int day() const = 0;
 };
 
+/// The macro by which \link Date \endlink implementations may
+/// register themselves with the \link Factory \endlink that can
+/// construct \link Date \endlink instances.
 #define REGISTER_DATE(TYPE) \
   REGISTER_NAMED(TYPE,TYPE,Date)
 
@@ -113,6 +116,9 @@ class Person : public FactoryConstructible {
   virtual shared_ptr<const Date> birthday() const = 0;
 };
 
+/// The macro by which \link Person \endlink implementations may
+/// register themselves with the \link Factory \endlink that can
+/// construct \link Person \endlink instances.
 #define REGISTER_PERSON(TYPE) \
   REGISTER_NAMED(TYPE,TYPE,Person)
 
@@ -238,6 +244,9 @@ class PetOwner : public FactoryConstructible {
   virtual shared_ptr<Animal> GetPet(int i) = 0;
 };
 
+/// The macro by which \link PetOwner \endlink implementations may
+/// register themselves with the \link Factory \endlink that can
+/// construct \link PetOwner \endlink instances.
 #define REGISTER_PET_OWNER(TYPE) \
   REGISTER_NAMED(TYPE,TYPE,PetOwner)
 
