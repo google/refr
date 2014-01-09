@@ -82,9 +82,9 @@ class DateImpl : public Date {
   /// Registers three required initializers.
   virtual void RegisterInitializers(Initializers &initializers) {
     bool required = true;
-    initializers.Add("year", &year_, required);
+    initializers.Add("year",  &year_,  required);
     initializers.Add("month", &month_, required);
-    initializers.Add("day", &day_, required);
+    initializers.Add("day",   &day_,   required);
   }
 
   /// \copydoc Date::year
@@ -110,8 +110,8 @@ class Person : public FactoryConstructible {
 
   /// Returns the name of this person.
   virtual const string &name() const = 0;
-  /// Returns the height of this person.
-  virtual const int height() const = 0;
+  /// Returns the height in centimeters of this person.
+  virtual const int cm_height() const = 0;
   /// Returns the birthday of this person.
   virtual shared_ptr<const Date> birthday() const = 0;
 };
@@ -134,10 +134,18 @@ class PersonImpl : public Person {
   /// Destroys this person.
   virtual ~PersonImpl() {}
 
+  /// Registers one required and two optional initializers.
+  virtual void RegisterInitializers(Initializers &initializers) {
+    bool required = true;
+    initializers.Add("name",      &name_,      required);
+    initializers.Add("cm_height", &cm_height_);
+    initializers.Add("birthday",  &birthday_);
+  }
+
   /// \copydoc Person::name
   virtual const string &name() const { return name_; }
-  /// \copydoc Person::height
-  virtual const int height() const { return cm_height_; }
+  /// \copydoc Person::cm_height
+  virtual const int cm_height() const { return cm_height_; }
   /// \copydoc Person::birthday
   virtual shared_ptr<const Date> birthday() const { return birthday_; }
 
@@ -183,7 +191,7 @@ public:
   virtual void RegisterInitializers(Initializers &initializers) {
     bool required = true;
     initializers.Add("name", &name_, required);
-    initializers.Add("age", &age_);
+    initializers.Add("age",  &age_);
   }
 
   /// Returns the name of this animal.
